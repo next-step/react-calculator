@@ -1,0 +1,16 @@
+.digits {
+	grid-area: digit;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row-reverse;
+}
+
+.digits button {
+	cursor: pointer;
+	flex: 1 0 30%;
+}
+
+.digit.wide {
+	flex: 2 0 60%;
+	order: 1;
+}

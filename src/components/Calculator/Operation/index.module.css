@@ -1,0 +1,8 @@
+.operations {
+	grid-area: oper;
+}
+
+.operations button {
+    cursor: pointer;
+	background-color: orange;
+}
