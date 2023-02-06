@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { OPERATORS } from '@/constants/operation';
 import { useCalculator } from '@/store/calculator-context';
 
@@ -25,4 +23,4 @@ const Operation = () => {
   );
 };
 
-export default memo(Operation);
+export default Operation;
