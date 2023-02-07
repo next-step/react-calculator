@@ -4,14 +4,8 @@
     "node": true,
     "browser": true
   },
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "babelOptions": {
-      "presets": [
-        "@babel/preset-react"
-      ]
-    },
-    "requireConfigFile": false,
     "ecmaVersion": 2021,
     "sourceType": "module",
     "ecmaFeatures": {
@@ -19,7 +13,8 @@
     }
   },
   "extends": [
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
