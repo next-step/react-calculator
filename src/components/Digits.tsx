@@ -16,7 +16,7 @@ export default function Digits({ digits }: Props) {
 
 		const updateDigits = calculator + value;
 
-		if (!Validator.isMaxDigitLength(updateDigits)) {
+		if (!Validator.isOverMaxDigitLength(updateDigits)) {
 			alert(MESSAGE.MAX_DIGIT_LENGTH);
 			return;
 		}
