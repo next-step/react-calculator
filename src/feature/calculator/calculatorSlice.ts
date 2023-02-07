@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MESSAGE } from '@/constants';
 
-interface CalculatorState {
+export interface CalculatorState {
 	value: string;
 }
 
