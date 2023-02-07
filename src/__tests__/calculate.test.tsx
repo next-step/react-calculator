@@ -39,7 +39,7 @@ test('2개의 숫자에 대해 뺄셈이 가능하다.', () => {
   expect(total).toHaveTextContent('3');
 });
 
-test('2개의 숫자에 대해 곱셉이 가능하다.', () => {
+test('2개의 숫자에 대해 곱셈이 가능하다.', () => {
   render(<App />);
 
   const total = screen.getByRole('heading', { level: 1 });
