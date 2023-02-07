@@ -15,13 +15,16 @@ export const calculatorSlice = createSlice({
 		insertDigits: (state, action: PayloadAction<string>) => {
 			state.value += action.payload;
 		},
+		insertOperation: (state, action: PayloadAction<string>) => {
+			state.value += action.payload;
+		},
 		resetCalculator: (state) => {
 			state.value = initialState.value;
 		}
 	}
 });
 
-export const { insertDigits, resetCalculator } = calculatorSlice.actions;
+export const { insertDigits, resetCalculator, insertOperation } = calculatorSlice.actions;
 
 export const calculatorValue = (state) => state.calculator.value || '0';
 

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { calculatorValue, insertDigits } from '@/feature/calculator/calculatorSlice';
 import { useAppSelector } from '@/store/hooks';
-import Validator from '@/domain/Validator';
+import Validator from '@/core/Validator';
 import { MESSAGE } from '@/constants';
 
 interface Props {
