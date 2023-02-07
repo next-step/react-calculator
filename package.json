@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",
+    "@reduxjs/toolkit": "^1.9.2",
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "vite-plugin-eslint": "^1.8.1"
   },
   "devDependencies": {
