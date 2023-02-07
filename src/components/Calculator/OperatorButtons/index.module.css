@@ -2,10 +2,6 @@
   grid-area: oper;
 }
 
-.subgrid {
-  display: grid;
-}
-
 .operations button {
   background-color: orange;
 }
