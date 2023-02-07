@@ -1,10 +1,11 @@
-import { Screen, Digits, Operators } from '../../components/Calculator';
+import { Screen, Digits, Modifiers, Operators } from '../../components/Calculator';
 
 const Calculator = () => {
   return (
     <div className="calculator">
       <Screen />
       <Digits />
+      <Modifiers />
       <Operators />
     </div>
   );
