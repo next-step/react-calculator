@@ -1,16 +1,18 @@
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { insertDigit } from '@/store/calculator';
+import { calculatorValue, insertDigit } from '@/store/calculator';
 import Validator from '@/domain/Validator.js';
 
 function App() {
   const dispatch = useDispatch();
-  const calculatorValue = useSelector((state) => state.calculator.value);
+  const calculator = useSelector(calculatorValue);
   const DIGIT = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
 
   const digitHandler = (digit) => {
+    if (calculator === '0' && digit === '0') return;
+
     const { isMaxDigitLength, MESSAGE } = Validator;
-    const updateValue = calculatorValue + digit;
+    const updateValue = calculator + digit;
 
     if (!isMaxDigitLength(updateValue)) {
       alert(MESSAGE.MAX_DIGIT_LENGTH);
@@ -22,7 +24,7 @@ function App() {
 
   return (
     <div className="calculator">
-      <h1 id="total">{calculatorValue}</h1>
+      <h1 id="total">{calculator}</h1>
       <div className="digits flex">
         {DIGIT.map((digit) => (
           <button

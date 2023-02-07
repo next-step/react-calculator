@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
+  value: '',
 };
 
 export const calculatorSlice = createSlice({
@@ -20,5 +20,7 @@ export const calculatorSlice = createSlice({
 });
 
 export const { insertDigit } = calculatorSlice.actions;
+
+export const calculatorValue = (state) => state.calculator.value || '0';
 
 export default calculatorSlice.reducer;
