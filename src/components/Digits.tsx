@@ -11,22 +11,22 @@ interface Props {
 export default function Digits({ digits }: Props) {
 	const dispatch = useDispatch();
 	const calculator = useAppSelector(calculatorValue);
-	const digitHandler = (value: string) => {
-		const updateDigits = calculator + value;
+	const digitHandler = () => {
+		const updateDigits = calculator + digits;
 
 		if (!Validator.isOverMaxDigitLength(updateDigits)) {
 			alert(MESSAGE.MAX_DIGIT_LENGTH);
 			return;
 		}
 
-		dispatch(insertDigits(value));
+		dispatch(insertDigits(digits));
 	};
 
 	return (
 		<button
 			className="digit"
 			type="button"
-			onClick={() => digitHandler(digits)}
+			onClick={digitHandler}
 		>{digits}</button>
 	);
 }

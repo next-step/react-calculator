@@ -1,15 +1,15 @@
+import Operation from '@/components/Operation';
 import { OPERATOR } from '@/constants';
-import Operation from './Operation';
 
 export default function OperationContainer() {
 	return (
 		<div className="operations subgrid">
-			{OPERATOR.map((operator) => (
+			{OPERATOR.map((operator: string, index) => (
 				<Operation
-					key={operator}
-					operator={operator}
-				/>
+					key={index}
+					operator={operator}/>
 			))}
+			<Operation operator="="/>
 		</div>
 	);
 }
