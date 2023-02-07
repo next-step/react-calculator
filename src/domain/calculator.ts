@@ -9,7 +9,6 @@ type Calculate = {
 };
 
 export const calculate = ({ operand1, operand2, operator }: Calculate) => {
-  console.log(operand1, operand2, operator);
   if (operator === OPERATORS.PLUS) {
     return operand1 + operand2;
   }
