@@ -1,5 +1,11 @@
+import Calculator from './components/Calculator';
+
 const App = () => {
-  return <div></div>;
+  return (
+    <div id="app">
+      <Calculator />
+    </div>
+  );
 };
 
 export default App;
