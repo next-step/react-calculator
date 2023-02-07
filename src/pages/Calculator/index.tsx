@@ -8,6 +8,7 @@ import { Operation } from '../../components/Calculator/Operation/index';
 import { useCalculator } from '../../hooks/useCalculator';
 
 export const App = () => {
+    // 비즈니스 로직은 커스텀훅으로 뻇음 
     const {
         resultInput,
         handleDigitInput,
