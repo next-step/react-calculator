@@ -1,16 +1,34 @@
+import { MouseEvent } from 'react';
+
+import { DIGIT_MAX_NUMBER, ERROR_RESULT } from '../../constants/calculator';
+import { OPERAND, useCalculator } from '../../context/calculator';
+
+const DIGIT_NUMBERS = Array.from({ length: DIGIT_MAX_NUMBER + 1 }, (_, index) => DIGIT_MAX_NUMBER - index);
+
 const Digits = () => {
+  const {
+    state: { operand1 },
+    dispatch,
+  } = useCalculator();
+
+  const handleClickDigits = (e: MouseEvent<HTMLDivElement>) => {
+    if (!(e.target instanceof HTMLButtonElement)) return;
+
+    const { num } = e.target.dataset;
+    if (num === undefined) return;
+
+    dispatch({ type: OPERAND, payload: Number(num) });
+  };
+
   return (
-    <div className="digits flex">
-      <button className="digit">9</button>
-      <button className="digit">8</button>
-      <button className="digit">7</button>
-      <button className="digit">6</button>
-      <button className="digit">5</button>
-      <button className="digit">4</button>
-      <button className="digit">3</button>
-      <button className="digit">2</button>
-      <button className="digit">1</button>
-      <button className="digit">0</button>
+    <div className="digits flex" onClick={handleClickDigits}>
+      {DIGIT_NUMBERS.map((number) => {
+        return (
+          <button key={number} className="digit" type="button" disabled={operand1 === ERROR_RESULT} data-num={number}>
+            {number}
+          </button>
+        );
+      })}
     </div>
   );
 };
