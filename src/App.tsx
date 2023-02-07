@@ -43,6 +43,12 @@ function App() {
     inputCountRef.current = count + 1;
   }, []);
 
+  const handleClearClick = () => {
+    setTotal(null);
+    operatorRef.current = undefined;
+    inputCountRef.current = 0;
+  };
+
   return (
     <div className="calculator">
       <h1 id="total">
@@ -54,7 +60,9 @@ function App() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <button className="modifier" onClick={handleClearClick}>
+          AC
+        </button>
       </div>
       <div className="operations subgrid">
         {OPERATIONS_LIST.map((operation) => (
