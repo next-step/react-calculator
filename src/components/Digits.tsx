@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { insertDigits } from '@/feature/calculator/calculatorSlice';
-import { useAppSelector } from '../store/hooks';
-import { calculatorValue } from '../feature/calculator/calculatorSlice';
-import Validator from '../domain/Validator';
-import { MESSAGE } from '../constants';
+import { calculatorValue, insertDigits } from '@/feature/calculator/calculatorSlice';
+import { useAppSelector } from '@/store/hooks';
+import Validator from '@/domain/Validator';
+import { MESSAGE } from '@/constants';
 
 interface Props {
 	digits: string;

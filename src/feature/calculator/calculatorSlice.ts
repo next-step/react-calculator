@@ -14,11 +14,14 @@ export const calculatorSlice = createSlice({
 	reducers: {
 		insertDigits: (state, action: PayloadAction<string>) => {
 			state.value += action.payload;
+		},
+		resetCalculator: (state) => {
+			state.value = initialState.value;
 		}
 	}
 });
 
-export const { insertDigits } = calculatorSlice.actions;
+export const { insertDigits, resetCalculator } = calculatorSlice.actions;
 
 export const calculatorValue = (state) => state.calculator.value || '0';
 
