@@ -2,7 +2,7 @@ import { useAppSelector } from '@/store/hooks';
 import { calculatorValue } from '@/feature/calculator/calculatorSlice';
 import DigitsContainer from '@/components/DigitsContainer';
 import OperationContainer from '@/components/OperationContainer';
-import ResetContainer from './components/ResetContainer';
+import ResetContainer from '@/components/ResetContainer';
 
 function App() {
 	const calculator = useAppSelector(calculatorValue);

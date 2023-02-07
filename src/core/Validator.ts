@@ -10,7 +10,7 @@ export default class Validator {
 		const operator = text.split('').find((item: string) => OPERATOR.includes(item));
 
 		if (operator) {
-			return text.split(operator).every((item: string) => item.length <= MAX_DIGIT_LENGTH);
+			return text.split(operator).every((item: string) => item.length <= MAX_DIGIT_LENGTH && item.length > 0);
 		}
 
 		return text.length <= MAX_DIGIT_LENGTH;

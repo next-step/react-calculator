@@ -12,8 +12,6 @@ export default function Digits({ digits }: Props) {
 	const dispatch = useDispatch();
 	const calculator = useAppSelector(calculatorValue);
 	const digitHandler = (value: string) => {
-		if (calculator === '0' && value === '0') return;
-
 		const updateDigits = calculator + value;
 
 		if (!Validator.isOverMaxDigitLength(updateDigits)) {
