@@ -1,20 +1,37 @@
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { insertDigit } from '@/store/calculator';
+import Validator from '@/domain/Validator.js';
 
 function App() {
+  const dispatch = useDispatch();
+  const calculatorValue = useSelector((state) => state.calculator.value);
+  const DIGIT = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
+
+  const digitHandler = (digit) => {
+    const { isMaxDigitLength, MESSAGE } = Validator;
+    const updateValue = calculatorValue + digit;
+
+    if (!isMaxDigitLength(updateValue)) {
+      alert(MESSAGE.MAX_DIGIT_LENGTH);
+      return;
+    }
+
+    dispatch(insertDigit(digit));
+  };
+
   return (
     <div className="calculator">
-      <h1 id="total">0</h1>
+      <h1 id="total">{calculatorValue}</h1>
       <div className="digits flex">
-        <button className="digit">9</button>
-        <button className="digit">8</button>
-        <button className="digit">7</button>
-        <button className="digit">6</button>
-        <button className="digit">5</button>
-        <button className="digit">4</button>
-        <button className="digit">3</button>
-        <button className="digit">2</button>
-        <button className="digit">1</button>
-        <button className="digit">0</button>
+        {DIGIT.map((digit) => (
+          <button
+            key={digit}
+            className="digit"
+            type="button"
+            onClick={() => digitHandler(digit)}
+          >{digit}</button>
+        ))}
       </div>
       <div className="modifiers subgrid">
         <button className="modifier">AC</button>

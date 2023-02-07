@@ -7,7 +7,18 @@ const initialState = {
 export const calculatorSlice = createSlice({
   name: 'calculator',
   initialState,
-  reducers: {}
+  reducers: {
+    insertDigit: (state, action) => {
+      if (state.value === 0) {
+        state.value = action.payload;
+        return;
+      }
+
+      state.value += action.payload;
+    }
+  }
 });
+
+export const { insertDigit } = calculatorSlice.actions;
 
 export default calculatorSlice.reducer;
