@@ -13,7 +13,7 @@ export const calculatorReducer = (state: State, action: Action) => {
       return { ...state, operator: action.payload as Operator };
 
     case 'EQUAL': {
-      if (state.operator === '') return state;
+      if (state.operator === OPERATOR_INITIAL_VALUE) return state;
 
       return {
         operand1: calculate(state),
@@ -28,7 +28,7 @@ export const calculatorReducer = (state: State, action: Action) => {
 
     case 'OPERAND': {
       try {
-        const targetOperand = state.operator === '' ? 'operand1' : 'operand2';
+        const targetOperand = state.operator === OPERATOR_INITIAL_VALUE ? 'operand1' : 'operand2';
 
         const concatOperand = String(state[targetOperand]) + String(action.payload);
         validateOperand(concatOperand.length);
