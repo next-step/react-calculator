@@ -5,6 +5,7 @@ import Digits from "./components/Digits";
 import Modifiers from "./components/Modifiers";
 import Operations from "./components/Operations";
 import Total from "./components/Total";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -16,20 +17,44 @@ const Wrapper = styled.div`
 const OPERATION_LIST = ["/", "X", "-", "+", "="];
 const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
-const handleDigitClick = (digit) => {
-  console.log(digit);
-};
-const handleOperationClick = (operation) => {
-  console.log(operation);
-};
-
 function App() {
+  const [number, setNumber] = useState(0);
+  const [operation, setOperation] = useState("");
+
+  const handleDigitClick = (digit) => {
+    if (String(number).length === 3) {
+      return;
+    }
+
+    if (number === 0) {
+      setNumber(digit);
+      return;
+    }
+
+    setNumber(Number(`${number}${digit}`));
+  };
+  const handleOperationClick = (_operation) => {
+    if (!_operation || !number) return;
+
+    if (_operation === "=") {
+      setNumber(0);
+      setOperation("");
+      return;
+    }
+
+    setOperation(_operation);
+  };
+  const handleModifierClick = () => {
+    setNumber(0);
+    setOperation("");
+  };
+
   return (
     <>
       <GlobalStyle />
       <Wrapper>
         <Calculator>
-          <Total>0</Total>
+          <Total>{number}</Total>
           <Digits>
             {DIGIT_LIST.map((digit) => (
               <button onClick={() => handleDigitClick(digit)} key={digit}>
@@ -38,7 +63,7 @@ function App() {
             ))}
           </Digits>
           <Modifiers>
-            <button>AC</button>
+            <button onClick={handleModifierClick}>AC</button>
           </Modifiers>
           <Operations>
             {OPERATION_LIST.map((operation) => (
