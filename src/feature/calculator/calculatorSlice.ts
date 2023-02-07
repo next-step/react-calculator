@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MESSAGE } from '@/constants';
 
 interface CalculatorState {
 	value: string;
@@ -23,7 +24,12 @@ export const calculatorSlice = createSlice({
 		insertOperation: (state, action: PayloadAction<string>) => {
 			state.value += action.payload;
 		},
-		updateAnswer: (state, action: PayloadAction<number>) => {
+		setAnswer: (state, action: PayloadAction<number>) => {
+			if (action.payload === Infinity) {
+				state.value = MESSAGE.INFINITY;
+				return;
+			}
+
 			state.value = String(action.payload);
 		},
 		resetCalculator: (state) => {
@@ -32,7 +38,7 @@ export const calculatorSlice = createSlice({
 	}
 });
 
-export const { insertDigits, resetCalculator, insertOperation, updateAnswer } = calculatorSlice.actions;
+export const { insertDigits, resetCalculator, insertOperation, setAnswer } = calculatorSlice.actions;
 
 export const calculatorValue = (state) => state.calculator.value;
 

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '@/store/hooks';
-import { calculatorValue, insertOperation, updateAnswer } from '@/feature/calculator/calculatorSlice';
+import { calculatorValue, insertOperation, setAnswer } from '@/feature/calculator/calculatorSlice';
 import Validator from '@/core/Validator';
 import { MESSAGE, OPERATOR } from '@/constants';
 import Calculator from '@/domain/Calculator';
@@ -16,7 +16,7 @@ export default function Operation({ operator }: Props) {
 	const calculateAnswer = () => {
 		const getOperator = calculator.split('').find((item: string) => OPERATOR.includes(item));
 
-		if (!getOperator || !Validator.isOverMaxDigitLength(calculator)) {
+		if (!Validator.isOverMaxDigitLength(calculator) || !getOperator) {
 			return;
 		}
 
@@ -25,7 +25,7 @@ export default function Operation({ operator }: Props) {
 			calculator.split(getOperator).map((item) => Number(item))
 		);
 
-		dispatch(updateAnswer(item.result()));
+		dispatch(setAnswer(item.result()));
 	};
 
 	const clickOperatorHandler = () => {

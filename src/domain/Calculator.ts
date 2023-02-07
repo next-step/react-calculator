@@ -1,8 +1,8 @@
 export default class Calculator {
 	private readonly operator: string;
-	private readonly calculateData: Array<number>;
+	private readonly calculateData: number[];
 
-	constructor(operator: string, calculateData: Array<number>) {
+	constructor(operator: string, calculateData: number[]) {
 		this.operator = operator;
 		this.calculateData = calculateData;
 	}
