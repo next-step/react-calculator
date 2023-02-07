@@ -1,12 +1,20 @@
+import { OPERATORS } from "@/util/constants";
+
 import styles from "./index.module.css";
 
-const operators = ["/", "X", "-", "+", "="];
+interface OperatorButtonsPropsType {
+  onClickOperator(value: string): void;
+}
 
-export default function OperatorButtons() {
+export default function OperatorButtons({
+  onClickOperator,
+}: OperatorButtonsPropsType) {
   return (
     <div className={`${styles.operations} subgrid`}>
-      {operators.map((operator) => (
-        <button key={operator}>{operator}</button>
+      {OPERATORS.map((operator) => (
+        <button key={operator} onClick={() => onClickOperator(operator)}>
+          {operator}
+        </button>
       ))}
     </div>
   );

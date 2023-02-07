@@ -1,9 +1,15 @@
 import styles from "./index.module.css";
 
-export default function ModifierButton() {
+interface ModifierButtonPropsType {
+  onClickModifier(value: string): void;
+}
+
+export default function ModifierButton({
+  onClickModifier,
+}: ModifierButtonPropsType) {
   return (
     <div className={`${styles.modifiers} subgrid`}>
-      <button>AC</button>
+      <button onClick={() => onClickModifier("AC")}>AC</button>
     </div>
   );
 }
