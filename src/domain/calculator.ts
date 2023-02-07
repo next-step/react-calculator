@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, OPERAND_MAX_LENGTH, OPERATORS } from '../constants/calculator';
+import { ERROR_MESSAGE, OPERAND_INITIAL_VALUE, OPERAND_MAX_LENGTH, OPERATORS } from '../constants/calculator';
 import { InitialOperator, Operator } from '../types/calculator';
 import { validate, validator } from '../utils/validation';
 
@@ -23,7 +23,7 @@ export const calculate = ({ operand1, operand2, operator }: Calculate) => {
     return Math.trunc(operand1 / operand2);
   }
 
-  return 0;
+  return OPERAND_INITIAL_VALUE;
 };
 
 export const validateOperand = (operand: number) => {
