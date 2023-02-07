@@ -32,11 +32,15 @@ button {
   border: 0.5px solid #98999b;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
+
 .modifiers button {
   background-color: #ccc;
 }
 
-.operations button {
+.operators button {
   background-color: orange;
 }
 
@@ -78,7 +82,7 @@ button {
   grid-auto-columns: 1fr;
 }
 
-.operations {
+.operators {
   grid-area: oper;
 }
 
