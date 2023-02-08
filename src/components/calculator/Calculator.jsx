@@ -1,30 +1,31 @@
 import React from 'react';
+import Button from '../common/Button';
 
 const Calculator = () => {
   return (
     <div className="calculator">
       <h1 id="total">0</h1>
       <div className="digits flex">
-        <button className="digit">9</button>
-        <button className="digit">8</button>
-        <button className="digit">7</button>
-        <button className="digit">6</button>
-        <button className="digit">5</button>
-        <button className="digit">4</button>
-        <button className="digit">3</button>
-        <button className="digit">2</button>
-        <button className="digit">1</button>
-        <button className="digit">0</button>
+        <Button className="digit" value="9" />
+        <Button className="digit" value="8" />
+        <Button className="digit" value="7" />
+        <Button className="digit" value="6" />
+        <Button className="digit" value="5" />
+        <Button className="digit" value="4" />
+        <Button className="digit" value="3" />
+        <Button className="digit" value="2" />
+        <Button className="digit" value="1" />
+        <Button className="digit" value="0" />
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <Button className="modifier" value="AC" />
       </div>
       <div className="operations subgrid">
-        <button className="operation">/</button>
-        <button className="operation">X</button>
-        <button className="operation">-</button>
-        <button className="operation">+</button>
-        <button className="operation">=</button>
+        <Button className="operation" value="/" />
+        <Button className="operation" value="X" />
+        <Button className="operation" value="-" />
+        <Button className="operation" value="+" />
+        <Button className="operation" value="=" />
       </div>
     </div>
   );
