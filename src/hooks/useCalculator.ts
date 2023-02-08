@@ -46,7 +46,11 @@ export const useCalculator = (): CalculatorReturnType => {
   };
 
   const appendOperator = (operator: Operators) => {
-    if (state.value !== ZERO_VALUE && state.value !== MINUS) {
+    if (
+      state.value !== ZERO_VALUE &&
+      state.value !== MINUS &&
+      state.prevValue === ''
+    ) {
       dispatch({ type: 'SET_OPERATOR', payload: operator });
       return;
     }
