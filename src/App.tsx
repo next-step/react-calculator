@@ -3,14 +3,12 @@ import { CalculatorProvider } from './context/calculator/context';
 
 import './css/index.css';
 
-function App() {
+const App = () => {
   return (
-    <>
-      <CalculatorProvider>
-        <Calculator />
-      </CalculatorProvider>
-    </>
+    <CalculatorProvider>
+      <Calculator />
+    </CalculatorProvider>
   );
-}
+};
 
 export default App;
