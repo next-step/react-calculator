@@ -43,7 +43,7 @@ export default function Calculator() {
     if (buttonValue === "=") {
       // 계산
     } else if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
-      //
+      alert(messages.OVER_MAX_NUM_OF_NUMBERS);
     } else {
       curNumber.current = "";
       setResultPanel((prev) => `${prev}${buttonValue}`);
