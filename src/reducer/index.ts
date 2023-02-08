@@ -16,6 +16,7 @@ type CalculatorActions =
   | { type: 'SET_VALUE'; payload: string }
   | { type: 'APPEND_VALUE'; payload: string }
   | { type: 'SET_OPERATOR'; payload: string }
+  | { type: 'SET_MINUS_OPERATOR' }
   | { type: 'CALCULATE' }
   | { type: 'RESET' };
 
@@ -34,6 +35,11 @@ export const calculatorReducer = (
         prevValue: state.value,
         value: '',
         operator: action.payload,
+      };
+    case 'SET_MINUS_OPERATOR':
+      return {
+        ...state,
+        value: '-',
       };
     case 'CALCULATE': {
       const prev = +state.prevValue;

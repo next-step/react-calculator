@@ -1,7 +1,12 @@
 import { useReducer } from 'react';
 
-import { type Operators } from '../components/Calculator/Operation/Operation.js';
+import { type DigitNumbers } from '../components/Calculator/Digit/Digit.js';
 import {
+  type Operators,
+  type Subtract,
+} from '../components/Calculator/Operation/Operation.js';
+import {
+  type CalculatorState,
   calculatorReducer,
   initialState,
   ZERO_VALUE,
@@ -9,11 +14,26 @@ import {
 
 const MAX_NUMBER_LENGTH = 3 as const;
 
-export const useCalculator = () => {
+export interface CalculatorReturnType {
+  appendDigit: (digit: DigitNumbers) => void;
+  appendOperator: (operator: Operators) => void;
+  calculate: () => void;
+  reset: () => void;
+  state: CalculatorState;
+}
+
+const MINUS: Subtract = '-';
+
+export const useCalculator = (): CalculatorReturnType => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
-  const appendDigit = (digit: string) => {
-    if (state.value.length >= MAX_NUMBER_LENGTH) {
+  const appendDigit = (digit: DigitNumbers) => {
+    if (
+      (state.value.length >= MAX_NUMBER_LENGTH &&
+        !state.value.includes(MINUS)) ||
+      (state.value.length >= MAX_NUMBER_LENGTH + 1 &&
+        state.value.includes(MINUS))
+    ) {
       alert(`숫자는 ${MAX_NUMBER_LENGTH}자리까지만 입력 가능합니다!`);
       return;
     }
@@ -26,13 +46,13 @@ export const useCalculator = () => {
   };
 
   const appendOperator = (operator: Operators) => {
-    if (state.value !== ZERO_VALUE) {
+    if (state.value !== ZERO_VALUE && state.value !== MINUS) {
       dispatch({ type: 'SET_OPERATOR', payload: operator });
       return;
     }
 
-    if (state.operator === '-') {
-      dispatch({ type: 'SET_OPERATOR', payload: operator });
+    if (operator === MINUS) {
+      dispatch({ type: 'SET_MINUS_OPERATOR' });
       return;
     }
 
