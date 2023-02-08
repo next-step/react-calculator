@@ -1,10 +1,7 @@
 import { PropsWithChildren, useMemo } from 'react';
 import { useReducer } from 'react';
 
-import { MAX_NUMBER_SIZE } from '@/constants/limit';
-import { MESSAGE } from '@/constants/message';
 import type { Operator } from '@/constants/operation';
-import { OPERATOR_REGEX } from '@/constants/regex';
 import { calcOperation } from '@/utils/calcOperation';
 import { isInfinite } from '@/utils/numberUtils';
 
@@ -94,4 +91,13 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
 
 const getCalculatorNumberArray = (str: string) => {
   return str.replace(OPERATOR_REGEX, ',').split(',');
+};
+
+const OPERATOR_REGEX = /[X]|[/]|[+]|[-]/gi;
+const MAX_NUMBER_SIZE = 3;
+const MESSAGE = {
+  OVER_MAX_NUMBER_SIZE: `${MAX_NUMBER_SIZE}자리 이상은 입력할 수 없어요.`,
+  EMPTY_NUMBER: `계산할 값을 입력해주세요!`,
+  EMPTY_OPERATION: `연산자를 입력해주세요!`,
+  LACK_NUMBER: `연산할 두 숫자를 입력해주세요!`,
 };
