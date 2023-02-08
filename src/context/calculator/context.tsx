@@ -5,17 +5,17 @@ import { InitialOperator, Operator } from '../../types/calculator';
 import { Action } from './action';
 import { calculatorReducer } from './reducer';
 
-export const initialState = {
-  operand1: OPERAND_INITIAL_VALUE,
-  operand2: OPERAND_INITIAL_VALUE,
-  operator: OPERATOR_INITIAL_VALUE,
-} as const;
-
 export type State = {
   operand1: number;
   operand2: number;
   operator: Operator | InitialOperator;
 };
+
+export const initialState: State = {
+  operand1: OPERAND_INITIAL_VALUE,
+  operand2: OPERAND_INITIAL_VALUE,
+  operator: OPERATOR_INITIAL_VALUE,
+} as const;
 
 type CalculatorContext = {
   state: State;
