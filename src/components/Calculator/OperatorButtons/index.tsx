@@ -1,9 +1,9 @@
-import { OPERATORS } from "@/util/constants";
+import { OPERATORS, OperatorTypes } from "@/util/constants";
 
 import styles from "./index.module.css";
 
 interface OperatorButtonsPropsType {
-  onClickOperator(value: string): void;
+  onClickOperator(value: OperatorTypes): void;
 }
 
 export default function OperatorButtons({
