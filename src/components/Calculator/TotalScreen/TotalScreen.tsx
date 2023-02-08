@@ -1,16 +1,22 @@
 import './totalScreen.css';
 
-import { type CalculatorState } from '../../../reducer/index.js';
+import { type CalculatorState } from '../../../reducer';
+
+const INFINITY = 'Infinity' as const;
 
 const TotalScreen = ({
   calculatorState,
 }: {
   calculatorState: CalculatorState;
 }) => {
-  const screen =
+  const calculatorResult =
     calculatorState.prevValue +
     calculatorState.operator +
     calculatorState.value;
+
+  const screen = calculatorResult.includes(INFINITY)
+    ? '오류'
+    : calculatorResult;
 
   return <h1 id="total">{screen}</h1>;
 };

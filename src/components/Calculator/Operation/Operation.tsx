@@ -1,10 +1,16 @@
 import './operation.css';
 
-export type Operators = '/' | 'X' | '+' | '-';
+type Add = '+';
+export type Subtract = '-';
+type Multiply = 'X';
+type Divide = '/';
+type Equal = '=';
 
-const OPERATORS: ReadonlyArray<Operators> = ['/', 'X', '+', '-'] as const;
+export type Operators = Add | Subtract | Multiply | Divide;
 
-const EQUAL = '=' as const;
+export const OPERATORS: ReadonlyArray<Operators> = ['/', 'X', '-', '+'];
+
+const EQUAL: Equal = '=';
 
 const Operation = ({
   appendOperator,
