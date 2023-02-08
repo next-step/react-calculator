@@ -20,7 +20,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
     [userInput]
   );
   const userNumbers = useMemo(
-    () => getNumberArray(userInput, OPERATOR_REGEX),
+    () => getCalculatorNumberArray(userInput),
     [userInput]
   );
   const userOperation = useMemo(
@@ -35,7 +35,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
     }
 
     if (
-      !getNumberArray(userInput + nextNumber, OPERATOR_REGEX).every(
+      !getCalculatorNumberArray(userInput + nextNumber).every(
         (n) => n.length <= MAX_NUMBER_SIZE
       )
     ) {
@@ -92,6 +92,6 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
   return <CalculatorContext.Provider value={value} {...props} />;
 };
 
-const getNumberArray = (str: string, regex: RegExp) => {
-  return str.replace(regex, ',').split(',');
+const getCalculatorNumberArray = (str: string) => {
+  return str.replace(OPERATOR_REGEX, ',').split(',');
 };
