@@ -1,25 +1,17 @@
-import useCalculator from '@/hooks/useCalculator';
-
 interface Props {
 	operator: string;
+	onClick: (operation: string) => void;
 }
 
-export default function Operation({ operator }: Props) {
-	const { setAnswer, insertOperation } = useCalculator();
-
-	const clickOperatorHandler = () => {
-		if (operator === '=') {
-			setAnswer();
-			return;
-		}
-
-		insertOperation(operator);
+export default function Operation({ operator, onClick }: Props) {
+	const handlerOnClick = () => {
+		onClick(operator);
 	};
 
 	return (
 		<button
 			className="operation"
-			onClick={clickOperatorHandler}
+			onClick={handlerOnClick}
 		>{operator}</button>
 	);
 }

@@ -6,5 +6,4 @@ export const MESSAGE = {
 	INFINITY: '오류',
 	NOT_FOUND_ACTION: 'action 을 찾을 수 없습니다.',
 };
-export const DIGIT = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
 export const OPERATOR = ['/', 'X', '-', '+'];
