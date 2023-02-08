@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE, OPERAND_INITIAL_VALUE, OPERAND_MAX_LENGTH, OPERATORS } from '../constants/calculator';
 import { InitialOperator, Operator } from '../types/calculator';
-import { validate, validator } from '../utils/validation';
+import { validate } from '../utils/validation';
 
 type Calculate = {
   operand1: number;
@@ -26,5 +26,5 @@ export const calculate = ({ operand1, operand2, operator }: Calculate) => {
 };
 
 export const validateOperand = (operand: number) => {
-  validate(validator.lte(operand, OPERAND_MAX_LENGTH), ERROR_MESSAGE.CALCULATOR.INVALID_OPERAND_LENGTH);
+  validate(operand <= OPERAND_MAX_LENGTH, ERROR_MESSAGE.CALCULATOR.INVALID_OPERAND_LENGTH);
 };
