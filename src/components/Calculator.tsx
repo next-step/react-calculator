@@ -11,21 +11,22 @@ const add = (a: number, b: number) => {
   }
   return a + b;
 };
+
 const sub = (a: number, b: number) => {
   if (!b || b === undefined) {
     b = 0;
   }
   return a - b;
 };
-const mul = (a: number, b: number) => {
-  console.log(a, b);
 
+const mul = (a: number, b: number) => {
   if (!b || b === undefined) {
     b = 1;
   }
 
   return a * b;
 };
+
 const dev = (a: number, b: number) => {
   if (!b || b === undefined) {
     b = 1;
@@ -43,9 +44,9 @@ const mapOperation: Record<string, (a: number, b: number) => number> = {
 
 function Calculator() {
   const [total, setTotal] = useState('');
+  const [currentInput, setCurrentInput] = useState('');
   const [digits, setDigits] = useState<string[]>([]);
   const [operations, setOperations] = useState<string[]>([]);
-  const [currentInput, setCurrentInput] = useState('');
 
   // const total = digits.map((digit, index) => `${digit}${operations[index] ?? ''}`).join('');
 
@@ -67,7 +68,6 @@ function Calculator() {
     if (value === '=') {
       const copyOperations = [...operations];
       const copyDigits = [...digits, currentInput];
-      console.log(copyDigits);
 
       let result = copyDigits.shift();
 
@@ -76,12 +76,8 @@ function Calculator() {
         const operation = copyOperations.shift() as string;
         const operFunc = mapOperation[operation];
 
-        console.log(result, digit);
-
         result = Math.floor(operFunc(Number(result), Number(digit))).toString();
       }
-
-      console.log(result);
 
       setTotal(result as string);
       setCurrentInput(result as string);

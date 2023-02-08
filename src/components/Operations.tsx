@@ -5,6 +5,7 @@ const operations: Operations[] = ['/', 'X', '-', '+', '='];
 type OperationsProps = {
   handleOperations: (e: MouseEvent<HTMLDivElement>) => void;
 };
+
 function Operations({ handleOperations }: OperationsProps) {
   return (
     <div className="operations subgrid" onClick={handleOperations}>

@@ -1,6 +1,8 @@
-import React from 'react';
+type ModifierProps = {
+  handleModifier: () => void;
+};
 
-function Modifier({ handleModifier }: { handleModifier: () => void }) {
+function Modifier({ handleModifier }: ModifierProps) {
   return (
     <div className="modifiers subgrid">
       <button className="modifier" onClick={handleModifier}>
