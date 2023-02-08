@@ -5,7 +5,7 @@ import Digits from "./components/Digits";
 import Modifiers from "./components/Modifiers";
 import Operations from "./components/Operations";
 import Total from "./components/Total";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -14,11 +14,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const OPERATION_LIST = ["/", "X", "-", "+", "="];
+const OPERATION_LIST = ["/", "X", "-", "+"];
 const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 function App() {
   const [number, setNumber] = useState(0);
+  const [total, setTotal] = useState([]);
   const [operation, setOperation] = useState("");
 
   const handleDigitClick = (digit) => {
@@ -33,21 +34,64 @@ function App() {
 
     setNumber(Number(`${number}${digit}`));
   };
-  const handleOperationClick = (_operation) => {
+  const handleOperationClick = async (_operation) => {
     if (!_operation || !number) return;
 
-    if (_operation === "=") {
-      setNumber(0);
-      setOperation("");
-      return;
-    }
+    // if (_operation === "=") {
+    //   // await setTotal((num) => [...num, number]);
 
+    //   return;
+    // }
+
+    setTotal((num) => [...num, number]);
     setOperation(_operation);
+    setNumber(0);
   };
   const handleModifierClick = () => {
     setNumber(0);
     setOperation("");
   };
+
+  const getCalculatedNumber = (numberList, operation) => {
+    let result = 0;
+    switch (operation) {
+      case "/":
+        result = numberList[0] / numberList[1];
+        break;
+      case "X":
+        result = numberList[0] * numberList[1];
+        break;
+      case "-":
+        result = numberList[0] - numberList[1];
+        break;
+      case "+":
+        result = numberList[0] + numberList[1];
+        break;
+      default:
+        result = 1;
+    }
+
+    if (!isFinite(result)) return "오류";
+
+    return result;
+  };
+
+  const handleCalculateClick = () => {
+    setTotal((num) => [...num, number]);
+  };
+
+  useEffect(() => {
+    let calculatedNumber = 0;
+    if (total.length > 1) {
+      calculatedNumber = getCalculatedNumber(total, operation);
+      setNumber(calculatedNumber);
+      setTotal([]);
+    }
+  }, [total, operation]);
+
+  useEffect(() => {
+    console.log(number);
+  }, [number]);
 
   return (
     <>
@@ -74,6 +118,7 @@ function App() {
                 {operation}
               </button>
             ))}
+            <button onClick={handleCalculateClick}>=</button>
           </Operations>
         </Calculator>
       </Wrapper>
