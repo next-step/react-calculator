@@ -6,31 +6,35 @@ import Total from './Total';
 import './calculator.css';
 
 const add = (a: number, b: number) => {
-  if (b === undefined) {
+  if (!b || b === undefined) {
     b = 0;
   }
   return a + b;
 };
 const sub = (a: number, b: number) => {
-  if (b === undefined) {
+  if (!b || b === undefined) {
     b = 0;
   }
   return a - b;
 };
 const mul = (a: number, b: number) => {
-  if (b === undefined) {
+  console.log(a, b);
+
+  if (!b || b === undefined) {
     b = 1;
   }
+
   return a * b;
 };
 const dev = (a: number, b: number) => {
-  if (b === undefined) {
+  if (!b || b === undefined) {
     b = 1;
   }
+
   return a / b;
 };
 
-const mapOperation: Record<string, any> = {
+const mapOperation: Record<string, (a: number, b: number) => number> = {
   '+': add,
   '-': sub,
   X: mul,
@@ -48,7 +52,7 @@ function Calculator() {
   const handleDigits = (e: MouseEvent<HTMLDivElement>) => {
     if (!(e.target instanceof HTMLButtonElement)) return;
 
-    if (currentInput.length === 3) {
+    if (currentInput.length >= 3) {
       return window.alert('3자리까지 가능');
     }
     const { value } = e.target;
@@ -62,17 +66,28 @@ function Calculator() {
 
     if (value === '=') {
       const copyOperations = [...operations];
-      const copyDigits = [...digits];
-      let result = copyOperations.pop();
+      const copyDigits = [...digits, currentInput];
+      console.log(copyDigits);
 
-      while (copyDigits.length === 0) {
-        const digit = copyDigits.pop();
-        const operation = copyOperations.pop() as string;
+      let result = copyDigits.shift();
+
+      while (copyOperations.length !== 0) {
+        const digit = copyDigits.shift();
+        const operation = copyOperations.shift() as string;
         const operFunc = mapOperation[operation];
-        if (operation === '+') {
-          result = add(Number(result), Number(digit)).toString();
-        }
+
+        console.log(result, digit);
+
+        result = Math.floor(operFunc(Number(result), Number(digit))).toString();
       }
+
+      console.log(result);
+
+      setTotal(result as string);
+      setCurrentInput(result as string);
+      setDigits([]);
+      setOperations([]);
+      return;
     }
 
     if (total.length === 0 || ['X', '/', '-', '+'].includes(total.at(-1) as string)) {
@@ -86,13 +101,18 @@ function Calculator() {
     setCurrentInput('');
   };
 
-  console.log(currentInput);
+  const handleModifier = () => {
+    setTotal('');
+    setDigits([]);
+    setOperations([]);
+    setCurrentInput('');
+  };
 
   return (
     <div className="calculator">
       <Total total={total} />
       <Digits handleDigits={handleDigits} />
-      <Modifier />
+      <Modifier handleModifier={handleModifier} />
       <Operations handleOperations={handleOperations} />
     </div>
   );

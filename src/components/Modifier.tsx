@@ -1,9 +1,11 @@
 import React from 'react';
 
-function Modifier() {
+function Modifier({ handleModifier }: { handleModifier: () => void }) {
   return (
     <div className="modifiers subgrid">
-      <button className="modifier">AC</button>
+      <button className="modifier" onClick={handleModifier}>
+        AC
+      </button>
     </div>
   );
 }
