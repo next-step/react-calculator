@@ -1,8 +1,12 @@
-const digits = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+import { MouseEvent } from 'react';
 
-function Digits() {
+const digits = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+type DigitsProps = {
+  handleDigits: (e: MouseEvent<HTMLDivElement>) => void;
+};
+function Digits({ handleDigits }: DigitsProps) {
   return (
-    <div className="digits flex">
+    <div className="digits flex" onClick={handleDigits}>
       {digits.map(digit => (
         <button key={digit} className="digit" name={`${digit}`} value={digit}>
           {digit}
