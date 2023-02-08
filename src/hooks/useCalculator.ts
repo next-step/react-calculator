@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 
+import { type Operators } from '../components/Calculator/Operation/Operation.js';
 import {
   calculatorReducer,
   initialState,
@@ -24,12 +25,19 @@ export const useCalculator = () => {
     dispatch({ type: 'APPEND_VALUE', payload: digit });
   };
 
-  const appendOperator = (operator: string) => {
-    if (state.operator !== '' || state.value === ZERO_VALUE) {
-      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+  const appendOperator = (operator: Operators) => {
+    if (state.value !== ZERO_VALUE) {
+      dispatch({ type: 'SET_OPERATOR', payload: operator });
       return;
     }
-    dispatch({ type: 'SET_OPERATOR', payload: operator });
+
+    if (state.operator === '-') {
+      dispatch({ type: 'SET_OPERATOR', payload: operator });
+      return;
+    }
+
+    alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+    return;
   };
 
   const calculate = () => {

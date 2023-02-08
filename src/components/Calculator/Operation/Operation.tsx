@@ -1,13 +1,16 @@
 import './operation.css';
 
-const OPERATORS = ['/', 'X', '+', '-'] as const;
+export type Operators = '/' | 'X' | '+' | '-';
+
+const OPERATORS: ReadonlyArray<Operators> = ['/', 'X', '+', '-'] as const;
+
 const EQUAL = '=' as const;
 
 const Operation = ({
   appendOperator,
   calculate,
 }: {
-  appendOperator: (operation: string) => void;
+  appendOperator: (operation: Operators) => void;
   calculate: () => void;
 }) => {
   return (
