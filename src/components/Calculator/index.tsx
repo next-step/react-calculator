@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 
 import {
+  CalOperatorTypes,
   MAX_NUM_OF_NUMBERS,
   MAX_NUMBER_LENGTH,
   OperatorTypes,
 } from "@/util/constants";
+import { doOperate } from "@/util/helper";
 import messages from "@/util/messages";
 
 import DigitButtons from "./DigitButtons";
@@ -22,7 +24,7 @@ export default function Calculator() {
   const curNumber = useRef("");
 
   const inputNumbers = resultPanel.split(operatorRegex);
-  const curOperator = resultPanel.match(operatorRegex);
+  const curOperator = resultPanel.match(operatorRegex) as [CalOperatorTypes];
 
   function handleDigitButtonClick(buttonValue: number) {
     if (curNumber.current.length >= MAX_NUMBER_LENGTH) {
@@ -41,7 +43,13 @@ export default function Calculator() {
     }
 
     if (buttonValue === "=") {
-      // 계산
+      if (!curOperator) return;
+
+      const [num1, num2] = inputNumbers.map((number) => Number(number));
+      const result = String(doOperate(num1, num2, curOperator[0]));
+
+      curNumber.current = result;
+      setResultPanel(result);
     } else if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
       alert(messages.OVER_MAX_NUM_OF_NUMBERS);
     } else {
