@@ -20,30 +20,27 @@ function App() {
 
   const onClickNumber = (event) => {
     if (screenNumber === 0) {
-      setScreenNumber(event.target.value);
-      return;
+      return setScreenNumber(event.target.value);
     }
-
-    // if (screenNumber.length === 3)
-    //   return alert("숫자는 세 자리까지만 입력 가능합니다!");
-
+    if (screenNumber.length === 3) {
+      return alert("숫자는 세 자리까지만 입력 가능합니다!");
+    }
     setScreenNumber((prev) => prev + event.target.value);
   };
 
   const onClickOperator = (event) => {
     if (screenNumber === 0) {
-      alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
-      return;
+      return alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
     }
     setScreenNumber((prev) => prev + event.target.value);
   };
 
   const onClickResult = () => {
-    // 숫자가 3자리인 경우에는 어떻게 할건데
     const plus = screenNumber.split("+");
     const minus = screenNumber.split("-");
     const multiply = screenNumber.split("X");
     const divide = screenNumber.split("/");
+
     if (screenNumber.includes("+") === true) {
       setScreenNumber(Number(plus[0]) + Number(plus[1]));
     }
@@ -55,7 +52,17 @@ function App() {
       setScreenNumber(Number(multiply[0]) * Number(multiply[1]));
 
     if (screenNumber.includes("/") === true)
-      setScreenNumber(Number(divide[0]) / Number(divide[1]));
+      setScreenNumber(Math.floor(Number(divide[0]) / Number(divide[1])));
+    if (
+      Number(divide[0]) / Number(divide[1]) === Infinity ||
+      Number(divide[0]) / Number(divide[1]) === -Infinity
+    ) {
+      setScreenNumber("오류");
+    }
+  };
+
+  const onClickAllClear = () => {
+    setScreenNumber(0);
   };
   return (
     <div id="app">
@@ -94,7 +101,9 @@ function App() {
           </button>
         </div>
         <div className="modifiers subgrid">
-          <button className="modifier">AC</button>
+          <button className="modifier" onClick={onClickAllClear}>
+            AC
+          </button>
         </div>
         <div className="operations subgrid">
           <button value={"/"} className="operation" onClick={onClickOperator}>
