@@ -3,15 +3,14 @@ import type { Operator } from '@/constants/operation';
 export const initialState = { userInput: '0' };
 
 type CalculatorActionType =
-  | { type: 'ADD_NUMBER'; nextNumber: number }
-  | { type: 'REPLACE_NUMBER'; nextNumber: number }
-  | { type: 'ADD_OPERATION'; nextOperation: Operator }
+  | { type: 'ADD_NUMBER'; payload: number }
+  | { type: 'REPLACE_NUMBER'; payload: number }
+  | { type: 'ADD_OPERATION'; payload: Operator }
   | {
       type: 'REPLACE_OPERATION';
-      prevOperation: Operator;
-      nextOperation: Operator;
+      payload: { prevOperation: Operator; nextOperation: Operator };
     }
-  | { type: 'CALCULATE'; result: number }
+  | { type: 'CALCULATE'; payload: number }
   | { type: 'RESET' };
 
 export const calculatorReducer = (
@@ -20,20 +19,20 @@ export const calculatorReducer = (
 ) => {
   switch (action.type) {
     case 'ADD_NUMBER':
-      return { userInput: state.userInput + String(action.nextNumber) };
+      return { userInput: state.userInput + String(action.payload) };
     case 'REPLACE_NUMBER':
-      return { userInput: String(action.nextNumber) };
+      return { userInput: String(action.payload) };
     case 'ADD_OPERATION':
-      return { userInput: state.userInput + action.nextOperation };
+      return { userInput: state.userInput + action.payload };
     case 'REPLACE_OPERATION':
       return {
         userInput: state.userInput.replace(
-          action.prevOperation,
-          action.nextOperation
+          action.payload.nextOperation,
+          action.payload.nextOperation
         ),
       };
     case 'CALCULATE':
-      return { userInput: String(action.result) };
+      return { userInput: String(action.payload) };
     case 'RESET':
       return initialState;
     default:

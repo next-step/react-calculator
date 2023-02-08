@@ -27,7 +27,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
 
   const addNumber = (nextNumber: number) => {
     if (userInput === initialState.userInput) {
-      dispatch({ type: 'REPLACE_NUMBER', nextNumber });
+      dispatch({ type: 'REPLACE_NUMBER', payload: nextNumber });
       return;
     }
 
@@ -40,7 +40,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
       return;
     }
 
-    dispatch({ type: 'ADD_NUMBER', nextNumber });
+    dispatch({ type: 'ADD_NUMBER', payload: nextNumber });
   };
 
   const addOperation = (nextOperation: Operator) => {
@@ -49,11 +49,14 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
         .match(OPERATOR_REGEX)
         ?.at(0) as Operator;
 
-      dispatch({ type: 'REPLACE_OPERATION', prevOperation, nextOperation });
+      dispatch({
+        type: 'REPLACE_OPERATION',
+        payload: { prevOperation, nextOperation },
+      });
       return;
     }
 
-    dispatch({ type: 'ADD_OPERATION', nextOperation });
+    dispatch({ type: 'ADD_OPERATION', payload: nextOperation });
   };
 
   const calculate = () => {
@@ -77,7 +80,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
       Number(userNumbers.at(1))
     )[userOperation]();
 
-    dispatch({ type: 'CALCULATE', result });
+    dispatch({ type: 'CALCULATE', payload: result });
   };
 
   const reset = () => {
