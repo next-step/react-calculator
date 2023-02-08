@@ -1,0 +1,8 @@
+.digit:last-child {
+  flex: 2 0 60%;
+  order: 1;
+}
+
+.digit {
+  flex: 1 0 30%;
+}
