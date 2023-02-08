@@ -1,4 +1,4 @@
-import Operation from '@/components/Operation';
+import { Operation } from '@/components';
 import { OPERATOR } from '@/constants';
 import useCalculator from '../hooks/useCalculator';
 

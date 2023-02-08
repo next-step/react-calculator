@@ -1,6 +1,4 @@
-import DigitsContainer from '@/components/DigitsContainer';
-import ResetContainer from '@/components/ResetContainer';
-import OperationContainer from '@/components/OperationContainer';
+import { DigitsContainer, OperationContainer, ResetContainer } from '@/container';
 import useCalculator from '@/hooks/useCalculator';
 
 function App() {
