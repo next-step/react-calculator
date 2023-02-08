@@ -7,19 +7,19 @@ function App() {
 
   const onClickNumber = (event) => {
     if (screenNumber === 0) {
-      return setScreenNumber(event.target.value);
+      return setScreenNumber(event.target.textContent);
     }
     if (screenNumber.length === 3) {
       return alert("숫자는 세 자리까지만 입력 가능합니다!");
     }
-    setScreenNumber((prev) => prev + event.target.value);
+    setScreenNumber((prev) => prev + event.target.textContent);
   };
 
   const onClickOperator = (event) => {
     if (screenNumber === 0) {
       return alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
     }
-    setScreenNumber((prev) => prev + event.target.value);
+    setScreenNumber((prev) => prev + event.target.textContent);
   };
 
   const onClickResult = () => {
@@ -56,34 +56,34 @@ function App() {
       <div className="calculator">
         <h1 id="total">{screenNumber}</h1>
         <div className="digits flex">
-          <button value={9} className="digit" onClick={onClickNumber}>
+          <button className="digit" onClick={onClickNumber}>
             9
           </button>
-          <button value={8} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             8
           </button>
-          <button value={7} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             7
           </button>
-          <button value={6} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             6
           </button>
-          <button value={5} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             5
           </button>
-          <button value={4} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             4
           </button>
-          <button value={3} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             3
           </button>
-          <button value={2} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             2
           </button>
-          <button value={1} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             1
           </button>
-          <button value={0} onClick={onClickNumber} className="digit">
+          <button onClick={onClickNumber} className="digit">
             0
           </button>
         </div>
@@ -93,19 +93,19 @@ function App() {
           </button>
         </div>
         <div className="operations subgrid">
-          <button value={"/"} className="operation" onClick={onClickOperator}>
+          <button className="operation" onClick={onClickOperator}>
             /
           </button>
-          <button value={"X"} className="operation" onClick={onClickOperator}>
+          <button className="operation" onClick={onClickOperator}>
             X
           </button>
-          <button value={"-"} className="operation" onClick={onClickOperator}>
+          <button className="operation" onClick={onClickOperator}>
             -
           </button>
-          <button value={"+"} className="operation" onClick={onClickOperator}>
+          <button className="operation" onClick={onClickOperator}>
             +
           </button>
-          <button value={"="} className="operation" onClick={onClickResult}>
+          <button className="operation" onClick={onClickResult}>
             =
           </button>
         </div>
