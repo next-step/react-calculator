@@ -39,21 +39,22 @@ function App() {
   };
 
   const onClickResult = () => {
-    const expression = screenNumber.split("+");
+    // 숫자가 3자리인 경우에는 어떻게 할건데
+    const plus = screenNumber.split("+");
     const minus = screenNumber.split("-");
     const multiply = screenNumber.split("X");
     const divide = screenNumber.split("/");
-    if (screenNumber[1] === "+") {
-      setScreenNumber(Number(expression[0]) + Number(expression[1]));
+    if (screenNumber.includes("+") === true) {
+      setScreenNumber(Number(plus[0]) + Number(plus[1]));
     }
 
-    if (screenNumber[1] === "-")
+    if (screenNumber.includes("-") === true)
       setScreenNumber(Number(minus[0]) - Number(minus[1]));
 
-    if (screenNumber[1] === "X")
+    if (screenNumber.includes("X") === true)
       setScreenNumber(Number(multiply[0]) * Number(multiply[1]));
 
-    if (screenNumber[1] === "/")
+    if (screenNumber.includes("/") === true)
       setScreenNumber(Number(divide[0]) / Number(divide[1]));
   };
   return (
