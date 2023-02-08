@@ -34,13 +34,10 @@ const calculate = (originalInputs) => {
   while ((input = inputs.shift())) {
     if (input in OPERATOR) {
       const recentOperator = operators.shift();
-      if (
-        recentOperator &&
-        OPERATOR[recentOperator].priority >= OPERATOR[input].priority
-      ) {
-        postfix.push(recentOperator);
-      } else if (recentOperator) {
-        operators.unshift(recentOperator);
+      if (recentOperator) {
+        if (OPERATOR[recentOperator].priority >= OPERATOR[input].priority) {
+          postfix.push(recentOperator);
+        } else operators.unshift(recentOperator);
       }
       operators.unshift(input);
     } else {
