@@ -21,42 +21,43 @@ function App() {
   const [number, setNumber] = useState(0);
   const [total, setTotal] = useState([]);
   const [operation, setOperation] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleDigitClick = (digit) => {
     if (String(number).length === 3) {
       return;
     }
 
-    if (number === 0) {
+    setIsTyping(true);
+
+    if (!isTyping) {
       setNumber(digit);
       return;
     }
 
     setNumber(Number(`${number}${digit}`));
   };
+
   const handleOperationClick = async (_operation) => {
-    if (!_operation || !number) return;
+    if (!number) return;
 
-    // if (_operation === "=") {
-    //   // await setTotal((num) => [...num, number]);
-
-    //   return;
-    // }
-
-    setTotal((num) => [...num, number]);
+    setTotal([number]);
     setOperation(_operation);
-    setNumber(0);
+    setIsTyping(false);
   };
+
   const handleModifierClick = () => {
     setNumber(0);
     setOperation("");
+    setTotal([]);
+    setIsTyping(false);
   };
 
   const getCalculatedNumber = (numberList, operation) => {
     let result = 0;
     switch (operation) {
       case "/":
-        result = numberList[0] / numberList[1];
+        result = Math.floor(numberList[0] / numberList[1]);
         break;
       case "X":
         result = numberList[0] * numberList[1];
@@ -78,20 +79,16 @@ function App() {
 
   const handleCalculateClick = () => {
     setTotal((num) => [...num, number]);
+    setIsTyping(false);
   };
 
   useEffect(() => {
-    let calculatedNumber = 0;
     if (total.length > 1) {
-      calculatedNumber = getCalculatedNumber(total, operation);
+      const calculatedNumber = getCalculatedNumber(total, operation);
       setNumber(calculatedNumber);
-      setTotal([]);
+      setTotal([calculatedNumber]);
     }
   }, [total, operation]);
-
-  useEffect(() => {
-    console.log(number);
-  }, [number]);
 
   return (
     <>
