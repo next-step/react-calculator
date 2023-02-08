@@ -6,6 +6,7 @@ import { MESSAGE } from '@/constants/message';
 import type { Operator } from '@/constants/operation';
 import { OPERATOR_REGEX } from '@/constants/regex';
 import { calcOperation } from '@/utils/calcOperation';
+import { isInfinite } from '@/utils/numberUtils';
 
 import { CalculatorContext } from './calculator-context';
 import { calculatorReducer, initialState } from './calculator-reducer';
@@ -15,7 +16,7 @@ export const CalculatorProvider = (props: PropsWithChildren) => {
   const { userInput } = state;
 
   const computedInput = useMemo(
-    () => (Number(userInput) === Infinity ? '오류' : userInput),
+    () => (isInfinite(Number(userInput)) ? '오류' : userInput),
     [userInput]
   );
   const userNumbers = useMemo(
