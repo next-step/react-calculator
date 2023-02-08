@@ -1,13 +1,14 @@
 import { DigitsContainer, OperationContainer, ResetContainer } from '@/container';
-import useCalculator from '@/hooks/useCalculator';
+import { CalculatorTitle } from '@/components';
+import useCalculator from './store/hooks/useCalculator';
 
 function App() {
-	const { state } = useCalculator();
+	const { calculatorState } = useCalculator();
 
 	return (
 		<div className="App">
 			<div className="calculator">
-				<h1 id="total">{state}</h1>
+				<CalculatorTitle>{calculatorState}</CalculatorTitle>
 				<DigitsContainer/>
 				<ResetContainer/>
 				<OperationContainer/>

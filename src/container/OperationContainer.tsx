@@ -1,6 +1,6 @@
 import { Operation } from '@/components';
 import { OPERATOR } from '@/constants';
-import useCalculator from '../hooks/useCalculator';
+import useCalculator from '../store/hooks/useCalculator';
 
 export default function OperationContainer() {
 	const { setAnswer, insertOperation } = useCalculator();

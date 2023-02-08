@@ -5,10 +5,10 @@ interface ContextType {
 	insertOperation: (operation: string) => void;
 	setAnswer: () => void;
 	resetCalculator: () => void;
-	state: string;
+	calculatorState: string;
 }
 
-export const CalculatorContext = createContext<ContextType>({
+const initialValue: ContextType = {
 	insertDigits: () => {
 		// 계산기에 숫자 추가 (최대 3글자)
 	},
@@ -21,6 +21,8 @@ export const CalculatorContext = createContext<ContextType>({
 	resetCalculator: () => {
 		// 계산기 초기값으로 재설정
 	},
-	state: '0'
-});
+	calculatorState: '0'
+};
+
+export const CalculatorContext = createContext(initialValue);
 
