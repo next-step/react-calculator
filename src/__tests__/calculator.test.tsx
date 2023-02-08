@@ -13,7 +13,7 @@ describe('<Calculator />', () => {
     expect(total).toHaveTextContent('7');
 
     userEvent.click(screen.getByRole('button', { name: '+' }));
-    expect(total).toHaveTextContent(/^7+$/);
+    expect(total).toHaveTextContent(/^7\+$/);
 
     userEvent.click(screen.getByRole('button', { name: '4' }));
     expect(total).toHaveTextContent('7+4');
