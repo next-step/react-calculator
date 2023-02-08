@@ -45,42 +45,35 @@ export const calculatorReducer = (
       const prev = +state.prevValue;
       const current = +state.value;
 
-      switch (state.operator) {
-        case '+':
-          return {
-            ...state,
-            prevValue: '',
-            value: (prev + current).toString(),
-            operator: '',
-          };
-        case '-':
-          return {
-            ...state,
-            prevValue: '',
-            value: (prev - current).toString(),
-            operator: '',
-          };
-        case 'X':
-          return {
-            ...state,
-            prevValue: '',
-            value: (prev * current).toString(),
-            operator: '',
-          };
-        case '/':
-          return {
-            ...state,
-            prevValue: '',
-            value: Math.floor(prev / current).toString(),
-            operator: '',
-          };
-        default:
-          return state;
-      }
+      return {
+        ...state,
+        prevValue: '',
+        value: performOperation(prev, current, state.operator),
+        operator: '',
+      };
     }
     case 'RESET':
       return initialState;
     default:
       return state;
+  }
+};
+
+const performOperation = (
+  prevValue: number,
+  value: number,
+  operator: string
+) => {
+  switch (operator) {
+    case '+':
+      return (prevValue + value).toString();
+    case '-':
+      return (prevValue - value).toString();
+    case 'X':
+      return (prevValue * value).toString();
+    case '/':
+      return Math.floor(prevValue / value).toString();
+    default:
+      return value.toString();
   }
 };
