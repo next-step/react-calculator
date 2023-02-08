@@ -1,4 +1,4 @@
-import useCalculator from '../store/hooks/useCalculator';
+import useCalculator from '../hooks/useCalculator';
 
 export default function ResetContainer() {
 	const { resetCalculator } = useCalculator();

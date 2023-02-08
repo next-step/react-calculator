@@ -1,6 +1,6 @@
 import { DigitsContainer, OperationContainer, ResetContainer } from '@/container';
 import { CalculatorTitle } from '@/components';
-import useCalculator from './store/hooks/useCalculator';
+import useCalculator from './hooks/useCalculator';
 
 function App() {
 	const { calculatorState } = useCalculator();

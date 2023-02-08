@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
-import Validator from '../../core/Validator';
-import { MESSAGE, OPERATOR } from '../../constants';
-import Calculator from '../../domain/Calculator';
+import Validator from '../core/Validator';
+import { MESSAGE, OPERATOR } from '../constants';
+import Calculator from '../domain/Calculator';
 
 const initialState = '0';
 

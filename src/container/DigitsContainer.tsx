@@ -1,5 +1,5 @@
 import { Digits } from '@/components';
-import useCalculator from '../store/hooks/useCalculator';
+import useCalculator from '../hooks/useCalculator';
 
 const DIGIT = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
 
