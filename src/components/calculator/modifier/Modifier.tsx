@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import './Modifier.css';
 
-const Modifier = () => {
+type PropsType = {
+  setCalc: Dispatch<SetStateAction<string>>;
+};
+
+const Modifier = ({ setCalc }: PropsType) => {
+  const onClickAC = () => {
+    setCalc('');
+  };
+
   return (
     <div className="modifiers subgrid">
-      <button className="modifier">AC</button>
+      <button onClick={onClickAC} className="modifier">
+        AC
+      </button>
     </div>
   );
 };

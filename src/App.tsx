@@ -6,18 +6,18 @@ import Modifier from '@/components/calculator/modifier/Modifier';
 import Operation from '@/components/calculator/operation/Operation';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [calc, setCalc] = useState('');
 
   return (
     <div id="app">
       <div className="calculator">
-        <h1 id="total">0</h1>
+        <h1 id="total">{calc}</h1>
 
-        <Digit />
+        <Digit calc={calc} setCalc={setCalc} />
 
-        <Modifier />
+        <Modifier setCalc={setCalc} />
 
-        <Operation />
+        <Operation calc={calc} setCalc={setCalc} />
       </div>
     </div>
   );
