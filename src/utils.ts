@@ -13,6 +13,8 @@ function calculate(augend: number, addend: number, operation: Operation) {
       return augend * addend;
     case OPERATION.DIVIDE:
       return Math.floor(augend / addend);
+    default:
+      throw new Error('Unhandled operation type');
   }
 }
 
