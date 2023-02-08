@@ -1,7 +1,18 @@
-import './totalScreen.css'
+import './totalScreen.css';
 
-const TotalScreen = () => {
-  return <h1 id="total">0</h1>;
+import { type CalculatorState } from '../../../reducer/index.js';
+
+const TotalScreen = ({
+  calculatorState,
+}: {
+  calculatorState: CalculatorState;
+}) => {
+  const screen =
+    calculatorState.prevValue +
+    calculatorState.operator +
+    calculatorState.value;
+
+  return <h1 id="total">{screen}</h1>;
 };
 
 export default TotalScreen;

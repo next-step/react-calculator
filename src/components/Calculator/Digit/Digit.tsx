@@ -1,20 +1,32 @@
 import './digit.css';
 
-const Digit = () => {
+const Digit = ({ appendDigit }: { appendDigit: (n: string) => void }) => {
   return (
     <div className="digits flex">
-      <button className="digit">9</button>
-      <button className="digit">8</button>
-      <button className="digit">7</button>
-      <button className="digit">6</button>
-      <button className="digit">5</button>
-      <button className="digit">4</button>
-      <button className="digit">3</button>
-      <button className="digit">2</button>
-      <button className="digit">1</button>
-      <button className="digit">0</button>
+      {DIGIT_NUMBERS.map((number) => (
+        <button
+          className="digit"
+          key={number}
+          onClick={() => appendDigit(number)}
+        >
+          {number}
+        </button>
+      ))}
     </div>
   );
 };
 
 export default Digit;
+
+const DIGIT_NUMBERS = [
+  '9',
+  '8',
+  '7',
+  '6',
+  '5',
+  '4',
+  '3',
+  '2',
+  '1',
+  '0',
+] as const;

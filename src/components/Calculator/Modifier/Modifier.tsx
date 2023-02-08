@@ -1,9 +1,11 @@
-import './modifier.css'
+import './modifier.css';
 
-const Modifier = () => {
+const Modifier = ({ reset }: { reset: () => void }) => {
   return (
     <div className="modifiers subgrid">
-      <button className="modifier">AC</button>
+      <button className="modifier" onClick={reset}>
+        AC
+      </button>
     </div>
   );
 };

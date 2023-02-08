@@ -1,13 +1,29 @@
-import './operation.css'
+import './operation.css';
 
-const Operation = () => {
+const OPERATORS = ['/', 'X', '+', '-'] as const;
+const EQUAL = '=' as const;
+
+const Operation = ({
+  appendOperator,
+  calculate,
+}: {
+  appendOperator: (operation: string) => void;
+  calculate: () => void;
+}) => {
   return (
     <div className="operations subgrid">
-      <button className="operation">/</button>
-      <button className="operation">X</button>
-      <button className="operation">-</button>
-      <button className="operation">+</button>
-      <button className="operation">=</button>
+      {OPERATORS.map((operation) => (
+        <button
+          key={operation}
+          className="operation"
+          onClick={() => appendOperator(operation)}
+        >
+          {operation}
+        </button>
+      ))}
+      <button className="operation" onClick={calculate}>
+        {EQUAL}
+      </button>
     </div>
   );
 };

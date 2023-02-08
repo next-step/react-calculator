@@ -1,17 +1,17 @@
-import './calculator.css'
+import './calculator.css';
 
-import Digit from './Digit';
-import Modifier from './Modifier';
-import Operation from './Operation';
-import TotalScreen from './TotalScreen';
+import { useCalculator } from '../../hooks/useCalculator';
+import { Digit, Modifier, Operation, TotalScreen } from '../Calculator';
 
 const Calculator = () => {
+  const { appendDigit, appendOperator, calculate, reset, state } =
+    useCalculator();
   return (
     <div className="calculator">
-      <TotalScreen />
-      <Digit />
-      <Modifier />
-      <Operation />
+      <TotalScreen calculatorState={state} />
+      <Digit appendDigit={appendDigit} />
+      <Modifier reset={reset} />
+      <Operation appendOperator={appendOperator} calculate={calculate} />
     </div>
   );
 };
