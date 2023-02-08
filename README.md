@@ -24,6 +24,15 @@
   <a href="https://next-step.github.io/js-calculator/">🖥️ 데모 링크</a>
 </p>
 
+## 🚀 Getting Started
+
+미션보다는 React를 체험하며 정말 기본적인 개념들을 습득하는 것에 초점을 두고 있습니다.
+
+✔️ Boilerplate는 CRA를 표준 사용을 추천합니다. <br/>
+✔️ NEXTSTEP 온보딩이 주 목적이므로 기본적인 요구사항만 구현 후 리뷰 받는 것을 추천합니다. <br/>
+✔️ 불필요한 Third-Party 없이 React에서 제공되는 것만으로 구현합니다. <br/>
+✔️ 테스트 도구 사용 및 테스트 코드 작성은 필수가 아닙니다. <br/>
+
 ## 🎯 기능 요구사항
 
 - [ ] 2개의 숫자에 대해 덧셈이 가능하다.
