@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { IOperationsProps } from "../../types/calculate";
+import { IOperationsProps } from "../../types/allProps";
 
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const [operator, setOperator] = useState("X");

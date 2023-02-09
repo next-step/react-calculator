@@ -1,4 +1,4 @@
-import { ITotalProps } from "../../types/calculate";
+import { ITotalProps } from "../../types/allProps";
 
 function Total({ calculation }: ITotalProps) {
   return (

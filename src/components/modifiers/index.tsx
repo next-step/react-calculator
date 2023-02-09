@@ -1,4 +1,4 @@
-import { IModifiersProps } from "../../types/calculate";
+import { IModifiersProps } from "../../types/allProps";
 
 function Modifiers({ setCalculation }: IModifiersProps) {
   const modifierHandler = () => {

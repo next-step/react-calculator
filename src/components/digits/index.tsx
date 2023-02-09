@@ -1,5 +1,5 @@
 import { MouseEvent, useState, useEffect } from "react";
-import { IDigitsProps } from "../../types/calculate";
+import { IDigitsProps } from "../../types/allProps";
 
 function Digits({ calculation, setCalculation }: IDigitsProps) {
   const [digits, setDigits] = useState("");
