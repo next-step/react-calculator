@@ -87,7 +87,7 @@ function reducer(state: ICalculator, action: Action) {
         operation: null,
         augend: total,
         addend: 0,
-        accumulator: String(total),
+        accumulator: total === Infinity ? '오류' : String(total),
       };
     case 'clear':
       return {
@@ -118,6 +118,11 @@ function Calculator() {
   };
 
   const handleOperationButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (!augend) {
+      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+      return;
+    }
+
     const operation = e.currentTarget.textContent as Operation;
     const isCalcultateOperation = operation === OPERATION.CALCULATE;
 
