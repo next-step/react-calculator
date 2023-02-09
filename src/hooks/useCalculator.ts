@@ -12,7 +12,7 @@ import {
   ZERO_VALUE,
 } from '../reducer/index.js';
 
-const MAX_NUMBER_LENGTH = 3 as const;
+const MAX_NUMBER_LENGTH = 3;
 
 export interface CalculatorReturnType {
   appendDigit: (digit: DigitNumbers) => void;

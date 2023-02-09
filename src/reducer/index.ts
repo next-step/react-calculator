@@ -4,7 +4,7 @@ export type CalculatorState = {
   operator: string;
 };
 
-export const ZERO_VALUE = '0' as const;
+export const ZERO_VALUE = '0';
 
 export const initialState: CalculatorState = {
   value: ZERO_VALUE,

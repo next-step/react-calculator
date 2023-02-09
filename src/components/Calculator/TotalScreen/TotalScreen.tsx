@@ -2,7 +2,7 @@ import './totalScreen.css';
 
 import { type CalculatorState } from '../../../reducer';
 
-const INFINITY = 'Infinity' as const;
+const INFINITY = 'Infinity';
 
 const TotalScreen = ({
   calculatorState,
