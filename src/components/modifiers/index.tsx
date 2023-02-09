@@ -1,8 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
-interface IModifiersProps {
-  setCalculation: Dispatch<SetStateAction<string>>;
-}
+import { IModifiersProps } from "../../types/calculate";
 
 function Modifiers({ setCalculation }: IModifiersProps) {
   const modifierHandler = () => {

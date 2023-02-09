@@ -1,15 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  MouseEvent,
-  useState,
-  useEffect,
-} from "react";
-
-interface IDigitsProps {
-  calculation: string;
-  setCalculation: Dispatch<SetStateAction<string>>;
-}
+import { MouseEvent, useState, useEffect } from "react";
+import { IDigitsProps } from "../../types/calculate";
 
 function Digits({ calculation, setCalculation }: IDigitsProps) {
   const [digits, setDigits] = useState("");
@@ -25,8 +15,11 @@ function Digits({ calculation, setCalculation }: IDigitsProps) {
     if (calculation === "") {
       setDigits("");
     }
+    if (Number.isNaN(Number(calculation.split("")[calculation.length - 1]))) {
+      setDigits("");
+    }
   }, [calculation]);
-  console.log(digits);
+
   return (
     <div className="digits flex">
       <button onClick={digitHandler} className="digit">
