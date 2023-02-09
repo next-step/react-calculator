@@ -76,7 +76,7 @@ describe('<Calculator />', () => {
     expect(total).toHaveTextContent('1');
   });
 
-  test('AC(All Clear)버튼을 누르면 0으로 초기화 한다', () => {
+  test('AC(All Clear)버튼을 누르면 0으로 초기화 한다.', () => {
     render(<App />);
 
     const total = screen.getByRole('heading', { level: 1 });
@@ -86,5 +86,27 @@ describe('<Calculator />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'AC' }));
     expect(total).toHaveTextContent('0');
+  });
+
+  test('숫자는 한번에 최대 3자리 수까지 입력 가능하다.', () => {
+    render(<App />);
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    const total = screen.getByRole('heading', { level: 1 });
+
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    expect(total).toHaveTextContent(/^777$/);
+
+    userEvent.click(screen.getByRole('button', { name: '+' }));
+    expect(total).toHaveTextContent('777+');
+
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    expect(total).toHaveTextContent(/^777\+777$/);
   });
 });
