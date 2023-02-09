@@ -5,7 +5,6 @@ import {
   CalculateOperators,
   MAX_NUM_OF_NUMBERS,
   MAX_NUMBER_LENGTH,
-  Operators,
 } from "@/util/constants";
 import errorMessage from "@/util/errorMessage";
 
@@ -36,29 +35,31 @@ export default function Calculator() {
     setResultPanel((prev) => `${prev}${buttonValue}`);
   }
 
-  function handleOperatorButtonClick(buttonValue: Operators) {
-    if (buttonValue !== "=" && resultPanel === "") {
+  function handleCalculateButtonClick(buttonValue: CalculateOperators) {
+    if (resultPanel === "") {
       alert(errorMessage.CAL_WITH_EMPTY_NUMBER);
       return;
     }
 
-    if (buttonValue === "=") {
-      if (!curOperator) return;
-
-      const [num1, num2] = inputNumbers.map(Number);
-      const calculateResult = operations[curOperator[0]](num1, num2);
-      const resultOnResultPanel = Number.isNaN(calculateResult)
-        ? errorMessage.GET_INVALID_RESULT
-        : String(calculateResult);
-
-      curNumber.current = resultOnResultPanel;
-      setResultPanel(resultOnResultPanel);
-    } else if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
+    if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
       alert(errorMessage.OVER_MAX_NUM_OF_NUMBERS);
     } else {
       curNumber.current = "";
       setResultPanel((prev) => `${prev}${buttonValue}`);
     }
+  }
+
+  function handleResultButtonClick() {
+    if (!curOperator) return;
+
+    const [num1, num2] = inputNumbers.map(Number);
+    const calculateResult = operations[curOperator[0]](num1, num2);
+    const resultOnResultPanel = Number.isNaN(calculateResult)
+      ? errorMessage.INVALID_RESULT
+      : String(calculateResult);
+
+    curNumber.current = resultOnResultPanel;
+    setResultPanel(resultOnResultPanel);
   }
 
   function handleAllClearBtnClick(buttonValue: string) {
@@ -73,7 +74,10 @@ export default function Calculator() {
       <ResultPanel calculateQueue={resultPanel} />
       <ModifierButton onClickModifier={handleAllClearBtnClick} />
       <DigitButtons onClickDigit={handleDigitButtonClick} />
-      <OperatorButtons onClickOperator={handleOperatorButtonClick} />
+      <OperatorButtons
+        onClickCalculateButton={handleCalculateButtonClick}
+        onClickResultButton={handleResultButtonClick}
+      />
     </div>
   );
 }

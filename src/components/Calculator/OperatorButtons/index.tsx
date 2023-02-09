@@ -1,21 +1,28 @@
-import { OPERATORS, OperatorTypes } from "@/util/constants";
+import {
+  CALCULATE_OPERATOR,
+  CalculateOperators,
+  EQUAL_OPERATOR,
+} from "@/util/constants";
 
 import styles from "./index.module.css";
 
 interface OperatorButtonsProps {
-  onClickOperator(value: OperatorTypes): void;
+  onClickCalculateButton(value: CalculateOperators): void;
+  onClickResultButton(): void;
 }
 
 export default function OperatorButtons({
-  onClickOperator,
+  onClickCalculateButton,
+  onClickResultButton,
 }: OperatorButtonsProps) {
   return (
     <div className={`${styles.operations} subgrid`}>
-      {OPERATORS.map((operator) => (
-        <button key={operator} onClick={() => onClickOperator(operator)}>
+      {CALCULATE_OPERATOR.map((operator) => (
+        <button key={operator} onClick={() => onClickCalculateButton(operator)}>
           {operator}
         </button>
       ))}
+      <button onClick={onClickResultButton}>{EQUAL_OPERATOR}</button>
     </div>
   );
 }
