@@ -5,7 +5,7 @@ const isNumber = (s) => /[0-9]/g.test(s);
 
 const { RESTRICTIONS, INITIAL_STATE } = CALCULATOR;
 
-const isBlank = (v) => ["", "0"].some((value) => String(value) === String(v));
+const isBlank = (v) => [""].some((value) => String(value) === String(v));
 const isInfiniy = (v) => [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].some((infinity) => infinity === v);
 
 export default class Calculator {
@@ -20,62 +20,79 @@ export default class Calculator {
   }
 
   input(value) {
+    console.log(value, { ...this.#state });
+
     if (isNumber(value)) {
       this.#handleNumber(value);
+      this.#state.isInitialized = false;
       return;
     }
     this.#handleModifier(value);
+    this.#state.isInitialized = false;
   }
 
   output() {
-    const { modifier, value1, value2, result } = this.#state;
-    if (result) return isInfiniy(result) ? "오류" : result;
-    else if (modifier) return value2 || this.#state.value1;
-    return value1;
+    const { modifier, value1, value2 } = this.#state;
+    if (modifier) return value2 || this.#state.value1;
+    return isInfiniy(value1) ? "오류" : value1;
+  }
+
+  #setState(state = {}) {
+    this.#state = {
+      ...INITIAL_STATE,
+      ...state,
+      isAccumulated: true,
+      isInitialized: false,
+    };
   }
 
   #handleNumber(value) {
-    if (this.#state.modifier === null) {
-      this.#state.value1 = this.#getAddedNumber(this.#state.value1, value);
+    const { modifier, value1, value2, isAccumulated } = this.#state;
+
+    if (modifier === null) {
+      this.#state.value1 = isAccumulated ? String(value) : this.#getAddedNumber(value1, value);
+      this.#state.isAccumulated = false;
       return;
     }
-    this.#state.value2 = this.#getAddedNumber(this.#state.value2, value);
+    this.#state.value2 = isAccumulated ? String(value) : this.#getAddedNumber(value2, value);
+    this.#state.isAccumulated = false;
   }
 
-  #getAddedNumber(current, newValue) {
+  #getAddedNumber(oldValue, newValue) {
     const number = Number(newValue);
-    const accumulated = current + String(number);
+    const accumulated = oldValue + String(number);
     if (accumulated.length > RESTRICTIONS.MAX_NUMBER_DIGITS) throw new Error(ERROR_MESSAGES.MAX_THREE_DIGIT_NUMBERS);
-    return isBlank(current) ? number : accumulated;
+    return this.#state.isInitialized || isBlank(oldValue) ? number : accumulated;
   }
 
   #handleModifier(value) {
+    if (value === "=" || this.#state.modifier) {
+      this.#calculate();
+      if (value === "=") return;
+    }
+
+    this.#state.modifier = value;
+  }
+
+  #calculate() {
     const { modifier, value1, value2 } = this.#state;
 
-    if (value === "=") {
-      const computationalMethods = {
-        "+": (number1, number2) => number1 + number2,
-        "-": (number1, number2) => number1 - number2,
-        x: (number1, number2) => number1 * number2,
-        X: (number1, number2) => number1 * number2,
-        "/": (number1, number2) => Math.floor(number1 / number2),
-      };
+    const computationalMethods = {
+      "+": (number1, number2) => number1 + number2,
+      "-": (number1, number2) => number1 - number2,
+      x: (number1, number2) => number1 * number2,
+      X: (number1, number2) => number1 * number2,
+      "/": (number1, number2) => Math.floor(number1 / number2),
+    };
 
-      if (!modifier) {
-        this.#state.result = value1 ? Number(value1) : "0";
-        return;
-      }
-
-      this.#state.result = computationalMethods[modifier](Number(value1), Number(value2));
-      return;
+    if (!modifier) {
+      this.#setState({
+        value1: value1 || "0",
+      });
     }
 
-    if (modifier && value2) {
-      this.#state = {
-        ...INITIAL_STATE,
-        value1: this.#state.result,
-      };
-    }
-    this.#state.modifier = value;
+    this.#setState({
+      value1: String(computationalMethods[modifier](Number(value1), Number(value2))),
+    });
   }
 }

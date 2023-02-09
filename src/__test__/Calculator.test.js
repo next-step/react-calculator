@@ -4,7 +4,7 @@ describe("계산기 모듈 테스트", () => {
   const calculate = (array) => {
     const calculator = new Calculator();
     array.forEach((value) => calculator.input(String(value)));
-    return calculator.output();
+    return Number(calculator.output());
   };
   describe("기본적인 사칙연산을 1회 테스트한다", () => {
     test("덧셈 연산을 수행한다", () => {
@@ -25,12 +25,31 @@ describe("계산기 모듈 테스트", () => {
     });
   });
 
-  describe.only("2회 이상의 사칙연산을 테스트한다", () => {
+  describe("2회 이상의 사칙연산을 테스트한다", () => {
     test("2 + 3 = 5 + 2 = 7 테스트", () => {
-      const output = calculate([2, "+", 3, "=", 5, "+", 2, "="]);
+      const output = calculate([2, "+", 3, "=", "+", 2, "="]);
       expect(output).toBe(7);
     });
 
-    // 나머지 테스트 케이스는 다음 이슈에서 진행...
+    test("하나의 수식을 계산(=)하고 새로운 수식을 입력할 때 두 번째 수식이 올바르게 계산(=)되어야 한다", () => {
+      const output = calculate([2, "+", 1, "=", 5, "+", 2, "="]);
+      expect(output).toBe(7);
+    });
+
+    test("세 개의 숫자에 대한 연산을 수행한다", () => {
+      const output = calculate([1, "+", 2, "-", 3, "="]);
+      expect(output).toBe(0);
+    });
+
+    test("두 번째 계산에서 십의 자리 연산을 수행한다", () => {
+      const output = calculate([1, "+", 2, "+", 1, 0, "="]);
+      expect(output).toBe(13);
+    });
+  });
+
+  describe("예외 상황을 테스트한다", () => {
+    // test("0으로 나누려고 할 때 오류를 발생시킨다", () => {
+    //   expect(true).toBe(false);
+    // });
   });
 });
