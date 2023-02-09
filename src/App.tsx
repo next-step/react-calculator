@@ -10,7 +10,7 @@ const excute = {
   '+': (a: number, b: number) => a + b,
   '-': (a: number, b: number) => a - b,
   X: (a: number, b: number) => a * b,
-  '/': (a: number, b: number) => ~~(a / b),
+  '/': (a: number, b: number) => Math.floor(a / b),
 };
 type ExecuteType = keyof typeof excute;
 
@@ -37,6 +37,10 @@ function App() {
       const token = total.match(/\d+|[+\-/X]/g);
       const [a, operator, b] = token!;
       const result = excute[operator as ExecuteType](Number(a), Number(b));
+      if (result === Infinity) {
+        setTotal('오류');
+        return;
+      }
       setTotal(`${result}`);
       return;
     }
