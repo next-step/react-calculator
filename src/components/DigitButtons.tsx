@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+import { DIGITS } from '../constants/calculate';
 
 interface Props {
   onDigitClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
