@@ -28,7 +28,7 @@ function Calculator({ calculator }) {
   };
 
   return (
-    <div className={styles.calculator}>
+    <div className={styles.calculator} data-testid="calculator">
       <StatusPane>{display}</StatusPane>
       <div className={getClassNames([styles.digits, styles.flex])}>
         {digits.map((number) => (
