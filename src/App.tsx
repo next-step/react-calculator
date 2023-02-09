@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './css/index.css';
 
+import { separateCalculateUnits } from './utils/separateCalculateUnits';
+
 import DigitButtons from './components/DigitButtons';
 import OperationButtons from './components/OperationButtons';
 import CalculateButton from './components/CalculateButton';
@@ -20,7 +22,7 @@ function App() {
   const [total, setTotal] = useState('');
 
   const onDigitClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const lastInput = total.match(/\d+|[+\-/X]/g)?.pop();
+    const lastInput = separateCalculateUnits(total)?.pop();
     if (lastInput && lastInput?.length >= 3) {
       alert('숫자는 세 자리까지만 입력 가능합니다!');
       return;
@@ -39,23 +41,23 @@ function App() {
   };
 
   const onSummaryClick = () => {
-    const token = total.match(/\d+|[+\-/X]/g);
-    if (token) {
-      let sum;
-      for (let i = 1; i < token.length; i += 2) {
-        if (i === 1) {
-          sum = excute[token[i] as ExecuteType](Number(token[i - 1]), Number(token[i + 1]));
-        } else {
-          sum = excute[token[i] as ExecuteType](sum || 0, Number(token[i + 1]));
-        }
+    const units = separateCalculateUnits(total);
+    if (!units) return;
+
+    let sum;
+    for (let i = 1; i < units.length; i += 2) {
+      if (i === 1) {
+        sum = excute[units[i] as ExecuteType](Number(units[i - 1]), Number(units[i + 1]));
+      } else {
+        sum = excute[units[i] as ExecuteType](sum || 0, Number(units[i + 1]));
       }
-      if (sum === Infinity) {
-        setTotal('오류');
-        return;
-      }
-      setTotal(`${sum}`);
+    }
+    if (sum === Infinity) {
+      setTotal('오류');
       return;
     }
+    setTotal(`${sum}`);
+    return;
   };
 
   const onReset = () => {
