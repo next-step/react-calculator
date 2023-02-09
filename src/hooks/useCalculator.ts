@@ -76,6 +76,7 @@ function reducer(state: ICalculator, action: Action) {
       return {
         ...state,
         operation: action.payload,
+        addend: 0,
         accumulator: newAccumulator,
       };
     }
