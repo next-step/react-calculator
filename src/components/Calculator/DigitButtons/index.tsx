@@ -1,10 +1,10 @@
 import styles from "./index.module.css";
 
-interface DigitButtonsPropsType {
+interface DigitButtonsProps {
   onClickDigit(value: number): void;
 }
 
-export default function DigitButtons({ onClickDigit }: DigitButtonsPropsType) {
+export default function DigitButtons({ onClickDigit }: DigitButtonsProps) {
   return (
     <div className={`${styles.digits} flex`}>
       {Array.from({ length: 10 }, (_, idx) => 9 - idx).map((digit) => (

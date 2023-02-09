@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 
 import {
-  CalOperatorTypes,
+  CalculateOperators,
   MAX_NUM_OF_NUMBERS,
   MAX_NUMBER_LENGTH,
-  OperatorTypes,
+  Operators,
 } from "@/util/constants";
 import { doOperate } from "@/util/helper";
 import messages from "@/util/messages";
@@ -24,7 +24,7 @@ export default function Calculator() {
   const curNumber = useRef("");
 
   const inputNumbers = resultPanel.split(operatorRegex);
-  const curOperator = resultPanel.match(operatorRegex) as [CalOperatorTypes];
+  const curOperator = resultPanel.match(operatorRegex) as [CalculateOperators];
 
   function handleDigitButtonClick(buttonValue: number) {
     if (curNumber.current.length >= MAX_NUMBER_LENGTH) {
@@ -36,7 +36,7 @@ export default function Calculator() {
     setResultPanel((prev) => `${prev}${buttonValue}`);
   }
 
-  function handleOperatorButtonClick(buttonValue: OperatorTypes) {
+  function handleOperatorButtonClick(buttonValue: Operators) {
     if (buttonValue !== "=" && resultPanel === "") {
       alert(messages.CAL_WITH_EMPTY_NUMBER);
       return;

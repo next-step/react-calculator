@@ -1,5 +1,5 @@
-export type OperatorTypes = (typeof OPERATORS)[number];
-export type CalOperatorTypes = Exclude<OperatorTypes, "=">;
+export type Operators = (typeof OPERATORS)[number];
+export type CalculateOperators = Exclude<Operators, "=">;
 
 export const OPERATORS = ["/", "X", "-", "+", "="] as const;
 
