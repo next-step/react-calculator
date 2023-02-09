@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OPERATORS = ['/', 'X', '-', '+'];
+import { OPERATORS } from '../constants/calculate';
 
 interface Props {
   onOperationClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

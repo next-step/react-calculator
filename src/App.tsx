@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './css/index.css';
 
-import { separateCalculateUnits } from './utils/separateCalculateUnits';
-
 import DigitButtons from './components/DigitButtons';
 import OperationButtons from './components/OperationButtons';
 import CalculateButton from './components/CalculateButton';
 import ResetButton from './components/ResetButton';
 
-const OPERATORS = ['/', 'X', '-', '+', '='];
+import { separateCalculateUnits } from './utils/separateCalculateUnits';
+import { MAX_INPUT_NUMBER, OPERATORS } from './constants/calculate';
+import { MESSAGES } from './constants/messages';
 
 const excute = {
   '+': (a: number, b: number) => a + b,
@@ -23,8 +23,8 @@ function App() {
 
   const onDigitClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const lastInput = separateCalculateUnits(total)?.pop();
-    if (lastInput && lastInput?.length >= 3) {
-      alert('숫자는 세 자리까지만 입력 가능합니다!');
+    if (lastInput && lastInput?.length >= MAX_INPUT_NUMBER) {
+      alert(MESSAGES.DIGIT.MAX_LENGTH);
       return;
     }
     const { textContent } = e.target as HTMLButtonElement;
@@ -33,7 +33,7 @@ function App() {
 
   const onOperationClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (OPERATORS.includes(total.slice(-1))) {
-      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+      alert(MESSAGES.OPERATOR.NOT_FIRST);
       return;
     }
     const { textContent } = e.target as HTMLButtonElement;
