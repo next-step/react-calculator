@@ -109,4 +109,17 @@ describe('<Calculator />', () => {
     userEvent.click(screen.getByRole('button', { name: '7' }));
     expect(total).toHaveTextContent(/^777\+777$/);
   });
+
+  test('연산의 결과값이 Infinity일 경우 오류라는 문자열을 보여준다.', () => {
+    render(<App />);
+
+    const total = screen.getByRole('heading', { level: 1 });
+
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    userEvent.click(screen.getByRole('button', { name: '/' }));
+    userEvent.click(screen.getByRole('button', { name: '0' }));
+    userEvent.click(screen.getByRole('button', { name: '=' }));
+
+    expect(total).toHaveTextContent('오류');
+  });
 });
