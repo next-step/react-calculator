@@ -19,4 +19,6 @@ const OPERATION = {
   CALCULATE: '=',
 } as const;
 
-export { DIGIT, OPERATION };
+const MAX_LENGTH = 3;
+
+export { DIGIT, OPERATION, MAX_LENGTH };

@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 import Button from './Button';
 
-import { OPERATION, DIGIT } from 'constant';
+import { OPERATION, DIGIT, MAX_LENGTH } from 'constant';
 import { calculate } from 'utils';
 import type { ValueOf } from 'types';
 
@@ -100,9 +100,19 @@ function reducer(state: ICalculator, action: Action) {
 
 function Calculator() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { accumulator } = state;
+  const { accumulator, augend, addend, operation } = state;
 
   const handleDigitButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (!operation && String(augend).length >= MAX_LENGTH) {
+      alert('숫자는 세 자리까지만 입력 가능합니다!');
+      return;
+    }
+
+    if (operation && String(addend).length >= MAX_LENGTH) {
+      alert('숫자는 세 자리까지만 입력 가능합니다!');
+      return;
+    }
+
     const digit = e.currentTarget.textContent as Digit;
     dispatch({ type: 'digit', payload: digit });
   };
