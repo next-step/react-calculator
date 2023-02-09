@@ -1,125 +1,35 @@
-import { useReducer } from 'react';
-
 import Button from './Button';
 
-import { OPERATION, DIGIT, MAX_LENGTH } from 'constant';
-import { calculate } from 'utils';
+import useCalculator from 'hooks/useCalculator';
+
+import { OPERATION, DIGIT, MAX_LENGTH, ERROR_MESSAGE } from 'constant';
 import type { ValueOf } from 'types';
 
 type Digit = ValueOf<typeof DIGIT>;
 type Operation = ValueOf<typeof OPERATION>;
 
-interface ICalculator {
-  total: number;
-  addend: number;
-  augend: number;
-  accumulator: string;
-  operation: Operation | null;
-}
-
-const initialState: ICalculator = {
-  total: 0,
-  addend: 0,
-  augend: 0,
-  accumulator: '0',
-  operation: null,
-};
-
-type Action =
-  | {
-      type: 'digit';
-      payload: Digit;
-    }
-  | {
-      type: 'operation';
-      payload: Operation;
-    }
-  | {
-      type: 'calculate';
-    }
-  | {
-      type: 'clear';
-    };
-
-function reducer(state: ICalculator, action: Action) {
-  const { operation, addend, augend } = state;
-
-  switch (action.type) {
-    case 'digit':
-      if (!operation) {
-        const newAugend = Number('' + augend + action.payload);
-        const newAccumulator = String(newAugend);
-
-        return {
-          ...state,
-          augend: newAugend,
-          accumulator: newAccumulator,
-        };
-      } else {
-        const newAddend = Number('' + addend + action.payload);
-        const newAccumulator = augend + operation + newAddend;
-
-        return {
-          ...state,
-          addend: newAddend,
-          accumulator: newAccumulator,
-        };
-      }
-    case 'operation': {
-      const newAccumulator = augend + action.payload;
-
-      return {
-        ...state,
-        operation: action.payload,
-        accumulator: newAccumulator,
-      };
-    }
-    case 'calculate':
-      if (!operation) {
-        throw new Error('Missing Operation');
-      }
-
-      const total = calculate(augend, addend, operation);
-
-      return {
-        ...state,
-        total,
-        operation: null,
-        augend: total,
-        addend: 0,
-        accumulator: total === Infinity ? '오류' : String(total),
-      };
-    case 'clear':
-      return {
-        ...initialState,
-      };
-    default:
-      throw new Error('Unhandled Action type');
-  }
-}
-
 function Calculator() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { accumulator, augend, addend, operation } = state;
+  const { calculator, calculate, clear, setOperand, setOperation } = useCalculator();
+  const { accumulator, augend, addend, operation } = calculator;
 
   const handleDigitButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (!operation && String(augend).length >= MAX_LENGTH) {
-      alert('숫자는 세 자리까지만 입력 가능합니다!');
+      alert(ERROR_MESSAGE.MAX_LENGTH);
       return;
     }
 
     if (operation && String(addend).length >= MAX_LENGTH) {
-      alert('숫자는 세 자리까지만 입력 가능합니다!');
+      alert(ERROR_MESSAGE.MAX_LENGTH);
       return;
     }
 
     const digit = e.currentTarget.textContent as Digit;
-    dispatch({ type: 'digit', payload: digit });
+    setOperand(digit);
   };
 
   const handleOperationButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (!augend) {
-      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+      alert(ERROR_MESSAGE.NUMBER_FIRST);
       return;
     }
 
@@ -127,15 +37,11 @@ function Calculator() {
     const isCalcultateOperation = operation === OPERATION.CALCULATE;
 
     if (isCalcultateOperation) {
-      dispatch({ type: 'calculate' });
+      calculate();
       return;
     }
 
-    dispatch({ type: 'operation', payload: operation });
-  };
-
-  const handleModifierButton: React.MouseEventHandler<HTMLButtonElement> = () => {
-    dispatch({ type: 'clear' });
+    setOperation(operation);
   };
 
   return (
@@ -149,7 +55,7 @@ function Calculator() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <Button className="modifier" onClick={handleModifierButton}>
+        <Button className="modifier" onClick={clear}>
           AC
         </Button>
       </div>
