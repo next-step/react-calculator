@@ -18,5 +18,16 @@ const Digit = ({ appendDigit }: { appendDigit: (n: DigitNumbers) => void }) => {
 
 export default Digit;
 
-const DIGIT_NUMBERS = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'] as const;
-type DigitNumbers = typeof DIGIT_NUMBERS[number];
+const DIGIT_NUMBERS = [
+  '9',
+  '8',
+  '7',
+  '6',
+  '5',
+  '4',
+  '3',
+  '2',
+  '1',
+  '0',
+] as const;
+type DigitNumbers = (typeof DIGIT_NUMBERS)[number];

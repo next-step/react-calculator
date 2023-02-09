@@ -5,7 +5,7 @@ import { type CalculatorState } from '../../../reducer';
 const INFINITY = 'Infinity';
 
 const TotalScreen = ({
-  calculatorState : { prevValue, operator, value },
+  calculatorState: { prevValue, operator, value },
 }: {
   calculatorState: CalculatorState;
 }) => {

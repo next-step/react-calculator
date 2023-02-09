@@ -25,10 +25,7 @@
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "prettier/prettier": [
-      "error",
-      { "singleQuote": true, "endOfLine": "auto" }
-    ],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/react-in-jsx-scope": "off",
     "no-undef": "off"
   }
