@@ -5,14 +5,11 @@ import { type CalculatorState } from '../../../reducer';
 const INFINITY = 'Infinity';
 
 const TotalScreen = ({
-  calculatorState,
+  calculatorState : { prevValue, operator, value },
 }: {
   calculatorState: CalculatorState;
 }) => {
-  const calculatorResult =
-    calculatorState.prevValue +
-    calculatorState.operator +
-    calculatorState.value;
+  const calculatorResult = `${prevValue}${operator}${value}`;
 
   const screen = calculatorResult.includes(INFINITY)
     ? '오류'
