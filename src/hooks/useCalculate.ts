@@ -3,15 +3,21 @@ import { operations } from '../constants';
 import { calculate } from '../utils';
 
 const useCalculate = () => {
-  const [total, setTotal] = useState<number | null>(null);
+  const [total, setTotal] = useState<number>(0);
 
-  const operatorRef = useRef<(next: number) => number>();
-  const inputCountRef = useRef<number>(0);
+  const operatorRef = useRef<((next: number) => number) | null>();
+  const prevNumberRef = useRef<number | null>(null);
 
   const handleOperationClick = (operation: keyof typeof operations) => {
-    if (total === null) return;
+    const isClickOperationBefore = prevNumberRef.current === null;
 
-    if (inputCountRef.current === 0) {
+    if (operations[operation] === operations.SUBTRACT) {
+      setTotal(-total);
+      prevNumberRef.current = -total;
+      return;
+    }
+
+    if (isClickOperationBefore) {
       operatorRef.current = calculate[operation](total);
       return;
     }
@@ -20,32 +26,43 @@ const useCalculate = () => {
       ? Math.floor(operatorRef.current(total))
       : total;
 
-    setTotal(nextTotalValue);
     operatorRef.current = calculate[operation](nextTotalValue);
+    setTotal(nextTotalValue);
+    prevNumberRef.current = null;
+  };
 
-    inputCountRef.current = 0;
+  const isLimitLength = (number: number) => {
+    const LIMIT_NUMBER_LENGTH = 3;
+
+    return Math.abs(number).toString().length >= LIMIT_NUMBER_LENGTH;
   };
 
   const handleDigitClick = useCallback((digit: number) => {
-    const count = inputCountRef.current;
+    const prevNumber = prevNumberRef.current;
 
     setTotal((prevTotal) => {
-      if (prevTotal === null) return digit;
-
-      if (count === 0) {
+      if (prevNumber === null) {
+        prevNumberRef.current = digit;
         return digit;
       }
-      if (count >= 3) return prevTotal;
-      return prevTotal * 10 + digit;
-    });
 
-    inputCountRef.current = count + 1;
+      if (isLimitLength(prevTotal)) {
+        prevNumberRef.current = prevTotal;
+        return prevTotal;
+      }
+
+      const newNumber =
+        prevNumber < 0 ? prevNumber * 10 - digit : prevNumber * 10 + digit;
+
+      prevNumberRef.current = newNumber;
+      return newNumber;
+    });
   }, []);
 
   const handleClearClick = useCallback(() => {
-    setTotal(null);
-    operatorRef.current = undefined;
-    inputCountRef.current = 0;
+    setTotal(0);
+    operatorRef.current = null;
+    prevNumberRef.current = null;
   }, [setTotal]);
 
   return {

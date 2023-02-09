@@ -12,11 +12,9 @@ function App() {
     return value < Number.MAX_SAFE_INTEGER && value > Number.MIN_SAFE_INTEGER;
   };
 
-  const totalNumber = total === null ? 0 : total;
-
   return (
     <div className="calculator">
-      <h1 id="total">{isRange(totalNumber) ? '오류' : totalNumber}</h1>
+      <h1 id="total">{isRange(total) ? total : '오류'}</h1>
       <div className="digits flex">
         {DIGITS.map((digit) => (
           <DigitButton key={digit} digit={digit} onClick={handleDigitClick} />
