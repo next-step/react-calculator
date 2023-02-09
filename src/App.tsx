@@ -35,14 +35,22 @@ function App() {
     const { textContent } = e.target as HTMLButtonElement;
     if (textContent === '=') {
       const token = total.match(/\d+|[+\-/X]/g);
-      const [a, operator, b] = token!;
-      const result = excute[operator as ExecuteType](Number(a), Number(b));
-      if (result === Infinity) {
-        setTotal('오류');
+      if (token) {
+        let sum;
+        for (let i = 1; i < token.length; i += 2) {
+          if (i === 1) {
+            sum = excute[token[i] as ExecuteType](Number(token[i - 1]), Number(token[i + 1]));
+          } else {
+            sum = excute[token[i] as ExecuteType](sum || 0, Number(token[i + 1]));
+          }
+        }
+        if (sum === Infinity) {
+          setTotal('오류');
+          return;
+        }
+        setTotal(`${sum}`);
         return;
       }
-      setTotal(`${result}`);
-      return;
     }
 
     setTotal((prev) => prev + textContent);
