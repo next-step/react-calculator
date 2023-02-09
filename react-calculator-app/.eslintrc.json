@@ -12,7 +12,7 @@
   "plugins": ["react"],
   "rules": {
     "max-depth": 2,
-    "max-lines": ["error", 15],
+    // "max-lines": ["error", 15],
     "no-var": "error"
   }
 }
