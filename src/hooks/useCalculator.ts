@@ -18,21 +18,16 @@ export const useCalculator = () => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
   const appendDigit = (digit: DigitNumbers) => {
-    if (
-      (state.value.length >= MAX_NUMBER_LENGTH &&
-        !state.value.includes(MINUS)) ||
-      (state.value.length >= MAX_NUMBER_LENGTH + 1 &&
-        state.value.includes(MINUS))
-    ) {
+    if (isNumberRange(state.value)) {
       alert(`숫자는 ${MAX_NUMBER_LENGTH}자리까지만 입력 가능합니다!`);
       return;
     }
-    if (state.value === ZERO_VALUE) {
-      dispatch({ type: 'SET_VALUE', payload: digit });
-      return;
-    }
 
-    dispatch({ type: 'APPEND_VALUE', payload: digit });
+    const isZero = state.value === ZERO_VALUE;
+    dispatch({
+      type: isZero ? 'SET_VALUE' : 'APPEND_VALUE',
+      payload: digit,
+    });
   };
 
   const appendOperator = (operator: Operators) => {
@@ -63,4 +58,11 @@ export const useCalculator = () => {
   };
 
   return { appendDigit, appendOperator, calculate, reset, state } as const;
+};
+
+const isNumberRange = (value: string) => {
+  return (
+    (value.length >= MAX_NUMBER_LENGTH && !value.includes(MINUS)) ||
+    (value.length >= MAX_NUMBER_LENGTH + 1 && value.includes(MINUS))
+  );
 };

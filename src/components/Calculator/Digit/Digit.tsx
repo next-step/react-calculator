@@ -30,4 +30,4 @@ const DIGIT_NUMBERS = [
   '1',
   '0',
 ] as const;
-type DigitNumbers = (typeof DIGIT_NUMBERS)[number];
+export type DigitNumbers = (typeof DIGIT_NUMBERS)[number];
