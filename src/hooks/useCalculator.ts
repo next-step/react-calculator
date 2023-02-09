@@ -6,25 +6,15 @@ import {
   type Subtract,
 } from '../components/Calculator/Operation/Operation.js';
 import {
-  type CalculatorState,
   calculatorReducer,
   initialState,
   ZERO_VALUE,
 } from '../reducer/index.js';
 
 const MAX_NUMBER_LENGTH = 3;
-
-export interface CalculatorReturnType {
-  appendDigit: (digit: DigitNumbers) => void;
-  appendOperator: (operator: Operators) => void;
-  calculate: () => void;
-  reset: () => void;
-  state: CalculatorState;
-}
-
 const MINUS: Subtract = '-';
 
-export const useCalculator = (): CalculatorReturnType => {
+export const useCalculator = () => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
   const appendDigit = (digit: DigitNumbers) => {
@@ -72,5 +62,5 @@ export const useCalculator = (): CalculatorReturnType => {
     dispatch({ type: 'RESET' });
   };
 
-  return { appendDigit, appendOperator, calculate, reset, state };
+  return { appendDigit, appendOperator, calculate, reset, state } as const;
 };
