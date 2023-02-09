@@ -1,11 +1,13 @@
 import Calculator from "./component/Calculator";
 import "./css/App.css";
 
+import CalculatorModule from "./domain/calculator";
+
 function App() {
   return (
-    <>
-      <Calculator />
-    </>
+    <div id="app">
+      <Calculator calculator={new CalculatorModule()} />
+    </div>
   );
 }
 
