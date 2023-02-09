@@ -75,4 +75,16 @@ describe('<Calculator />', () => {
     userEvent.click(screen.getByRole('button', { name: '=' }));
     expect(total).toHaveTextContent('1');
   });
+
+  test('AC(All Clear)버튼을 누르면 0으로 초기화 한다', () => {
+    render(<App />);
+
+    const total = screen.getByRole('heading', { level: 1 });
+
+    userEvent.click(screen.getByRole('button', { name: '7' }));
+    expect(total).toHaveTextContent('7');
+
+    userEvent.click(screen.getByRole('button', { name: 'AC' }));
+    expect(total).toHaveTextContent('0');
+  });
 });
