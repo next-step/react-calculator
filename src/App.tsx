@@ -33,27 +33,27 @@ function App() {
       return;
     }
     const { textContent } = e.target as HTMLButtonElement;
-    if (textContent === '=') {
-      const token = total.match(/\d+|[+\-/X]/g);
-      if (token) {
-        let sum;
-        for (let i = 1; i < token.length; i += 2) {
-          if (i === 1) {
-            sum = excute[token[i] as ExecuteType](Number(token[i - 1]), Number(token[i + 1]));
-          } else {
-            sum = excute[token[i] as ExecuteType](sum || 0, Number(token[i + 1]));
-          }
+    setTotal((prev) => prev + textContent);
+  };
+
+  const onSummaryClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const token = total.match(/\d+|[+\-/X]/g);
+    if (token) {
+      let sum;
+      for (let i = 1; i < token.length; i += 2) {
+        if (i === 1) {
+          sum = excute[token[i] as ExecuteType](Number(token[i - 1]), Number(token[i + 1]));
+        } else {
+          sum = excute[token[i] as ExecuteType](sum || 0, Number(token[i + 1]));
         }
-        if (sum === Infinity) {
-          setTotal('오류');
-          return;
-        }
-        setTotal(`${sum}`);
+      }
+      if (sum === Infinity) {
+        setTotal('오류');
         return;
       }
+      setTotal(`${sum}`);
+      return;
     }
-
-    setTotal((prev) => prev + textContent);
   };
 
   return (
@@ -65,7 +65,7 @@ function App() {
           AC
         </button>
       </div>
-      <Operations onOperationClick={onOperationClick} />
+      <Operations onOperationClick={onOperationClick} onSummaryClick={onSummaryClick} />
     </div>
   );
 }
