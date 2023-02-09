@@ -2,8 +2,8 @@ import '../css/modifier.css';
 
 const Modifier = () => {
   return (
-    <div class="modifiers subgrid">
-      <button class="modifier">AC</button>
+    <div className="modifiers subgrid">
+      <button className="modifier">AC</button>
     </div>
   );
 };

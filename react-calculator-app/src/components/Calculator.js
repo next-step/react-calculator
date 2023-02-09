@@ -7,7 +7,7 @@ import '../css/calculator.css';
 
 const Calculator = () => {
   return (
-    <div class="calculator">
+    <div className="calculator">
       <Total />
       <Digits />
       <Modifier />

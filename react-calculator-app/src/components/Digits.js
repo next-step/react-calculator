@@ -1,20 +1,20 @@
 import '../css/digits.css';
+import { useCalculator } from '../store/CalcContext';
 
 const Digits = () => {
+  const { addDigit } = useCalculator();
+
   return (
-    <div class="digits flex">
-      <button class="digit">9</button>
-      <button class="digit">8</button>
-      <button class="digit">7</button>
-      <button class="digit">6</button>
-      <button class="digit">5</button>
-      <button class="digit">4</button>
-      <button class="digit">3</button>
-      <button class="digit">2</button>
-      <button class="digit">1</button>
-      <button class="digit">0</button>
+    <div className="digits flex">
+      {numbers.map((number) => (
+        <button key={number} onClick={() => addDigit(number)}>
+          {number}
+        </button>
+      ))}
     </div>
   );
 };
 
 export default Digits;
+
+const numbers = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];

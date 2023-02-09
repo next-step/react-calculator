@@ -2,12 +2,12 @@ import '../css/operations.css';
 
 const Operations = () => {
   return (
-    <div class="operations subgrid">
-      <button class="operation">/</button>
-      <button class="operation">X</button>
-      <button class="operation">-</button>
-      <button class="operation">+</button>
-      <button class="operation">=</button>
+    <div className="operations subgrid">
+      <button className="operation">/</button>
+      <button className="operation">X</button>
+      <button className="operation">-</button>
+      <button className="operation">+</button>
+      <button className="operation">=</button>
     </div>
   );
 };

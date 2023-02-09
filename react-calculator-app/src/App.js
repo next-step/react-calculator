@@ -3,7 +3,7 @@ import { CalcProvider } from './store/CalcProvider';
 
 const App = () => {
   return (
-    <div class="app">
+    <div className="app">
       <CalcProvider>
         <Calculator />
       </CalcProvider>
