@@ -30,7 +30,7 @@ const useCalculate = () => {
     const count = inputCountRef.current;
 
     setTotal((prevTotal) => {
-      if (!prevTotal) return digit;
+      if (prevTotal === null) return digit;
 
       if (count === 0) {
         return digit;
