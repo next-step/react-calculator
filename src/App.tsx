@@ -8,7 +8,6 @@ import "./css/index.css";
 function App() {
   const [calculation, setCalculation] = useState("");
 
-  console.log(calculation.search("/X-+"));
   return (
     <main id="app">
       <div className="calculator">

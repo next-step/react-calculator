@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, MouseEvent } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  MouseEvent,
+  useState,
+  useEffect,
+} from "react";
 
 interface IDigitsProps {
   calculation: string;
@@ -6,9 +12,21 @@ interface IDigitsProps {
 }
 
 function Digits({ calculation, setCalculation }: IDigitsProps) {
+  const [digits, setDigits] = useState("");
   const digitHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    setCalculation(calculation + e.currentTarget.innerHTML);
+    if (digits.length < 3) {
+      setDigits(digits + e.currentTarget.innerText);
+      setCalculation(calculation + e.currentTarget.innerText);
+    } else {
+      alert("최대 3자리수 까지 입력 가능합니다!");
+    }
   };
+  useEffect(() => {
+    if (calculation === "") {
+      setDigits("");
+    }
+  }, [calculation]);
+  console.log(digits);
   return (
     <div className="digits flex">
       <button onClick={digitHandler} className="digit">

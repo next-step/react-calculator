@@ -7,8 +7,14 @@ interface IOperationsProps {
 
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const operationHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    setCalculation(calculation + e.currentTarget.innerText);
+    if (
+      Number.isNaN(Number(calculation.split("")[calculation.length - 1])) ===
+      false
+    ) {
+      setCalculation(calculation + e.currentTarget.innerText);
+    }
   };
+
   return (
     <div className="operations subgrid">
       <button onClick={operationHandler} className="operation">
