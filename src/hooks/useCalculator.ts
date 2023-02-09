@@ -17,6 +17,7 @@ export default function useCalculator() {
 		}
 
 		if (calculatorState === initialState) {
+			setState(digits);
 			return;
 		}
 

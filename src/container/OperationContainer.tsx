@@ -1,14 +1,17 @@
 import { Operation } from '@/components';
 import { OPERATOR } from '@/constants';
-import useCalculator from '../hooks/useCalculator';
 
-export default function OperationContainer() {
-	const { setAnswer, insertOperation } = useCalculator();
+interface Props {
+	setAnswer: () => void;
+	insertOperation: (operation: string) => void;
+}
+
+export default function OperationContainer({ setAnswer, insertOperation }: Props) {
 	return (
 		<div className="operations subgrid">
-			{OPERATOR.map((operator: string, index) => (
+			{OPERATOR.map((operator: string) => (
 				<Operation
-					key={index}
+					key={operator}
 					onClick={insertOperation}
 					operator={operator}/>
 			))}
