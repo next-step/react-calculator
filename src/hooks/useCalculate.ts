@@ -8,7 +8,7 @@ const useCalculate = () => {
   const operatorRef = useRef<((next: number) => number) | null>();
   const prevNumberRef = useRef<number | null>(null);
 
-  const handleOperationClick = (operation: keyof typeof operations) => {
+  const operate = (operation: keyof typeof operations) => {
     const isClickOperationBefore = prevNumberRef.current === null;
 
     if (operations[operation] === operations.SUBTRACT) {
@@ -37,7 +37,7 @@ const useCalculate = () => {
     return Math.abs(number).toString().length >= LIMIT_NUMBER_LENGTH;
   };
 
-  const handleDigitClick = useCallback((digit: number) => {
+  const insertDigit = useCallback((digit: number) => {
     const prevNumber = prevNumberRef.current;
 
     setTotal((prevTotal) => {
@@ -59,7 +59,7 @@ const useCalculate = () => {
     });
   }, []);
 
-  const handleClearClick = useCallback(() => {
+  const clear = useCallback(() => {
     setTotal(0);
     operatorRef.current = null;
     prevNumberRef.current = null;
@@ -67,9 +67,9 @@ const useCalculate = () => {
 
   return {
     total,
-    handleDigitClick,
-    handleOperationClick,
-    handleClearClick,
+    insertDigit,
+    operate,
+    clear,
   };
 };
 

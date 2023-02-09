@@ -5,8 +5,7 @@ import { operations, DIGITS, OPERATIONS_LIST } from './constants';
 import { useCalculate } from './hooks';
 
 function App() {
-  const { total, handleClearClick, handleDigitClick, handleOperationClick } =
-    useCalculate();
+  const { total, operate, insertDigit, clear } = useCalculate();
 
   const isRange = (value: number) => {
     return value < Number.MAX_SAFE_INTEGER && value > Number.MIN_SAFE_INTEGER;
@@ -17,11 +16,11 @@ function App() {
       <h1 id="total">{isRange(total) ? total : '오류'}</h1>
       <div className="digits flex">
         {DIGITS.map((digit) => (
-          <DigitButton key={digit} digit={digit} onClick={handleDigitClick} />
+          <DigitButton key={digit} digit={digit} insertDigit={insertDigit} />
         ))}
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier" onClick={handleClearClick}>
+        <button className="modifier" onClick={clear}>
           AC
         </button>
       </div>
@@ -30,7 +29,7 @@ function App() {
           <button
             key={operation}
             className="operation"
-            onClick={() => handleOperationClick(operation)}
+            onClick={() => operate(operation)}
           >
             {operations[operation]}
           </button>
