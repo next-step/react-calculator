@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './css/index.css';
 
-import Digits from './components/Digits';
-import Operations from './components/Operations';
+import DigitButtons from './components/DigitButtons';
+import OperationButtons from './components/OperationButtons';
+import CalculateButton from './components/CalculateButton';
+import ResetButton from './components/ResetButton';
 
 const OPERATORS = ['/', 'X', '-', '+', '='];
 
@@ -36,7 +38,7 @@ function App() {
     setTotal((prev) => prev + textContent);
   };
 
-  const onSummaryClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSummaryClick = () => {
     const token = total.match(/\d+|[+\-/X]/g);
     if (token) {
       let sum;
@@ -56,16 +58,23 @@ function App() {
     }
   };
 
+  const onReset = () => {
+    setTotal('');
+  };
+
   return (
     <div className="calculator">
       <h1 id="total">{total || '0'}</h1>
-      <Digits onDigitClick={onDigitClick} />
-      <div className="modifiers subgrid">
-        <button className="modifier" onClick={() => setTotal('')}>
-          AC
-        </button>
+      <div className="digits flex">
+        <DigitButtons onDigitClick={onDigitClick} />
       </div>
-      <Operations onOperationClick={onOperationClick} onSummaryClick={onSummaryClick} />
+      <div className="modifiers subgrid">
+        <ResetButton onReset={onReset} />
+      </div>
+      <div className="operations subgrid">
+        <OperationButtons onOperationClick={onOperationClick} />
+        <CalculateButton onSummaryClick={onSummaryClick} />
+      </div>
     </div>
   );
 }

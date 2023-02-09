@@ -6,16 +6,16 @@ interface Props {
   onDigitClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const Digits = ({ onDigitClick }: Props) => {
+const DigitButtons = ({ onDigitClick }: Props) => {
   return (
-    <div className="digits flex">
+    <>
       {DIGITS.map((digit) => (
         <button key={digit} className="digit" onClick={onDigitClick}>
           {digit}
         </button>
       ))}
-    </div>
+    </>
   );
 };
 
-export default Digits;
+export default DigitButtons;
