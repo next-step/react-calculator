@@ -1,9 +1,12 @@
 import Calculator from './components/Calculator';
+import { CalcProvider } from './store/CalcProvider';
 
 const App = () => {
   return (
     <div class="app">
-      <Calculator />
+      <CalcProvider>
+        <Calculator />
+      </CalcProvider>
     </div>
   );
 };
