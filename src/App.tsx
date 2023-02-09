@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 import Digit from '@/components/calculator/digit/Digit';
@@ -7,6 +7,12 @@ import Operation from '@/components/calculator/operation/Operation';
 
 function App() {
   const [calc, setCalc] = useState('0');
+
+  useEffect(() => {
+    if (parseInt(calc, 10) === Infinity) {
+      setCalc('오류');
+    }
+  }, [calc]);
 
   return (
     <div id="app">
