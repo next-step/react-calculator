@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './@common/Button';
 
 const OPERATORS = ['/', 'X', '-', '+', '='];
 
@@ -11,9 +10,9 @@ const Operations = ({ onOperationClick }: Props) => {
   return (
     <div className="operations subgrid">
       {OPERATORS.map((operator) => (
-        <Button key={operator} className="operation" onClick={onOperationClick}>
+        <button key={operator} className="operation" onClick={onOperationClick}>
           {operator}
-        </Button>
+        </button>
       ))}
     </div>
   );
