@@ -3,7 +3,9 @@ import { Calculator, Operator, Validator } from '../domain';
 import { MESSAGE } from '../constants';
 
 const initialState = '0';
-const OPERATOR_SYMBOLS = Operator.symbols;
+
+const { symbols: OPERATOR_SYMBOLS, MAX_OPERATOR_LENGTH } = Operator;
+const { MAX_DIGIT_LENGTH } = Calculator;
 
 export default function useCalculator() {
 	const [calculatorState, setState] = useState(initialState);
@@ -12,7 +14,7 @@ export default function useCalculator() {
 		const updateDigits = calculatorState + digits;
 
 		if (!Validator.isOverMaxDigitLength(updateDigits)) {
-			alert(MESSAGE.MAX_DIGIT_LENGTH(Calculator.MAX_DIGIT_LENGTH));
+			alert(MESSAGE.MAX_DIGIT_LENGTH(MAX_DIGIT_LENGTH));
 			return;
 		}
 
@@ -30,7 +32,7 @@ export default function useCalculator() {
 		}
 
 		if (Validator.isMaxOperatorLength(calculatorState + operator)) {
-			alert(MESSAGE.MAX_OPERATOR_LENGTH(Operator.MAX_OPERATOR_LENGTH));
+			alert(MESSAGE.MAX_OPERATOR_LENGTH(MAX_OPERATOR_LENGTH));
 			return;
 		}
 

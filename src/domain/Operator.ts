@@ -19,7 +19,9 @@ export default class Operator {
 	}
 
 	public static calculate(operator: string, [a, b]: [number, number]): number {
-		const { calculator } = Object.values(Operator.SYMBOLS).find((item) => item.operator === operator);
+		const { calculator } = Object.values(Operator.SYMBOLS).find((item) => (
+			item.operator === operator
+		));
 		return calculator(a, b);
 	}
 }
