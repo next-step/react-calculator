@@ -20,18 +20,18 @@ const operatorRegex = /[\+-\/X]/g;
 export default function Calculator() {
   const [resultPanel, setResultPanel] = useState("");
 
-  const curNumber = useRef("");
+  const currentInputNumber = useRef("");
 
   const inputNumbers = resultPanel.split(operatorRegex);
   const curOperator = resultPanel.match(operatorRegex) as [CalculateOperators];
 
   function handleDigitButtonClick(buttonValue: number) {
-    if (curNumber.current.length >= MAX_NUMBER_LENGTH) {
+    if (currentInputNumber.current.length >= MAX_NUMBER_LENGTH) {
       alert(errorMessage.OVER_MAX_NUMBER_LENGTH);
       return;
     }
 
-    curNumber.current += `${buttonValue}`;
+    currentInputNumber.current += `${buttonValue}`;
     setResultPanel((prev) => `${prev}${buttonValue}`);
   }
 
@@ -44,7 +44,7 @@ export default function Calculator() {
     if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
       alert(errorMessage.OVER_MAX_NUM_OF_NUMBERS);
     } else {
-      curNumber.current = "";
+      currentInputNumber.current = "";
       setResultPanel((prev) => `${prev}${buttonValue}`);
     }
   }
@@ -58,18 +58,18 @@ export default function Calculator() {
       ? errorMessage.INVALID_RESULT
       : String(calculateResult);
 
-    curNumber.current = resultOnResultPanel;
+    currentInputNumber.current = resultOnResultPanel;
     setResultPanel(resultOnResultPanel);
   }
 
   function handleAllClearBtnClick() {
     setResultPanel("");
-    curNumber.current = "";
+    currentInputNumber.current = "";
   }
 
   return (
     <div className={styles.calculator}>
-      <ResultPanel calculateQueue={resultPanel} />
+      <ResultPanel resultPanel={resultPanel} />
       <ModifierButton onClickModifier={handleAllClearBtnClick} />
       <DigitButtons onClickDigit={handleDigitButtonClick} />
       <OperatorButtons

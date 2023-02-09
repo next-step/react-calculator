@@ -1,11 +1,9 @@
 import styles from "./index.module.css";
 
 interface ResultPanelProps {
-  calculateQueue: string;
+  resultPanel: string;
 }
 
-export default function ResultPanel({ calculateQueue }: ResultPanelProps) {
-  return (
-    <h1 id={styles.total}>{calculateQueue === "" ? "0" : calculateQueue}</h1>
-  );
+export default function ResultPanel({ resultPanel }: ResultPanelProps) {
+  return <h1 id={styles.total}>{resultPanel === "" ? "0" : resultPanel}</h1>;
 }
