@@ -15,7 +15,7 @@ export default class Operator {
 	}
 
 	static get symbols(): string[] {
-		return Object.values(this.SYMBOLS).map((item) => item.operator);
+		return Object.values(this.SYMBOLS).map((item) => item.operator).reverse();
 	}
 
 	public static calculate(operator: string, [a, b]: [number, number]): number {
