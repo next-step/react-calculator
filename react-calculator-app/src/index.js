@@ -3,7 +3,11 @@ import ReactDOM from 'react';
 
 import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed  to fidn the root element');
+const root = ReactDOM.createRoot(rootElement);
+
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
