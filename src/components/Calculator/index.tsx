@@ -62,9 +62,7 @@ export default function Calculator() {
     setResultPanel(resultOnResultPanel);
   }
 
-  function handleAllClearBtnClick(buttonValue: string) {
-    if (buttonValue !== "AC") return;
-
+  function handleAllClearBtnClick() {
     setResultPanel("");
     curNumber.current = "";
   }

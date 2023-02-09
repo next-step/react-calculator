@@ -9,3 +9,5 @@ export const OPERATORS = [...CALCULATE_OPERATOR, EQUAL_OPERATOR] as const;
 export const MAX_NUMBER_LENGTH = 3;
 
 export const MAX_NUM_OF_NUMBERS = 2;
+
+export const RESULT_BUTTON = "AC";
