@@ -15,11 +15,6 @@ const Digit = ({ calc, setCalc }: PropsType) => {
     }
 
     setCalc((prev) => prev + e.target.value);
-
-    if (calc.length === 3 || calc.length === 7) {
-      alert('3자리 숫자만 가능합니다!');
-      setCalc((prev) => prev.slice(0, -1));
-    }
   };
 
   return (
