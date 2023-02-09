@@ -1,10 +1,8 @@
 import { ERROR_MESSAGES, CALCULATOR } from "./constant";
 
+const { RESTRICTIONS, INITIAL_STATE, MODIFIER, NATURAL_NUMBER } = CALCULATOR;
+
 const isNumber = (s) => /[0-9]/g.test(s);
-// const modifiers = ["/", "X", "-", "+", "="];
-
-const { RESTRICTIONS, INITIAL_STATE } = CALCULATOR;
-
 const isBlank = (v) => [""].some((value) => String(value) === String(v));
 const isInfiniy = (v) => [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].some((infinity) => infinity === v);
 
@@ -54,6 +52,7 @@ export default class Calculator {
       this.#state.isAccumulated = false;
       return;
     }
+
     this.#state.value2 = isAccumulated ? String(value) : this.#getAddedNumber(value2, value);
     this.#state.isAccumulated = false;
   }
@@ -61,33 +60,36 @@ export default class Calculator {
   #getAddedNumber(oldValue, newValue) {
     const number = Number(newValue);
     const accumulated = oldValue + String(number);
-    if (accumulated.length > RESTRICTIONS.MAX_NUMBER_DIGITS) throw new Error(ERROR_MESSAGES.MAX_THREE_DIGIT_NUMBERS);
+
+    if (accumulated.length > RESTRICTIONS.MAX_NUMBER_DIGITS) {
+      throw new Error(ERROR_MESSAGES.MAX_THREE_DIGIT_NUMBERS);
+    }
+
     return this.#state.isInitialized || isBlank(oldValue) ? number : accumulated;
   }
 
   #handleModifier(value) {
-    if (value === "=" || this.#state.modifier) {
+    if (value === MODIFIER.EQUAL || this.#state.modifier) {
       this.#calculate();
-      if (value === "=") return;
     }
 
-    this.#state.modifier = value;
+    if (value !== MODIFIER.EQUAL) this.#state.modifier = value;
   }
 
   #calculate() {
     const { modifier, value1, value2 } = this.#state;
 
     const computationalMethods = {
-      "+": (number1, number2) => number1 + number2,
-      "-": (number1, number2) => number1 - number2,
-      x: (number1, number2) => number1 * number2,
-      X: (number1, number2) => number1 * number2,
-      "/": (number1, number2) => Math.floor(number1 / number2),
+      [MODIFIER.ADD]: (number1, number2) => number1 + number2,
+      [MODIFIER.SUBTRACT]: (number1, number2) => number1 - number2,
+      [MODIFIER.MULTIPLY]: (number1, number2) => number1 * number2,
+      [MODIFIER.MULTIPLY_LOWER]: (number1, number2) => number1 * number2,
+      [MODIFIER.DIVIDE]: (number1, number2) => Math.floor(number1 / number2),
     };
 
     if (!modifier) {
       this.#setState({
-        value1: value1 || "0",
+        value1: value1 || NATURAL_NUMBER.ZERO,
       });
     }
 

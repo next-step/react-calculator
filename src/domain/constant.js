@@ -14,4 +14,15 @@ export const CALCULATOR = {
     isAccumulated: false,
     isInitialized: true,
   },
+  MODIFIER: {
+    EQUAL: "=",
+    ADD: "+",
+    SUBTRACT: "-",
+    MULTIPLY: "X",
+    MULTIPLY_LOWER: "x",
+    DIVIDE: "/",
+  },
+  NATURAL_NUMBER: {
+    ZERO: "0",
+  },
 };
