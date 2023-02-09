@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import './Digit.css';
 
 type PropsType = {
@@ -11,15 +11,12 @@ const Digit = ({ calc, setCalc }: PropsType) => {
 
   const onClickNumber = (e: any) => {
     setCalc((prev) => prev + e.target.value);
-  };
 
-  // useEffect(() => {
-  //   if (calc.length > 3 && !calc.includes('+')) {
-  //     alert('3자리 숫자까지만 가능합니다!');
-  //     setCalc((prev) => prev.slice(0, -1));
-  //     return;
-  //   }
-  // }, [calc]);
+    if (calc.length === 3 || calc.length === 7) {
+      alert('3자리 숫자만 가능합니다!');
+      setCalc((prev) => prev.slice(0, -1));
+    }
+  };
 
   return (
     <div className="digits flex">

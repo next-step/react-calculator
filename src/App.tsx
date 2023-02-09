@@ -6,7 +6,7 @@ import Modifier from '@/components/calculator/modifier/Modifier';
 import Operation from '@/components/calculator/operation/Operation';
 
 function App() {
-  const [calc, setCalc] = useState('');
+  const [calc, setCalc] = useState('0');
 
   return (
     <div id="app">
