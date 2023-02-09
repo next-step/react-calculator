@@ -1,21 +1,25 @@
 export const INITIAL_VALUE = '0';
 
 export const initialState = {
-  value: INITIAL_VALUE,
-  prevValue: '',
+  total: INITIAL_VALUE,
+  nums: [],
   operator: '',
 };
 
 export const calcReducer = (state, action) => {
   switch (action.type) {
     case 'SET_VALUE':
-      return { ...state, value: action.payload };
+      return { ...state, total: action.payload };
     case 'ADD_VALUE':
-      return { ...state, value: state.value + action.payload };
-    case 'SET_OPERATION':
-      return { ...state, value: state.value + action.payload };
+      return { ...state, total: state.total + action.payload };
+    case 'ADD_OPERATOR':
+      return {
+        ...state,
+        total: state.total + action.operator,
+        operator: action.operator,
+      };
     case 'CALCULATE':
-      return action.result;
+      return { ...state, total: action.payload };
     case 'RESET':
       return initialState;
     default:

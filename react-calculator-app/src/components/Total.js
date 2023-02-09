@@ -1,6 +1,9 @@
 import '../css/total.css';
+import { useCalculator } from '../store/CalcContext';
 const Total = () => {
-  return <h1 id="total">0</h1>;
+  const { ...state } = useCalculator();
+  console.log(state);
+  return <h1 id="total">{state.total}</h1>;
 };
 
 export default Total;
