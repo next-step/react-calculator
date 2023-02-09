@@ -10,6 +10,10 @@ const Digit = ({ calc, setCalc }: PropsType) => {
   const digitArr = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
 
   const onClickNumber = (e: any) => {
+    if (calc[0] === '0') {
+      setCalc((prev) => prev.slice(1));
+    }
+
     setCalc((prev) => prev + e.target.value);
 
     if (calc.length === 3 || calc.length === 7) {
