@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 
+import { operations } from "@/util/calculateService";
 import {
   CalculateOperators,
   MAX_NUM_OF_NUMBERS,
   MAX_NUMBER_LENGTH,
   Operators,
 } from "@/util/constants";
-import { doOperate } from "@/util/helper";
-import messages from "@/util/messages";
+import errorMessage from "@/util/errorMessage";
 
 import DigitButtons from "./DigitButtons";
 import styles from "./index.module.css";
@@ -28,7 +28,7 @@ export default function Calculator() {
 
   function handleDigitButtonClick(buttonValue: number) {
     if (curNumber.current.length >= MAX_NUMBER_LENGTH) {
-      alert(messages.OVER_MAX_NUMBER_LENGTH);
+      alert(errorMessage.OVER_MAX_NUMBER_LENGTH);
       return;
     }
 
@@ -38,20 +38,23 @@ export default function Calculator() {
 
   function handleOperatorButtonClick(buttonValue: Operators) {
     if (buttonValue !== "=" && resultPanel === "") {
-      alert(messages.CAL_WITH_EMPTY_NUMBER);
+      alert(errorMessage.CAL_WITH_EMPTY_NUMBER);
       return;
     }
 
     if (buttonValue === "=") {
       if (!curOperator) return;
 
-      const [num1, num2] = inputNumbers.map((number) => Number(number));
-      const result = String(doOperate(num1, num2, curOperator[0]));
+      const [num1, num2] = inputNumbers.map(Number);
+      const calculateResult = operations[curOperator[0]](num1, num2);
+      const resultOnResultPanel = Number.isNaN(calculateResult)
+        ? errorMessage.GET_INVALID_RESULT
+        : String(calculateResult);
 
-      curNumber.current = result;
-      setResultPanel(result);
+      curNumber.current = resultOnResultPanel;
+      setResultPanel(resultOnResultPanel);
     } else if (inputNumbers.length >= MAX_NUM_OF_NUMBERS) {
-      alert(messages.OVER_MAX_NUM_OF_NUMBERS);
+      alert(errorMessage.OVER_MAX_NUM_OF_NUMBERS);
     } else {
       curNumber.current = "";
       setResultPanel((prev) => `${prev}${buttonValue}`);
