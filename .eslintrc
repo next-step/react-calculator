@@ -10,7 +10,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "rules": {},
+  "rules": {
+    "no-unused-vars": "off"
+  },
   "globals": {
     "React": "writable",
     "document": false
