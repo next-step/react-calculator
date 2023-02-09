@@ -14,9 +14,13 @@ const useCalculate = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     validateCallback: (total: string) => void,
   ) => {
-    validateCallback(total);
-    const { textContent } = e.target as HTMLButtonElement;
-    setTotal((prev) => prev + textContent);
+    try {
+      validateCallback(total);
+      const { textContent } = e.target as HTMLButtonElement;
+      setTotal((prev) => prev + textContent);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const onSummaryClick = () => {
