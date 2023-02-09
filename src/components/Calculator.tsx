@@ -36,6 +36,9 @@ type Action =
     }
   | {
       type: 'calculate';
+    }
+  | {
+      type: 'clear';
     };
 
 function reducer(state: ICalculator, action: Action) {
@@ -86,6 +89,10 @@ function reducer(state: ICalculator, action: Action) {
         addend: 0,
         accumulator: String(total),
       };
+    case 'clear':
+      return {
+        ...initialState,
+      };
     default:
       throw new Error('Unhandled Action type');
   }
@@ -112,6 +119,10 @@ function Calculator() {
     dispatch({ type: 'operation', payload: operation });
   };
 
+  const handleModifierButton: React.MouseEventHandler<HTMLButtonElement> = () => {
+    dispatch({ type: 'clear' });
+  };
+
   return (
     <div className="calculator">
       <h1 id="total">{accumulator}</h1>
@@ -123,7 +134,9 @@ function Calculator() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <Button className="modifier">AC</Button>
+        <Button className="modifier" onClick={handleModifierButton}>
+          AC
+        </Button>
       </div>
       <div className="operations subgrid">
         {Object.values(OPERATION).map((operation) => (
