@@ -1,5 +1,4 @@
 export const ERROR_MESSAGES = {
-  DIV_0: "0으로 나눌 수 없습니다",
   MAX_THREE_DIGIT_NUMBERS: "숫자는 세 자리까지만 입력 가능합니다",
 };
 

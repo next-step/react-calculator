@@ -5,13 +5,16 @@ import StatusPane from "../StatusPane";
 import styles from "./index.module.css";
 import ClearButton from "../ClearButton";
 import ModifierButton from "../ModifierButton";
+import { CALCULATOR } from "../../domain/constant";
 
+const { MODIFIER, NATURAL_NUMBER } = CALCULATOR;
 const getClassNames = (styles = []) => styles.join(" ");
+
 const digits = Array.from({ length: 10 }, (_, idx) => idx).sort((a, b) => b - a);
-const modifiers = ["/", "X", "-", "+", "="];
+const modifiers = [MODIFIER.DIVIDE, MODIFIER.MULTIPLY, MODIFIER.SUBTRACT, MODIFIER.ADD, MODIFIER.EQUAL];
 
 function Calculator({ calculator }) {
-  const [display, setDisplay] = useState("0");
+  const [display, setDisplay] = useState(NATURAL_NUMBER.ZERO);
 
   const buttonPressHandler = (value) => {
     try {
@@ -23,7 +26,7 @@ function Calculator({ calculator }) {
   };
 
   const clear = () => {
-    setDisplay("0");
+    setDisplay(NATURAL_NUMBER.ZERO);
     calculator.clear();
   };
 

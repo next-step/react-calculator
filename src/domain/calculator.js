@@ -1,10 +1,11 @@
 import { ERROR_MESSAGES, CALCULATOR } from "./constant";
 
-const { RESTRICTIONS, INITIAL_STATE, MODIFIER, NATURAL_NUMBER } = CALCULATOR;
+const { RESTRICTIONS, INITIAL_STATE, MODIFIER } = CALCULATOR;
 
 const isNumber = (s) => /[0-9]/g.test(s);
-const isBlank = (v) => [""].some((value) => String(value) === String(v));
-const isInfiniy = (v) => [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].some((infinity) => infinity === v);
+const isBlank = (v) => v === "";
+
+const isValidNumber = (v) => isFinite(Number(v)) && !isNaN(Number(v));
 
 export default class Calculator {
   #state = { ...INITIAL_STATE };
@@ -18,8 +19,6 @@ export default class Calculator {
   }
 
   input(value) {
-    console.log(value, { ...this.#state });
-
     if (isNumber(value)) {
       this.#handleNumber(value);
       this.#state.isInitialized = false;
@@ -31,8 +30,13 @@ export default class Calculator {
 
   output() {
     const { modifier, value1, value2 } = this.#state;
-    if (modifier) return value2 || this.#state.value1;
-    return isInfiniy(value1) ? "오류" : value1;
+
+    //prettier-ignore
+    return  modifier && value2
+      ? value2
+      : isValidNumber(value1)
+      ? value1
+      : "오류";
   }
 
   #setState(state = {}) {
@@ -65,7 +69,7 @@ export default class Calculator {
       throw new Error(ERROR_MESSAGES.MAX_THREE_DIGIT_NUMBERS);
     }
 
-    return this.#state.isInitialized || isBlank(oldValue) ? number : accumulated;
+    return this.#state.isInitialized || isBlank(oldValue) ? String(number) : accumulated;
   }
 
   #handleModifier(value) {
@@ -78,6 +82,7 @@ export default class Calculator {
 
   #calculate() {
     const { modifier, value1, value2 } = this.#state;
+    if (!modifier) return;
 
     const computationalMethods = {
       [MODIFIER.ADD]: (number1, number2) => number1 + number2,
@@ -86,12 +91,6 @@ export default class Calculator {
       [MODIFIER.MULTIPLY_LOWER]: (number1, number2) => number1 * number2,
       [MODIFIER.DIVIDE]: (number1, number2) => Math.floor(number1 / number2),
     };
-
-    if (!modifier) {
-      this.#setState({
-        value1: value1 || NATURAL_NUMBER.ZERO,
-      });
-    }
 
     this.#setState({
       value1: String(computationalMethods[modifier](Number(value1), Number(value2))),
