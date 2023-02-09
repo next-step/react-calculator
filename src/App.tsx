@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent, SetStateAction } from "react";
 import Digits from "./components/digits";
 import Modifiers from "./components/modifiers";
 import Operations from "./components/operations";
@@ -6,19 +6,16 @@ import Total from "./components/total";
 import "./css/index.css";
 
 function App() {
-  const [total, setTotal] = useState(0);
-  const [calculate, setScalculate] = useState({
-    firstNumber: 0,
-    secondNumber: 0,
-    operator: "",
-  });
+  const [calculation, setCalculation] = useState("");
+
+  console.log(calculation.search("/X-+"));
   return (
     <main id="app">
       <div className="calculator">
-        <Total />
-        <Digits />
-        <Modifiers />
-        <Operations />
+        <Total calculation={calculation} />
+        <Digits calculation={calculation} setCalculation={setCalculation} />
+        <Modifiers setCalculation={setCalculation} />
+        <Operations calculation={calculation} setCalculation={setCalculation} />
       </div>
     </main>
   );

@@ -1,5 +1,11 @@
-function Total() {
-  return <h1 id="total">0</h1>;
+import { useState } from "react";
+
+interface ITotalProps {
+  calculation: string;
+}
+
+function Total({ calculation }: ITotalProps) {
+  return <h1 id="total">{calculation === "" ? 0 : calculation}</h1>;
 }
 
 export default Total;
