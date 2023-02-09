@@ -7,8 +7,7 @@ import CalculateButton from './components/CalculateButton';
 import ResetButton from './components/ResetButton';
 
 import { separateCalculateUnits } from './utils/separateCalculateUnits';
-import { MAX_INPUT_NUMBER, OPERATORS } from './constants/calculate';
-import { MESSAGES } from './constants/messages';
+import { validateDigit, validateOperation } from './utils/validator';
 
 const excute = {
   '+': (a: number, b: number) => a + b,
@@ -21,21 +20,11 @@ type ExecuteType = keyof typeof excute;
 function App() {
   const [total, setTotal] = useState('');
 
-  const onDigitClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const lastInput = separateCalculateUnits(total)?.pop();
-    if (lastInput && lastInput?.length >= MAX_INPUT_NUMBER) {
-      alert(MESSAGES.DIGIT.MAX_LENGTH);
-      return;
-    }
-    const { textContent } = e.target as HTMLButtonElement;
-    setTotal((prev) => prev + textContent);
-  };
-
-  const onOperationClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (OPERATORS.includes(total.slice(-1))) {
-      alert(MESSAGES.OPERATOR.NOT_FIRST);
-      return;
-    }
+  const onButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    validateCallback: (total: string) => void,
+  ) => {
+    validateCallback(total);
     const { textContent } = e.target as HTMLButtonElement;
     setTotal((prev) => prev + textContent);
   };
@@ -68,13 +57,13 @@ function App() {
     <div className="calculator">
       <h1 id="total">{total || '0'}</h1>
       <div className="digits flex">
-        <DigitButtons onDigitClick={onDigitClick} />
+        <DigitButtons onDigitClick={(e) => onButtonClick(e, validateDigit)} />
       </div>
       <div className="modifiers subgrid">
         <ResetButton onReset={onReset} />
       </div>
       <div className="operations subgrid">
-        <OperationButtons onOperationClick={onOperationClick} />
+        <OperationButtons onOperationClick={(e) => onButtonClick(e, validateOperation)} />
         <CalculateButton onSummaryClick={onSummaryClick} />
       </div>
     </div>
