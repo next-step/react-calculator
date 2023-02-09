@@ -1,6 +1,4 @@
-import Digits from './Digits';
-import Modifiers from './Modifiers';
-import Operators from './Operators';
-import Screen from './Screen';
+import ResultScreen from './ResultScreen';
+import CalculatorButton from './CalculatorButton';
 
-export { Digits, Modifiers, Operators, Screen };
+export { CalculatorButton, ResultScreen };

@@ -1,30 +1,21 @@
-import { ERROR_MESSAGE, OPERAND_INITIAL_VALUE, OPERAND_MAX_LENGTH, OPERATORS } from '../constants/calculator';
-import { InitialOperator, Operator } from '../types/calculator';
+import { ERROR_MESSAGE, OPERAND_MAX_LENGTH, OPERATORS } from '../constants/calculator';
+import { CalculatorState } from '../types/calculator';
 import { validate } from '../utils/validation';
 
-type Calculate = {
-  operand1: number;
-  operand2: number;
-  operator: Operator | InitialOperator;
-};
+export const calculate = ({ result, operand, operator }: CalculatorState) => {
+  if (operand === null || operator === null) return result;
 
-export const calculate = ({ operand1, operand2, operator }: Calculate) => {
-  if (operator === OPERATORS.PLUS) {
-    return operand1 + operand2;
-  }
-  if (operator === OPERATORS.MINUS) {
-    return operand1 - operand2;
-  }
-  if (operator === OPERATORS.MULTIPLY) {
-    return operand1 * operand2;
-  }
-  if (operator === OPERATORS.DIVIDE) {
-    return Math.trunc(operand1 / operand2);
-  }
+  const calculateResult = {
+    [OPERATORS.PLUS]: result + operand,
+    [OPERATORS.MINUS]: result - operand,
+    [OPERATORS.MULTIPLY]: result * operand,
+    [OPERATORS.DIVIDE]: Math.trunc(result / operand),
+    [OPERATORS.EQUAL]: result,
+  }[operator];
 
-  return OPERAND_INITIAL_VALUE;
+  return calculateResult;
 };
 
 export const validateOperand = (operand: number) => {
-  validate(operand <= OPERAND_MAX_LENGTH, ERROR_MESSAGE.CALCULATOR.INVALID_OPERAND_LENGTH);
+  validate(String(operand).length <= OPERAND_MAX_LENGTH, ERROR_MESSAGE.CALCULATOR.INVALID_OPERAND_LENGTH);
 };
