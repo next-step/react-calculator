@@ -7,10 +7,15 @@ describe('Calculator', () => {
     expect(result.value).toBe('1000');
   });
 
-  it('can subtract two numbers', () => {
-    const result = Calculator(['999', '-', '1']).enter('=');
-
-    expect(result.value).toBe('998');
+  it.each`
+    fomula                 | expected
+    ${['999', '-', '1']}   | ${'998'}
+    ${['-999', '-', '1']}  | ${'-1000'}
+    ${['1', '-', '-999']}  | ${'1000'}
+    ${['-999', '-', '-1']} | ${'-998'}
+  `('can subtract two numbers', ({ fomula, expected }) => {
+    const result = Calculator(fomula).enter('=');
+    expect(result.value).toBe(expected);
   });
 
   it.each`
