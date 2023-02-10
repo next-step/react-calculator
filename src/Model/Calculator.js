@@ -75,17 +75,16 @@ export const Calculator = (inputs = ['0']) => {
         return Calculator([result !== 'Infinity' ? result : '오류']);
       }
 
-      // 숫자가 입력된 경우
-      if (!(value in OPERATOR)) {
-        // 이전 입력도 숫자일 때
+      if (value in OPERATOR) {
+        // 연산자 이후에 연산자가 입력된 경우
+        if (recentInput in OPERATOR) inputs.pop();
+      } else {
+        // 숫자 이후에 숫자가 입력된 경우
         if (!(recentInput in OPERATOR)) {
           if (recentInput.length >= 3) throw new exceedLimitOfDigitError();
           inputs.pop();
           return Calculator([...inputs, `${Number(recentInput + value)}`]);
         }
-      } else {
-        // 연산자 이후에 연산자가 입력된 경우
-        if (recentInput in OPERATOR) inputs.pop();
       }
 
       return Calculator([...inputs, value]);
