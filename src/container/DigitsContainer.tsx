@@ -1,4 +1,4 @@
-import { Digits } from '@/components';
+import { Digit } from '@/components';
 
 interface Props {
 	insertDigits: (digits: string) => void;
@@ -10,7 +10,7 @@ export default function DigitsContainer({ insertDigits }: Props) {
 	return (
 		<div className="digits flex">
 			{DIGITS.map((digits) => (
-				<Digits
+				<Digit
 					key={digits}
 					onClick={insertDigits}
 					digits={digits}/>

@@ -23,7 +23,7 @@ export default function useCalculator() {
 			return;
 		}
 
-		setState(calculatorState + digits);
+		setState(updateDigits);
 	}, [calculatorState]);
 
 	const insertOperation = useCallback((operator: string) => {

@@ -3,7 +3,7 @@ interface Props {
 	onClick: (digits: string) => void;
 }
 
-export default function Digits({ digits, onClick }: Props) {
+export default function Digit({ digits, onClick }: Props) {
 	const handlerOnClick = () => {
 		onClick(digits);
 	};
