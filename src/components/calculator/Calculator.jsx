@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+
 import Button from '../common/Button';
+
+import { arithmetic } from '../../utils/arithmetic';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState('');
@@ -24,8 +27,9 @@ const Calculator = () => {
 
   const handleCalculate = () => {
     const number = expression.number.map(Number);
+    const operation = expression.operation[0];
 
-    setTotalText(number[0] + number[1]);
+    setTotalText(arithmetic(number[0], number[1], operation));
   };
 
   return (
