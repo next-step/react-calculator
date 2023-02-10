@@ -29,7 +29,15 @@ const Calculator = () => {
     const number = expression.number.map(Number);
     const operation = expression.operation[0];
 
-    setTotalText(arithmetic(number[0], number[1], operation));
+    const result = arithmetic(number[0], number[1], operation);
+
+    if (result === '') {
+      setExpression({ number: [], operation: [], counter: 0 });
+    } else {
+      setExpression({ number: [result], operation: [], counter: 0 });
+    }
+
+    setTotalText(result);
   };
 
   return (
