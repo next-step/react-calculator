@@ -22,7 +22,9 @@ function App() {
         <ResetButton onReset={onReset} />
       </div>
       <div className="operations subgrid">
-        <OperationButtons onOperationClick={(e) => onButtonClick(e, validateOperation)} />
+        <OperationButtons
+          onOperationClick={(e) => onButtonClick(e, validateOperation)}
+        />
         <CalculateButton onSummaryClick={onSummaryClick} />
       </div>
     </div>

@@ -12,7 +12,7 @@ const useCalculate = () => {
 
   const onButtonClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    validateCallback: (total: string) => void,
+    validateCallback: (total: string) => void
   ) => {
     try {
       validateCallback(total);
@@ -30,9 +30,15 @@ const useCalculate = () => {
     let sum;
     for (let i = 1; i < units.length; i += 2) {
       if (i === 1) {
-        sum = operations[units[i] as OperationType](Number(units[i - 1]), Number(units[i + 1]));
+        sum = operations[units[i] as OperationType](
+          Number(units[i - 1]),
+          Number(units[i + 1])
+        );
       } else {
-        sum = operations[units[i] as OperationType](sum || 0, Number(units[i + 1]));
+        sum = operations[units[i] as OperationType](
+          sum || 0,
+          Number(units[i + 1])
+        );
       }
     }
     setTotal(sum === Infinity ? '오류' : `${sum}`);

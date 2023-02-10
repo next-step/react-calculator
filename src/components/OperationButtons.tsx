@@ -3,7 +3,9 @@ import React from 'react';
 import { OPERATORS } from '../constants/calculate';
 
 interface Props {
-  onOperationClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onOperationClick: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
 }
 
 const OperationButtons = ({ onOperationClick }: Props) => {
