@@ -58,6 +58,8 @@ const calculate = (inputs) => {
   return result.pop();
 };
 
+export class exceedLimitOfDigitError extends Error {}
+
 export const Calculator = (inputs = ['0']) => {
   return {
     enter(value) {
@@ -67,6 +69,18 @@ export const Calculator = (inputs = ['0']) => {
       if (value === '=') {
         const result = calculate(inputs);
         return Calculator([result !== 'Infinity' ? result : '오류']);
+      }
+      // 숫자가 입력된 경우
+      if (!(value in OPERATOR)) {
+        const recentInput = inputs.pop();
+        if (recentInput === '오류') return Calculator([value]);
+        // 이전 입력도 숫자일 때
+        if (!(recentInput in OPERATOR)) {
+          if (recentInput.length >= 3) throw new exceedLimitOfDigitError();
+          return Calculator([...inputs, `${Number(recentInput + value)}`]);
+        } else {
+          inputs.push(recentInput);
+        }
       }
       return Calculator([...inputs, value]);
     },

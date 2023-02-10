@@ -1,4 +1,4 @@
-import { Calculator } from './Calculator.js';
+import { Calculator, exceedLimitOfDigitError } from './Calculator.js';
 
 describe('Calculator', () => {
   it.each`
@@ -62,9 +62,22 @@ describe('Calculator', () => {
     expect(result.value).toBe(expected);
   });
 
-  it('can enter up to 3 digits', () => {});
+  it.each`
+    fomula      | input  | expected
+    ${['0']}    | ${'1'} | ${'1'}
+    ${['1']}    | ${'1'} | ${'11'}
+    ${['11']}   | ${'1'} | ${'111'}
+    ${['오류']} | ${'1'} | ${'1'}
+  `('can enter up to 3 digits', ({ fomula, input, expected }) => {
+    const result = Calculator(fomula).enter(input);
+    expect(result.value).toBe(expected);
+  });
 
-  it('throw an error when number exceeds 3 digits', () => {});
+  it('throw an error when number exceeds 3 digits', () => {
+    expect(() => {
+      Calculator(['111']).enter('1');
+    }).toThrow(exceedLimitOfDigitError);
+  });
 
   it('throw an error when operator is entered before number is entered', () => {});
 });
