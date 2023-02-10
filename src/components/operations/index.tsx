@@ -6,15 +6,17 @@ const OPERATIONS = ["/", "X", "-", "+"];
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const [operator, setOperator] = useState("X");
   const operationHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    const isOperatorEnteredFirst = Number.isNaN(
+      Number(calculation.split("")[calculation.length - 1])
+    );
     if (
-      Number.isNaN(Number(calculation.split("")[calculation.length - 1])) ===
-        false &&
+      isOperatorEnteredFirst === false &&
       calculation.includes(operator) === false
     ) {
       setCalculation(calculation + e.currentTarget.innerText);
       setOperator(e.currentTarget.innerText);
     }
-    if (Number.isNaN(Number(calculation.split("")[calculation.length - 1]))) {
+    if (isOperatorEnteredFirst) {
       alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
     }
     if (calculation.includes(operator)) {
