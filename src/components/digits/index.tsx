@@ -1,10 +1,12 @@
 import { MouseEvent, useState, useEffect } from "react";
 import { IDigitsProps } from "../../types/allProps";
 
+const DIGIT_MAX_LENGTH = 3;
+
 function Digits({ calculation, setCalculation }: IDigitsProps) {
   const [digits, setDigits] = useState("");
   const digitHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    if (digits.length < 3) {
+    if (digits.length < DIGIT_MAX_LENGTH) {
       setDigits(digits + e.currentTarget.innerText);
       setCalculation(calculation + e.currentTarget.innerText);
     } else {
