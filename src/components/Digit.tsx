@@ -1,11 +1,11 @@
 interface Props {
-	digits: string;
-	onClick: (digits: string) => void;
+	digit: string;
+	onClick: (digit: string) => void;
 }
 
-export default function Digit({ digits, onClick }: Props) {
+export default function Digit({ digit, onClick }: Props) {
 	const handlerOnClick = () => {
-		onClick(digits);
+		onClick(digit);
 	};
 
 	return (
@@ -13,6 +13,6 @@ export default function Digit({ digits, onClick }: Props) {
 			className="digit"
 			type="button"
 			onClick={handlerOnClick}
-		>{digits}</button>
+		>{digit}</button>
 	);
 }
