@@ -20,7 +20,7 @@ const OPERATOR = {
   '/': {
     priority: 2,
     execute(num1, num2) {
-      return `${Math.floor(parseInt(num1) / parseInt(num2))}`;
+      return `${Math.floor(Number(num1) / Number(num2))}`;
     },
   },
 };
@@ -55,13 +55,16 @@ const calculate = (inputs) => {
       result.push(input);
     }
   }
-  return result;
+  return result.pop();
 };
 
 export const Calculator = (inputs = []) => {
   return {
     enter(value) {
-      if (value === '=') return Calculator(calculate(inputs));
+      if (value === '=') {
+        const result = calculate(inputs);
+        return Calculator([result !== 'Infinity' ? result : '오류']);
+      }
       return Calculator([...inputs, value]);
     },
     get value() {
