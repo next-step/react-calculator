@@ -1,17 +1,13 @@
-export interface IDigitsProps {
+interface ICalculator {
   calculation: string;
   setCalculation: Dispatch<SetStateAction<string>>;
 }
+export interface IDigitsProps extends ICalculator {}
 
 export interface IModifiersProps {
-  setCalculation: Dispatch<SetStateAction<string>>;
+  allClearHandler: Dispatch<SetStateAction<string>>;
 }
 
-export interface IOperationsProps {
-  calculation: string;
-  setCalculation: Dispatch<SetStateAction<string>>;
-}
+export interface IOperationsProps extends ICalculator {}
 
-export interface ITotalProps {
-  calculation: string;
-}
+export interface ITotalProps extends Omit<ICalculator, "setCalculation"> {}

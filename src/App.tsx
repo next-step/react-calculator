@@ -13,7 +13,7 @@ function App() {
       <div className="calculator">
         <Total calculation={calculation} />
         <Digits calculation={calculation} setCalculation={setCalculation} />
-        <Modifiers setCalculation={setCalculation} />
+        <Modifiers allClearHandler={setCalculation} />
         <Operations calculation={calculation} setCalculation={setCalculation} />
       </div>
     </main>

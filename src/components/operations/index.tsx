@@ -5,6 +5,7 @@ const OPERATIONS = ["/", "X", "-", "+"];
 
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const [operator, setOperator] = useState("X");
+
   const operationHandler = (e: MouseEvent<HTMLButtonElement>) => {
     const isOperatorEnteredFirst = Number.isNaN(
       Number(calculation.split("")[calculation.length - 1])
@@ -26,19 +27,17 @@ function Operations({ calculation, setCalculation }: IOperationsProps) {
 
   const calcurationHandler = () => {
     const formula = calculation.split(operator);
-    if (operator === "/") {
-      setCalculation(`${Math.floor(Number(formula[0]) / Number(formula[1]))}`);
-    }
-    if (operator === "X") {
-      setCalculation(`${Math.floor(Number(formula[0]) * Number(formula[1]))}`);
-    }
-    if (operator === "-") {
-      setCalculation(`${Math.floor(Number(formula[0]) - Number(formula[1]))}`);
-    }
-    if (operator === "+") {
-      setCalculation(`${Math.floor(Number(formula[0]) + Number(formula[1]))}`);
-    }
+
+    const operatorType = {
+      X: `${Math.floor(Number(formula[0]) * Number(formula[1]))}`,
+      "/": `${Math.floor(Number(formula[0]) / Number(formula[1]))}`,
+      "-": `${Math.floor(Number(formula[0]) - Number(formula[1]))}`,
+      "+": `${Math.floor(Number(formula[0]) + Number(formula[1]))}`,
+    }[operator];
+
     setOperator("X");
+
+    setCalculation(operatorType);
   };
 
   return (

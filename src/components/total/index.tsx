@@ -7,6 +7,7 @@ function Total({ calculation }: ITotalProps) {
     }
     return Number(value) === Infinity ? "ERROR" : value;
   };
+
   return <h1 id="total">{calcuatedValue(calculation)}</h1>;
 }
 
