@@ -5,7 +5,7 @@ const Modifier = () => {
   const { reset } = useCalculator();
   return (
     <div className="modifiers subgrid">
-      <button className="modifier" onClick={() => reset()}>
+      <button className="modifier" onClick={reset}>
         AC
       </button>
     </div>

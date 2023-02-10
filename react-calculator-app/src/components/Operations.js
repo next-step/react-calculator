@@ -10,7 +10,7 @@ const Operations = () => {
           {operator}
         </button>
       ))}
-      <button key={'='} onClick={() => calculate()}>
+      <button key="=" onClick={calculate}>
         =
       </button>
     </div>

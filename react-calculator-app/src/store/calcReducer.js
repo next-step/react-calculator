@@ -10,8 +10,6 @@ export const calcReducer = (state, action) => {
   switch (action.type) {
     case 'SET_VALUE':
       return { ...state, total: action.payload };
-    case 'SET_CURRENT_NUM':
-      return { ...state, currentNum: '' };
     case 'ADD_CURRENT_NUM':
       return { ...state, currentNum: state.currentNum + action.payload };
     case 'ADD_VALUE':
@@ -21,9 +19,10 @@ export const calcReducer = (state, action) => {
         ...state,
         total: state.total + action.operator,
         operator: action.operator,
+        currentNum: '',
       };
     case 'CALCULATE':
-      return { ...state, total: action.payload };
+      return { ...state, total: action.payload, currentNum: '' };
     case 'RESET':
       return initialState;
     default:

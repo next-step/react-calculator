@@ -1,15 +1,19 @@
 import { useReducer } from 'react';
 import { CalcContext } from './CalcContext';
 import { calcReducer, initialState, INITIAL_VALUE } from './calcReducer';
-
-const OPERATOR_REGEX = /[+]|[-]|[X]|[/]/gi;
+import { MIN_DIGIT_LENGTH } from '../constants/numbers';
+import {
+  INFINITY_NUM_ERROR,
+  MIN_DIGIT_LENGTH_ERROR,
+} from '../constants/errorMessages';
+import { OPERATOR_REGEX } from '../constants/regex';
 
 export const CalcProvider = ({ children }) => {
   const [state, dispatch] = useReducer(calcReducer, initialState);
 
   const addDigit = (digit) => {
-    if (state.currentNum.length > 2) {
-      alert('3자리까지 입력가능합니다.');
+    if (state.currentNum.length > MIN_DIGIT_LENGTH) {
+      alert(MIN_DIGIT_LENGTH_ERROR);
       return;
     }
 
@@ -24,7 +28,6 @@ export const CalcProvider = ({ children }) => {
   };
   const addOperator = (operator) => {
     dispatch({ type: 'ADD_OPERATOR', operator });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
 
   const calculate = () => {
@@ -53,16 +56,14 @@ export const CalcProvider = ({ children }) => {
     }
 
     if (result === Infinity) {
-      alert('오류');
+      alert(INFINITY_NUM_ERROR);
       return;
     }
 
     dispatch({ type: 'CALCULATE', payload: String(result) });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
   const reset = () => {
     dispatch({ type: 'RESET' });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
 
   return (
