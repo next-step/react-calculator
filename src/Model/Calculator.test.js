@@ -13,10 +13,16 @@ describe('Calculator', () => {
     expect(result.value).toBe('998');
   });
 
-  it('can multiply two numbers', () => {
-    const result = Calculator(['999', '*', '999']).enter('=');
-
-    expect(result.value).toBe('998001');
+  it.each`
+    fomula                                   | expected
+    ${['999', '*', '999']}                   | ${'998001'}
+    ${['-999', '*', '999']}                  | ${'-998001'}
+    ${['999', '*', '-999']}                  | ${'-998001'}
+    ${['-999', '*', '-999']}                 | ${'998001'}
+    ${['9.920279440699441e+23', '*', '999']} | ${'9.910359161258741e+26'}
+  `('can multiply two numbers', ({ fomula, expected }) => {
+    const result = Calculator(fomula).enter('=');
+    expect(result.value).toBe(expected);
   });
 
   it('can divide two numbers', () => {
