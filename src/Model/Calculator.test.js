@@ -63,14 +63,18 @@ describe('Calculator', () => {
   });
 
   it.each`
-    fomula      | input  | expected
-    ${['0']}    | ${'1'} | ${'1'}
-    ${['1']}    | ${'1'} | ${'11'}
-    ${['11']}   | ${'1'} | ${'111'}
-    ${['오류']} | ${'1'} | ${'1'}
+    fomula    | input  | expected
+    ${['0']}  | ${'1'} | ${'1'}
+    ${['1']}  | ${'1'} | ${'11'}
+    ${['11']} | ${'1'} | ${'111'}
   `('can enter up to 3 digits', ({ fomula, input, expected }) => {
     const result = Calculator(fomula).enter(input);
     expect(result.value).toBe(expected);
+  });
+
+  it('replace an previous operator if new input is also an operator', () => {
+    const result = Calculator(['1', '+']).enter('*');
+    expect(result.value).toBe('1 *');
   });
 
   it('throw an error when number exceeds 3 digits', () => {
@@ -78,6 +82,4 @@ describe('Calculator', () => {
       Calculator(['111']).enter('1');
     }).toThrow(exceedLimitOfDigitError);
   });
-
-  it('throw an error when operator is entered before number is entered', () => {});
 });

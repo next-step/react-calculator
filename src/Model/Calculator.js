@@ -66,26 +66,32 @@ export const Calculator = (inputs = ['0']) => {
       if (value === 'ac') {
         return Calculator();
       }
+
+      const recentInput = inputs[inputs.length - 1];
+      if (recentInput === '오류') return Calculator(['오류']);
+
       if (value === '=') {
         const result = calculate(inputs);
         return Calculator([result !== 'Infinity' ? result : '오류']);
       }
+
       // 숫자가 입력된 경우
       if (!(value in OPERATOR)) {
-        const recentInput = inputs.pop();
-        if (recentInput === '오류') return Calculator([value]);
         // 이전 입력도 숫자일 때
         if (!(recentInput in OPERATOR)) {
           if (recentInput.length >= 3) throw new exceedLimitOfDigitError();
+          inputs.pop();
           return Calculator([...inputs, `${Number(recentInput + value)}`]);
-        } else {
-          inputs.push(recentInput);
         }
+      } else {
+        // 연산자 이후에 연산자가 입력된 경우
+        if (recentInput in OPERATOR) inputs.pop();
       }
+
       return Calculator([...inputs, value]);
     },
     get value() {
-      return inputs.join('');
+      return inputs.join(' ');
     },
   };
 };
