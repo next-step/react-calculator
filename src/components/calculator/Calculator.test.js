@@ -14,3 +14,16 @@ test('버튼을 클릭하면 h1 태그에 버튼의 value가 텍스트로 입력
 
   expect(h1Element).toHaveTextContent('1+1');
 });
+
+test('= 버튼을 클릭하면 식이 계산된다. (더하기)', () => {
+  render(<Calculator />);
+
+  fireEvent.click(screen.getByText('1'));
+  fireEvent.click(screen.getByText('+'));
+  fireEvent.click(screen.getByText('1'));
+  fireEvent.click(screen.getByText('='));
+
+  const h1Element = screen.getByRole('heading');
+
+  expect(h1Element).toHaveTextContent('2');
+});
