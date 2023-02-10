@@ -2,15 +2,18 @@ import { useReducer } from 'react';
 import { CalcContext } from './CalcContext';
 import { calcReducer, initialState, INITIAL_VALUE } from './calcReducer';
 import { MIN_DIGIT_LENGTH } from '../constants/numbers';
-
-const OPERATOR_REGEX = /[+|-|X|/]/gi;
+import {
+  INFINITY_NUM_ERROR,
+  MIN_DIGIT_LENGTH_ERROR,
+} from '../constants/errorMessages';
+import { OPERATOR_REGEX } from '../constants/regex';
 
 export const CalcProvider = ({ children }) => {
   const [state, dispatch] = useReducer(calcReducer, initialState);
 
   const addDigit = (digit) => {
     if (state.currentNum.length > MIN_DIGIT_LENGTH) {
-      alert('3자리까지 입력가능합니다.');
+      alert(MIN_DIGIT_LENGTH_ERROR);
       return;
     }
 
@@ -53,7 +56,7 @@ export const CalcProvider = ({ children }) => {
     }
 
     if (result === Infinity) {
-      alert('오류');
+      alert(INFINITY_NUM_ERROR);
       return;
     }
 
