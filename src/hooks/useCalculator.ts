@@ -4,26 +4,18 @@ import { MESSAGE } from '../constants';
 
 const initialState = '0';
 
-const { symbols: OPERATOR_SYMBOLS, MAX_OPERATOR_LENGTH } = Operator;
-const { MAX_DIGIT_LENGTH } = Calculator;
+const { symbols: OPERATOR_SYMBOLS } = Operator;
 
 export default function useCalculator() {
 	const [calculatorState, setState] = useState(initialState);
 
-	const insertDigits = useCallback((digits: string) => {
-		const updateDigits = calculatorState + digits;
-
-		if (!Validator.isOverMaxDigitLength(updateDigits)) {
-			alert(MESSAGE.MAX_DIGIT_LENGTH(MAX_DIGIT_LENGTH));
-			return;
-		}
-
+	const insertDigit = useCallback((digit: string) => {
 		if (calculatorState === initialState) {
-			setState(digits);
+			setState(digit);
 			return;
 		}
 
-		setState(updateDigits);
+		setState(calculatorState + digit);
 	}, [calculatorState]);
 
 	const insertOperation = useCallback((operator: string) => {
@@ -31,24 +23,19 @@ export default function useCalculator() {
 			return;
 		}
 
-		if (Validator.isMaxOperatorLength(calculatorState + operator)) {
-			alert(MESSAGE.MAX_OPERATOR_LENGTH(MAX_OPERATOR_LENGTH));
-			return;
-		}
-
 		setState(calculatorState + operator);
 	}, [calculatorState]);
 
 	const setAnswer = useCallback(() => {
-		const getOperator = calculatorState.split('').find((item) => OPERATOR_SYMBOLS.includes(item));
+		const operator = calculatorState.split('').find((item) => OPERATOR_SYMBOLS.includes(item));
 
-		if (!Validator.isOverMaxDigitLength(calculatorState) || !getOperator) {
+		if (!Validator.isOverMaxDigitLength(calculatorState) || !operator) {
 			return;
 		}
 
-		const [a, b] = calculatorState.split(getOperator).map((item) => Number(item));
+		const [a, b] = calculatorState.split(operator).map((item) => Number(item));
 		const item = new Calculator(
-			getOperator,
+			operator,
 			[a, b]
 		);
 		const result = item.execute();
@@ -64,7 +51,7 @@ export default function useCalculator() {
 	const resetCalculator = () => setState(initialState);
 
 	return useMemo(() => ({
-		insertDigits,
+		insertDigit,
 		insertOperation,
 		setAnswer,
 		resetCalculator,

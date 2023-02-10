@@ -5,7 +5,7 @@ import useCalculator from './hooks/useCalculator';
 function App() {
 	const {
 		calculatorState,
-		insertDigits,
+		insertDigit,
 		insertOperation,
 		setAnswer,
 		resetCalculator
@@ -15,11 +15,15 @@ function App() {
 		<div className="App">
 			<div className="calculator">
 				<CalculatorTitle>{calculatorState}</CalculatorTitle>
-				<DigitsContainer insertDigits={insertDigits}/>
+				<DigitsContainer
+					insertDigit={insertDigit}
+					calculatorState={calculatorState}
+				/>
 				<ResetContainer resetCalculator={resetCalculator}/>
 				<OperationContainer
 					insertOperation={insertOperation}
 					setAnswer={setAnswer}
+					calculatorState={calculatorState}
 				/>
 			</div>
 		</div>
