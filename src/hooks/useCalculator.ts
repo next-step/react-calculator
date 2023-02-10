@@ -6,8 +6,14 @@ import {
   type Subtract,
 } from '../components/Calculator/Operation/Operation.js';
 import {
+  APPEND_VALUE,
+  CALCULATE,
   calculatorReducer,
   initialState,
+  RESET,
+  SET_MINUS_OPERATOR,
+  SET_OPERATOR,
+  SET_VALUE,
   ZERO_VALUE,
 } from '../reducer/index.js';
 
@@ -25,7 +31,7 @@ export const useCalculator = () => {
 
     const isZero = state.value === ZERO_VALUE;
     dispatch({
-      type: isZero ? 'SET_VALUE' : 'APPEND_VALUE',
+      type: isZero ? SET_VALUE : APPEND_VALUE,
       payload: digit,
     });
   };
@@ -34,14 +40,14 @@ export const useCalculator = () => {
     if (
       state.value !== ZERO_VALUE &&
       state.value !== MINUS &&
-      state.prevValue === ''
+      state.prevValue === initialState.prevValue
     ) {
-      dispatch({ type: 'SET_OPERATOR', payload: operator });
+      dispatch({ type: SET_OPERATOR, payload: operator });
       return;
     }
 
     if (operator === MINUS) {
-      dispatch({ type: 'SET_MINUS_OPERATOR' });
+      dispatch({ type: SET_MINUS_OPERATOR });
       return;
     }
 
@@ -50,11 +56,11 @@ export const useCalculator = () => {
   };
 
   const calculate = () => {
-    dispatch({ type: 'CALCULATE' });
+    dispatch({ type: CALCULATE });
   };
 
   const reset = () => {
-    dispatch({ type: 'RESET' });
+    dispatch({ type: RESET });
   };
 
   return { appendDigit, appendOperator, calculate, reset, state } as const;

@@ -20,12 +20,12 @@ export const initialState: CalculatorState = {
   operator: '',
 };
 
-const SET_VALUE = 'SET_VALUE';
-const APPEND_VALUE = 'APPEND_VALUE';
-const SET_OPERATOR = 'SET_OPERATOR';
-const SET_MINUS_OPERATOR = 'SET_MINUS_OPERATOR';
-const CALCULATE = 'CALCULATE';
-const RESET = 'RESET';
+export const SET_VALUE = 'SET_VALUE';
+export const APPEND_VALUE = 'APPEND_VALUE';
+export const SET_OPERATOR = 'SET_OPERATOR';
+export const SET_MINUS_OPERATOR = 'SET_MINUS_OPERATOR';
+export const CALCULATE = 'CALCULATE';
+export const RESET = 'RESET';
 
 type CalculatorActions =
   | { type: typeof SET_VALUE; payload: string }
