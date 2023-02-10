@@ -25,26 +25,24 @@ const OPERATOR = {
   },
 };
 
-const calculate = (originalInputs) => {
+const calculate = (inputs) => {
   // 중위표기법을 후위표기법으로 변환
-  const inputs = [...originalInputs];
   const postfix = [];
   const operators = [];
-  let input;
-  while ((input = inputs.shift())) {
+  for (let input of inputs) {
     if (input in OPERATOR) {
-      const recentOperator = operators.shift();
+      const recentOperator = operators.pop();
       if (recentOperator) {
         if (OPERATOR[recentOperator].priority >= OPERATOR[input].priority) {
           postfix.push(recentOperator);
-        } else operators.unshift(recentOperator);
+        } else operators.push(recentOperator);
       }
-      operators.unshift(input);
+      operators.push(input);
     } else {
       postfix.push(input);
     }
   }
-  postfix.push(...operators);
+  postfix.push(...operators.reverse());
 
   // 후위표기법을 계산
   let result = [];
