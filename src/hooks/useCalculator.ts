@@ -21,6 +21,12 @@ function useCalculator() {
   const [error, setError] = useState<CalculateError>(initialError);
 
   const handleDigits = (e: MouseEvent<HTMLDivElement>) => {
+    const { value } = e.target as HTMLButtonElement;
+
+    if (!state.targetNumber && value === '0') {
+      return;
+    }
+
     if (state.targetNumber.length > NUMBER_MAX_LENGTH) {
       window.alert(VALIDATE_MESSAGE.NUMBER_MAX_LENGTH);
       return;
@@ -28,7 +34,7 @@ function useCalculator() {
 
     setState(prev => ({
       ...prev,
-      targetNumber: prev.targetNumber + (e.target as HTMLButtonElement).value,
+      targetNumber: prev.targetNumber + value,
     }));
   };
 
@@ -38,7 +44,7 @@ function useCalculator() {
     if (value === '=') {
       const result = calculate(state);
 
-      if (isFinite(result)) {
+      if (!isFinite(result)) {
         setError({
           isError: true,
           msg: VALIDATE_MESSAGE.NUMBER_INFINITY,
