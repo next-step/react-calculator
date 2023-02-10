@@ -1,6 +1,8 @@
 import { MouseEvent, useState } from "react";
 import { IOperationsProps } from "../../types/allProps";
 
+const OPERATIONS = ["/", "X", "-", "+"];
+
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const [operator, setOperator] = useState("X");
   const operationHandler = (e: MouseEvent<HTMLButtonElement>) => {
@@ -39,18 +41,11 @@ function Operations({ calculation, setCalculation }: IOperationsProps) {
 
   return (
     <div className="operations subgrid">
-      <button onClick={operationHandler} className="operation">
-        /
-      </button>
-      <button onClick={operationHandler} className="operation">
-        X
-      </button>
-      <button onClick={operationHandler} className="operation">
-        -
-      </button>
-      <button onClick={operationHandler} className="operation">
-        +
-      </button>
+      {OPERATIONS.map((data) => (
+        <button onClick={operationHandler} key={data}>
+          {data}
+        </button>
+      ))}
       <button
         onClick={calcurationHandler}
         className="operation"
