@@ -23,7 +23,7 @@ const mapOperation: Record<string, (a: string, b: string) => number> = {
 
 const calculate = (state: { targetNumber: string; savedNumber: string; operator: string }) => {
   const { targetNumber, savedNumber, operator } = state;
-  return mapOperation[operator](targetNumber, savedNumber);
+  return Math.floor(mapOperation[operator](targetNumber, savedNumber));
 };
 
 export { calculate };
