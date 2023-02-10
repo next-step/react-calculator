@@ -3,10 +3,29 @@ import Button from '../common/Button';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState('');
+  const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
 
   const handleTextInsert = (event) => {
     const buttonValue = event.target.value;
+
+    const { number, operation } = expression;
+    let counter = expression.counter;
+
+    if (isNaN(buttonValue)) {
+      operation.push(buttonValue);
+      counter = counter + 1;
+    } else {
+      number[counter] = number[counter] ? number[counter] + buttonValue : buttonValue;
+    }
+
     setTotalText(totalText + buttonValue);
+    setExpression({ number, operation, counter });
+  };
+
+  const handleCalculate = () => {
+    const number = expression.number.map(Number);
+
+    setTotalText(number[0] + number[1]);
   };
 
   return (
@@ -32,7 +51,7 @@ const Calculator = () => {
         <Button className="operation" value="X" onClick={handleTextInsert} />
         <Button className="operation" value="-" onClick={handleTextInsert} />
         <Button className="operation" value="+" onClick={handleTextInsert} />
-        <Button className="operation" value="=" onClick={handleTextInsert} />
+        <Button className="operation" value="=" onClick={handleCalculate} />
       </div>
     </div>
   );
