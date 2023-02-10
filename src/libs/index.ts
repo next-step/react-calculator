@@ -1,20 +1,20 @@
-const add = (a: string, b: string) => {
-  return Number(a) + Number(b);
+const add = (num1: string, num2: string) => {
+  return Number(num1) + Number(num2);
 };
 
-const subtract = (a: string, b: string) => {
-  return Number(a) - Number(b);
+const subtract = (num1: string, num2: string) => {
+  return Number(num2) - Number(num1);
 };
 
-const multiply = (a: string, b: string) => {
-  return Number(a) * Number(b);
+const multiply = (num1: string, num2: string) => {
+  return Number(num1) * Number(num2);
 };
 
-const divide = (a: string, b: string) => {
-  return Number(b) / Number(a);
+const divide = (num1: string, num2: string) => {
+  return Number(num2) / Number(num1);
 };
 
-const mapOperation: Record<string, (a: string, b: string) => number> = {
+const mapOperation: Record<string, (num1: string, num2: string) => number> = {
   '+': add,
   '-': subtract,
   X: multiply,
