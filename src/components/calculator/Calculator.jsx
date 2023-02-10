@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import { arithmetic } from '../../utils/arithmetic';
 
 const Calculator = () => {
-  const [totalText, setTotalText] = useState('');
+  const [totalText, setTotalText] = useState('0');
   const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
 
   const handleTextInsert = (event) => {
@@ -21,7 +21,7 @@ const Calculator = () => {
       number[counter] = number[counter] ? number[counter] + buttonValue : buttonValue;
     }
 
-    setTotalText(totalText + buttonValue);
+    setTotalText(totalText === '0' ? buttonValue : totalText + buttonValue);
     setExpression({ number, operation, counter });
   };
 
@@ -37,7 +37,7 @@ const Calculator = () => {
       setExpression({ number: [result], operation: [], counter: 0 });
     }
 
-    setTotalText(result);
+    setTotalText(`${result}`);
   };
 
   return (
