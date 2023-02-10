@@ -1,0 +1,9 @@
+.modifiers {
+  grid-area: modif;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+
+.modifiers button {
+  background-color: #ccc;
+}
