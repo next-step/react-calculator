@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { MouseEvent } from 'react';
 import { calculate } from '../libs';
 
 const initialValue = {
@@ -9,9 +10,8 @@ const initialValue = {
 
 function useCalculator() {
   const [state, setState] = useState(initialValue);
-  console.log(state);
 
-  const handleDigits = (e: any) => {
+  const handleDigits = (e: MouseEvent<HTMLDivElement>) => {
     if (state.targetNumber.length > 2) {
       window.alert('3자리 미만');
       return;
@@ -19,12 +19,12 @@ function useCalculator() {
 
     setState(prev => ({
       ...prev,
-      targetNumber: prev.targetNumber + e.target.value,
+      targetNumber: prev.targetNumber + (e.target as HTMLButtonElement).value,
     }));
   };
 
-  const handleOperations = (e: any) => {
-    const { value } = e.target;
+  const handleOperations = (e: MouseEvent<HTMLDivElement>) => {
+    const { value } = e.target as HTMLButtonElement;
 
     if (value === '=') {
       const result = calculate(state);
