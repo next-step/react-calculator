@@ -51,7 +51,16 @@ describe('Calculator', () => {
     expect(result.value).toBe(expected);
   });
 
-  it('can be initialized by all clear action', () => {});
+  it.each`
+    fomula               | expected
+    ${['13']}            | ${'0'}
+    ${['13', '+']}       | ${'0'}
+    ${['13', '+', '13']} | ${'0'}
+    ${['오류']}          | ${'0'}
+  `('can be initialized by all clear action', ({ fomula, expected }) => {
+    const result = Calculator(fomula).enter('ac');
+    expect(result.value).toBe(expected);
+  });
 
   it('can enter up to 3 digits', () => {});
 

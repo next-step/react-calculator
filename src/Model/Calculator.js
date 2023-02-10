@@ -58,9 +58,12 @@ const calculate = (inputs) => {
   return result.pop();
 };
 
-export const Calculator = (inputs = []) => {
+export const Calculator = (inputs = ['0']) => {
   return {
     enter(value) {
+      if (value === 'ac') {
+        return Calculator();
+      }
       if (value === '=') {
         const result = calculate(inputs);
         return Calculator([result !== 'Infinity' ? result : '오류']);
