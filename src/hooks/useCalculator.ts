@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import { calculate } from '../libs';
+import { VALIDATE_MESSAGE, NUMBER_MAX_LENGTH } from '../constants';
 
 const initialValue = {
   targetNumber: '',
@@ -12,8 +13,8 @@ function useCalculator() {
   const [state, setState] = useState(initialValue);
 
   const handleDigits = (e: MouseEvent<HTMLDivElement>) => {
-    if (state.targetNumber.length > 2) {
-      window.alert('3자리 미만');
+    if (state.targetNumber.length > NUMBER_MAX_LENGTH) {
+      window.alert(VALIDATE_MESSAGE.NUMBER_MAX_LENGTH);
       return;
     }
 
@@ -28,6 +29,7 @@ function useCalculator() {
 
     if (value === '=') {
       const result = calculate(state);
+
       setState({
         targetNumber: result.toString(),
         savedNumber: '',
@@ -36,13 +38,8 @@ function useCalculator() {
       return;
     }
 
-    if (state.operator) {
-      window.alert('연산자가 이미 있습니다.');
-      return;
-    }
-
-    if (!state.targetNumber) {
-      window.alert('숫자가 먼저 와야합니다');
+    if (state.operator || !state.targetNumber) {
+      window.alert(VALIDATE_MESSAGE.ENTER_NUMBER_BEFORE_OPERATOR);
       return;
     }
 

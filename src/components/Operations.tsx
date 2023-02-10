@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
-type Operations = '/' | 'X' | '-' | '+' | '=';
-const operations: Operations[] = ['/', 'X', '-', '+', '='];
+const operations = ['/', 'X', '-', '+', '='] as const;
+
 type OperationsProps = {
   handleOperations: (e: MouseEvent<HTMLDivElement>) => void;
 };
