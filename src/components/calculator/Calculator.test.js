@@ -27,3 +27,42 @@ test('= 버튼을 클릭하면 식이 계산된다. (더하기)', () => {
 
   expect(h1Element).toHaveTextContent('2');
 });
+
+test('= 버튼을 클릭하면 식이 계산된다. (빼기)', () => {
+  render(<Calculator />);
+
+  fireEvent.click(screen.getByText('1'));
+  fireEvent.click(screen.getByText('-'));
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('='));
+
+  const h1Element = screen.getByRole('heading');
+
+  expect(h1Element).toHaveTextContent('-1');
+});
+
+test('= 버튼을 클릭하면 식이 계산된다. (나누기)', () => {
+  render(<Calculator />);
+
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('/'));
+  fireEvent.click(screen.getByText('4'));
+  fireEvent.click(screen.getByText('='));
+
+  const h1Element = screen.getByRole('heading');
+
+  expect(h1Element).toHaveTextContent('0');
+});
+
+test('= 버튼을 클릭하면 식이 계산된다. (곱하기)', () => {
+  render(<Calculator />);
+
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('X'));
+  fireEvent.click(screen.getByText('4'));
+  fireEvent.click(screen.getByText('='));
+
+  const h1Element = screen.getByRole('heading');
+
+  expect(h1Element).toHaveTextContent('8');
+});
