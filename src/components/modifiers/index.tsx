@@ -1,12 +1,12 @@
 import { IModifiersProps } from "../../types/allProps";
 
 function Modifiers({ setCalculation }: IModifiersProps) {
-  const modifierHandler = () => {
+  const allClearHandler = () => {
     setCalculation("");
   };
   return (
     <div className="modifiers subgrid">
-      <button onClick={modifierHandler} className="modifier">
+      <button onClick={allClearHandler} className="modifier">
         AC
       </button>
     </div>
