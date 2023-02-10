@@ -42,14 +42,14 @@ describe('Calculator', () => {
     ${['-999', '/', '3']}                    | ${'-333'}
     ${['999', '/', '-3']}                    | ${'-333'}
     ${['-999', '/', '-3']}                   | ${'333'}
+    ${['13', '/', '3']}                      | ${'4'}
+    ${['2', '/', '3']}                       | ${'0'}
     ${['9.910359161258741e+26', '/', '999']} | ${'9.920279440699441e+23'}
     ${['10', '/', '0']}                      | ${'오류'}
   `('can divide two numbers', ({ fomula, expected }) => {
     const result = Calculator(fomula).enter('=');
     expect(result.value).toBe(expected);
   });
-
-  it('round down decimal places to express results', () => {});
 
   it('can be initialized by all clear action', () => {});
 
