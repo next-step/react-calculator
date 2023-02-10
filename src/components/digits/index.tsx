@@ -30,9 +30,9 @@ function Digits({ calculation, setCalculation }: IDigitsProps) {
 
   return (
     <div className="digits flex">
-      {[...Array(10)].map((data, idx) => (
+      {[...Array(9)].map((_, idx) => (
         <button className="digit" onClick={digitHandler} key={idx}>
-          {9 - idx}
+          {[...Array(9)].length - idx}
         </button>
       ))}
     </div>
