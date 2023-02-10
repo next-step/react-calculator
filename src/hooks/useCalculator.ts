@@ -3,14 +3,22 @@ import type { MouseEvent } from 'react';
 import { calculate } from '../libs';
 import { VALIDATE_MESSAGE, NUMBER_MAX_LENGTH } from '../constants';
 
-const initialValue = {
+const initialState = {
   targetNumber: '',
   savedNumber: '',
   operator: '',
 };
 
+const initialError = {
+  isError: false,
+  msg: '',
+};
+
+type CalculateError = { isError: boolean; msg: string };
+
 function useCalculator() {
-  const [state, setState] = useState(initialValue);
+  const [state, setState] = useState(initialState);
+  const [error, setError] = useState<CalculateError>(initialError);
 
   const handleDigits = (e: MouseEvent<HTMLDivElement>) => {
     if (state.targetNumber.length > NUMBER_MAX_LENGTH) {
@@ -29,6 +37,13 @@ function useCalculator() {
 
     if (value === '=') {
       const result = calculate(state);
+
+      if (isFinite(result)) {
+        setError({
+          isError: true,
+          msg: VALIDATE_MESSAGE.NUMBER_INFINITY,
+        });
+      }
 
       setState({
         targetNumber: result.toString(),
@@ -52,11 +67,13 @@ function useCalculator() {
 
   const getTotal = () => {
     const { targetNumber, operator, savedNumber } = state;
-    return `${savedNumber}${operator}${targetNumber}`;
+
+    return error.isError ? error.msg : `${savedNumber}${operator}${targetNumber}`;
   };
 
   const handleModifier = () => {
-    setState(initialValue);
+    setState(initialState);
+    setError(initialError);
   };
 
   return {
@@ -65,6 +82,7 @@ function useCalculator() {
     handleOperations,
     handleModifier,
     total: getTotal(),
+    error,
   };
 }
 
