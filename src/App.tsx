@@ -1,5 +1,10 @@
+import Calculator from '@components/calculator'
 function App() {
-  return <div className="App"></div>
+  return (
+    <div id="app">
+      <Calculator />
+    </div>
+  )
 }
 
 export default App
