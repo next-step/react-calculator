@@ -25,7 +25,6 @@ export const CalcProvider = ({ children }) => {
   };
   const addOperator = (operator) => {
     dispatch({ type: 'ADD_OPERATOR', operator });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
 
   const calculate = () => {
@@ -59,11 +58,9 @@ export const CalcProvider = ({ children }) => {
     }
 
     dispatch({ type: 'CALCULATE', payload: String(result) });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
   const reset = () => {
     dispatch({ type: 'RESET' });
-    dispatch({ type: 'SET_CURRENT_NUM', payload: '' });
   };
 
   return (
