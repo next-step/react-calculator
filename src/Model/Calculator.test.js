@@ -20,6 +20,7 @@ describe('Calculator', () => {
     ${['999', '*', '-999']}                  | ${'-998001'}
     ${['-999', '*', '-999']}                 | ${'998001'}
     ${['9.920279440699441e+23', '*', '999']} | ${'9.910359161258741e+26'}
+    ${['1.7976931348623157e+308', '*', '9']} | ${'오류'}
   `('can multiply two numbers', ({ fomula, expected }) => {
     const result = Calculator(fomula).enter('=');
     expect(result.value).toBe(expected);
