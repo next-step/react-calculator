@@ -3,7 +3,7 @@ import { CalcContext } from './CalcContext';
 import { calcReducer, initialState, INITIAL_VALUE } from './calcReducer';
 import { MIN_DIGIT_LENGTH } from '../constants/numbers';
 
-const OPERATOR_REGEX = /[+]|[-]|[X]|[/]/gi;
+const OPERATOR_REGEX = /[+|-|X|/]/gi;
 
 export const CalcProvider = ({ children }) => {
   const [state, dispatch] = useReducer(calcReducer, initialState);
