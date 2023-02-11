@@ -1,41 +1,94 @@
 import { OperationType } from "../../../components/Calculator/Operations/Operation";
 import {
   ActionType,
-  ADD_DIGIT,
+  ADD_FIRST_DIGIT,
   ADD_OPERATION,
-  CLEAR_ALL,
+  ADD_SECOND_DIGIT,
+  RESET,
 } from "./CalculatorActionType";
 
 export interface DefaultValueState {
-  total: number;
-  digits: number;
-  operation: "ac" | OperationType | null;
+  total: string;
+  firstDigits: string;
+  secondDigits: string;
+  operation: OperationType | undefined;
 }
 
 export const defaultValue: DefaultValueState = {
-  total: 0,
-  digits: 0,
-  operation: null,
+  total: "",
+  firstDigits: "0",
+  secondDigits: "0",
+  operation: undefined,
 };
+
+function getTotal(state: DefaultValueState): string {
+  let total = 0;
+  const firstNum = Number(state.firstDigits);
+  const secondNum = Number(state.secondDigits);
+
+  switch (state.operation) {
+    case "+":
+      total = firstNum + secondNum;
+      break;
+    case "-":
+      total = firstNum - secondNum;
+      break;
+    case "X":
+      total = firstNum * secondNum;
+      break;
+    case "/":
+      total = Math.floor(firstNum / secondNum);
+      break;
+  }
+  if (Number.isFinite(total)) {
+    return total.toString();
+  }
+  return "ERROR";
+}
 
 function CalculatorReducer(
   state: DefaultValueState = defaultValue,
   action: ActionType
 ): DefaultValueState {
   switch (action.type) {
-    case ADD_DIGIT: {
+    case ADD_FIRST_DIGIT: {
+      if (state.firstDigits === "0") {
+        return {
+          ...state,
+          total: "",
+          firstDigits: action.digit,
+        };
+      }
       return {
         ...state,
-        digits: state.digits + action.digit,
+        firstDigits: state.firstDigits + action.digit,
+      };
+    }
+    case ADD_SECOND_DIGIT: {
+      if (state.secondDigits === "0") {
+        return {
+          ...state,
+          secondDigits: action.digit,
+        };
+      }
+      return {
+        ...state,
+        secondDigits: state.secondDigits + action.digit,
       };
     }
     case ADD_OPERATION: {
+      if (action.operation === "=") {
+        return {
+          ...defaultValue,
+          total: getTotal(state),
+        };
+      }
       return {
         ...state,
         operation: action.operation,
       };
     }
-    case CLEAR_ALL: {
+    case RESET: {
       return defaultValue;
     }
   }
