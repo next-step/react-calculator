@@ -19,7 +19,7 @@ const Calculator = () => {
   const handleCalculate = () => {
     const result = calculateExpression();
 
-    setTotalText(`${result}`);
+    setTotalText(result === Infinity ? '오류' : result);
   };
 
   const handleAllClear = () => {
