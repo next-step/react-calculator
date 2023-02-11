@@ -1,6 +1,6 @@
 const CalculatorOperationItem = (props) => {
   return (
-    <button className="operation">
+    <button className="operation" onClick={props.onClick}>
       {props.operation === "*" ? "X" : props.operation}
     </button>
   );
