@@ -78,6 +78,11 @@ export const Calculator = (inputs = ['0']) => {
       if (value in OPERATOR) {
         // 연산자 이후에 연산자가 입력된 경우
         if (recentInput in OPERATOR) {
+          if (recentInput === '-') {
+            const previousRecentInput = inputs[inputs.length - 2];
+            if (previousRecentInput in OPERATOR) return Calculator([...inputs]);
+          }
+
           if (value === '-') {
             return Calculator([...inputs, value]);
           } else {

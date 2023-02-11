@@ -91,7 +91,19 @@ describe('Calculator', () => {
     }
   );
 
-  it('ignores entered operator after negative minus', () => {});
+  it.each`
+    fomula             | input  | expected
+    ${['1', '*', '-']} | ${'+'} | ${'1 * -'}
+    ${['1', '*', '-']} | ${'-'} | ${'1 * -'}
+    ${['1', '*', '-']} | ${'*'} | ${'1 * -'}
+    ${['1', '*', '-']} | ${'/'} | ${'1 * -'}
+  `(
+    'ignores entered operator after negative minus',
+    ({ fomula, input, expected }) => {
+      const result = Calculator(fomula).enter(input);
+      expect(result.value).toBe(expected);
+    }
+  );
 
   it('throws an error when number exceeds 3 digits', () => {
     expect(() => {
