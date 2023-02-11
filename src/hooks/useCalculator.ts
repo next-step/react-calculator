@@ -1,10 +1,10 @@
 import { useReducer } from 'react';
 
-import { type DigitNumbers } from '../components/Calculator/Digit/Digit.js';
+import { type DigitNumbers } from '../components/Calculator/Digit/Digit';
 import {
   type Operators,
   type Subtract,
-} from '../components/Calculator/Operation/Operation.js';
+} from '../components/Calculator/Operation/Operation';
 import {
   APPEND_VALUE,
   CALCULATE,
@@ -15,7 +15,7 @@ import {
   SET_OPERATOR,
   SET_VALUE,
   ZERO_VALUE,
-} from '../reducer/index.js';
+} from '../reducer';
 
 const MAX_NUMBER_LENGTH = 3;
 const MINUS: Subtract = '-';

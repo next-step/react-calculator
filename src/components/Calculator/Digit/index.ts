@@ -1,1 +1,1 @@
-export { default } from './Digit.js';
+export { default } from './Digit';

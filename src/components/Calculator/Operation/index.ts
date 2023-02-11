@@ -1,1 +1,1 @@
-export { default } from './Operation.js';
+export { default } from './Operation';

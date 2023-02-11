@@ -1,1 +1,1 @@
-export { default } from './TotalScreen.js';
+export { default } from './TotalScreen';

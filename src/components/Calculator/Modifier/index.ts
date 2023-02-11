@@ -1,1 +1,1 @@
-export { default } from './Modifier.js';
+export { default } from './Modifier';
