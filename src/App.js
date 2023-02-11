@@ -19,7 +19,7 @@ const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 function App() {
   const [digit, setDigit] = useState(0);
-  const [digitList, setDigitList] = useState([]);
+  const [digits, setDigits] = useState([]);
   const [operation, setOperation] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
@@ -41,7 +41,7 @@ function App() {
   const handleOperationClick = (operation) => {
     if (!digit) return;
 
-    setDigitList([digit]);
+    setDigits([digit]);
     setOperation(operation);
     setIsTyping(false);
   };
@@ -49,7 +49,7 @@ function App() {
   const handleModifierClick = () => {
     setDigit(0);
     setOperation("");
-    setDigitList([]);
+    setDigits([]);
     setIsTyping(false);
   };
 
@@ -78,17 +78,17 @@ function App() {
   };
 
   const handleCalculateClick = () => {
-    setDigitList((num) => [...num, digit]);
+    setDigits((num) => [...num, digit]);
     setIsTyping(false);
   };
 
   useEffect(() => {
-    if (digitList.length > 1) {
-      const calculatedNumber = getCalculatedNumber(digitList, operation);
+    if (digits.length > 1) {
+      const calculatedNumber = getCalculatedNumber(digits, operation);
       setDigit(calculatedNumber);
-      setDigitList([calculatedNumber]);
+      setDigits([calculatedNumber]);
     }
-  }, [digitList, operation]);
+  }, [digits, operation]);
 
   return (
     <>
