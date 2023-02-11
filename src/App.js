@@ -29,7 +29,7 @@ function App() {
   const [operation, setOperation] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  const handleDigitClick = (digit) => {
+  const handleDigitClick = (clickedDigit) => {
     if (String(digit).length === 3) {
       return;
     }
@@ -37,18 +37,18 @@ function App() {
     setIsTyping(true);
 
     if (!isTyping) {
-      setDigit(digit);
+      setDigit(clickedDigit);
       return;
     }
 
-    setDigit(Number(`${digit}${digit}`));
+    setDigit(Number(`${digit}${clickedDigit}`));
   };
 
-  const handleOperationClick = (operation) => {
+  const handleOperationClick = (_operation) => {
     if (!digit) return;
 
     setDigits([digit]);
-    setOperation(operation);
+    setOperation(_operation);
     setIsTyping(false);
   };
 
