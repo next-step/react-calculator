@@ -63,7 +63,7 @@ export const useCalculator = () => {
     dispatch({ type: RESET });
   };
 
-  return { appendDigit, appendOperator, calculate, reset, state } as const;
+  return { appendDigit, appendOperator, calculate, reset, state };
 };
 
 const isNumberRange = (value: string) => {
