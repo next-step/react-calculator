@@ -1,6 +1,7 @@
 import DigitButton from '@components/digitButton'
+import OperationButton from '@components/operationButton'
 
-import { DIGIT_NUMBER } from '@constant/calculator'
+import { DIGIT_NUMBER, OPERATIONS } from '@constant/calculator'
 
 const Calculator = () => {
   return (
@@ -15,11 +16,9 @@ const Calculator = () => {
         <button className="modifier">AC</button>
       </div>
       <div className="operations subgrid">
-        <button className="operation">/</button>
-        <button className="operation">X</button>
-        <button className="operation">-</button>
-        <button className="operation">+</button>
-        <button className="operation">=</button>
+        {OPERATIONS.map((operation) => (
+          <OperationButton key={operation} operation={operation} />
+        ))}
       </div>
     </div>
   )
