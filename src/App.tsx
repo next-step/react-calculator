@@ -1,14 +1,21 @@
 import { useState } from 'react';
 
+import type { Operation } from './constants/operations';
+
 import { DigitNumbers } from './DigitNumbers';
 import { Modifier } from './Modifier';
 import { Operations } from './Operations';
 
+const initialHistoryState = 0;
+const initialIsNeedInitState = false;
+const initialCurrentNumberState = '';
+const initialCurrentOperationState = '=';
+
 function App() {
-  const historyStateBundle = useState(0);
-  const isNeedInitStateBundle = useState(false);
-  const currentNumberStateBundle = useState('');
-  const currentOperationStateBundle = useState('');
+  const historyStateBundle = useState(initialHistoryState);
+  const isNeedInitStateBundle = useState(initialIsNeedInitState);
+  const currentNumberStateBundle = useState(initialCurrentNumberState);
+  const currentOperationStateBundle = useState<Operation>(initialCurrentOperationState);
 
   const [_, setHistory] = historyStateBundle;
   const [_2, setIsNeedInit] = isNeedInitStateBundle;
@@ -24,10 +31,10 @@ function App() {
           currentNumberStateBundle={currentNumberStateBundle}
         />
         <Modifier initStates={() => {
-          setHistory(0);
-          setIsNeedInit(false);
-          setCurrentNumber('');
-          setCurrentOperation('');
+          setHistory(initialHistoryState);
+          setIsNeedInit(initialIsNeedInitState);
+          setCurrentNumber(initialCurrentNumberState);
+          setCurrentOperation(initialCurrentOperationState);
         }} />
         <Operations
           historyStateBundle={historyStateBundle}

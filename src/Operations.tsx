@@ -1,14 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { Operation, operations } from './constants/operations';
 import { calcNumbersWithSelectedOperation } from './utils';
-
-const operations = ['/', 'X', '-', '+', '='];
 
 interface OperationsProps {
   historyStateBundle: [number, Dispatch<SetStateAction<number>>];
   isNeedInitStateBundle: [boolean, Dispatch<SetStateAction<boolean>>];
-  currentOperationStateBundle: [string, Dispatch<SetStateAction<string>>];
   currentNumberStateBundle: [string, Dispatch<SetStateAction<string>>];
+  currentOperationStateBundle: [Operation, Dispatch<SetStateAction<Operation>>];
 }
 
 function Operations({
@@ -43,10 +42,10 @@ function Operations({
                 });
                 const ceiledNumber = Math.ceil(result);
 
-                setCurrentOperation(operation);
-                setHistory(ceiledNumber);
-                setCurrentNumber(changeToExpressionNumber(ceiledNumber));
                 setIsNeedInit(true);
+                setHistory(ceiledNumber);
+                setCurrentOperation(operation);
+                setCurrentNumber(changeToExpressionNumber(ceiledNumber));
               }}
             >
               {operation}

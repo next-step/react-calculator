@@ -1,5 +1,7 @@
+import { Operation } from '../constants/operations';
+
 interface calcNumbersWithSelectedOperationProps {
-  operation: string;
+  operation: Operation;
   num1: number;
   num2: number;
 }
