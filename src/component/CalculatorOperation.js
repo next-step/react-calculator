@@ -15,7 +15,7 @@ const CalculatorOperation = (props) => {
   };
 
   const onClickReturn = () => {
-    props.setTotal(eval(props.total));
+    props.setTotal(Math.floor(Number(eval(props.total))));
   };
 
   return (
