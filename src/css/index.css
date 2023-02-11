@@ -16,7 +16,7 @@ body {
   width: 300px;
   display: grid;
   grid-template-areas:
-    'total total total total'
+    'display display display display'
     'modif modif modif oper'
     'digit digit digit oper'
     'digit digit digit oper'
@@ -44,15 +44,18 @@ button {
   background-color: #efefef;
 }
 
-#total {
-  grid-area: total;
+.display {
+  grid-area: display;
   background-color: #333;
   color: white;
-  margin: 0;
   padding: 1rem;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: flex-end;
+}
+
+.display h1 {
+  margin: 0;
   font-size: 4rem;
 }
 
