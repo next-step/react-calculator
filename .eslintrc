@@ -19,6 +19,7 @@
         "plugin:react-hooks/recommended"
     ],
     "rules": {
-        "@typescript-eslint/strict-boolean-expressions": "warn"
+        "@typescript-eslint/strict-boolean-expressions": "warn",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
