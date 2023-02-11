@@ -14,6 +14,7 @@ function Digits({ calculation, setCalculation }: IDigitsProps) {
       setDigits(digits + e.currentTarget.innerText);
       setCalculation(calculation + e.currentTarget.innerText);
     }
+
     if (digits.length === DIGIT_MAX_LENGTH) {
       alert("최대 3자리수 까지 입력 가능합니다!");
     }
@@ -30,9 +31,9 @@ function Digits({ calculation, setCalculation }: IDigitsProps) {
 
   return (
     <div className="digits flex">
-      {[...Array(9)].map((_, idx) => (
+      {[...Array(10)].map((_, idx) => (
         <button className="digit" onClick={digitHandler} key={idx}>
-          {[...Array(9)].length - idx}
+          {Array(9).length - idx}
         </button>
       ))}
     </div>
