@@ -1,21 +1,16 @@
 import CalculatorDigitItem from "./CalculatorDigitItem";
+const DIGIT = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
-const CalculatorDigit = () => {
-  const range = (start, end) => {
-    let array = [];
-    for (let i = start; i <= end; i++) {
-      array.push(i);
-    }
-    return array;
-  };
-
+const CalculatorDigit = (props) => {
   return (
     <div className="digits flex">
-      {range(0, 9)
-        .reverse()
-        .map((num) => (
-          <CalculatorDigitItem number={num} key={num} />
-        ))}
+      {DIGIT.map((num) => (
+        <CalculatorDigitItem
+          number={num}
+          key={num}
+          onClick={() => props.setTotal(num)}
+        />
+      ))}
     </div>
   );
 };
