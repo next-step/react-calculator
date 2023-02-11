@@ -44,11 +44,11 @@ function App() {
     setDigit(Number(`${digit}${clickedDigit}`));
   };
 
-  const handleOperationClick = (_operation) => {
+  const handleOperationClick = (operation) => {
     if (!digit) return;
 
     setDigits([digit]);
-    setOperation(_operation);
+    setOperation(operation);
     setIsTyping(false);
   };
 
@@ -59,25 +59,30 @@ function App() {
     setIsTyping(false);
   };
 
-  const getCalculatedNumber = (numberList, operation) => {
+  const calculate = (digits, operation) => {
     let result = 0;
+
     switch (operation) {
       case OPERATION.DIVIDE:
-        result = Math.floor(numberList[0] / numberList[1]);
+        result = Math.floor(digits[0] / digits[1]);
         break;
       case OPERATION.MULTIPLY:
-        result = numberList[0] * numberList[1];
+        result = digits[0] * digits[1];
         break;
       case OPERATION.MINUS:
-        result = numberList[0] - numberList[1];
+        result = digits[0] - digits[1];
         break;
       case OPERATION.PLUS:
-        result = numberList[0] + numberList[1];
+        result = digits[0] + digits[1];
         break;
       default:
         result = 1;
     }
 
+    return result;
+  };
+
+  const checkResultIsFinite = (result) => {
     if (!isFinite(result)) return "오류";
 
     return result;
@@ -90,9 +95,10 @@ function App() {
 
   useEffect(() => {
     if (digits.length > 1) {
-      const calculatedNumber = getCalculatedNumber(digits, operation);
-      setDigit(calculatedNumber);
-      setDigits([calculatedNumber]);
+      let result = calculate(digits, operation);
+      result = checkResultIsFinite(result);
+      setDigit(result);
+      setDigits([result]);
     }
   }, [digits, operation]);
 
