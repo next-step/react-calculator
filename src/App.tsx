@@ -6,11 +6,13 @@ import { Operations } from './Operations';
 
 function App() {
   const historyStateBundle = useState(0);
-  const [_, setHistory] = historyStateBundle;
-  const isNeedInitStateBundle = useState(false)
-  const currentOperationStateBundle = useState('')
-  const [_2, setCurrentOperation] = currentOperationStateBundle;
+  const isNeedInitStateBundle = useState(false);
   const currentNumberStateBundle = useState('');
+  const currentOperationStateBundle = useState('');
+
+  const [_, setHistory] = historyStateBundle;
+  const [_2, setIsNeedInit] = isNeedInitStateBundle;
+  const [_3, setCurrentOperation] = currentOperationStateBundle;
   const [currentNumber, setCurrentNumber] = currentNumberStateBundle;
 
   return (
@@ -22,8 +24,9 @@ function App() {
           currentNumberStateBundle={currentNumberStateBundle}
         />
         <Modifier initStates={() => {
-          setCurrentNumber('');
           setHistory(0);
+          setIsNeedInit(false);
+          setCurrentNumber('');
           setCurrentOperation('');
         }} />
         <Operations
