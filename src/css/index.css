@@ -54,6 +54,10 @@ button {
   align-items: flex-end;
 }
 
+.display p {
+  height: 18px;
+}
+
 .display h1 {
   margin: 0;
   font-size: 4rem;

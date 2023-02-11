@@ -3,8 +3,8 @@ import './css/index.css';
 
 import Calculator from './components/Calculator';
 
-function App() {
+const App = () => {
   return <Calculator />;
-}
+};
 
 export default App;
