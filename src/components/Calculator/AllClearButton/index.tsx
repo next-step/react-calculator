@@ -4,7 +4,7 @@ type Props = {
   onClick: (arg: string) => () => void;
 };
 
-const AllClear = (props: Props) => {
+const AllClearButton = (props: Props) => {
   return (
     <div className={`${styles.modifiers} subgrid`}>
       <button onClick={props.onClick('clear')}>AC</button>
@@ -12,4 +12,4 @@ const AllClear = (props: Props) => {
   );
 };
 
-export default AllClear;
+export default AllClearButton;

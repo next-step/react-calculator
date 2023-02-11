@@ -1,4 +1,4 @@
-import type { CalculatorArgs } from '@/components/Calculator';
+import type { CalculatorArgs } from '@/components/Calculator/Calculator';
 import { Operator, OPERATORS } from '@/constants/operation';
 import { calcOperation } from '@/utils/calcOperation';
 

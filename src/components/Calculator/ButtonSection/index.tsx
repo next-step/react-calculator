@@ -1,9 +1,11 @@
 import { memo } from 'react';
 
-import type { CalculatorArgs } from '@/components/Calculator';
-import AllClear from '@/components/Calculator/AllClear';
-import Digit from '@/components/Calculator/Digit';
-import Operation from '@/components/Calculator/Operation';
+import {
+  AllClearButton,
+  DigitButton,
+  OperationButton,
+} from '@/components/Calculator';
+import type { CalculatorArgs } from '@/components/Calculator/Calculator';
 
 type Props = {
   onClick: (arg?: CalculatorArgs) => () => void;
@@ -12,9 +14,9 @@ type Props = {
 const ButtonSection = (props: Props) => {
   return (
     <>
-      <Digit onClick={props.onClick} />
-      <AllClear onClick={props.onClick} />
-      <Operation onClick={props.onClick} />
+      <DigitButton onClick={props.onClick} />
+      <AllClearButton onClick={props.onClick} />
+      <OperationButton onClick={props.onClick} />
     </>
   );
 };

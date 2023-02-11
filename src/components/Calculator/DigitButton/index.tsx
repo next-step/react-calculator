@@ -4,7 +4,7 @@ type Props = {
   onClick: (n: number) => () => void;
 };
 
-const Digits = (props: Props) => {
+const DigitButton = (props: Props) => {
   return (
     <div className={`${styles.digits} flex`}>
       {DIGIT_NUMBERS.map((n) => (
@@ -16,6 +16,6 @@ const Digits = (props: Props) => {
   );
 };
 
-export default Digits;
+export default DigitButton;
 
 const DIGIT_NUMBERS = Array.from({ length: 10 }, (_, i) => 9 - i);

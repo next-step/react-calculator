@@ -6,7 +6,7 @@ type Props = {
   onClick: (o: Operator | '=') => () => void;
 };
 
-const Operation = (props: Props) => {
+const OperationButton = (props: Props) => {
   return (
     <div className={`${styles.operations} subgrid`}>
       {OPERATORS.map((operation) => (
@@ -25,4 +25,4 @@ const Operation = (props: Props) => {
   );
 };
 
-export default Operation;
+export default OperationButton;
