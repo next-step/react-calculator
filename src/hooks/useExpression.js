@@ -27,7 +27,7 @@ const useExpression = () => {
     return buttonValue;
   };
 
-  const resetExpression = () => {
+  const calculateExpression = () => {
     const number = expression.number.map(Number);
     const operation = expression.operation[0];
 
@@ -42,7 +42,7 @@ const useExpression = () => {
     return result;
   };
 
-  return [writeExpression, resetExpression];
+  return [writeExpression, calculateExpression];
 };
 
 export default useExpression;
