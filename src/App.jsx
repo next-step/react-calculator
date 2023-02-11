@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { Calculator } from './Model/Calculator';
+
 const BUTTONS = {
   DIGIT: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'],
   ALL_CLEAR: 'AC',
@@ -5,11 +8,16 @@ const BUTTONS = {
 };
 
 const App = () => {
+  const [calculator, setCalculator] = useState(Calculator());
+  const handleClick = (e) => {
+    setCalculator(calculator.enter(e.target.innerText));
+  };
+
   return (
     <div className="app">
       <div className="calculator">
-        <h1 id="total">0</h1>
-        <div className="input-display">
+        <h1 id="total">{calculator.value}</h1>
+        <div className="input-display" onClick={handleClick}>
           <div className="digits flex">
             {BUTTONS.DIGIT.map((digit) => (
               <button key={`digit:${digit}`} className="digit">
