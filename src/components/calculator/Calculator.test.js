@@ -80,3 +80,16 @@ test('기호가 숫자보다 먼저 들어갈 경우 오류가 발생한다.', (
 
   window.alert.mockClear();
 });
+
+test('AC 버튼을 클릭하면 h1 태그의 텍스트가 0으로 변경된다.', () => {
+  render(<Calculator />);
+
+  const h1Element = screen.getByRole('heading');
+
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('+'));
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('AC'));
+
+  expect(h1Element).toHaveTextContent('0');
+});
