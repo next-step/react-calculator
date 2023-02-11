@@ -16,6 +16,12 @@ const Wrapper = styled.div`
 
 const OPERATION_LIST = ["/", "X", "-", "+"];
 const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+const OPERATION = {
+  DIVIDE: "/",
+  MULTIPLY: "X",
+  MINUS: "-",
+  PLUS: "+",
+};
 
 function App() {
   const [digit, setDigit] = useState(0);
@@ -56,16 +62,16 @@ function App() {
   const getCalculatedNumber = (numberList, operation) => {
     let result = 0;
     switch (operation) {
-      case "/":
+      case OPERATION.DIVIDE:
         result = Math.floor(numberList[0] / numberList[1]);
         break;
-      case "X":
+      case OPERATION.MULTIPLY:
         result = numberList[0] * numberList[1];
         break;
-      case "-":
+      case OPERATION.MINUS:
         result = numberList[0] - numberList[1];
         break;
-      case "+":
+      case OPERATION.PLUS:
         result = numberList[0] + numberList[1];
         break;
       default:
