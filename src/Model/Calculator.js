@@ -11,7 +11,7 @@ const OPERATOR = {
       return `${Number(num1) - Number(num2)}`;
     },
   },
-  '*': {
+  X: {
     priority: 2,
     execute(num1, num2) {
       return `${Number(num1) * Number(num2)}`;
@@ -63,7 +63,7 @@ export class exceedLimitOfDigitError extends Error {}
 export const Calculator = (inputs = ['0']) => {
   return {
     enter(value) {
-      if (value === 'ac') {
+      if (value === 'AC') {
         return Calculator();
       }
 
