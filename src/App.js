@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./css/index.css";
+import Button from "./component/Button";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <div className="calculator">
+        <h1 id="total">0</h1>
+        <div className="digits flex">
+          <Button className="digit" value="9" />
+          <Button className="digit" value="8" />
+          <Button className="digit" value="7" />
+          <Button className="digit" value="6" />
+          <Button className="digit" value="5" />
+          <Button className="digit" value="4" />
+          <Button className="digit" value="3" />
+          <Button className="digit" value="2" />
+          <Button className="digit" value="1" />
+          <Button className="digit" value="0" />
+        </div>
+        <div className="modifiers subgrid">
+          <Button className="modifier" value="AC" />
+        </div>
+        <div className="operations subgrid">
+          <Button className="operation" value="/" />
+          <Button className="operation" value="X" />
+          <Button className="operation" value="-" />
+          <Button className="operation" value="+" />
+          <Button className="operation" value="=" />
+        </div>
+      </div>
     </div>
   );
 }
