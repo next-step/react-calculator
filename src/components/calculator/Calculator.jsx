@@ -13,7 +13,7 @@ const Calculator = () => {
 
     const addText = writeExpression(buttonValue, totalText);
 
-    setTotalText(totalText === '0' ? addText : totalText + addText);
+    setTotalText(totalText === '0' || totalText === '오류' ? addText : totalText + addText);
   };
 
   const handleCalculate = () => {
