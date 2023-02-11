@@ -2,10 +2,10 @@ import { PropsWithChildren, useMemo } from 'react';
 import { useReducer } from 'react';
 
 import type { Operator } from '@/constants/operation';
+import { CalculatorContext } from '@/store/calculator-context';
 import { calcOperation } from '@/utils/calcOperation';
 import { isInfinite } from '@/utils/numberUtils';
 
-import { CalculatorContext } from './calculator-context';
 import { calculatorReducer, initialState } from './calculator-reducer';
 
 export const CalculatorProvider = (props: PropsWithChildren) => {

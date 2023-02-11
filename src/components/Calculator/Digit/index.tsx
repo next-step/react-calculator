@@ -1,17 +1,14 @@
-import { useCalculator } from '@/store/calculator-context';
-
 import styles from './index.module.css';
 
-const Digits = () => {
-  const { addNumber: handleNumber } = useCalculator();
+type Props = {
+  onClick: (n: number) => () => void;
+};
+
+const Digits = (props: Props) => {
   return (
     <div className={`${styles.digits} flex`}>
       {DIGIT_NUMBERS.map((n) => (
-        <button
-          className={styles.digit}
-          key={n}
-          onClick={() => handleNumber(n)}
-        >
+        <button className={styles.digit} key={n} onClick={props.onClick(n)}>
           {n}
         </button>
       ))}

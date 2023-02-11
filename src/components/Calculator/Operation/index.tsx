@@ -1,22 +1,24 @@
-import { OPERATORS } from '@/constants/operation';
-import { useCalculator } from '@/store/calculator-context';
+import { Operator, OPERATORS } from '@/constants/operation';
 
 import styles from './index.module.css';
 
-const Operation = () => {
-  const { addOperation: handleOperation, calculate } = useCalculator();
+type Props = {
+  onClick: (o: Operator | '=') => () => void;
+};
+
+const Operation = (props: Props) => {
   return (
     <div className={`${styles.operations} subgrid`}>
       {OPERATORS.map((operation) => (
         <button
           key={operation}
           className={styles.operation}
-          onClick={() => handleOperation(operation)}
+          onClick={props.onClick(operation)}
         >
           {operation}
         </button>
       ))}
-      <button className={styles.operation} onClick={calculate}>
+      <button className={styles.operation} onClick={props.onClick('=')}>
         =
       </button>
     </div>

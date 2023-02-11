@@ -1,20 +1,27 @@
-import { CalculatorProvider } from '@/store/CalculatorProvider';
+import { useCallback, useState } from 'react';
 
-import Digit from './Digit';
+import TotalPad from '@/components/Calculator/TotalPad';
+import { Operator } from '@/constants/operation';
+import { calculatorMachine } from '@/model/calculator';
+
+import ButtonSection from './ButtonSection';
 import styles from './index.module.css';
-import Modifier from './Modifier';
-import Operation from './Operation';
-import TotalPad from './TotalPad';
+
+export type CalculatorArgs = Operator | number | string | undefined;
 
 const Calculator = () => {
+  const [state, setState] = useState('0');
+  const handleClick = useCallback(
+    (args: CalculatorArgs) => () => {
+      setState((prev) => calculatorMachine(prev, args));
+    },
+    []
+  );
+
   return (
     <div className={styles.calculator}>
-      <CalculatorProvider>
-        <TotalPad />
-        <Digit />
-        <Modifier />
-        <Operation />
-      </CalculatorProvider>
+      <TotalPad computedInput={String(state)} />
+      <ButtonSection onClick={handleClick} />
     </div>
   );
 };
