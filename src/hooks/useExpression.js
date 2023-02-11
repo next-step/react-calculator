@@ -33,16 +33,20 @@ const useExpression = () => {
 
     const result = arithmetic(number[0], number[1], operation);
 
+    return ResetExpression(result);
+  };
+
+  const ResetExpression = (result = '') => {
     if (result === '') {
       setExpression({ number: [], operation: [], counter: 0 });
-      return result;
+      return 0;
     }
 
     setExpression({ number: [result], operation: [], counter: 0 });
     return result;
   };
 
-  return [writeExpression, calculateExpression];
+  return [writeExpression, calculateExpression, ResetExpression];
 };
 
 export default useExpression;

@@ -6,7 +6,7 @@ import useExpression from '../../hooks/useExpression';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState('0');
-  const [writeExpression, calculateExpression] = useExpression();
+  const [writeExpression, calculateExpression, ResetExpression] = useExpression();
 
   const handleTextInsert = (event) => {
     const buttonValue = event.target.value;
@@ -20,6 +20,10 @@ const Calculator = () => {
     const result = calculateExpression();
 
     setTotalText(`${result}`);
+  };
+
+  const handleAllClear = () => {
+    setTotalText(`${ResetExpression()}`);
   };
 
   return (
@@ -38,7 +42,7 @@ const Calculator = () => {
         <Button className="digit" value="0" onClick={handleTextInsert} />
       </div>
       <div className="modifiers subgrid">
-        <Button className="modifier" value="AC" onClick={handleTextInsert} />
+        <Button className="modifier" value="AC" onClick={handleAllClear} />
       </div>
       <div className="operations subgrid">
         <Button className="operation" value="/" onClick={handleTextInsert} />
