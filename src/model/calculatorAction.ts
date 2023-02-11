@@ -1,7 +1,7 @@
 import type { CalculatorArgs } from '@/components/Calculator/Calculator';
 import { MESSAGE } from '@/constants/message';
 import { CLEAR, OPERATE, Operator, OPERATORS } from '@/constants/operator';
-import { calcOperation } from '@/utils/calcOperation';
+import { calcOperation } from '@/model/calculatorOperation';
 import { isInfinite } from '@/utils/numberUtils';
 
 import { initialState } from './calculator';
