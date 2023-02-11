@@ -1,18 +1,15 @@
+import DigitButton from '@components/digitButton'
+
+import { DIGIT_NUMBER } from '@constant/calculator'
+
 const Calculator = () => {
   return (
     <div className="calculator">
       <h1 id="total">0</h1>
       <div className="digits flex">
-        <button className="digit">9</button>
-        <button className="digit">8</button>
-        <button className="digit">7</button>
-        <button className="digit">6</button>
-        <button className="digit">5</button>
-        <button className="digit">4</button>
-        <button className="digit">3</button>
-        <button className="digit">2</button>
-        <button className="digit">1</button>
-        <button className="digit">0</button>
+        {DIGIT_NUMBER.map((digit) => (
+          <DigitButton key={digit} digit={digit} />
+        ))}
       </div>
       <div className="modifiers subgrid">
         <button className="modifier">AC</button>
