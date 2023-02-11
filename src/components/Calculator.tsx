@@ -8,8 +8,6 @@ import {
   type OperationType,
 } from '../constants/calculate';
 
-import { separateCalculateUnits } from '../utils/separateCalculateUnits';
-
 // 계산기 안에 있는 컴포넌트를 다른 컴포넌트에서 사용하진 않을테니... 계산기를 여러 방향으로 조합하여 사용한다면?
 // 계산식이 보여질 곳, 입력 숫자, 연산자의 위치가 바뀔 수 있을 것 같다.
 
@@ -31,6 +29,7 @@ const Calculator = ({ children }: PropsWithChildren) => {
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
     setTotal((prev) => prev + textContent);
+
     if (isClear) {
       setCurrentNumber(textContent!);
       setIsClear(false);
@@ -44,9 +43,12 @@ const Calculator = ({ children }: PropsWithChildren) => {
     const { textContent } = e.target as HTMLDivElement;
 
     if (isCalculated) {
-      setTotal((prev) => prev + currentNumber + textContent);
+      if (textContent !== '=') {
+        setTotal(currentNumber + textContent);
+      }
       setBeforeNumber(currentNumber);
       setIsCalculated(false);
+      setIsClear(true);
       setOperator(textContent as OperationType);
       return;
     }
