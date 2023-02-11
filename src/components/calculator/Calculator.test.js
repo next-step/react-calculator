@@ -97,7 +97,7 @@ test('계산된 결과값을 가지고 추가적으로 계산을 진행할 수 �
   expect(h1Element).toHaveTextContent('2');
 });
 
-test('이상한 기호 또는 문자열이 들어갔을 때 오류 발생', () => {
+test('이상한 기호 또는 문자열이 들어갔을 때 오류가 발생한다.', () => {
   render(<Calculator />);
 
   window.alert = jest.fn();
@@ -112,6 +112,21 @@ test('이상한 기호 또는 문자열이 들어갔을 때 오류 발생', () =
 
   expect(window.alert).toHaveBeenCalledTimes(1);
   expect(h1Element).toHaveTextContent('');
+
+  window.alert.mockClear();
+});
+
+test('기호가 숫자보다 먼저 들어갈 경우 오류가 발생한다.', () => {
+  window.alert = jest.fn();
+
+  render(<Calculator />);
+
+  const h1Element = screen.getByRole('heading');
+
+  fireEvent.click(screen.getByText('X'));
+
+  expect(window.alert).toHaveBeenCalledTimes(1);
+  expect(h1Element).toHaveTextContent('0');
 
   window.alert.mockClear();
 });
