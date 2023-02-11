@@ -61,7 +61,7 @@ test('이상한 기호 또는 문자열이 들어갔을 때 오류가 발생한�
   fireEvent.click(screen.getByText('='));
 
   expect(window.alert).toHaveBeenCalledTimes(1);
-  expect(h1Element).toHaveTextContent('');
+  expect(h1Element).toHaveTextContent('0');
 
   window.alert.mockClear();
 });
