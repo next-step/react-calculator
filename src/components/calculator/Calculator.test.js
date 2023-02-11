@@ -111,3 +111,18 @@ test('입력한 숫자가 3자리 수 이상일 경우 오류가 발생한다.',
 
   window.alert.mockClear();
 });
+
+test('계산된 값이 인피니티일 경우 h1 태그의 텍스트에 "오류"가 출력된다.', () => {
+  render(<Calculator />);
+
+  const h1Element = screen.getByRole('heading');
+
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('3'));
+  fireEvent.click(screen.getByText('4'));
+  fireEvent.click(screen.getByText('/'));
+  fireEvent.click(screen.getByText('0'));
+  fireEvent.click(screen.getByText('='));
+
+  expect(h1Element).toHaveTextContent('오류');
+});
