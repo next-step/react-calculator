@@ -1,13 +1,12 @@
 import type { CalculatorArgs } from '@/components/Calculator/Calculator';
 import { Operator, OPERATORS } from '@/constants/operation';
 import { calcOperation } from '@/utils/calcOperation';
+import { isInfinite } from '@/utils/numberUtils';
 
 export const calculatorMachine = (
-  state: string,
+  state = '0',
   input: CalculatorArgs
 ): string => {
-  const init = '0';
-
   if (isOperator(input)) {
     const userOperation = state?.match(OPERATOR_REGEX)?.at(0) as Operator;
     if (userOperation) {
@@ -62,10 +61,10 @@ export const calculatorMachine = (
       Number(userNumbers.at(1))
     )[userOperation]();
 
-    return String(result);
+    return isInfinite(result) ? '오류' : String(result);
   }
 
-  return init;
+  return state;
 };
 
 const MAX_NUMBER_SIZE = 3;

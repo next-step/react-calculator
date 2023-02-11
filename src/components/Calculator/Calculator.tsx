@@ -1,10 +1,9 @@
 import { useCallback, useState } from 'react';
 
-import TotalPad from '@/components/Calculator/TotalPad';
+import { ButtonSection, TotalPad } from '@/components/Calculator';
 import { Operator } from '@/constants/operation';
 import { calculatorMachine } from '@/model/calculator';
 
-import ButtonSection from './ButtonSection';
 import styles from './index.module.css';
 
 export type CalculatorArgs = Operator | number | string | undefined;
