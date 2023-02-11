@@ -1,4 +1,4 @@
-import { Operator, OPERATORS } from '@/constants/operation';
+import { type Operator, OPERATORS } from '@/constants/operation';
 
 import styles from './index.module.css';
 

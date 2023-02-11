@@ -3,70 +3,44 @@ import { Operator, OPERATORS } from '@/constants/operation';
 import { calcOperation } from '@/utils/calcOperation';
 import { isInfinite } from '@/utils/numberUtils';
 
+enum CalculatorAction {
+  ADD_OPERATOR,
+  REPLACE_OPERATOR,
+  ADD_NUMBER,
+  REPLACE_NUMBER,
+  CLEAR,
+  OPERATE,
+}
+
 export const calculatorMachine = (
-  state = '0',
+  state = initialState,
   input: CalculatorArgs
 ): string => {
-  if (isOperator(input)) {
-    const userOperation = state?.match(OPERATOR_REGEX)?.at(0) as Operator;
-    if (userOperation) {
-      const prevOperation = String(state)
-        .match(OPERATOR_REGEX)
-        ?.at(0) as Operator;
-      return state.replace(prevOperation, input);
+  try {
+    const action = getAction(state, input);
+    switch (action.type) {
+      case CalculatorAction.ADD_NUMBER:
+        return state + String(input);
+      case CalculatorAction.REPLACE_NUMBER:
+        return state + String(input);
+      case CalculatorAction.ADD_OPERATOR:
+        return state + action.payload;
+      case CalculatorAction.REPLACE_OPERATOR:
+        return state + action.payload;
+      case CalculatorAction.OPERATE:
+        return String(action.payload);
+      case CalculatorAction.CLEAR:
+        return initialState;
+      default:
+        throw new Error('Unexpected Calculator Action');
     }
-    return state + String(input);
+  } catch (error) {
+    console.error(error);
+    return '오류';
   }
-
-  if (Number(input)) {
-    if (state === '0') {
-      return String(input);
-    }
-
-    const isOverNumberSize = !getCalculatorNumberArray(
-      state + String(input)
-    ).every((n) => n.length <= MAX_NUMBER_SIZE);
-
-    if (isOverNumberSize) {
-      alert(MESSAGE.OVER_MAX_NUMBER_SIZE);
-      return String(state);
-    }
-    return state + String(input);
-  }
-
-  if (input === 'clear') {
-    return '0';
-  }
-
-  if (input === '=') {
-    const userOperation = state?.match(OPERATOR_REGEX)?.at(0) as Operator;
-    const userNumbers = getCalculatorNumberArray(state);
-    if (!state) {
-      alert(MESSAGE.EMPTY_NUMBER);
-      return state;
-    }
-
-    if (!userOperation) {
-      alert(MESSAGE.EMPTY_OPERATION);
-      return state;
-    }
-
-    if (userNumbers.length < 2) {
-      alert(MESSAGE.LACK_NUMBER);
-      return state;
-    }
-
-    const result = calcOperation(
-      Number(userNumbers.at(0)),
-      Number(userNumbers.at(1))
-    )[userOperation]();
-
-    return isInfinite(result) ? '오류' : String(result);
-  }
-
-  return state;
 };
 
+const initialState = '0';
 const MAX_NUMBER_SIZE = 3;
 
 const MESSAGE = {
@@ -77,7 +51,70 @@ const MESSAGE = {
 };
 
 const isOperator = (arg: any): arg is Operator => OPERATORS.includes(arg);
+
 const OPERATOR_REGEX = /[X]|[/]|[+]|[-]/gi;
-const getCalculatorNumberArray = (str: string) => {
-  return str.replace(OPERATOR_REGEX, ',').split(',');
+const getCalculatorNumberArray = (str: string) =>
+  str.replace(OPERATOR_REGEX, ',').split(',');
+
+const getAction = (state: string, input: CalculatorArgs) => {
+  if (isOperator(input)) {
+    if (getFirstOperator(state)) {
+      return {
+        type: CalculatorAction.REPLACE_OPERATOR,
+        payload: state.replace(getFirstOperator(state), input),
+      };
+    }
+    return { type: CalculatorAction.ADD_OPERATOR, payload: input };
+  }
+
+  if (Number(input)) {
+    if (digitSizeValidator(state, input)) {
+      throw new Error(MESSAGE.OVER_MAX_NUMBER_SIZE);
+    }
+    return {
+      type: CalculatorAction.ADD_NUMBER,
+      payload: state == initialState ? input : state + String(input),
+    };
+  }
+
+  if (input === 'clear') {
+    return { type: CalculatorAction.CLEAR };
+  }
+  if (input === '=') {
+    const [firstNumber, secondNumber] = getCalculatorNumberArray(state);
+    if (!firstNumber) {
+      alert(MESSAGE.EMPTY_NUMBER);
+      return { type: CalculatorAction.OPERATE, payload: state };
+    }
+
+    if (!getFirstOperator(state)) {
+      alert(MESSAGE.EMPTY_OPERATION);
+      return { type: CalculatorAction.OPERATE, payload: state };
+    }
+
+    if (!(firstNumber && secondNumber)) {
+      alert(MESSAGE.LACK_NUMBER);
+      return { type: CalculatorAction.OPERATE, payload: state };
+    }
+
+    const result = calcOperation(Number(firstNumber), Number(secondNumber))[
+      getFirstOperator(state)
+    ]();
+
+    return {
+      type: CalculatorAction.OPERATE,
+      payload: isInfinite(result) ? '오류' : String(result),
+    };
+  }
+  return {
+    type: 'UNEXPECTED',
+  };
 };
+
+const digitSizeValidator = (state: string, input: CalculatorArgs) => {
+  return !getCalculatorNumberArray(state + String(input)).every(
+    (n) => n.length <= MAX_NUMBER_SIZE
+  );
+};
+const getFirstOperator = (str: string) =>
+  str.match(OPERATOR_REGEX)?.at(0) as Operator;
