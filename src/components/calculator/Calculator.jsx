@@ -2,46 +2,22 @@ import React, { useState } from 'react';
 
 import Button from '../common/Button';
 
-import { arithmetic } from '../../utils/arithmetic';
+import useExpression from '../../hooks/useExpression';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState('0');
-  const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
+  const [writeExpression, resetExpression] = useExpression();
 
   const handleTextInsert = (event) => {
     const buttonValue = event.target.value;
-    const { number, operation } = expression;
-    let counter = expression.counter;
 
-    if (isNaN(buttonValue) && !number[counter]) {
-      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
-      return;
-    }
+    const addText = writeExpression(buttonValue, totalText);
 
-    if (isNaN(buttonValue)) {
-      operation.push(buttonValue);
-      counter = counter + 1;
-    }
-
-    if (!isNaN(buttonValue)) {
-      number[counter] = number[counter] ? number[counter] + buttonValue : buttonValue;
-    }
-
-    setTotalText(totalText === '0' ? buttonValue : totalText + buttonValue);
-    setExpression({ number, operation, counter });
+    setTotalText(totalText === '0' ? addText : totalText + addText);
   };
 
   const handleCalculate = () => {
-    const number = expression.number.map(Number);
-    const operation = expression.operation[0];
-
-    const result = arithmetic(number[0], number[1], operation);
-
-    if (result === '') {
-      setExpression({ number: [], operation: [], counter: 0 });
-    } else {
-      setExpression({ number: [result], operation: [], counter: 0 });
-    }
+    const result = resetExpression();
 
     setTotalText(`${result}`);
   };
