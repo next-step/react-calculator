@@ -1,8 +1,13 @@
 {
-  "name": "ddddd",
+  "name": "[next-step] react 계산기",
+  "description": "계산기와 함께하는 Onboarding NEXTSTEP with React",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": {
+    "name": "DahyeShin",
+    "url": "https://github.com/dahye1013/react-calculator"
+  },
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
