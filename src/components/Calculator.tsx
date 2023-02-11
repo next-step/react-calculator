@@ -11,8 +11,10 @@ import {
   OPERATORS,
   OPERATIONS,
   type OperationType,
+  MAX_INPUT_NUMBER,
 } from '../constants/calculate';
 import useCalculate, { REDUCER_TYPE } from '../hooks/useCalculate';
+import { MESSAGES } from '../constants/messages';
 
 interface ContextCalculatorProps {
   total: string;
@@ -81,7 +83,13 @@ Calculator.Digits = () => {
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
-    dispatch({ type: REDUCER_TYPE.INPUT, payload: total + textContent });
+    const input = total + textContent;
+
+    if (input.length > MAX_INPUT_NUMBER) {
+      return alert(MESSAGES.DIGIT.MAX_LENGTH);
+    }
+
+    dispatch({ type: REDUCER_TYPE.INPUT, payload: input });
   };
   return (
     <div className="digits flex" onClick={onClick}>
