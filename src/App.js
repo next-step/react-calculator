@@ -38,11 +38,11 @@ function App() {
     setDigit(Number(`${digit}${digit}`));
   };
 
-  const handleOperationClick = (_operation) => {
+  const handleOperationClick = (operation) => {
     if (!digit) return;
 
     setTotal([digit]);
-    setOperation(_operation);
+    setOperation(operation);
     setIsTyping(false);
   };
 
