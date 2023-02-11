@@ -1,9 +1,9 @@
 import CalculatorDigitItem from "./CalculatorDigitItem";
-import { useEffect } from "react";
 const DIGIT = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
 
-const CalculatorDigit = ({ totalState }) => {
+const CalculatorDigit = ({ totalState, countState }) => {
   const onClickNumber = (num) => {
+    countNumber();
     if (totalState.total === "0") {
       totalState.setTotal(num);
     } else {
@@ -11,7 +11,14 @@ const CalculatorDigit = ({ totalState }) => {
     }
   };
 
-  useEffect(() => {}, []);
+  const countNumber = () => {
+    if (countState.count > 3) {
+      alert("숫자는 세 자리까지만 입력 가능합니다!");
+      return;
+    }
+
+    countState.setCount(() => countState.count + 1);
+  };
 
   return (
     <div className="digits flex">
