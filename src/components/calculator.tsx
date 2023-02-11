@@ -1,15 +1,25 @@
+import { useState } from 'react'
+
 import DigitButton from '@components/digitButton'
 import OperationButton from '@components/operationButton'
 
-import { DIGIT_NUMBER, OPERATIONS } from '@constant/calculator'
+import { DIGIT_NUMBER, OPERATIONS } from '@/constant/calculator'
+
+import { DigitNumber } from '@/types/calculator'
 
 const Calculator = () => {
+  const [total, setTotal] = useState(0)
+
+  const handleDigit = (digit: DigitNumber) => {
+    setTotal(digit)
+  }
+
   return (
     <div className="calculator">
-      <h1 id="total">0</h1>
+      <h1 id="total">{total}</h1>
       <div className="digits flex">
         {DIGIT_NUMBER.map((digit) => (
-          <DigitButton key={digit} digit={digit} />
+          <DigitButton key={digit} digit={digit} onClick={handleDigit} />
         ))}
       </div>
       <div className="modifiers subgrid">

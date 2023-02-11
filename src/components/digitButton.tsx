@@ -1,9 +1,16 @@
+import { DigitNumber } from '@/types/calculator'
+
 interface DigitButtonProps {
-  digit: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+  digit: DigitNumber
+  onClick(digit: DigitNumber): void
 }
 
-const DigitButton = ({ digit }: DigitButtonProps) => {
-  return <button className="digit">{digit}</button>
+const DigitButton = ({ digit, onClick }: DigitButtonProps) => {
+  return (
+    <button className="digit" onClick={() => onClick(digit)}>
+      {digit}
+    </button>
+  )
 }
 
 export default DigitButton
