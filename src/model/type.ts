@@ -1,0 +1,8 @@
+export enum CalculatorActionType {
+  ADD_OPERATOR,
+  REPLACE_OPERATOR,
+  ADD_NUMBER,
+  REPLACE_NUMBER,
+  CLEAR,
+  OPERATE,
+}
