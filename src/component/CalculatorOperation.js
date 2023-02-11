@@ -16,6 +16,9 @@ const CalculatorOperation = (props) => {
 
   const onClickReturn = () => {
     props.setTotal(Math.floor(Number(eval(props.total))));
+    if (eval(props.total) === Infinity) {
+      props.setTotal(() => "오류");
+    }
   };
 
   return (
