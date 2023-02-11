@@ -72,12 +72,28 @@ describe('Calculator', () => {
     expect(result.value).toBe(expected);
   });
 
-  it('replace an previous operator if new input is also an operator', () => {
+  it('replaces an previous operator if new input is also an operator', () => {
     const result = Calculator(['1', '+']).enter('*');
     expect(result.value).toBe('1 *');
   });
 
-  it('throw an error when number exceeds 3 digits', () => {
+  it.each`
+    fomula        | input  | expected
+    ${['1', '+']} | ${'-'} | ${'1 + -'}
+    ${['1', '-']} | ${'-'} | ${'1 - -'}
+    ${['1', '*']} | ${'-'} | ${'1 * -'}
+    ${['1', '/']} | ${'-'} | ${'1 / -'}
+  `(
+    'treats minus operator after other operator as negative',
+    ({ fomula, input, expected }) => {
+      const result = Calculator(fomula).enter(input);
+      expect(result.value).toBe(expected);
+    }
+  );
+
+  it('ignores entered operator after negative minus', () => {});
+
+  it('throws an error when number exceeds 3 digits', () => {
     expect(() => {
       Calculator(['111']).enter('1');
     }).toThrow(exceedLimitOfDigitError);

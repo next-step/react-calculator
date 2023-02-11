@@ -77,7 +77,13 @@ export const Calculator = (inputs = ['0']) => {
 
       if (value in OPERATOR) {
         // 연산자 이후에 연산자가 입력된 경우
-        if (recentInput in OPERATOR) inputs.pop();
+        if (recentInput in OPERATOR) {
+          if (value === '-') {
+            return Calculator([...inputs, value]);
+          } else {
+            inputs.pop();
+          }
+        }
       } else {
         // 숫자 이후에 숫자가 입력된 경우
         if (!(recentInput in OPERATOR)) {
