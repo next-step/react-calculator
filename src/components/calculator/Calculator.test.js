@@ -105,7 +105,9 @@ test('이상한 기호 또는 문자열이 들어갔을 때 오류가 발생한�
   const button = screen.getByText('X');
   button.value = '*';
 
+  fireEvent.click(screen.getByText('2'));
   fireEvent.click(button);
+  fireEvent.click(screen.getByText('2'));
   fireEvent.click(screen.getByText('='));
 
   const h1Element = screen.getByRole('heading');
@@ -117,13 +119,13 @@ test('이상한 기호 또는 문자열이 들어갔을 때 오류가 발생한�
 });
 
 test('기호가 숫자보다 먼저 들어갈 경우 오류가 발생한다.', () => {
-  window.alert = jest.fn();
-
   render(<Calculator />);
 
-  const h1Element = screen.getByRole('heading');
+  window.alert = jest.fn();
 
   fireEvent.click(screen.getByText('X'));
+
+  const h1Element = screen.getByRole('heading');
 
   expect(window.alert).toHaveBeenCalledTimes(1);
   expect(h1Element).toHaveTextContent('0');
