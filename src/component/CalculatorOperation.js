@@ -1,12 +1,15 @@
 import CalculatorOperationItem from "./CalculatorOperationItem";
 const OPERATIONS = ["/", "*", "-", "+", "="];
 
-const CalculatorOperation = (props) => {
+const CalculatorOperation = ({ totalState }) => {
   const onClickOperation = (operation) => {
-    if (props.total === "0" || OPERATIONS.includes(props.total.slice(-1))) {
+    if (
+      totalState.total === "0" ||
+      OPERATIONS.includes(totalState.total.slice(-1))
+    ) {
       alert("숫자를 먼저 입력한 후 연산자를 입력해 주세요.");
     } else {
-      props.setTotal(props.total + operation);
+      totalState.setTotal(totalState.total + operation);
     }
 
     if (operation === "=") {
@@ -15,9 +18,9 @@ const CalculatorOperation = (props) => {
   };
 
   const onClickReturn = () => {
-    props.setTotal(Math.floor(Number(eval(props.total))));
-    if (eval(props.total) === Infinity) {
-      props.setTotal(() => "오류");
+    totalState.setTotal(Math.floor(Number(eval(totalState.total))));
+    if (eval(totalState.total) === Infinity) {
+      totalState.setTotal(() => "오류");
     }
   };
 

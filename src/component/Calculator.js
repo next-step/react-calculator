@@ -10,9 +10,9 @@ const Calculator = () => {
   return (
     <div className="calculator">
       <CalculatorTotal total={total} />
-      <CalculatorDigit total={total} setTotal={setTotal} />
+      <CalculatorDigit totalState={{ total, setTotal }} />
       <CalculatorModifier setTotal={setTotal} />
-      <CalculatorOperation total={total} setTotal={setTotal} />
+      <CalculatorOperation totalState={{ total, setTotal }} />
     </div>
   );
 };

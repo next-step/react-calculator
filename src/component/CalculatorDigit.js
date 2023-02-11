@@ -2,12 +2,12 @@ import CalculatorDigitItem from "./CalculatorDigitItem";
 import { useEffect } from "react";
 const DIGIT = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
 
-const CalculatorDigit = (props) => {
+const CalculatorDigit = ({ totalState }) => {
   const onClickNumber = (num) => {
-    if (props.total === "0") {
-      props.setTotal(num);
+    if (totalState.total === "0") {
+      totalState.setTotal(num);
     } else {
-      props.setTotal(props.total + num);
+      totalState.setTotal(totalState.total + num);
     }
   };
 
