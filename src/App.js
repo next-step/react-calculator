@@ -18,36 +18,36 @@ const OPERATION_LIST = ["/", "X", "-", "+"];
 const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 function App() {
-  const [number, setNumber] = useState(0);
+  const [digit, setDigit] = useState(0);
   const [total, setTotal] = useState([]);
   const [operation, setOperation] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
   const handleDigitClick = (digit) => {
-    if (String(number).length === 3) {
+    if (String(digit).length === 3) {
       return;
     }
 
     setIsTyping(true);
 
     if (!isTyping) {
-      setNumber(digit);
+      setDigit(digit);
       return;
     }
 
-    setNumber(Number(`${number}${digit}`));
+    setDigit(Number(`${digit}${digit}`));
   };
 
   const handleOperationClick = async (_operation) => {
-    if (!number) return;
+    if (!digit) return;
 
-    setTotal([number]);
+    setTotal([digit]);
     setOperation(_operation);
     setIsTyping(false);
   };
 
   const handleModifierClick = () => {
-    setNumber(0);
+    setDigit(0);
     setOperation("");
     setTotal([]);
     setIsTyping(false);
@@ -78,14 +78,14 @@ function App() {
   };
 
   const handleCalculateClick = () => {
-    setTotal((num) => [...num, number]);
+    setTotal((num) => [...num, digit]);
     setIsTyping(false);
   };
 
   useEffect(() => {
     if (total.length > 1) {
       const calculatedNumber = getCalculatedNumber(total, operation);
-      setNumber(calculatedNumber);
+      setDigit(calculatedNumber);
       setTotal([calculatedNumber]);
     }
   }, [total, operation]);
@@ -95,7 +95,7 @@ function App() {
       <GlobalStyle />
       <Wrapper>
         <Calculator>
-          <Total>{number}</Total>
+          <Total>{digit}</Total>
           <Digits>
             {DIGIT_LIST.map((digit) => (
               <button onClick={() => handleDigitClick(digit)} key={digit}>
