@@ -10,14 +10,20 @@ const Calculator = () => {
 
   const handleTextInsert = (event) => {
     const buttonValue = event.target.value;
-
     const { number, operation } = expression;
     let counter = expression.counter;
+
+    if (isNaN(buttonValue) && !number[counter]) {
+      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+      return;
+    }
 
     if (isNaN(buttonValue)) {
       operation.push(buttonValue);
       counter = counter + 1;
-    } else {
+    }
+
+    if (!isNaN(buttonValue)) {
       number[counter] = number[counter] ? number[counter] + buttonValue : buttonValue;
     }
 
