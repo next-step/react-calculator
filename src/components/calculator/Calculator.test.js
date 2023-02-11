@@ -93,3 +93,21 @@ test('AC 버튼을 클릭하면 h1 태그의 텍스트가 0으로 변경된다.'
 
   expect(h1Element).toHaveTextContent('0');
 });
+
+test('입력한 숫자가 3자리 수 이상일 경우 오류가 발생한다.', () => {
+  window.alert = jest.fn();
+
+  render(<Calculator />);
+
+  const h1Element = screen.getByRole('heading');
+
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('2'));
+
+  expect(window.alert).toHaveBeenCalledTimes(1);
+  expect(h1Element).toHaveTextContent('222');
+
+  window.alert.mockClear();
+});
