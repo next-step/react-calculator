@@ -38,11 +38,13 @@ const useCalculator = () => {
           setTotal(calculator['X'](leftPort, rightPort))
           break
         case '/':
-          setTotal(calculator['/'](leftPort, rightPort))
+          if (!isFinite(Math.floor(leftPort / rightPort))) alert('오류입니다.')
+          else setTotal(calculator['/'](leftPort, rightPort))
           break
         default:
           return
       }
+      return setOperator({ leftPort: 0, rightPort: 0, expression: '' })
     }
     if (Boolean(expression)) return alert('두 개의 숫자에 대한 연산만 가능합니다.')
     setOperator({ ...operator, expression: operation })
