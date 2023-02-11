@@ -1,24 +1,34 @@
-import React from 'react';
+import { useState } from 'react';
+
+const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+const operations = ['/', 'X', '-', '+', '='];
+
+let needInit = false;
 
 function App() {
+  const [history, setHistory] = useState(0);
+  const [currentNumber, setCurrentNumber] = useState('');
+
   return (
     <div id="app">
       <div className='calculator'>
-        <h1 id='total'>0</h1>
+        <h1 id='total'>{currentNumber || '0'}</h1>
         <div className='digits flex'>
-          <button className='digit'>9</button>
-          <button className='digit'>8</button>
-          <button className='digit'>7</button>
-          <button className='digit'>6</button>
-          <button className='digit'>5</button>
-          <button className='digit'>4</button>
-          <button className='digit'>3</button>
-          <button className='digit'>2</button>
-          <button className='digit'>1</button>
-          <button className='digit'>0</button>
+          {numbers.map((number) => (
+            <button key={`digit-${number}`} className='digit' onClick={() => {
+              setCurrentNumber((prev) => {
+                const stringNumber = String(number);
+                if (needInit) return stringNumber;
+
+                return prev + stringNumber;
+              })}
+            }>
+              {number}
+            </button>)
+          )}
         </div>
         <div className='modifiers subgrid'>
-          <button className='modifier'>AC</button>
+          <button className='modifier' onClick={() => setCurrentNumber('')}>AC</button>
         </div>
         <div className='operations subgrid'>
           <button className='operation'>/</button>
