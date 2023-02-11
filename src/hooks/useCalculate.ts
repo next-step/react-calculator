@@ -1,54 +1,30 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 
-import { separateCalculateUnits } from '../utils/separateCalculateUnits';
-// import { operations, OperationType } from '../constants/operations';
+export const REDUCER_TYPE = {
+  INPUT: 'INPUT',
+  RESET: 'RESET',
+};
+export const initialState = {
+  total: '',
+  currentNumber: '',
+};
+
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case REDUCER_TYPE.INPUT:
+      return { ...state, total: action.payload, currentNumber: action.payload };
+
+    case REDUCER_TYPE.RESET:
+      return initialState;
+  }
+};
 
 const useCalculate = () => {
-  const [total, setTotal] = useState('');
-
-  const onReset = () => {
-    setTotal('');
-  };
-
-  const onButtonClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    validateCallback: (total: string) => void
-  ) => {
-    try {
-      validateCallback(total);
-      const { textContent } = e.target as HTMLButtonElement;
-      setTotal((prev) => prev + textContent);
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  // const onSummaryClick = () => {
-  //   const units = separateCalculateUnits(total);
-  //   if (!units) return;
-
-  //   let sum;
-  //   for (let i = 1; i < units.length; i += 2) {
-  //     if (i === 1) {
-  //       sum = operations[units[i] as OperationType](
-  //         Number(units[i - 1]),
-  //         Number(units[i + 1])
-  //       );
-  //     } else {
-  //       sum = operations[units[i] as OperationType](
-  //         sum || 0,
-  //         Number(units[i + 1])
-  //       );
-  //     }
-  //   }
-  //   setTotal(sum === Infinity ? '오류' : `${sum}`);
-  // };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return {
-    total,
-    onReset,
-    onButtonClick,
-    // onSummaryClick,
+    state,
+    dispatch,
   };
 };
 
