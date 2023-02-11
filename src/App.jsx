@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calculator } from './Model/Calculator';
+import { Calculator, exceedLimitOfDigitError } from './Model/Calculator';
 
 const BUTTONS = {
   DIGIT: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'],
@@ -10,7 +10,12 @@ const BUTTONS = {
 const App = () => {
   const [calculator, setCalculator] = useState(Calculator());
   const handleClick = (e) => {
-    setCalculator(calculator.enter(e.target.innerText));
+    try {
+      setCalculator(calculator.enter(e.target.innerText));
+    } catch (e) {
+      if (e instanceof exceedLimitOfDigitError)
+        alert('숫자는 세 자리까지만 입력 가능합니다!');
+    }
   };
 
   return (
