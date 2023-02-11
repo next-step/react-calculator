@@ -38,7 +38,7 @@ function App() {
     setDigit(Number(`${digit}${digit}`));
   };
 
-  const handleOperationClick = async (_operation) => {
+  const handleOperationClick = (_operation) => {
     if (!digit) return;
 
     setTotal([digit]);
