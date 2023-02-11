@@ -1,0 +1,14 @@
+.calculator {
+  width: 300px;
+  display: grid;
+  grid-template-areas:
+    'total total total total'
+    'modif modif modif oper'
+    'digit digit digit oper'
+    'digit digit digit oper'
+    'digit digit digit oper'
+    'digit digit digit oper';
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  height: 500px;
+}
