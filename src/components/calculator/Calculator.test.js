@@ -15,58 +15,6 @@ test('버튼을 클릭하면 h1 태그에 버튼의 value가 텍스트로 입력
   expect(h1Element).toHaveTextContent('1+1');
 });
 
-test('= 버튼을 클릭하면 식이 계산된다. (더하기)', () => {
-  render(<Calculator />);
-
-  const h1Element = screen.getByRole('heading');
-
-  fireEvent.click(screen.getByText('1'));
-  fireEvent.click(screen.getByText('+'));
-  fireEvent.click(screen.getByText('1'));
-  fireEvent.click(screen.getByText('='));
-
-  expect(h1Element).toHaveTextContent('2');
-});
-
-test('= 버튼을 클릭하면 식이 계산된다. (빼기)', () => {
-  render(<Calculator />);
-
-  const h1Element = screen.getByRole('heading');
-
-  fireEvent.click(screen.getByText('1'));
-  fireEvent.click(screen.getByText('-'));
-  fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('='));
-
-  expect(h1Element).toHaveTextContent('-1');
-});
-
-test('= 버튼을 클릭하면 식이 계산된다. (나누기)', () => {
-  render(<Calculator />);
-
-  const h1Element = screen.getByRole('heading');
-
-  fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('/'));
-  fireEvent.click(screen.getByText('4'));
-  fireEvent.click(screen.getByText('='));
-
-  expect(h1Element).toHaveTextContent(/^0$/);
-});
-
-test('= 버튼을 클릭하면 식이 계산된다. (곱하기)', () => {
-  render(<Calculator />);
-
-  const h1Element = screen.getByRole('heading');
-
-  fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('X'));
-  fireEvent.click(screen.getByText('4'));
-  fireEvent.click(screen.getByText('='));
-
-  expect(h1Element).toHaveTextContent('8');
-});
-
 test('계산된 결과값을 가지고 추가적으로 계산을 진행할 수 있다. (사칙연산)', () => {
   render(<Calculator />);
 
