@@ -19,32 +19,15 @@ import { MESSAGES } from '../constants/messages';
 interface ContextCalculatorProps {
   total: string;
   currentNumber: string;
+  beforeNumber: string;
+  operator: string;
   dispatch: React.Dispatch<any>;
 }
 
 const CalculatorContext = createContext({} as ContextCalculatorProps);
 
 const Calculator = ({ children }: PropsWithChildren) => {
-  const [total, setTotal] = useState('');
-  const [currentNumber, setCurrentNumber] = useState('');
-  const [beforeNumber, setBeforeNumber] = useState('');
-  const [operator, setOperator] = useState('');
-  const [isClear, setIsClear] = useState(false); //이전 데이터 값 삭제 상태
-  const [isCalculated, setIsCalculated] = useState(false);
   const { state, dispatch } = useCalculate();
-
-  const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const { textContent } = e.target as HTMLDivElement;
-    setTotal((prev) => prev + textContent);
-
-    if (isClear) {
-      setCurrentNumber(textContent!);
-      setIsClear(false);
-      return;
-    }
-
-    setCurrentNumber((prev) => prev + textContent);
-  };
 
   return (
     <CalculatorContext.Provider value={{ ...state!, dispatch }}>
@@ -79,17 +62,27 @@ Calculator.Reset = () => {
 };
 
 Calculator.Digits = () => {
-  const { total, dispatch } = useContext(CalculatorContext);
+  const { total, beforeNumber, currentNumber, dispatch } =
+    useContext(CalculatorContext);
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
-    const input = total + textContent;
+    const input = currentNumber + textContent;
 
     if (input.length > MAX_INPUT_NUMBER) {
       return alert(MESSAGES.DIGIT.MAX_LENGTH);
     }
 
-    dispatch({ type: REDUCER_TYPE.INPUT, payload: input });
+    dispatch({
+      type: REDUCER_TYPE.INPUT_DIGIT,
+      payload: {
+        total:
+          !total && currentNumber
+            ? currentNumber + textContent
+            : total + textContent,
+        currentNumber: input,
+      },
+    });
   };
   return (
     <div className="digits flex" onClick={onClick}>
@@ -103,8 +96,43 @@ Calculator.Digits = () => {
 };
 
 Calculator.Operations = () => {
+  const { total, beforeNumber, currentNumber, operator, dispatch } =
+    useContext(CalculatorContext);
+
+  const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { textContent } = e.target as HTMLDivElement;
+
+    if (operator && textContent !== '=') {
+      return alert(MESSAGES.OPERATOR.NOT_FIRST);
+    }
+
+    if (beforeNumber && currentNumber) {
+      const result = OPERATIONS[operator as OperationType](
+        Number(beforeNumber),
+        Number(currentNumber)
+      );
+      dispatch({
+        type: REDUCER_TYPE.CALCULATE,
+        payload: result,
+      });
+      return;
+    }
+
+    dispatch({
+      type: REDUCER_TYPE.INPUT_OPERATOR,
+      payload: {
+        total: currentNumber
+          ? currentNumber + textContent
+          : total + textContent,
+        operator: textContent,
+        beforeNumber: currentNumber,
+      },
+    });
+    dispatch({ type: REDUCER_TYPE.RESET_CURRENT_NUMBER });
+  };
+
   return (
-    <div className="operations subgrid">
+    <div className="operations subgrid" onClick={onClick}>
       {OPERATORS.map((operator) => (
         <Button key={operator} className="digit">
           {operator}
