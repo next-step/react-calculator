@@ -1,4 +1,4 @@
-export const arithmetic = (augend, addend, operation) => {
+export const arithmetic = (augend, addend = 0, operation) => {
   switch (operation) {
     case '+':
       return augend + addend;
