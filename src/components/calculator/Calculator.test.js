@@ -102,12 +102,12 @@ test('입력한 숫자가 3자리 수 이상일 경우 오류가 발생한다.',
   const h1Element = screen.getByRole('heading');
 
   fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('2'));
-  fireEvent.click(screen.getByText('2'));
+  fireEvent.click(screen.getByText('3'));
+  fireEvent.click(screen.getByText('4'));
+  fireEvent.click(screen.getByText('5'));
 
   expect(window.alert).toHaveBeenCalledTimes(1);
-  expect(h1Element).toHaveTextContent('222');
+  expect(h1Element).toHaveTextContent('234');
 
   window.alert.mockClear();
 });
