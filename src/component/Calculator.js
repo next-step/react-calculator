@@ -11,7 +11,7 @@ const Calculator = () => {
     <div className="calculator">
       <CalculatorTotal total={total} />
       <CalculatorDigit total={total} setTotal={setTotal} />
-      <CalculatorModifier />
+      <CalculatorModifier setTotal={setTotal} />
       <CalculatorOperation total={total} setTotal={setTotal} />
     </div>
   );
