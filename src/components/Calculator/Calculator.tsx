@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { ButtonSection, TotalPad } from '@/components/Calculator';
-import { Operator } from '@/constants/operation';
+import { type Operator } from '@/constants/operator';
 import { calculatorMachine } from '@/model/calculator';
 
 import styles from './index.module.css';

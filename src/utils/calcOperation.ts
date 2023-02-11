@@ -1,4 +1,4 @@
-import { Operator } from '@/constants/operation';
+import { Operator } from '@/constants/operator';
 
 type CalcOperation = { [key in Operator]: () => number };
 

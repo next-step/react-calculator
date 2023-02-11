@@ -1,6 +1,6 @@
 import type { CalculatorArgs } from '@/components/Calculator/Calculator';
 import { MESSAGE } from '@/constants/message';
-import { Operator, OPERATORS } from '@/constants/operation';
+import { CLEAR, OPERATE, Operator, OPERATORS } from '@/constants/operator';
 import { calcOperation } from '@/utils/calcOperation';
 import { isInfinite } from '@/utils/numberUtils';
 
@@ -29,11 +29,13 @@ export const getCalculatorAction = (state: string, input: CalculatorArgs) => {
     };
   }
 
-  if (input === 'clear') {
+  if (input === CLEAR) {
     return { type: CalculatorActionType.CLEAR };
   }
-  if (input === '=') {
+
+  if (input === OPERATE) {
     const [firstNumber, secondNumber] = getCalculatorNumberArray(state);
+
     if (!firstNumber) {
       throw new CalculatorError(MESSAGE.EMPTY_NUMBER);
     }

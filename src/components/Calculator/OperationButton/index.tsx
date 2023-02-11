@@ -1,9 +1,9 @@
-import { type Operator, OPERATORS } from '@/constants/operation';
+import { type Operator, OPERATE, OPERATORS } from '@/constants/operator';
 
 import styles from './index.module.css';
 
 type Props = {
-  onClick: (o: Operator | '=') => () => void;
+  onClick: (o: Operator | typeof OPERATE) => () => void;
 };
 
 const OperationButton = (props: Props) => {
@@ -18,8 +18,8 @@ const OperationButton = (props: Props) => {
           {operation}
         </button>
       ))}
-      <button className={styles.operation} onClick={props.onClick('=')}>
-        =
+      <button className={styles.operation} onClick={props.onClick(OPERATE)}>
+        {OPERATE}
       </button>
     </div>
   );
