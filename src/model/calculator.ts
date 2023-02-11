@@ -14,7 +14,7 @@ export const calculatorMachine = (
     const action = getCalculatorAction(state, input);
     switch (action.type) {
       case CalculatorActionType.ADD_NUMBER:
-        return state + String(input);
+        return String(action.payload);
       case CalculatorActionType.REPLACE_NUMBER:
         return String(state + String(input));
       case CalculatorActionType.ADD_OPERATOR:
