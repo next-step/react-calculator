@@ -27,7 +27,7 @@ function DigitNumbers({
 
           if (currentNumber.length >= 3) return;
 
-          setCurrentNumber(currentNumber + stringNumber);
+          setCurrentNumber((prev) => prev + stringNumber);
         }}>
           {number}
         </button>)
