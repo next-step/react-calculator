@@ -95,6 +95,14 @@ export const Calculator = (inputs = ['0']) => {
           if (recentInput.length >= 3) throw new exceedLimitOfDigitError();
           inputs.pop();
           return Calculator([...inputs, `${Number(recentInput + value)}`]);
+        } else {
+          if (recentInput === '-') {
+            const previousRecentInput = inputs[inputs.length - 2];
+            if (previousRecentInput in OPERATOR) {
+              inputs.pop();
+              return Calculator([...inputs, `-${value}`]);
+            }
+          }
         }
       }
 
