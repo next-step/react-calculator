@@ -7,7 +7,7 @@ import useExpression from '../../hooks/useExpression';
 import { ERROR_TEXT } from '../../constants/error';
 
 const Calculator = () => {
-  const [totalText, setTotalText] = useState('0');
+  const [totalText, setTotalText] = useState(0);
   const [writeExpression, calculateExpression, ResetExpression] = useExpression();
 
   const handleTextInsert = (event) => {
@@ -15,7 +15,7 @@ const Calculator = () => {
 
     const addText = writeExpression(buttonValue, totalText);
 
-    setTotalText(totalText === '0' || totalText === ERROR_TEXT ? addText : totalText + addText);
+    setTotalText(totalText === 0 || totalText === ERROR_TEXT ? addText : totalText + addText);
   };
 
   const handleCalculate = () => {
