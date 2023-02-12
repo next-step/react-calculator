@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {OPERATIONS} from "../../constants/Operations";
-import AllClear from "../AllClear/AllClear";
+import AllClearButton from "../AllClearButton/AllClearButton";
 import Digits from "../Digits/Digits";
 import Operations from "../Operations/Operations";
 import Total from "../Total/Total";
 import styles from "./Calculator.module.css";
+import {getTotal} from "../../utils/calculate";
 
 export type OperatorionsType = typeof OPERATIONS[keyof typeof OPERATIONS];
 
@@ -14,30 +15,7 @@ export default function Calculator() {
     null
   );
   const [isPreviousValueOperator, setIsPreviousValueOperator] =
-    useState<Boolean>(false);
-
-  const getTotal = (
-    operation: OperatorionsType,
-    acc: number,
-    cur: number
-  ): number => {
-    if (acc === null || isPreviousValueOperator) {
-      return cur;
-    }
-
-    switch (operation) {
-      case OPERATIONS.plus:
-        return acc + cur;
-      case OPERATIONS.minus:
-        return acc - cur;
-      case OPERATIONS.multiple:
-        return acc * cur;
-      case OPERATIONS.divide:
-        return Math.floor(acc / cur);
-      case OPERATIONS.equalSign:
-        return acc;
-    }
-  };
+    useState<boolean>(false);
 
   const setOperand = (operand: number) => {
     const [acc, cur] = reducer;
@@ -62,7 +40,12 @@ export default function Calculator() {
     if (acc === null) {
       setReducer([cur, cur]);
     } else {
-      const total = getTotal(cacheOperation || operation, acc, cur);
+      const total = getTotal({
+        operation: cacheOperation || operation,
+        total: acc,
+        current: cur,
+        isPreviousOperator: isPreviousValueOperator,
+      });
       setReducer([total, total]);
     }
 
@@ -80,10 +63,10 @@ export default function Calculator() {
     <div className="calculator">
       <Total total={reducer[1]} />
       <div className="modifiers subgrid">
-        <AllClear onClick={onResetReducer} />
+        <AllClearButton onClick={onResetReducer} />
       </div>
-      <Digits setOperand={setOperand} />
-      <Operations setOperation={setOperation} />
+      <Digits onClick={setOperand} />
+      <Operations onClick={setOperation} />
     </div>
   );
 }
