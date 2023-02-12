@@ -1,14 +1,16 @@
 import React from "react";
-import styles from "./AllClear.module.css";
+import styles from "./AllClearButton.module.css";
 
 interface AllClearProps {
   onClick: () => void;
 }
 
-export default function AllClear({onClick}: AllClearProps) {
+const AllClearButton = ({onClick}: AllClearProps) => {
   return (
     <button className={styles.modifier} onClick={onClick}>
       AC
     </button>
   );
-}
+};
+
+export default AllClearButton;

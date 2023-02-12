@@ -4,11 +4,12 @@ interface DigitProps {
   numeric: number;
   onClickDigit: () => void;
 }
-
-export default function Digit({numeric, onClickDigit}: DigitProps) {
+const Digit = ({numeric, onClickDigit}: DigitProps) => {
   return (
     <button className="digit" onClick={onClickDigit}>
       {numeric}
     </button>
   );
-}
+};
+
+export default Digit;

@@ -1,19 +1,24 @@
-import React from "react";
+import React, {memo, useMemo} from "react";
 import Digit from "../Digit/Digit";
 
 interface DigitsProps {
-  setOperand: (numeric: number) => void;
+  onClick: (numeric: number) => void;
 }
 
-export default function Digits({setOperand}: DigitsProps) {
+const Digits = ({onClick}: DigitsProps) => {
   const nemerics = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-
   return (
     <div className="digits flex">
-      {nemerics.map((numeric, index) => (
-        <Digit numeric={numeric} onClickDigit={() => setOperand(numeric)} />
+      {nemerics.map((numeric) => (
+        <Digit
+          numeric={numeric}
+          onClickDigit={() => onClick(numeric)}
+          key={numeric}
+        />
       ))}
       ;
     </div>
   );
-}
+};
+
+export default Digits;

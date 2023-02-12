@@ -5,10 +5,12 @@ interface OperationProps {
   clickOperation: () => void;
 }
 
-export default function Operation({operation, clickOperation}: OperationProps) {
+const Operation = ({operation, clickOperation}: OperationProps) => {
   return (
     <button className="operation" onClick={clickOperation}>
       {operation}
     </button>
   );
-}
+};
+
+export default Operation;
