@@ -1,5 +1,9 @@
-const CalculatorOperation = ({ operation }) => {
-  return <button className="operation">{operation}</button>;
+const CalculatorOperation = ({ operation, onClick }) => {
+  return (
+    <button className="operation" onClick={onClick}>
+      {operation}
+    </button>
+  );
 };
 
 export default CalculatorOperation;

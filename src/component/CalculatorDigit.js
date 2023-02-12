@@ -1,5 +1,9 @@
-const CalculatorDigit = ({ digit }) => {
-  return <button className="digit">{digit}</button>;
+const CalculatorDigit = ({ digit, onClick }) => {
+  return (
+    <button className="digit" onClick={onClick}>
+      {digit}
+    </button>
+  );
 };
 
 export default CalculatorDigit;

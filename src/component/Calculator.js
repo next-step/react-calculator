@@ -1,15 +1,22 @@
 import CalculatorDigit from "./CalculatorDigit";
 import CalculatorOperation from "./CalculatorOperation";
 import { DIGITS, OPERATIONS } from "../constant";
+import useCalculate from "../hook/useCalculate";
 
 const Calculator = () => {
+  const { total, enterDigit, enterOperator, calculateTotal } = useCalculate();
+
   return (
     <div className="calculator">
-      <h1 id="total">0</h1>
+      <h1 id="total">{total}</h1>
 
       <div className="digits flex">
         {DIGITS.map((digit) => (
-          <CalculatorDigit digit={digit} key={digit} />
+          <CalculatorDigit
+            digit={digit}
+            key={digit}
+            onClick={() => enterDigit(digit)}
+          />
         ))}
       </div>
 
@@ -19,8 +26,13 @@ const Calculator = () => {
 
       <div className="operations subgrid">
         {OPERATIONS.map((operation, index) => (
-          <CalculatorOperation operation={operation} key={index} />
+          <CalculatorOperation
+            operation={operation}
+            key={index}
+            onClick={() => enterOperator(operation)}
+          />
         ))}
+        <CalculatorOperation operation={"="} onClick={() => calculateTotal()} />
       </div>
     </div>
   );
