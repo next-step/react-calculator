@@ -46,6 +46,7 @@ describe('Calculator', () => {
     ${['2', '/', '3']}                       | ${'0'}
     ${['9.910359161258741e+26', '/', '999']} | ${'9.920279440699441e+23'}
     ${['10', '/', '0']}                      | ${'오류'}
+    ${['-10', '/', '0']}                     | ${'오류'}
   `('can divide two numbers', ({ fomula, expected }) => {
     const result = Calculator(fomula).enter('=');
     expect(result.value).toBe(expected);

@@ -72,7 +72,9 @@ export const Calculator = (inputs = ['0']) => {
 
       if (value === '=') {
         const result = calculate(inputs);
-        return Calculator([result !== 'Infinity' ? result : '오류']);
+        return Calculator([
+          result !== 'Infinity' && result !== '-Infinity' ? result : '오류',
+        ]);
       }
 
       if (value in OPERATOR) {
