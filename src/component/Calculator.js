@@ -4,7 +4,8 @@ import { DIGITS, OPERATIONS } from "../constant";
 import useCalculate from "../hook/useCalculate";
 
 const Calculator = () => {
-  const { total, enterDigit, enterOperator, calculateTotal } = useCalculate();
+  const { total, enterDigit, enterOperator, calculateTotal, clear } =
+    useCalculate();
 
   return (
     <div className="calculator">
@@ -21,7 +22,9 @@ const Calculator = () => {
       </div>
 
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <button className="modifier" onClick={clear}>
+          AC
+        </button>
       </div>
 
       <div className="operations subgrid">
@@ -32,7 +35,7 @@ const Calculator = () => {
             onClick={() => enterOperator(operation)}
           />
         ))}
-        <CalculatorOperation operation={"="} onClick={() => calculateTotal()} />
+        <CalculatorOperation operation={"="} onClick={calculateTotal} />
       </div>
     </div>
   );

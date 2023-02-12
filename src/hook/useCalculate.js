@@ -24,11 +24,16 @@ const useCalculate = () => {
     setTotal(calculate(...digitRef.current, operatorRef.current));
   };
 
+  const clear = () => {
+    setTotal("0");
+  };
+
   return {
     total,
     enterDigit,
     enterOperator,
     calculateTotal,
+    clear,
   };
 };
 
