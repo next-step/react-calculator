@@ -14,21 +14,32 @@ function DigitNumbers({
   const [isNeedInit, setIsNeedInit] = isNeedInitStateBundle;
   const [currentNumber, setCurrentNumber] = currentNumberStateBundle;
 
+  const resetCurrentNumberIfIsNeedInit = (digitNumber: string) => {
+    const isInit = isNeedInit || !currentNumber;
+    if (isInit) {
+      setIsNeedInit(false);
+      setCurrentNumber(digitNumber);
+    }
+    return isInit;
+  }
+
+  const checkIsMaximumCurrentNumberLength = () => {
+    return !currentNumber || currentNumber.length >= 3;
+  }
+
+  const digitButtonClickHandler = (number: number) => () => {
+    const digitNumber = String(number);
+
+    if (resetCurrentNumberIfIsNeedInit(digitNumber)) return;
+    if (checkIsMaximumCurrentNumberLength()) return;
+
+    setCurrentNumber((prev) => prev + digitNumber);
+  };
+
   return (
     <div className='digits flex'>
       {numbers.map((number) => (
-        <button key={`digit-${number}`} className='digit' onClick={() => {
-          const stringNumber = String(number);
-          if (isNeedInit || !currentNumber) {
-            setIsNeedInit(false);
-            setCurrentNumber(stringNumber);
-            return;
-          }
-
-          if (currentNumber.length >= 3) return;
-
-          setCurrentNumber((prev) => prev + stringNumber);
-        }}>
+        <button key={`digit-${number}`} className='digit' onClick={digitButtonClickHandler(number)}>
           {number}
         </button>)
       )}
