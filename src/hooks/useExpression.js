@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { arithmetic } from '../utils/arithmetic';
 
+import { INPUT_NUMBER_FIRST_MESSAGE, NUMBER_OF_EXCEPTION_MESSAGE } from '../constants/error';
+
 const useExpression = () => {
   const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
 
@@ -10,7 +12,7 @@ const useExpression = () => {
     let counter = expression.counter;
 
     if (isNaN(buttonValue) && !number[counter]) {
-      alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+      alert(INPUT_NUMBER_FIRST_MESSAGE);
       return totalText;
     }
 
@@ -20,7 +22,7 @@ const useExpression = () => {
     }
 
     if (number[counter] && number[counter].length >= 3) {
-      alert('숫자는 세 자리까지만 입력 가능합니다!');
+      alert(NUMBER_OF_EXCEPTION_MESSAGE);
       return '';
     }
 

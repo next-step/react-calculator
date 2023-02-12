@@ -3,6 +3,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import Calculator from './calculator';
 
+import { ERROR_TEXT } from '../../constants/error';
+
 test('버튼을 클릭하면 h1 태그에 버튼의 value가 텍스트로 입력된다.', () => {
   render(<Calculator />);
 
@@ -61,7 +63,7 @@ test('이상한 기호 또는 문자열이 들어갔을 때 오류가 발생한�
   fireEvent.click(screen.getByText('='));
 
   expect(window.alert).toHaveBeenCalledTimes(1);
-  expect(h1Element).toHaveTextContent('0');
+  expect(h1Element).toHaveTextContent(ERROR_TEXT);
 
   window.alert.mockClear();
 });
@@ -124,5 +126,5 @@ test('계산된 값이 인피니티일 경우 h1 태그의 텍스트에 "오류"
   fireEvent.click(screen.getByText('0'));
   fireEvent.click(screen.getByText('='));
 
-  expect(h1Element).toHaveTextContent('오류');
+  expect(h1Element).toHaveTextContent(ERROR_TEXT);
 });

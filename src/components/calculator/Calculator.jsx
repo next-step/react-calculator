@@ -4,6 +4,8 @@ import Button from '../common/Button';
 
 import useExpression from '../../hooks/useExpression';
 
+import { ERROR_TEXT } from '../../constants/error';
+
 const Calculator = () => {
   const [totalText, setTotalText] = useState('0');
   const [writeExpression, calculateExpression, ResetExpression] = useExpression();
@@ -13,17 +15,17 @@ const Calculator = () => {
 
     const addText = writeExpression(buttonValue, totalText);
 
-    setTotalText(totalText === '0' || totalText === '오류' ? addText : totalText + addText);
+    setTotalText(totalText === '0' || totalText === ERROR_TEXT ? addText : totalText + addText);
   };
 
   const handleCalculate = () => {
     const result = calculateExpression();
 
-    setTotalText(result === Infinity ? '오류' : result);
+    setTotalText(result === Infinity ? ERROR_TEXT : result);
   };
 
   const handleAllClear = () => {
-    setTotalText(`${ResetExpression()}`);
+    setTotalText(ResetExpression());
   };
 
   return (

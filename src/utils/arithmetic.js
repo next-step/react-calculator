@@ -1,3 +1,5 @@
+import { ERROR_TEXT, INPUT_NOT_ALLOWED_MESSAGE } from '../constants/error';
+
 export const arithmetic = (augend, addend = 0, operation) => {
   switch (operation) {
     case '+':
@@ -9,7 +11,7 @@ export const arithmetic = (augend, addend = 0, operation) => {
     case 'X':
       return augend * addend;
     default:
-      alert('잘못된 기호 또는 문자가 포함되어있습니다.');
-      return '';
+      alert(INPUT_NOT_ALLOWED_MESSAGE);
+      return ERROR_TEXT;
   }
 };
