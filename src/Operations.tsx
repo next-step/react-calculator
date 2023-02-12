@@ -23,6 +23,27 @@ function Operations({
   const [currentNumber, setCurrentNumber] = currentNumberStateBundle;
   const [currentOperation, setCurrentOperation] = currentOperationStateBundle;
 
+  const calcNumbers = () => {
+    const result = calcNumbersWithSelectedOperation({
+      operation: currentOperation,
+      num1: history,
+      num2: Number(currentNumber),
+    });
+
+    return Math.ceil(result);
+  }
+
+  const operationButtonClickHandler = (operation: Operation) => () => {
+    if (isNeedInit) return;
+
+    const calcResult = calcNumbers();
+
+    setIsNeedInit(true);
+    setHistory(calcResult);
+    setCurrentOperation(operation);
+    setCurrentNumber(changeToExpressionNumber(calcResult));
+  }
+
   return (
     <div className='operations subgrid'>
       {
@@ -34,21 +55,7 @@ function Operations({
               key={`operation-${operation}`}
               id={id}
               className='operation'
-              onClick={() => {
-                if (isNeedInit) return;
-
-                const result = calcNumbersWithSelectedOperation({
-                  operation: currentOperation,
-                  num1: history,
-                  num2: Number(currentNumber),
-                });
-                const ceiledNumber = Math.ceil(result);
-
-                setIsNeedInit(true);
-                setHistory(ceiledNumber);
-                setCurrentOperation(operation);
-                setCurrentNumber(changeToExpressionNumber(ceiledNumber));
-              }}
+              onClick={operationButtonClickHandler(operation)}
             >
               {operation}
             </button>
