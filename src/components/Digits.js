@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+function Digits({ children }) {
+  return <StyledDigits className="flex">{children}</StyledDigits>;
+}
+
 const StyledDigits = styled.div`
   grid-area: digit;
   display: flex;
@@ -15,9 +19,5 @@ const StyledDigits = styled.div`
     order: 1;
   }
 `;
-
-function Digits({ children }) {
-  return <StyledDigits className="flex">{children}</StyledDigits>;
-}
 
 export default Digits;

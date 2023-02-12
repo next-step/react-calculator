@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+function Modifiers({ children }) {
+  return <StyledModifiers className="subgrid">{children}</StyledModifiers>;
+}
+
 const StyledModifiers = styled.div`
   grid-area: modifier;
   grid-auto-flow: column;
@@ -9,9 +13,5 @@ const StyledModifiers = styled.div`
     background-color: #ccc;
   }
 `;
-
-function Modifiers({ children }) {
-  return <StyledModifiers className="subgrid">{children}</StyledModifiers>;
-}
 
 export default Modifiers;

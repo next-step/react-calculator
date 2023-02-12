@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+function Calculator({ children }) {
+  return <StyledCalculator>{children}</StyledCalculator>;
+}
+
 const StyledCalculator = styled.div`
   width: 300px;
   display: grid;
@@ -14,9 +18,5 @@ const StyledCalculator = styled.div`
   grid-auto-rows: 1fr;
   height: 500px;
 `;
-
-function Calculator({ children }) {
-  return <StyledCalculator>{children}</StyledCalculator>;
-}
 
 export default Calculator;
