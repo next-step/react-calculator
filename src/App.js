@@ -5,21 +5,28 @@ import { useState } from "react";
 function App() {
   const [screenNumber, setScreenNumber] = useState(0);
 
+  const changeScreenNumber = (event) => {
+    setScreenNumber((prev) => prev + event.target.textContent);
+  };
+
   const onClickNumber = (event) => {
     if (screenNumber === 0) {
-      return setScreenNumber(event.target.textContent);
+      setScreenNumber(event.target.textContent);
+      return;
     }
     if (screenNumber.length === 3) {
-      return alert("숫자는 세 자리까지만 입력 가능합니다!");
+      alert("숫자는 세 자리까지만 입력 가능합니다!");
+      return;
     }
-    setScreenNumber((prev) => prev + event.target.textContent);
+    changeScreenNumber(event);
   };
 
   const onClickOperator = (event) => {
     if (screenNumber === 0) {
-      return alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
+      alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
+      return;
     }
-    setScreenNumber((prev) => prev + event.target.textContent);
+    changeScreenNumber(event);
   };
 
   const onClickResult = () => {
