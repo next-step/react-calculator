@@ -23,29 +23,26 @@ function App() {
   };
 
   const onClickResult = () => {
-    const plus = screenNumber.split("+");
-    const minus = screenNumber.split("-");
-    const multiply = screenNumber.split("X");
-    const divide = screenNumber.split("/");
+    const [plusLeft, plusRight] = screenNumber.split("+").map(Number);
+    const [minusLeft, minusRight] = screenNumber.split("-").map(Number);
+    const [multiplyLeft, multiplyRight] = screenNumber.split("X").map(Number);
+    const [divideLeft, divideRight] = screenNumber.split("/").map(Number);
+    const divideResult = divideLeft / divideRight;
 
     if (screenNumber.includes("+") === true) {
-      setScreenNumber(Number(plus[0]) + Number(plus[1]));
+      setScreenNumber(plusLeft + plusRight);
     }
 
     if (screenNumber.includes("-") === true)
-      setScreenNumber(Number(minus[0]) - Number(minus[1]));
+      setScreenNumber(minusLeft - minusRight);
 
     if (screenNumber.includes("X") === true)
-      setScreenNumber(Number(multiply[0]) * Number(multiply[1]));
+      setScreenNumber(multiplyLeft * multiplyRight);
 
     if (screenNumber.includes("/") === true)
-      setScreenNumber(Math.floor(Number(divide[0]) / Number(divide[1])));
-    if (
-      Number(divide[0]) / Number(divide[1]) === Infinity ||
-      Number(divide[0]) / Number(divide[1]) === -Infinity
-    ) {
+      setScreenNumber(Math.floor(divideResult));
+    if (divideResult === Infinity || divideResult === -Infinity)
       setScreenNumber("오류");
-    }
   };
 
   const onClickAllClear = () => {
