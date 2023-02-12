@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 interface DigitNumbersProps {
   isNeedInitStateBundle: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  currentNumberStateBundle: [string, React.Dispatch<React.SetStateAction<string>>];
+  currentNumberStateBundle: ReturnType<typeof useState<string>>;
 }
 
 function DigitNumbers({
@@ -19,9 +19,10 @@ function DigitNumbers({
       {numbers.map((number) => (
         <button key={`digit-${number}`} className='digit' onClick={() => {
           const stringNumber = String(number);
-          if (isNeedInit) {
+          if (isNeedInit || !currentNumber) {
             setIsNeedInit(false);
-            return setCurrentNumber(stringNumber);
+            setCurrentNumber(stringNumber);
+            return;
           }
 
           if (currentNumber.length >= 3) return;

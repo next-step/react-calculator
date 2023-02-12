@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Operation, operations } from './constants/operations';
 import { calcNumbersWithSelectedOperation } from './utils';
@@ -6,7 +6,7 @@ import { calcNumbersWithSelectedOperation } from './utils';
 interface OperationsProps {
   historyStateBundle: [number, Dispatch<SetStateAction<number>>];
   isNeedInitStateBundle: [boolean, Dispatch<SetStateAction<boolean>>];
-  currentNumberStateBundle: [string, Dispatch<SetStateAction<string>>];
+  currentNumberStateBundle: ReturnType<typeof useState<string>>;
   currentOperationStateBundle: [Operation, Dispatch<SetStateAction<Operation>>];
 }
 

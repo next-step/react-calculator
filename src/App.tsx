@@ -9,12 +9,12 @@ import { Operations } from './Operations';
 const initStates: {
   initialHistoryState: number,
   initialIsNeedInitState: boolean,
-  initialCurrentNumberState: string,
+  initialCurrentNumberState: string | undefined,
   initialCurrentOperationState: Operation,
 } = {
   initialHistoryState: 0,
   initialIsNeedInitState: false,
-  initialCurrentNumberState: '',
+  initialCurrentNumberState: undefined,
   initialCurrentOperationState: '=',
 };
 
@@ -32,7 +32,7 @@ function App() {
   return (
     <div id="app">
       <div className='calculator'>
-        <h1 id='total'>{currentNumber || '0'}</h1>
+        <h1 id='total'>{currentNumber ?? '0'}</h1>
         <DigitNumbers
           isNeedInitStateBundle={isNeedInitStateBundle}
           currentNumberStateBundle={currentNumberStateBundle}
