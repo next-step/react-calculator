@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  value: number;
+  value: string;
 }
 
 const Result = (props: Props) => {
