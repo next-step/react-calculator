@@ -6,7 +6,7 @@ export const REDUCER_TYPE = {
   RESET_CURRENT_NUMBER: 'RESET_CURRENT_NUMBER',
   CALCULATE: 'CALCULATE',
   RESET: 'RESET',
-};
+} as const;
 export const initialState = {
   total: '',
   beforeNumber: '',
@@ -14,7 +14,14 @@ export const initialState = {
   operator: '',
 };
 
-const reducer = (state: any, action: any) => {
+export type StateType = typeof initialState;
+
+export type ActionType = {
+  type: keyof typeof REDUCER_TYPE;
+  payload: StateType;
+};
+
+const reducer = (state: StateType, action: any): StateType => {
   switch (action.type) {
     case REDUCER_TYPE.INPUT_DIGIT:
       return { ...state, ...action.payload };
@@ -27,7 +34,6 @@ const reducer = (state: any, action: any) => {
       };
     case REDUCER_TYPE.CALCULATE:
       return {
-        ...state,
         total: initialState.total,
         beforeNumber: initialState.beforeNumber,
         currentNumber: action.payload,
@@ -35,6 +41,8 @@ const reducer = (state: any, action: any) => {
       };
     case REDUCER_TYPE.RESET:
       return initialState;
+    default:
+      return state;
   }
 };
 

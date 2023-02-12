@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/index.css';
 
-import Calculator from './components/Calculator';
+import Calculator from './components/calculator/Calculator';
 
 const App = () => {
   return (
