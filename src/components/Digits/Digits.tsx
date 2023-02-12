@@ -1,6 +1,7 @@
-import React, {memo, useMemo} from "react";
+import React from "react";
 import {NUMERICS} from "../../constants/Calcurator";
 import Digit from "../Digit/Digit";
+import styles from "./Digits.module.css";
 
 interface DigitsProps {
   onClick: (num: number) => void;
@@ -9,7 +10,7 @@ interface DigitsProps {
 const Digits = ({onClick}: DigitsProps) => {
   const nemerics = NUMERICS;
   return (
-    <div className="digits flex">
+    <div className={`${styles.digits}`}>
       {nemerics.map((numeric) => (
         <Digit numeric={numeric} onClickDigit={onClick} key={numeric} />
       ))}

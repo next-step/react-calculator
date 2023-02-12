@@ -13,16 +13,6 @@
   height: 500px;
 }
 
-.modifiers {
-  grid-area: modif;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-}
-
-.operations {
-  grid-area: oper;
-}
-
 .subgrid {
   display: grid;
 }

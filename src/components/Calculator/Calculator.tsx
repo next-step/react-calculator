@@ -10,9 +10,9 @@ export default function Calculator() {
   const [reducer, onPressValue, reset] = useCalculate();
 
   return (
-    <div className="calculator">
+    <div className={styles.calculator}>
       <Total total={reducer[1]} />
-      <div className="modifiers subgrid">
+      <div className={`${styles.modifiers} ${styles.subgrid}`}>
         <AllClearButton onClick={reset} />
       </div>
       <Digits onClick={onPressValue} />

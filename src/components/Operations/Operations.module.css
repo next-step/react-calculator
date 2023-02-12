@@ -1,0 +1,7 @@
+.operations {
+  grid-area: oper;
+}
+
+.subgrid {
+  display: grid;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Digit.module.css";
 
 interface DigitProps {
   numeric: number;
@@ -6,7 +7,7 @@ interface DigitProps {
 }
 const Digit = ({numeric, onClickDigit}: DigitProps) => {
   return (
-    <button className="digit" onClick={() => onClickDigit(numeric)}>
+    <button className={styles.digit} onClick={() => onClickDigit(numeric)}>
       {numeric}
     </button>
   );

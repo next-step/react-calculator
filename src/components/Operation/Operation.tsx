@@ -1,5 +1,6 @@
 import React from "react";
 import {OperatorionsType} from "../../models/Operations";
+import styles from "./Operation.module.css";
 
 interface OperationProps {
   operation: OperatorionsType;
@@ -8,7 +9,10 @@ interface OperationProps {
 
 const Operation = ({operation, clickOperation}: OperationProps) => {
   return (
-    <button className="operation" onClick={() => clickOperation(operation)}>
+    <button
+      className={styles.operation}
+      onClick={() => clickOperation(operation)}
+    >
       {operation}
     </button>
   );

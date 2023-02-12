@@ -1,0 +1,9 @@
+.digit {
+  flex: 1 0 30%;
+  background-color: #efefef;
+}
+
+.digit.wide {
+  flex: 2 0 60%;
+  order: 1;
+}
