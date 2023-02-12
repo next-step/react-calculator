@@ -36,18 +36,16 @@ function App() {
     const [divideLeft, divideRight] = screenNumber.split("/").map(Number);
     const divideResult = divideLeft / divideRight;
 
-    if (screenNumber.includes("+") === true) {
+    if (screenNumber.includes("+")) {
       setScreenNumber(plusLeft + plusRight);
     }
 
-    if (screenNumber.includes("-") === true)
-      setScreenNumber(minusLeft - minusRight);
+    if (screenNumber.includes("-")) setScreenNumber(minusLeft - minusRight);
 
-    if (screenNumber.includes("X") === true)
+    if (screenNumber.includes("X"))
       setScreenNumber(multiplyLeft * multiplyRight);
 
-    if (screenNumber.includes("/") === true)
-      setScreenNumber(Math.floor(divideResult));
+    if (screenNumber.includes("/")) setScreenNumber(Math.floor(divideResult));
     if (divideResult === Infinity || divideResult === -Infinity)
       setScreenNumber("오류");
   };
