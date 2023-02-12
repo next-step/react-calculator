@@ -29,23 +29,30 @@ export const useCalculate: useCalculateFn = () => {
     } else {
       setOperator(value);
     }
+    setCachePreviousValue(value.toString());
   };
 
   const setOperand = (operand: number) => {
     const [total, current] = reducer;
     const stringOperand = operand.toString();
 
-    setCachePreviousValue(stringOperand);
-    if (isPreviousValueOperator()) {
-      setReducer([total, operand]);
-      return;
+    switch (cachePreviousValue) {
+      case null:
+      case "+":
+      case "-":
+      case "*":
+      case "/":
+      case "=":
+        setReducer([total, operand]);
+        break;
+      default:
+        const currentOperand = current + "" + stringOperand;
+        if (currentOperand.length > MAXIUM_LENGTH) {
+          return;
+        }
+        setReducer([total, Number(currentOperand)]);
+        break;
     }
-
-    const currentOperand = current + "" + stringOperand;
-    if (currentOperand.length > MAXIUM_LENGTH) {
-      return;
-    }
-    setReducer([total, Number(currentOperand)]);
   };
 
   const setOperator = (operation: OperatorionsType) => {
@@ -62,7 +69,6 @@ export const useCalculate: useCalculateFn = () => {
       });
       setReducer([currentTotal, currentTotal]);
     }
-    setCachePreviousValue(operation);
     setCacheOperation(operation);
   };
 
