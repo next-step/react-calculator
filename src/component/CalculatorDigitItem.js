@@ -1,7 +1,7 @@
-const CalculatorDigitItem = (props) => {
+const CalculatorDigitItem = ({ onClick, number }) => {
   return (
-    <button className="digit" onClick={props.onClick}>
-      {props.number}
+    <button className="digit" onClick={onClick}>
+      {number}
     </button>
   );
 };

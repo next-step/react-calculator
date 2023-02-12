@@ -1,7 +1,7 @@
-const CalculatorOperationItem = (props) => {
+const CalculatorOperationItem = ({ onClick, operation }) => {
   return (
-    <button className="operation" onClick={props.onClick}>
-      {props.operation === "*" ? "X" : props.operation}
+    <button className="operation" onClick={onClick}>
+      {operation === "*" ? "X" : operation}
     </button>
   );
 };

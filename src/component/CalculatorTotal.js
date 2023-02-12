@@ -1,5 +1,5 @@
-const CalculatorTotal = (props) => {
-  return <h1 id="total">{props.total}</h1>;
+const CalculatorTotal = ({ total }) => {
+  return <h1 id="total">{total}</h1>;
 };
 
 export default CalculatorTotal;
