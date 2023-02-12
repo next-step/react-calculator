@@ -44,7 +44,7 @@ function App() {
 
   const operationHandler = (oper: OperationType) => {
     if (done) {
-      setFirstNumber(resultNumber.toString());
+      setFirstNumber(Math.floor(resultNumber).toString());
       setOperation(oper);
       setDone(false);
       return;
