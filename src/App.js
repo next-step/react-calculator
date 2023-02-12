@@ -34,7 +34,7 @@ function App() {
           <Total>{digit}</Total>
           <Digits>
             {DIGIT_LIST.map((digit) => (
-              <button onClick={() => handleDigitClick(digit)} key={digit}>
+              <button onClick={handleDigitClick(digit)} key={digit}>
                 {digit}
               </button>
             ))}
@@ -44,10 +44,7 @@ function App() {
           </Modifiers>
           <Operations>
             {OPERATION_LIST.map((operation) => (
-              <button
-                onClick={() => handleOperationClick(operation)}
-                key={operation}
-              >
+              <button onClick={handleOperationClick(operation)} key={operation}>
                 {operation}
               </button>
             ))}

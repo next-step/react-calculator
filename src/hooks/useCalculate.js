@@ -14,26 +14,30 @@ function useCalculate() {
   const [isTyping, setIsTyping] = useState(false);
 
   const handleDigitClick = (clickedDigit) => {
-    if (String(digit).length === 3) {
-      return;
-    }
+    return () => {
+      if (String(digit).length === 3) {
+        return;
+      }
 
-    setIsTyping(true);
+      setIsTyping(true);
 
-    if (!isTyping) {
-      setDigit(clickedDigit);
-      return;
-    }
+      if (!isTyping) {
+        setDigit(clickedDigit);
+        return;
+      }
 
-    setDigit(Number(`${digit}${clickedDigit}`));
+      setDigit(Number(`${digit}${clickedDigit}`));
+    };
   };
 
   const handleOperationClick = (operation) => {
-    if (!digit) return;
+    return () => {
+      if (!digit) return;
 
-    setDigits([digit]);
-    setOperation(operation);
-    setIsTyping(false);
+      setDigits([digit]);
+      setOperation(operation);
+      setIsTyping(false);
+    };
   };
 
   const handleModifierClick = () => {
