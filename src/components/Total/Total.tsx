@@ -6,5 +6,6 @@ interface TotalProps {
 }
 
 export default function Total({total}: TotalProps) {
-  return <h1 id={styles.total}>{total}</h1>;
+  const errors = [Infinity, -Infinity];
+  return <h1 id={styles.total}>{errors.includes(total) ? "오류" : total}</h1>;
 }
