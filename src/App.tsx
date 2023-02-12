@@ -37,7 +37,7 @@ function App() {
           isNeedInitStateBundle={isNeedInitStateBundle}
           currentNumberStateBundle={currentNumberStateBundle}
         />
-        <Modifier initStates={() => {
+        <Modifier reset={() => {
           setHistory(initStates.initialHistoryState);
           setIsNeedInit(initStates.initialIsNeedInitState);
           setCurrentNumber(initStates.initialCurrentNumberState);

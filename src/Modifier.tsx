@@ -1,16 +1,16 @@
 import React from 'react';
 
 interface ModifierProps {
-  initStates: () => void;
+  reset: () => void;
 }
 
 function Modifier({
-  initStates,
+  reset,
 }: ModifierProps) {
   return (
     <div className='modifiers subgrid'>
       <button className='modifier' onClick={() => {
-        initStates();
+        reset();
       }}>
         AC
       </button>
