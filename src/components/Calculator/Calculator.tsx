@@ -1,4 +1,4 @@
-import useCalculator from 'hooks/useCalculator';
+import useCalculator from 'components/calculator/hooks/useCalculator';
 
 import { Digit, OPERATION } from 'constants/calculator';
 import { ERROR_MESSAGE } from 'constants/message';
