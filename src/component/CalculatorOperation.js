@@ -1,15 +1,16 @@
 import CalculatorOperationItem from "./CalculatorOperationItem";
+import { useContext } from "react";
+import { ContextTotal } from "../context/ContextTotal";
 const OPERATIONS = ["/", "*", "-", "+", "="];
 
-const CalculatorOperation = ({ totalState }) => {
+const CalculatorOperation = () => {
+  const { total, setTotal } = useContext(ContextTotal);
+
   const onClickOperation = (operation) => {
-    if (
-      totalState.total === "0" ||
-      OPERATIONS.includes(totalState.total.slice(-1))
-    ) {
+    if (total === "0" || OPERATIONS.includes(total.slice(-1))) {
       alert("숫자를 먼저 입력한 후 연산자를 입력해 주세요.");
     } else {
-      totalState.setTotal(totalState.total + operation);
+      setTotal(total + operation);
     }
 
     if (operation === "=") {
@@ -18,9 +19,9 @@ const CalculatorOperation = ({ totalState }) => {
   };
 
   const onClickReturn = () => {
-    totalState.setTotal(Math.floor(Number(eval(totalState.total))));
-    if (eval(totalState.total) === Infinity) {
-      totalState.setTotal(() => "오류");
+    setTotal(Math.floor(Number(eval(total))));
+    if (eval(total) === Infinity) {
+      setTotal(() => "오류");
     }
   };
 

@@ -1,23 +1,17 @@
 import CalculatorDigitItem from "./CalculatorDigitItem";
+import { useContext } from "react";
+import { ContextTotal } from "../context/ContextTotal";
 const DIGIT = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
 
-const CalculatorDigit = ({ totalState, countState }) => {
+const CalculatorDigit = () => {
+  const { total, setTotal } = useContext(ContextTotal);
+
   const onClickNumber = (num) => {
-    countNumber();
-    if (totalState.total === "0") {
-      totalState.setTotal(num);
+    if (total === "0") {
+      setTotal(num);
     } else {
-      totalState.setTotal(totalState.total + num);
+      setTotal(total + num);
     }
-  };
-
-  const countNumber = () => {
-    if (countState.count > 3) {
-      alert("숫자는 세 자리까지만 입력 가능합니다!");
-      return;
-    }
-
-    countState.setCount(() => countState.count + 1);
   };
 
   return (
