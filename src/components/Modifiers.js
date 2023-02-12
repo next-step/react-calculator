@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledModifiers = styled.div`
-  grid-area: modif;
+  grid-area: modifier;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
 

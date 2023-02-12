@@ -5,11 +5,11 @@ const StyledCalculator = styled.div`
   display: grid;
   grid-template-areas:
     "total total total total"
-    "modif modif modif oper"
-    "digit digit digit oper"
-    "digit digit digit oper"
-    "digit digit digit oper"
-    "digit digit digit oper";
+    "modifier modifier modifier operation"
+    "digit digit digit operation"
+    "digit digit digit operation"
+    "digit digit digit operation"
+    "digit digit digit operation";
   grid-auto-columns: 1fr;
   grid-auto-rows: 1fr;
   height: 500px;

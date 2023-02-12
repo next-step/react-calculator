@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledOperations = styled.div`
-  grid-area: oper;
+  grid-area: operation;
 
   button {
     background-color: orange;
