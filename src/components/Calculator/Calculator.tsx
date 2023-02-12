@@ -1,14 +1,10 @@
-import React, {useState} from "react";
-import {OPERATIONS} from "../../constants/Operations";
+import React from "react";
 import AllClearButton from "../AllClearButton/AllClearButton";
 import Digits from "../Digits/Digits";
 import Operations from "../Operations/Operations";
 import Total from "../Total/Total";
 import styles from "./Calculator.module.css";
-import {getTotal} from "../../utils/calculate";
 import {useCalculate} from "../../hooks/useCalculate";
-
-export type OperatorionsType = typeof OPERATIONS[keyof typeof OPERATIONS];
 
 export default function Calculator() {
   const [reducer, onPressValue, reset] = useCalculate();

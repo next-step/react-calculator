@@ -1,10 +1,10 @@
 import React from "react";
-import {OPERATIONS} from "../../constants/Operations";
-import {OperatorionsType} from "../Calculator/Calculator";
+import {OPERATIONS} from "../../constants/Calcurator";
+import {OperatorionsType} from "../../models/Operations";
 import Operation from "../Operation/Operation";
 
 interface OperationsProps {
-  onClick: (operations: OperatorionsType) => void;
+  onClick: (operator: OperatorionsType) => void;
 }
 
 const Operations = ({onClick}: OperationsProps) => {
@@ -14,7 +14,7 @@ const Operations = ({onClick}: OperationsProps) => {
       {operations.map((operation) => (
         <Operation
           operation={operation}
-          clickOperation={() => onClick(operation)}
+          clickOperation={onClick}
           key={operation}
         />
       ))}

@@ -1,6 +1,5 @@
-import {OPERATIONS} from "../constants/Operations";
-
-export type OperatorionsType = typeof OPERATIONS[keyof typeof OPERATIONS];
+import {OPERATIONS} from "../constants/Calcurator";
+import {OperatorionsType} from "../models/Operations";
 
 interface GetTotalParams {
   operation: OperatorionsType;
