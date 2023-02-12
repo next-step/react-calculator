@@ -6,6 +6,7 @@ import Modifiers from "./components/Modifiers";
 import Operations from "./components/Operations";
 import Total from "./components/Total";
 import useCalculate from "./hooks/useCalculate";
+import { OPERATION_LIST } from "./constants/operation";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -14,7 +15,6 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const OPERATION_LIST = ["/", "X", "-", "+"];
 const DIGIT_LIST = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 function App() {

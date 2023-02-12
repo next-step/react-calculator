@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-
-const OPERATION = {
-  DIVIDE: "/",
-  MULTIPLY: "X",
-  MINUS: "-",
-  PLUS: "+",
-};
+import { OPERATION } from "../constants/operation";
 
 function useCalculate() {
   const [digit, setDigit] = useState(0);
