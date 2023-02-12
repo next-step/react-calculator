@@ -17,7 +17,7 @@ export function calcNumbersWithSelectedOperation({
 
   switch(operation) {
     case('+'): {
-      return add(num1, num2);
+      return sum(num1, num2);
     }
     case('-'): {
       return subtract(num1, num2);
@@ -34,7 +34,7 @@ export function calcNumbersWithSelectedOperation({
   }
 }
 
-function add(num1: number, num2: number) {
+function sum(num1: number, num2: number) {
   return num1 + num2;
 }
 
