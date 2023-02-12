@@ -1,5 +1,5 @@
 import { MouseEvent, useCallback, useState } from 'react';
-import { DIGIT_MAX_LENGTH, ZERO } from '../constants';
+import { DIGIT_MAX_LENGTH, OPERATIONS, ZERO } from '../constants';
 import { calculate } from '../util';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 
@@ -34,7 +34,7 @@ export const useCalculate = () => {
   const operate = (event: MouseEvent<HTMLDivElement>) => {
     const { value } = event.target as HTMLButtonElement;
 
-    if (value === '=') {
+    if (value === OPERATIONS.EQUAL) {
       const result = calculate(state);
 
       setState({
