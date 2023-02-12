@@ -1,71 +1,61 @@
 import React, {useState} from "react";
+import {OPERATIONS} from "../../constants/Operations";
 import AllClear from "../AllClear/AllClear";
 import Digits from "../Digits/Digits";
 import Operations from "../Operations/Operations";
 import Total from "../Total/Total";
 import styles from "./Calculator.module.css";
 
-export type OperatorionsType = "+" | "-" | "/" | "*" | "=";
+export type OperatorionsType = typeof OPERATIONS[keyof typeof OPERATIONS];
 
 export default function Calculator() {
   const [reducer, setReducer] = useState<[null | number, number]>([null, 0]);
   const [cacheOperation, setCacheOperation] = useState<OperatorionsType | null>(
     null
   );
-
-  const [isActiveOperation, setIsActiveOperation] = useState<Boolean>(false);
+  const [isPreviousValueOperator, setIsPreviousValueOperator] =
+    useState<Boolean>(false);
 
   const getTotal = (
     operation: OperatorionsType,
     acc: number,
     cur: number
   ): number => {
-    if (acc === null || isActiveOperation) {
+    if (acc === null || isPreviousValueOperator) {
       return cur;
     }
 
     switch (operation) {
-      case "+":
+      case OPERATIONS.plus:
         return acc + cur;
-      case "-":
+      case OPERATIONS.minus:
         return acc - cur;
-      case "*":
+      case OPERATIONS.multiple:
         return acc * cur;
-      case "/":
+      case OPERATIONS.divide:
         return Math.floor(acc / cur);
-      case "=":
+      case OPERATIONS.equalSign:
         return acc;
     }
   };
 
-  /**
-   * 현재 피연산자를 누름
-   * * 이전에 아무 값도 안눌림: [null, 0] => [null, operand]
-   * * 이전에 숫자가 눌림: [acc, 이전값] => [null, 이전값 + operand]
-   * * 이전에 오퍼레이션이 눌림: [acc, 이전값] => [acc, operand]
-   */
   const setOperand = (operand: number) => {
     const [acc, cur] = reducer;
     const stringOperand = operand.toString();
 
-    if (isActiveOperation) {
+    if (isPreviousValueOperator) {
+      setIsPreviousValueOperator(false);
       setReducer([acc, operand]);
-      setIsActiveOperation(false);
-    } else {
-      const currentOperand = cur + "" + stringOperand;
-      if (currentOperand.length > 3) {
-        return;
-      }
-      setReducer([acc, Number(currentOperand)]);
+      return;
     }
+
+    const currentOperand = cur + "" + stringOperand;
+    if (currentOperand.length > 3) {
+      return;
+    }
+    setReducer([acc, Number(currentOperand)]);
   };
 
-  /**
-   * 현재 연산자를 누름
-   * * 이전에 아무 값도 안눌림: [null, 0] => [null, 0]
-   * * 이전에 숫자가 눌림: [acc, cur] => [acc + cur, acc + cur]
-   * * 이전에 오퍼레이션이 눌림: [acc, cur] => [acc, cur]
-   */
   const setOperation = (operation: OperatorionsType) => {
     const [acc, cur] = reducer;
 
@@ -76,13 +66,13 @@ export default function Calculator() {
       setReducer([total, total]);
     }
 
-    setIsActiveOperation(true);
+    setIsPreviousValueOperator(true);
     setCacheOperation(operation);
   };
 
   const onResetReducer = () => {
     setReducer([null, 0]);
-    setIsActiveOperation(false);
+    setIsPreviousValueOperator(false);
     setCacheOperation(null);
   };
 

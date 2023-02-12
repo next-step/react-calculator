@@ -1,4 +1,5 @@
 import React from "react";
+import {OPERATIONS} from "../../constants/Operations";
 import {OperatorionsType} from "../Calculator/Calculator";
 import Operation from "../Operation/Operation";
 
@@ -7,7 +8,7 @@ interface OperationsProps {
 }
 
 export default function Operations({setOperation}: OperationsProps) {
-  const operations: OperatorionsType[] = ["/", "*", "-", "+", "="];
+  const operations: OperatorionsType[] = Object.values(OPERATIONS);
   return (
     <div className="operations subgrid">
       {operations.map((operation) => (
