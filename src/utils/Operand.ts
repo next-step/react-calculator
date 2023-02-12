@@ -5,7 +5,7 @@ const mapOperation: Record<string, (num1: string, num2: string) => number> = {
   "/": (num1, num2) => Number(num2) / Number(num1),
 };
 
-const calculate = (state: {
+const operand = (state: {
   targetNumber: string;
   prevNumber: string;
   operator: string;
@@ -14,4 +14,4 @@ const calculate = (state: {
   return Math.floor(mapOperation[operator](targetNumber, prevNumber));
 };
 
-export { calculate };
+export { operand };
