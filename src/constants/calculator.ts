@@ -18,4 +18,6 @@ const OPERATION = {
   PLUS: '+',
 } as const;
 
-export { Digit, OPERATION };
+const MAX_LENGTH = 3;
+
+export { Digit, OPERATION, MAX_LENGTH };
