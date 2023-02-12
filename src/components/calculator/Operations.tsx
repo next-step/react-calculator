@@ -18,8 +18,14 @@ const Operations = () => {
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
 
-    if (operator) {
+    if (operator === '' && total === '' && currentNumber === '') {
       return alert(MESSAGES.OPERATOR.NOT_FIRST);
+    }
+    if (operator !== '' && textContent !== '=') {
+      return;
+    }
+    if (!(beforeNumber && currentNumber) && textContent === '=') {
+      return;
     }
 
     if (beforeNumber && currentNumber) {

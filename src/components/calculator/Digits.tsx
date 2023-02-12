@@ -17,6 +17,9 @@ const Digits = () => {
     if (input.length > MAX_INPUT_NUMBER) {
       return alert(MESSAGES.DIGIT.MAX_LENGTH);
     }
+    if (currentNumber === '' && textContent === '0') {
+      return;
+    }
 
     dispatch({
       type: REDUCER_TYPE.INPUT_DIGIT,

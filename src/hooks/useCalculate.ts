@@ -18,10 +18,12 @@ export type StateType = typeof initialState;
 
 export type ActionType = {
   type: keyof typeof REDUCER_TYPE;
-  payload: StateType;
+  payload: any;
+  //TODO: payload로 string 값을 보낼 때가 있고 StateType으로 보낼 때가 있음
+  // 한 가지로 통일시키는 것이 필요함
 };
 
-const reducer = (state: StateType, action: any): StateType => {
+const reducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
     case REDUCER_TYPE.INPUT_DIGIT:
       return { ...state, ...action.payload };
