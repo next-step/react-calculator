@@ -6,16 +6,23 @@ import { DigitNumbers } from './DigitNumbers';
 import { Modifier } from './Modifier';
 import { Operations } from './Operations';
 
-const initialHistoryState = 0;
-const initialIsNeedInitState = false;
-const initialCurrentNumberState = '';
-const initialCurrentOperationState = '=';
+const initStates: {
+  initialHistoryState: number,
+  initialIsNeedInitState: boolean,
+  initialCurrentNumberState: string,
+  initialCurrentOperationState: Operation,
+} = {
+  initialHistoryState: 0,
+  initialIsNeedInitState: false,
+  initialCurrentNumberState: '',
+  initialCurrentOperationState: '=',
+};
 
 function App() {
-  const historyStateBundle = useState(initialHistoryState);
-  const isNeedInitStateBundle = useState(initialIsNeedInitState);
-  const currentNumberStateBundle = useState(initialCurrentNumberState);
-  const currentOperationStateBundle = useState<Operation>(initialCurrentOperationState);
+  const historyStateBundle = useState(initStates.initialHistoryState);
+  const isNeedInitStateBundle = useState(initStates.initialIsNeedInitState);
+  const currentNumberStateBundle = useState(initStates.initialCurrentNumberState);
+  const currentOperationStateBundle = useState(initStates.initialCurrentOperationState);
 
   const [_, setHistory] = historyStateBundle;
   const [_2, setIsNeedInit] = isNeedInitStateBundle;
@@ -31,10 +38,10 @@ function App() {
           currentNumberStateBundle={currentNumberStateBundle}
         />
         <Modifier initStates={() => {
-          setHistory(initialHistoryState);
-          setIsNeedInit(initialIsNeedInitState);
-          setCurrentNumber(initialCurrentNumberState);
-          setCurrentOperation(initialCurrentOperationState);
+          setHistory(initStates.initialHistoryState);
+          setIsNeedInit(initStates.initialIsNeedInitState);
+          setCurrentNumber(initStates.initialCurrentNumberState);
+          setCurrentOperation(initStates.initialCurrentOperationState);
         }} />
         <Operations
           historyStateBundle={historyStateBundle}
