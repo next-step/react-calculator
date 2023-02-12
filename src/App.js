@@ -1,7 +1,8 @@
-import Calculator from "./component/Calculator";
-import "./css/App.css";
+import React from 'react';
+import Calculator from './component/Calculator';
+import './css/App.css';
 
-import CalculatorModule from "./domain/calculator";
+import CalculatorModule from './domain/calculator';
 
 function App() {
   return (

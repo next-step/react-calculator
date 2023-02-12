@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./index.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './index.module.css';
 
 function ModifierButton({ modifier, onClick }) {
   return (
@@ -12,6 +12,7 @@ function ModifierButton({ modifier, onClick }) {
 
 ModifierButton.propTypes = {
   modifier: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ModifierButton;

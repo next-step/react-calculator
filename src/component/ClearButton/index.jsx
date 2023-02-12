@@ -1,5 +1,6 @@
-import React from "react";
-import styles from "./index.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './index.module.css';
 
 function ClearButton({ onClick }) {
   return (
@@ -8,5 +9,9 @@ function ClearButton({ onClick }) {
     </button>
   );
 }
+
+ClearButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default ClearButton;

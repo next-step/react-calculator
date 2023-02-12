@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import DigitButton from "../DigitButton";
-import StatusPane from "../StatusPane";
-import styles from "./index.module.css";
-import ClearButton from "../ClearButton";
-import ModifierButton from "../ModifierButton";
-import { CALCULATOR } from "../../domain/constant";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import DigitButton from '../DigitButton';
+import StatusPane from '../StatusPane';
+import styles from './index.module.css';
+import ClearButton from '../ClearButton';
+import ModifierButton from '../ModifierButton';
+import { CALCULATOR } from '../../domain/calculator/constant';
 
 const { MODIFIER, NATURAL_NUMBER } = CALCULATOR;
-const getClassNames = (styles = []) => styles.join(" ");
+const getClassNames = (styles = []) => styles.join(' ');
 
 const digits = Array.from({ length: 10 }, (_, idx) => idx).sort((a, b) => b - a);
 const modifiers = [MODIFIER.DIVIDE, MODIFIER.MULTIPLY, MODIFIER.SUBTRACT, MODIFIER.ADD, MODIFIER.EQUAL];
@@ -19,7 +19,7 @@ function Calculator({ calculator }) {
   const buttonPressHandler = (value) => {
     try {
       calculator.input(value);
-      setDisplay(calculator.output());
+      setDisplay(calculator.output);
     } catch (error) {
       alert(error.message);
     }

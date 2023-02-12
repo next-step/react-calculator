@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./index.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './index.module.css';
 
 function DigitButton({ value, onClick }) {
   return (
@@ -12,6 +12,7 @@ function DigitButton({ value, onClick }) {
 
 DigitButton.propTypes = {
   value: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default DigitButton;
