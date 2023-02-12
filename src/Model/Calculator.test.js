@@ -25,12 +25,12 @@ describe('Calculator', () => {
 
   it.each`
     fomula                                   | expected
-    ${['999', '*', '999']}                   | ${'998001'}
-    ${['-999', '*', '999']}                  | ${'-998001'}
-    ${['999', '*', '-999']}                  | ${'-998001'}
-    ${['-999', '*', '-999']}                 | ${'998001'}
-    ${['9.920279440699441e+23', '*', '999']} | ${'9.910359161258741e+26'}
-    ${['1.7976931348623157e+308', '*', '9']} | ${'오류'}
+    ${['999', 'X', '999']}                   | ${'998001'}
+    ${['-999', 'X', '999']}                  | ${'-998001'}
+    ${['999', 'X', '-999']}                  | ${'-998001'}
+    ${['-999', 'X', '-999']}                 | ${'998001'}
+    ${['9.920279440699441e+23', 'X', '999']} | ${'9.910359161258741e+26'}
+    ${['1.7976931348623157e+308', 'X', '9']} | ${'오류'}
   `('can multiply two numbers', ({ fomula, expected }) => {
     const result = Calculator(fomula).enter('=');
     expect(result.value).toBe(expected);
@@ -58,7 +58,7 @@ describe('Calculator', () => {
     ${['13', '+', '13']} | ${'0'}
     ${['오류']}          | ${'0'}
   `('can be initialized by all clear action', ({ fomula, expected }) => {
-    const result = Calculator(fomula).enter('ac');
+    const result = Calculator(fomula).enter('AC');
     expect(result.value).toBe(expected);
   });
 
@@ -73,15 +73,15 @@ describe('Calculator', () => {
   });
 
   it('replaces an previous operator if new input is also an operator', () => {
-    const result = Calculator(['1', '+']).enter('*');
-    expect(result.value).toBe('1 *');
+    const result = Calculator(['1', '+']).enter('X');
+    expect(result.value).toBe('1 X');
   });
 
   it.each`
     fomula        | input  | expected
     ${['1', '+']} | ${'-'} | ${'1 + -'}
     ${['1', '-']} | ${'-'} | ${'1 - -'}
-    ${['1', '*']} | ${'-'} | ${'1 * -'}
+    ${['1', 'X']} | ${'-'} | ${'1 X -'}
     ${['1', '/']} | ${'-'} | ${'1 / -'}
   `(
     'treats minus operator after other operator as negative',
@@ -93,12 +93,24 @@ describe('Calculator', () => {
 
   it.each`
     fomula             | input  | expected
-    ${['1', '*', '-']} | ${'+'} | ${'1 * -'}
-    ${['1', '*', '-']} | ${'-'} | ${'1 * -'}
-    ${['1', '*', '-']} | ${'*'} | ${'1 * -'}
-    ${['1', '*', '-']} | ${'/'} | ${'1 * -'}
+    ${['1', 'X', '-']} | ${'+'} | ${'1 X -'}
+    ${['1', 'X', '-']} | ${'-'} | ${'1 X -'}
+    ${['1', 'X', '-']} | ${'X'} | ${'1 X -'}
+    ${['1', 'X', '-']} | ${'/'} | ${'1 X -'}
   `(
     'ignores entered operator after negative minus',
+    ({ fomula, input, expected }) => {
+      const result = Calculator(fomula).enter(input);
+      expect(result.value).toBe(expected);
+    }
+  );
+
+  it.each`
+    fomula             | input  | expected
+    ${['5', 'X', '-']} | ${'1'} | ${'5 X -1'}
+    ${['5', '-']}      | ${'1'} | ${'5 - 1'}
+  `(
+    'makes negative number binding minus operator with entered number',
     ({ fomula, input, expected }) => {
       const result = Calculator(fomula).enter(input);
       expect(result.value).toBe(expected);
