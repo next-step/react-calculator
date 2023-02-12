@@ -73,10 +73,19 @@ describe('Calculator', () => {
     expect(result.value).toBe(expected);
   });
 
-  it('replaces an previous operator if new input is also an operator', () => {
-    const result = Calculator(['1', '+']).enter('X');
-    expect(result.value).toBe('1 X');
-  });
+  it.each`
+    fomula        | input  | expected
+    ${['1', '+']} | ${'X'} | ${'1 X'}
+    ${['1', '+']} | ${'/'} | ${'1 /'}
+    ${['1', '+']} | ${'+'} | ${'1 +'}
+    ${['1', '+']} | ${'-'} | ${'1 + -'}
+  `(
+    'replaces an previous operator if new input is also an operator',
+    ({ fomula, input, expected }) => {
+      const result = Calculator(fomula).enter(input);
+      expect(result.value).toBe(expected);
+    }
+  );
 
   it.each`
     fomula        | input  | expected
