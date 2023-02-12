@@ -18,7 +18,7 @@ export type StateType = typeof initialState;
 
 export type ActionType = {
   type: keyof typeof REDUCER_TYPE;
-  payload: any;
+  payload?: any;
   //TODO: payload로 string 값을 보낼 때가 있고 StateType으로 보낼 때가 있음
   // 한 가지로 통일시키는 것이 필요함
 };

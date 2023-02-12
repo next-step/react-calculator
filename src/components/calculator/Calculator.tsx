@@ -1,6 +1,9 @@
 import React, { createContext, PropsWithChildren } from 'react';
 
-import useCalculate, { type StateType } from '../../hooks/useCalculate';
+import useCalculate, {
+  type StateType,
+  type ActionType,
+} from '../../hooks/useCalculate';
 
 import Reset from './Reset';
 import Digits from './Digits';
@@ -8,7 +11,7 @@ import Display from './Display';
 import Operations from './Operations';
 
 interface ContextCalculatorProps extends StateType {
-  dispatch: any;
+  dispatch: React.Dispatch<ActionType>;
 }
 
 export const CalculatorContext = createContext({} as ContextCalculatorProps);
