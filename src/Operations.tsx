@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Operation, operations } from './constants/operations';
-import { calcNumbersWithSelectedOperation } from './utils';
+import { operations } from './constants/operations';
+import type { Operation } from './constants/operations';
+
+import { sum, divide, multiple, subtract } from './utils';
 
 interface OperationsProps {
   historyStateBundle: [number, Dispatch<SetStateAction<number>>];
@@ -63,6 +65,40 @@ function changeToExpressionNumber(number: number): string {
   }
 
   return String(number);
+}
+
+interface calcNumbersWithSelectedOperationProps {
+  operation: Operation;
+  num1: number;
+  num2: number;
+}
+
+export function calcNumbersWithSelectedOperation({
+  operation,
+  num1,
+  num2,
+}: calcNumbersWithSelectedOperationProps) {
+  if (!num1 && !num2) return 0;
+  if (!num1) return num2;
+  if (!num2) return num1;
+
+  switch(operation) {
+    case('+'): {
+      return sum(num1, num2);
+    }
+    case('-'): {
+      return subtract(num1, num2);
+    }
+    case('X'): {
+      return multiple(num1, num2);
+    }
+    case('/'): {
+      return divide(num1, num2);
+    }
+    default: {
+      return num2;
+    }
+  }
 }
 
 export { Operations };
