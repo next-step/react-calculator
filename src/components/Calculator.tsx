@@ -1,70 +1,39 @@
-import Button from './Button';
-
 import useCalculator from 'hooks/useCalculator';
 
-import { OPERATION, DIGIT, MAX_LENGTH, ERROR_MESSAGE } from 'constant';
-import type { ValueOf } from 'types';
-
-type Digit = ValueOf<typeof DIGIT>;
-type Operation = ValueOf<typeof OPERATION>;
+import { Digit, OPERATION } from 'constants/calculator';
+import { ERROR_MESSAGE } from 'constants/message';
+import { isInfinity } from 'utils';
 
 function Calculator() {
-  const { calculator, calculate, clear, setOperand, setOperation } = useCalculator();
-  const { accumulator, augend, addend, operation } = calculator;
+  const { calculator, handleClickAllClear, handleClickDigit, handleClickOperation } = useCalculator();
+  const { accumulator, leftOperand } = calculator;
 
-  const handleDigitButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    if (!operation && String(augend).length >= MAX_LENGTH) {
-      alert(ERROR_MESSAGE.MAX_LENGTH);
-      return;
-    }
-
-    if (operation && String(addend).length >= MAX_LENGTH) {
-      alert(ERROR_MESSAGE.MAX_LENGTH);
-      return;
-    }
-
-    const digit = e.currentTarget.textContent as Digit;
-    setOperand(digit);
-  };
-
-  const handleOperationButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    if (!augend) {
-      alert(ERROR_MESSAGE.NUMBER_FIRST);
-      return;
-    }
-
-    const operation = e.currentTarget.textContent as Operation;
-    const isCalcultateOperation = operation === OPERATION.CALCULATE;
-
-    if (isCalcultateOperation) {
-      calculate();
-      return;
-    }
-
-    setOperation(operation);
-  };
+  const total = isInfinity(leftOperand) ? ERROR_MESSAGE.INIFINITY : accumulator;
 
   return (
     <div className="calculator">
-      <h1 id="total">{accumulator}</h1>
+      <h1 id="total">{total}</h1>
       <div className="digits flex">
-        {Object.values(DIGIT).map((digit) => (
-          <Button key={digit} className="digit" onClick={handleDigitButton}>
+        {Object.values(Digit).map((digit) => (
+          <button key={digit} className="digit" onClick={handleClickDigit}>
             {digit}
-          </Button>
+          </button>
         ))}
       </div>
       <div className="modifiers subgrid">
-        <Button className="modifier" onClick={clear}>
+        <button className="modifier" onClick={handleClickAllClear}>
           AC
-        </Button>
+        </button>
       </div>
       <div className="operations subgrid">
         {Object.values(OPERATION).map((operation) => (
-          <Button key={operation} className="operation" onClick={handleOperationButton}>
+          <button key={operation} className="operation" onClick={handleClickOperation}>
             {operation}
-          </Button>
+          </button>
         ))}
+        <button className="operation" onClick={handleClickOperation}>
+          =
+        </button>
       </div>
     </div>
   );

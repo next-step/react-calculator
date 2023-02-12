@@ -1,10 +1,19 @@
 import { useReducer } from 'react';
 
-import { OPERATION, DIGIT, ERROR_MESSAGE } from 'constant';
-import { calculate } from 'utils';
+import {
+  ICalculator,
+  calculate,
+  updateOperation,
+  updateOperand,
+  updateAccumulator,
+  isOperandMaxLength,
+} from 'components/Calculator/CalculatorModel';
+
+import { OPERATION, Digit } from 'constants/calculator';
+import { ERROR_MESSAGE } from 'constants/message';
+import { isInfinity } from 'utils';
 import type { ValueOf } from 'types';
 
-type Digit = ValueOf<typeof DIGIT>;
 type Operation = ValueOf<typeof OPERATION>;
 
 const ACTION_TYPE = {
@@ -30,71 +39,30 @@ type Action =
       type: typeof ACTION_TYPE.CLEAR;
     };
 
-interface ICalculator {
-  total: number;
-  addend: number;
-  augend: number;
-  accumulator: string;
-  operation: Operation | null;
-}
-
 const initialState: ICalculator = {
-  total: 0,
-  addend: 0,
-  augend: 0,
-  accumulator: '0',
+  leftOperand: 0,
+  rightOperand: null,
   operation: null,
+  accumulator: '0',
 };
 
 function reducer(state: ICalculator, action: Action) {
-  const { operation, addend, augend } = state;
-
   switch (action.type) {
     case ACTION_TYPE.OPERAND:
-      if (!operation) {
-        const newAugend = Number('' + augend + action.payload);
-        const newAccumulator = String(newAugend);
-
-        return {
-          ...state,
-          augend: newAugend,
-          accumulator: newAccumulator,
-        };
-      } else {
-        const newAddend = Number('' + addend + action.payload);
-        const newAccumulator = augend + operation + newAddend;
-
-        return {
-          ...state,
-          addend: newAddend,
-          accumulator: newAccumulator,
-        };
-      }
-    case ACTION_TYPE.OPERATION: {
-      const newAccumulator = augend + action.payload;
-
       return {
         ...state,
-        operation: action.payload,
-        addend: 0,
-        accumulator: newAccumulator,
+        ...updateAccumulator(updateOperand(state, action.payload)),
+      };
+    case ACTION_TYPE.OPERATION: {
+      return {
+        ...state,
+        ...updateAccumulator(updateOperation(state, action.payload)),
       };
     }
     case ACTION_TYPE.CALCULATE:
-      if (!operation) {
-        throw new Error('Missing Operation');
-      }
-
-      const total = calculate(augend, addend, operation);
-      const isInfinity = total === Infinity;
-
       return {
         ...state,
-        total,
-        operation: null,
-        augend: isInfinity ? 0 : total,
-        addend: 0,
-        accumulator: isInfinity ? ERROR_MESSAGE.INIFINITY : String(total),
+        ...updateAccumulator(calculate(state)),
       };
     case ACTION_TYPE.CLEAR:
       return {
@@ -107,30 +75,53 @@ function reducer(state: ICalculator, action: Action) {
 
 const useCalculator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { leftOperand } = state;
 
-  const setOperand = (digit: Digit) => {
-    dispatch({ type: ACTION_TYPE.OPERAND, payload: digit });
-  };
-
-  const setOperation = (operation: Operation) => {
-    dispatch({ type: ACTION_TYPE.OPERATION, payload: operation });
-  };
-
-  const calculate = () => {
-    dispatch({ type: ACTION_TYPE.CALCULATE });
-  };
-
-  const clear = () => {
+  const handleClickAllClear = () => {
     dispatch({ type: ACTION_TYPE.CLEAR });
+  };
+
+  const handleClickDigit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (isInfinity(leftOperand)) {
+      alert(ERROR_MESSAGE.HAVE_TO_ALL_CLEAR);
+      return;
+    }
+
+    if (isOperandMaxLength(state)) {
+      alert(ERROR_MESSAGE.MAX_LENGTH);
+      return;
+    }
+
+    const digit = e.currentTarget.textContent;
+    if (isDigit(digit)) {
+      dispatch({ type: ACTION_TYPE.OPERAND, payload: digit });
+    }
+  };
+
+  const handleClickOperation: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (isInfinity(leftOperand)) {
+      alert(ERROR_MESSAGE.HAVE_TO_ALL_CLEAR);
+      return;
+    }
+
+    const operation = e.currentTarget.textContent;
+    if (isOperation(operation)) {
+      dispatch({ type: ACTION_TYPE.OPERATION, payload: operation });
+      return;
+    }
+
+    dispatch({ type: ACTION_TYPE.CALCULATE });
   };
 
   return {
     calculator: state,
-    setOperand,
-    setOperation,
-    calculate,
-    clear,
+    handleClickDigit,
+    handleClickOperation,
+    handleClickAllClear,
   };
 };
+
+const isDigit = (arg: any): arg is Digit => arg !== undefined;
+const isOperation = (arg: any): arg is Operation => Object.values(OPERATION).includes(arg);
 
 export default useCalculator;
