@@ -1,13 +1,19 @@
-export const Operation = () => {
+import { OPERATORS } from "../constants";
+
+type Props = {
+  operate: (operator: any) => void;
+};
+
+export const Operation = ({ operate }: Props) => {
   return (
     <>
-      <div className="operations subgrid">
-        <button className="operation">/</button>
-        <button className="operation">X</button>
-        <button className="operation">-</button>
-        <button className="operation">+</button>
-        <button className="operation">=</button>
+      <div className="operations subgrid" onClick={operate}>
+        {OPERATORS.map((operator) => (
+          <button key={operator} value={operator}>
+            {operator}
+          </button>
+        ))}
       </div>
     </>
   );
-}
+};

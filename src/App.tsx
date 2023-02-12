@@ -1,17 +1,8 @@
-import { AllClear } from "./components/AllClear";
-import { NumberPad } from "./components/NumberPad";
-import { Operation } from "./components/Operation";
-import { Total } from "./components/Total";
-
+import { Calculator } from "./components/calculator";
 function App() {
   return (
     <>
-      <div className="calculator">
-        <Total />
-        <NumberPad />
-        <AllClear />
-        <Operation />
-      </div>
+      <Calculator />
     </>
   );
 }
