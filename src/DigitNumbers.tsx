@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] as const;
 
 interface DigitNumbersProps {
   isNeedInitStateBundle: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
