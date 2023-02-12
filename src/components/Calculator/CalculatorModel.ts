@@ -1,4 +1,4 @@
-import { Digit, OPERATION } from 'constants/calculator';
+import { Digit, OPERATION, MAX_LENGTH } from 'constants/calculator';
 import type { ValueOf } from 'types';
 
 type Operation = ValueOf<typeof OPERATION>;
@@ -69,5 +69,16 @@ const calculate = (calcaultor: ICalculator) => {
   };
 };
 
-export { updateAccumulator, updateOperand, updateOperation, calculate };
+const isOperandMaxLength = (calcaultor: ICalculator) => {
+  const { leftOperand, rightOperand, operation } = calcaultor;
+
+  const isLeftOperandMaxLength = !operation && String(leftOperand).length >= MAX_LENGTH;
+
+  const hasRightOperand = Boolean(operation) && rightOperand !== null;
+  const isRightOperandMaxLength = hasRightOperand && String(rightOperand).length >= MAX_LENGTH;
+
+  return isLeftOperandMaxLength || isRightOperandMaxLength;
+};
+
+export { updateAccumulator, updateOperand, updateOperation, calculate, isOperandMaxLength };
 export type { ICalculator };
