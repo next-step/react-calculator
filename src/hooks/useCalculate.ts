@@ -1,75 +1,88 @@
-import { useCallback, useRef, useState } from 'react';
-import { operations } from '../constants';
-import { calculate } from '../utils';
+import { useRef, useState } from 'react';
+import { OPERATORS, Operation } from '../constants';
+import { calculations, isNumber, isOperator } from '../utils';
 
 const useCalculate = () => {
-  const [total, setTotal] = useState<number>(0);
-
-  const operatorRef = useRef<((next: number) => number) | null>();
+  const [result, setResult] = useState<number | null>(null);
   const prevNumberRef = useRef<number | null>(null);
+  const operatorRef = useRef<Exclude<Operation, '='> | null>(null);
+  const isPositive = useRef(true);
+  const isDirty = result !== null;
 
-  const operate = (operation: keyof typeof operations) => {
-    const isClickOperationBefore = prevNumberRef.current === null;
-
-    if (operations[operation] === operations.SUBTRACT) {
-      setTotal(-total);
-      prevNumberRef.current = -total;
-      return;
-    }
-
-    if (isClickOperationBefore) {
-      operatorRef.current = calculate[operation](total);
-      return;
-    }
-
-    const nextTotalValue = operatorRef.current
-      ? Math.floor(operatorRef.current(total))
-      : total;
-
-    operatorRef.current = calculate[operation](nextTotalValue);
-    setTotal(nextTotalValue);
-    prevNumberRef.current = null;
-  };
-
-  const isLimitLength = (number: number) => {
-    const LIMIT_NUMBER_LENGTH = 3;
-
-    return Math.abs(number).toString().length >= LIMIT_NUMBER_LENGTH;
-  };
-
-  const insertDigit = useCallback((digit: number) => {
-    const prevNumber = prevNumberRef.current;
-
-    setTotal((prevTotal) => {
-      if (prevNumber === null) {
-        prevNumberRef.current = digit;
+  const handleDigit = (digit: number) => {
+    setResult((prev) => {
+      if (prev === null) {
         return digit;
       }
 
-      if (isLimitLength(prevTotal)) {
-        prevNumberRef.current = prevTotal;
-        return prevTotal;
-      }
-
-      const newNumber =
-        prevNumber < 0 ? prevNumber * 10 - digit : prevNumber * 10 + digit;
-
-      prevNumberRef.current = newNumber;
-      return newNumber;
+      const newNumber = prev * 10 + digit;
+      return newNumber < 1000 ? newNumber : prev;
     });
-  }, []);
+  };
 
-  const clear = useCallback(() => {
-    setTotal(0);
-    operatorRef.current = null;
+  const handleOperator = (input: Operation) => {
+    if (!isDirty) {
+      if (input === OPERATORS.SUBTRACT) {
+        isPositive.current = false;
+      }
+      if (input === OPERATORS.ADD) {
+        isPositive.current = true;
+      }
+      return;
+    }
+
+    if (input === OPERATORS.EQUAL) {
+      if (operatorRef.current === null) return;
+      if (prevNumberRef.current === null) return;
+
+      const calculate = calculations[operatorRef.current];
+      const newResult = calculate(prevNumberRef.current, result);
+      clear();
+      setResult(newResult);
+      return;
+    }
+
+    /**
+     * 이전연산자가 없는 경우 (초기상태)
+     */
+    if (operatorRef.current === null) {
+      prevNumberRef.current = isPositive.current ? result : -result;
+      operatorRef.current = input;
+      setResult(null);
+      return;
+    }
+
+    const calculate = calculations[operatorRef.current];
+    const newResult = calculate(prevNumberRef.current ?? 0, result);
+    prevNumberRef.current = newResult;
+    operatorRef.current = input;
+    setResult(null);
+  };
+
+  const handleInput = (input: string | number) => {
+    if (isOperator(input)) {
+      handleOperator(input);
+      return;
+    }
+
+    if (isNumber(input)) {
+      handleDigit(input);
+    }
+  };
+
+  const clear = () => {
+    isPositive.current = true;
     prevNumberRef.current = null;
-  }, [setTotal]);
+    operatorRef.current = null;
+    setResult(null);
+  };
+
+  const total = result !== null ? result : prevNumberRef.current ?? 0;
 
   return {
-    total,
-    insertDigit,
-    operate,
     clear,
+    handleInput,
+    result: total,
   };
 };
 
