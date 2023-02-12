@@ -1,14 +1,9 @@
 import useCalculator from 'components/calculator/hooks/useCalculator';
 
 import { Digit, OPERATION } from 'constants/calculator';
-import { ERROR_MESSAGE } from 'constants/message';
-import { isInfinity } from 'utils';
 
 function Calculator() {
-  const { calculator, handleClickAllClear, handleClickDigit, handleClickOperation } = useCalculator();
-  const { accumulator, leftOperand } = calculator;
-
-  const total = isInfinity(leftOperand) ? ERROR_MESSAGE.INIFINITY : accumulator;
+  const { total, handleClickAllClear, handleClickDigit, handleClickOperation } = useCalculator();
 
   return (
     <div className="calculator">

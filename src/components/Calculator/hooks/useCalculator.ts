@@ -75,7 +75,9 @@ function reducer(state: ICalculator, action: Action) {
 
 const useCalculator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { leftOperand } = state;
+  const { leftOperand, accumulator } = state;
+
+  const total = isInfinity(leftOperand) ? ERROR_MESSAGE.INIFINITY : accumulator;
 
   const handleClickAllClear = () => {
     dispatch({ type: ACTION_TYPE.CLEAR });
@@ -118,6 +120,7 @@ const useCalculator = () => {
     handleClickDigit,
     handleClickOperation,
     handleClickAllClear,
+    total,
   };
 };
 
