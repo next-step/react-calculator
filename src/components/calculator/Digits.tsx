@@ -15,21 +15,19 @@ const Digits = () => {
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
     const input = currentNumber + textContent;
+    const isZeroEntered = currentNumber[0] === '0' && textContent === '0';
 
     if (input.length > MAX_INPUT_NUMBER) {
       return alert(MESSAGES.DIGIT.MAX_LENGTH);
     }
-    if (currentNumber === '' && textContent === '0') {
+    if (isZeroEntered) {
       return;
     }
 
     dispatch({
       type: REDUCER_TYPE.INPUT_DIGIT,
       payload: {
-        total:
-          !total && currentNumber
-            ? currentNumber + textContent
-            : total + textContent,
+        total: !total && currentNumber ? input : total + textContent,
         currentNumber: input,
       },
     });

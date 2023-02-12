@@ -4,8 +4,9 @@ import Button from '../@common/Button';
 import { CalculatorContext } from './Calculator';
 
 import { REDUCER_TYPE } from '../../hooks/useCalculate';
-import { MESSAGES } from '../../constants/messages';
+import { MESSAGES, NUMBER_ERROR } from '../../constants/messages';
 import { OPERATIONS, type OperationType } from '../../constants/calculate';
+import { isValidNumber } from '../../utils/validation';
 
 const OPERATORS = Object.keys(OPERATIONS);
 
@@ -15,25 +16,27 @@ const Operations = () => {
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { textContent } = e.target as HTMLDivElement;
+    const isCalculate = beforeNumber && currentNumber;
+    const isEqual = textContent === '=';
 
     if (operator === '' && total === '' && currentNumber === '') {
       return alert(MESSAGES.OPERATOR.NOT_FIRST);
     }
-    if (operator !== '' && textContent !== '=') {
-      return;
-    }
-    if (!(beforeNumber && currentNumber) && textContent === '=') {
+
+    // operator가 비어있지 않은 상태에서 등호 기호를 누르지 않은 상황이거나
+    // 계산된 값이 모두 입력되어 있지 않을 때 등호 기호를 누른 경우
+    if ((operator !== '' && !isEqual) || (!isCalculate && isEqual)) {
       return;
     }
 
-    if (beforeNumber && currentNumber) {
+    if (isCalculate) {
       const result = OPERATIONS[operator as OperationType](
         Number(beforeNumber),
         Number(currentNumber)
       );
       dispatch({
         type: REDUCER_TYPE.CALCULATE,
-        payload: result,
+        payload: isValidNumber(result!) ? result : NUMBER_ERROR,
       });
       return;
     }
