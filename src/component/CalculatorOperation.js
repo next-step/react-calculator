@@ -21,7 +21,7 @@ const CalculatorOperation = () => {
   const onClickReturn = () => {
     setTotal(Math.floor(Number(eval(total))));
     if (eval(total) === Infinity) {
-      setTotal(() => "오류");
+      setTotal("오류");
     }
   };
 
