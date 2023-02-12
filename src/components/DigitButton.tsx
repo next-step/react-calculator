@@ -2,12 +2,12 @@ import React from 'react';
 
 type DigitButtonProps = {
   digit: number;
-  insertDigit: (digit: number) => void;
+  onClick: (digit: number) => void;
 };
 
-function DigitButton({ digit, insertDigit }: DigitButtonProps) {
+function DigitButton({ digit, onClick }: DigitButtonProps) {
   const handleClick = () => {
-    insertDigit(digit);
+    onClick(digit);
   };
 
   return (

@@ -1,11 +1,12 @@
 import React from 'react';
 
 import DigitButton from './components/DigitButton';
-import { operations, DIGITS, OPERATIONS_LIST } from './constants';
+import { DIGITS, ERROR_TEXT, OPERATIONS } from './constants';
 import { useCalculate } from './hooks';
+import OperationButton from './components/OperationButton';
 
 function App() {
-  const { total, operate, insertDigit, clear } = useCalculate();
+  const { result, handleInput, clear } = useCalculate();
 
   const isRange = (value: number) => {
     return value < Number.MAX_SAFE_INTEGER && value > Number.MIN_SAFE_INTEGER;
@@ -13,10 +14,10 @@ function App() {
 
   return (
     <div className="calculator">
-      <h1 id="total">{isRange(total) ? total : '오류'}</h1>
+      <h1 id="total">{isRange(result) ? result : ERROR_TEXT}</h1>
       <div className="digits flex">
         {DIGITS.map((digit) => (
-          <DigitButton key={digit} digit={digit} insertDigit={insertDigit} />
+          <DigitButton key={digit} digit={digit} onClick={handleInput} />
         ))}
       </div>
       <div className="modifiers subgrid">
@@ -25,14 +26,12 @@ function App() {
         </button>
       </div>
       <div className="operations subgrid">
-        {OPERATIONS_LIST.map((operation) => (
-          <button
+        {OPERATIONS.map((operation) => (
+          <OperationButton
             key={operation}
-            className="operation"
-            onClick={() => operate(operation)}
-          >
-            {operations[operation]}
-          </button>
+            operation={operation}
+            onClick={handleInput}
+          />
         ))}
       </div>
     </div>
