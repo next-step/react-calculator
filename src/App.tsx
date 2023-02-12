@@ -2,18 +2,6 @@ import React, {useState} from "react";
 import "./App.css";
 
 /**
- * 현재 누른 값
- *  - 오퍼레이션
- *    - 이전에 눌린값이 오퍼레이션: 누적값 변경없음, 현재값 변경없음
- *    - 이전에 눌린값이 넘버: 누적값: 누적값 + 현재값, 현재값 변경없음
- *    - 이전에 눌린값이 없을 경우: 누적값 변경없음, 현재값 변경없음
- *  - 숫자
- *    - 이전에 눌린값이 오퍼레이션: 누적값 변경없음, 현재값 눌린값으로 업데이트
- *    - 이전에 눌린값이 넘버: 누적값 변경없음, 현재값: 현재값 + 눌린값으로 업데이트
- *    - 이전에 눌린값이 없을 경우: 누적값 변경없음, 현재값 변경없음
- */
-
-/**
  * - calculator
  *    - digits
  *      - digit (상태변화 필요없음), 이벤트 전파만 필요
@@ -82,6 +70,7 @@ function App() {
   const resetResult = () => {
     setResult("0");
     setTemp(null);
+    setIsActiveOperation(false);
   };
 
   const setOperand = (numeric: string) => {
@@ -91,8 +80,8 @@ function App() {
     console.log(isActiveOperation);
     if (isActiveOperation) {
       setResult(numeric);
-      console.log(numeric, result);
       setIsActiveOperation(false);
+      return;
     }
     // string으로 받을까 number로 받을까 고민 필요
     if (current.toString().length > 3) {
