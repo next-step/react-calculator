@@ -16,3 +16,9 @@
 .subgrid {
   display: grid;
 }
+
+.modifiers {
+  grid-area: modif;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
