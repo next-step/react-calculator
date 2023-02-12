@@ -1,5 +1,5 @@
-import DigitButton from '@components/digitButton'
-import OperationButton from '@components/operationButton'
+import DigitButton from '@components/DigitButton'
+import OperationButton from '@components/OperationButton'
 
 import { DIGIT_NUMBER, OPERATIONS } from '@/constant/calculator'
 
