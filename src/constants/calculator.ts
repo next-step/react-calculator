@@ -18,6 +18,4 @@ const OPERATION = {
   PLUS: '+',
 } as const;
 
-const CALCULATE = '=';
-
-export { Digit, OPERATION, CALCULATE };
+export { Digit, OPERATION };
