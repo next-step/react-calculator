@@ -5,11 +5,9 @@ import { CalculatorContext } from './Calculator';
 
 import { REDUCER_TYPE } from '../../hooks/useCalculate';
 import { MESSAGES } from '../../constants/messages';
-import {
-  OPERATORS,
-  OPERATIONS,
-  type OperationType,
-} from '../../constants/calculate';
+import { OPERATIONS, type OperationType } from '../../constants/calculate';
+
+const OPERATORS = Object.keys(OPERATIONS);
 
 const Operations = () => {
   const { total, beforeNumber, currentNumber, operator, dispatch } =

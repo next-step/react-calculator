@@ -5,7 +5,9 @@ import { CalculatorContext } from './Calculator';
 
 import { REDUCER_TYPE } from '../../hooks/useCalculate';
 import { MESSAGES } from '../../constants/messages';
-import { DIGITS, MAX_INPUT_NUMBER } from '../../constants/calculate';
+import { MAX_INPUT_NUMBER } from '../../constants/calculate';
+
+export const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
 const Digits = () => {
   const { total, currentNumber, dispatch } = useContext(CalculatorContext);
