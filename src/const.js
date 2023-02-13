@@ -11,4 +11,7 @@ export const DIGIT_NUMBERS = Object.freeze([
   "0",
 ]);
 export const OPERATORS = Object.freeze(["/", "X", "-", "+", "="]);
-export const MAX_NUMBER = 1000;
+export const MAX_NUMBER = 999;
+export const MESSAGE = {
+  MAX_NUMBER: "세 자리 수 이상은 입력할 수 없습니다!",
+};
