@@ -1,8 +1,8 @@
+import { MAX_DIGIT_LENGTH } from '../../../constants/calculator';
 import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
 import Digit from './Digit';
 
 const digitList = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-const MAX_DIGIT_LENGTH = 3;
 
 const Digits = () => {
   const { calculator, addFirstDigit, addSecondDigit } = useCalculator();
