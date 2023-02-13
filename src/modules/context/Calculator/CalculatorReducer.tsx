@@ -22,11 +22,13 @@ export const defaultValue: DefaultValueState = {
 };
 
 function getTotal(state: DefaultValueState): string {
-  let total = 0;
-  const firstNum = Number(state.firstDigits);
-  const secondNum = Number(state.secondDigits);
+  const { firstDigits, secondDigits, operation } = state;
 
-  switch (state.operation) {
+  let total = 0;
+  const firstNum = Number(firstDigits);
+  const secondNum = Number(secondDigits);
+
+  switch (operation) {
     case '+':
       total = firstNum + secondNum;
       break;
