@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { arithmetic } from '../utils/arithmetic';
 
-import { ERROR_MESSAGE } from '../constants/error';
+import { ERROR_MESSAGE, ERROR_TEXT } from '../constants/error';
 
 const MAX_LENGHT = 3;
 
@@ -40,7 +40,12 @@ const useExpression = () => {
     const number = expression.number.map(Number);
     const operation = expression.operation[0];
 
-    const result = arithmetic(number[0], number[1], operation);
+    const result = arithmetic[operation]?.(number[0], number[1]);
+
+    if (!result) {
+      alert(ERROR_MESSAGE.NOT_ALLOWED);
+      return resetExpression(ERROR_TEXT);
+    }
 
     return resetExpression(result);
   };
