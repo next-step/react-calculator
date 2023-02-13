@@ -1,9 +1,8 @@
-interface Props {
+interface ACProps {
   allClear: () => void;
 }
 
-const AC = (props: Props) => {
-  const { allClear } = props;
+const AC = ({ allClear }: ACProps) => {
   return (
     <div className="modifiers subgrid">
       <button className="modifier" onClick={allClear}>

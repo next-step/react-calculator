@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { OperationType } from "../components/Opertaions";
+import { floorToString } from "../utils/floorToString";
+import { OperationType } from "../utils/types";
+
+const MAX_INPUT_LENGTH = 3;
 
 const useCalculate = () => {
   const [firstNumber, setFirstNumber] = useState("");
@@ -17,55 +20,52 @@ const useCalculate = () => {
   };
 
   const firstNumberHandler = (num: number) => {
-    if (firstNumber.length >= 3) return;
-    const number = firstNumber + num;
-    setFirstNumber(number);
+    if (firstNumber.length >= MAX_INPUT_LENGTH) return;
+    setFirstNumber((prevValue) => prevValue + num);
   };
   const secondNumberHandler = (num: number) => {
-    if (secondNumber.length >= 3) return;
-    const number = secondNumber + num;
-    setSecondNumber(number);
+    if (secondNumber.length >= MAX_INPUT_LENGTH) return;
+    setSecondNumber((prevValue) => prevValue + num);
   };
 
   const numHandler = (num: number) => {
-    if (!operation) {
-      firstNumberHandler(num);
-      return;
-    }
+    if (!operation) return firstNumberHandler(num);
     secondNumberHandler(num);
   };
 
   const getResultValue = () => {
     if (!isFinite(resultNumber)) return "오류";
-    if (done) return Math.floor(resultNumber).toString();
-    if (secondNumber) {
-      return secondNumber;
-    } else if (firstNumber) {
-      return firstNumber;
-    }
+    if (done) return floorToString(resultNumber);
+    if (secondNumber) return secondNumber;
+    if (firstNumber) return firstNumber;
     return "0";
   };
 
   const operationHandler = (oper: OperationType) => {
     if (done) {
-      setFirstNumber(Math.floor(resultNumber).toString());
+      setFirstNumber(floorToString(resultNumber));
       setOperation(oper);
       setDone(false);
       return;
     }
-    const num1 = Number(firstNumber);
-    const num2 = Number(secondNumber);
+    const num1 = parseInt(firstNumber);
+    const num2 = parseInt(secondNumber);
     if (!num1) return;
     if (oper === "=") {
       if (num1 && num2) {
-        if (operation === "+") {
-          setResultNumber(num1 + num2);
-        } else if (operation === "-") {
-          setResultNumber(num1 - num2);
-        } else if (operation === "X") {
-          setResultNumber(num1 * num2);
-        } else if (operation === "/") {
-          setResultNumber(num1 / num2);
+        switch (operation) {
+          case "+":
+            setResultNumber(num1 + num2);
+            break;
+          case "-":
+            setResultNumber(num1 - num2);
+            break;
+          case "X":
+            setResultNumber(num1 * num2);
+            break;
+          case "/":
+            setResultNumber(num1 / num2);
+            break;
         }
         setDone(true);
         setOperation(undefined);

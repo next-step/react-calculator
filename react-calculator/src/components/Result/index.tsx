@@ -1,12 +1,10 @@
-import React from "react";
-
-interface Props {
-  value: string;
+interface ResultProps {
+  displayValue: string;
 }
 
-const Result = (props: Props) => {
-  const { value } = props;
-  return <h1 id="total">{value}</h1>;
+const Result = (props: ResultProps) => {
+  const { displayValue } = props;
+  return <h1 id="total">{displayValue}</h1>;
 };
 
 export default Result;

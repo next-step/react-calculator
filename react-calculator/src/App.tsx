@@ -1,5 +1,4 @@
 import AC from "./components/AC";
-import Container from "./components/Container";
 import Numbers from "./components/Numbers";
 import Operations from "./components/Opertaions";
 import Result from "./components/Result";
@@ -10,16 +9,14 @@ function App() {
     useCalculate();
 
   return (
-    <body>
-      <div id="app">
-        <Container>
-          <Result value={getResultValue()} />
-          <Numbers numHandler={numHandler} />
-          <AC allClear={allClear} />
-          <Operations operationHandler={operationHandler} />
-        </Container>
+    <div id="app">
+      <div className="calculator">
+        <Result displayValue={getResultValue()} />
+        <Numbers numHandler={numHandler} />
+        <AC allClear={allClear} />
+        <Operations operationHandler={operationHandler} />
       </div>
-    </body>
+    </div>
   );
 }
 

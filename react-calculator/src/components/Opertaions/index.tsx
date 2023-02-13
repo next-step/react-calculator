@@ -1,17 +1,21 @@
-export type OperationType = "/" | "X" | "-" | "+" | "=";
+import { operations } from "../../utils/constants";
+import { OperationType } from "../../utils/types";
 
-interface Props {
+interface OperationsProps {
   operationHandler: (operation: OperationType) => void;
 }
 
-const Operation = (props: Props) => {
+const Operation = (props: OperationsProps) => {
   const { operationHandler } = props;
-  const operations: OperationType[] = ["/", "X", "-", "+", "="];
   return (
     <div className="operations subgrid">
-      {operations.map((oper) => (
-        <button className="operation" onClick={() => operationHandler(oper)}>
-          {oper}
+      {operations.map((operation) => (
+        <button
+          key={operation}
+          className="operation"
+          onClick={() => operationHandler(operation)}
+        >
+          {operation}
         </button>
       ))}
     </div>

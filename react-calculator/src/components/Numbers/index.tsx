@@ -1,24 +1,25 @@
-import React from "react";
-
-interface Props {
+interface NumbersProps {
   numHandler: (num: number) => void;
 }
 
-const range = (limit: number) => {
-  const result = [];
-  for (let i = 0; i < limit; i++) {
-    result.push(i);
-  }
-  return result;
-};
+const LIMIT_COUNT = 10;
 
-const Numbers = (props: Props) => {
+const NUMBER_ARRAY = Array.from(
+  { length: LIMIT_COUNT },
+  (_, index) => index
+).reverse();
+
+const Numbers = (props: NumbersProps) => {
   const { numHandler } = props;
-  const numbers = range(10).reverse();
+
   return (
     <div className="digits flex">
-      {numbers.map((number) => (
-        <button className="digit" onClick={() => numHandler(number)}>
+      {NUMBER_ARRAY.map((number) => (
+        <button
+          key={number.toString()}
+          className="digit"
+          onClick={() => numHandler(number)}
+        >
           {number}
         </button>
       ))}
