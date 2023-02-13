@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
 import Digit from './Digit';
 

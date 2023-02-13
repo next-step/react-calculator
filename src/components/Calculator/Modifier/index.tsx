@@ -1,5 +1,4 @@
-import React from "react";
-import { useCalculator } from "../../../modules/context/Calculator/CalculatorContext";
+import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
 
 const Modifier = () => {
   const { reset } = useCalculator();

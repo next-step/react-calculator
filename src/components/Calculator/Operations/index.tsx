@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
 import { OperationType } from '../../../types/calculator';
 import Operation from './Operation';

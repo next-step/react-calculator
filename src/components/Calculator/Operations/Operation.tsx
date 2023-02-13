@@ -1,4 +1,3 @@
-import React from 'react';
 import { OperationType } from '../../../types/calculator';
 
 interface OperationProps {

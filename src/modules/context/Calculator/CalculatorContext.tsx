@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { OperationType } from '../../../types/calculator';
 import {
   ADD_FIRST_DIGIT,
