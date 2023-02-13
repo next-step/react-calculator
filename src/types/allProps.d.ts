@@ -13,3 +13,5 @@ export interface IOperationsProps extends ICalculator {}
 export interface ITotalProps extends Omit<ICalculator, "setCalculation"> {}
 
 export interface IUseDigtProps extends ICalculator {}
+
+export interface IUseOperationProps extends ICalculator {}
