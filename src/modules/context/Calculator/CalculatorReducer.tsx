@@ -1,11 +1,11 @@
-import { OperationType } from "../../../components/Calculator/Operations/Operation";
+import { OperationType } from '../../../types/calculator';
 import {
   ActionType,
   ADD_FIRST_DIGIT,
   ADD_OPERATION,
   ADD_SECOND_DIGIT,
   RESET,
-} from "./CalculatorActionType";
+} from './CalculatorActionType';
 
 export interface DefaultValueState {
   total: string;
@@ -15,9 +15,9 @@ export interface DefaultValueState {
 }
 
 export const defaultValue: DefaultValueState = {
-  total: "",
-  firstDigits: "0",
-  secondDigits: "0",
+  total: '',
+  firstDigits: '0',
+  secondDigits: '0',
   operation: undefined,
 };
 
@@ -27,23 +27,23 @@ function getTotal(state: DefaultValueState): string {
   const secondNum = Number(state.secondDigits);
 
   switch (state.operation) {
-    case "+":
+    case '+':
       total = firstNum + secondNum;
       break;
-    case "-":
+    case '-':
       total = firstNum - secondNum;
       break;
-    case "X":
+    case 'X':
       total = firstNum * secondNum;
       break;
-    case "/":
+    case '/':
       total = Math.floor(firstNum / secondNum);
       break;
   }
   if (Number.isFinite(total)) {
     return total.toString();
   }
-  return "ERROR";
+  return 'ERROR';
 }
 
 function CalculatorReducer(
@@ -52,10 +52,10 @@ function CalculatorReducer(
 ): DefaultValueState {
   switch (action.type) {
     case ADD_FIRST_DIGIT: {
-      if (state.firstDigits === "0") {
+      if (state.firstDigits === '0') {
         return {
           ...state,
-          total: "",
+          total: '',
           firstDigits: action.digit,
         };
       }
@@ -65,7 +65,7 @@ function CalculatorReducer(
       };
     }
     case ADD_SECOND_DIGIT: {
-      if (state.secondDigits === "0") {
+      if (state.secondDigits === '0') {
         return {
           ...state,
           secondDigits: action.digit,
@@ -77,7 +77,7 @@ function CalculatorReducer(
       };
     }
     case ADD_OPERATION: {
-      if (action.operation === "=") {
+      if (action.operation === '=') {
         return {
           ...defaultValue,
           total: getTotal(state),

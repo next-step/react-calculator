@@ -1,8 +1,9 @@
-import React from "react";
-import { useCalculator } from "../../../modules/context/Calculator/CalculatorContext";
-import Operation, { OperationType } from "./Operation";
+import React from 'react';
+import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
+import { OperationType } from '../../../types/calculator';
+import Operation from './Operation';
 
-const operationList: OperationType[] = ["/", "X", "-", "+", "="];
+const operationList: OperationType[] = ['/', 'X', '-', '+', '='];
 
 const Operations = () => {
   const { addOperation } = useCalculator();

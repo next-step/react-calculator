@@ -1,6 +1,5 @@
 import React from 'react';
-
-export type OperationType = '/' | 'X' | '-' | '+' | '=';
+import { OperationType } from '../../../types/calculator';
 
 interface OperationProps {
   operation: OperationType;

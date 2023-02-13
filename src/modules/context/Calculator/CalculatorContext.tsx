@@ -1,15 +1,15 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { OperationType } from "../../../components/Calculator/Operations/Operation";
+import React, { createContext, useContext, useReducer } from 'react';
+import { OperationType } from '../../../types/calculator';
 import {
   ADD_FIRST_DIGIT,
   ADD_SECOND_DIGIT,
   ADD_OPERATION,
   RESET,
-} from "./CalculatorActionType";
+} from './CalculatorActionType';
 import CalculatorReducer, {
   defaultValue,
   DefaultValueState,
-} from "./CalculatorReducer";
+} from './CalculatorReducer';
 
 interface ContextProps {
   readonly calculator: DefaultValueState;
