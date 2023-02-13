@@ -4,12 +4,15 @@ import './App.css';
 import Digit from '@/components/calculator/digit/Digit';
 import Modifier from '@/components/calculator/modifier/Modifier';
 import Operation from '@/components/calculator/operation/Operation';
+import Total from '@/components/calculator/total/Total';
+
+import changeDecimal from './lib';
 
 function App() {
   const [calc, setCalc] = useState('0');
 
   useEffect(() => {
-    if (parseInt(calc, 10) === Infinity) {
+    if (changeDecimal(calc) === Infinity) {
       setCalc('오류');
     }
   }, [calc]);
@@ -17,7 +20,7 @@ function App() {
   return (
     <div id="app">
       <div className="calculator">
-        <h1 id="total">{calc}</h1>
+        <Total calc={calc} />
 
         <Digit calc={calc} setCalc={setCalc} />
 
