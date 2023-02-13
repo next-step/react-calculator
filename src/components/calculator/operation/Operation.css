@@ -1,0 +1,7 @@
+.operations button {
+  background-color: orange;
+}
+
+.operations {
+  grid-area: oper;
+}
