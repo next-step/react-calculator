@@ -1,6 +1,6 @@
 type Operator = 'X' | '/' | '+' | '-'
 
-export const calculator = {
+export const calculateByOperator = {
   '+': (a: number, b: number) => a + b,
   '-': (a: number, b: number) => a - b,
   X: (a: number, b: number) => a * b,
@@ -13,7 +13,7 @@ export const calculate = (expression: string) => {
   let result = numbers[0]
 
   for (let i = 0; i < operators.length; i++) {
-    result = calculator[operators[i]](result, numbers[i + 1])
+    result = calculateByOperator[operators[i]](result, numbers[i + 1])
   }
 
   return result.toString()
