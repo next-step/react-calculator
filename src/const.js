@@ -11,3 +11,4 @@ export const DIGIT_NUMBERS = Object.freeze([
   "0",
 ]);
 export const OPERATORS = Object.freeze(["/", "X", "-", "+", "="]);
+export const MAX_NUMBER = 1000;
