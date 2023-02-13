@@ -1,3 +1,10 @@
+import {
+  DIVIDE,
+  EROOR,
+  MINUS,
+  MULTIPLY,
+  PLUS,
+} from '../../../constants/calculator';
 import { OperationType } from '../../../types/calculator';
 import {
   ActionType,
@@ -29,23 +36,23 @@ function getTotal(state: DefaultValueState): string {
   const secondNum = Number(secondDigits);
 
   switch (operation) {
-    case '+':
+    case PLUS:
       total = firstNum + secondNum;
       break;
-    case '-':
+    case MINUS:
       total = firstNum - secondNum;
       break;
-    case 'X':
+    case MULTIPLY:
       total = firstNum * secondNum;
       break;
-    case '/':
+    case DIVIDE:
       total = Math.floor(firstNum / secondNum);
       break;
   }
   if (Number.isFinite(total)) {
     return total.toString();
   }
-  return 'ERROR';
+  return EROOR;
 }
 
 function CalculatorReducer(
