@@ -31,15 +31,3 @@ button {
   font-size: 2rem;
   border: 0.5px solid #98999b;
 }
-
-#total {
-  grid-area: total;
-  background-color: #333;
-  color: white;
-  margin: 0;
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  font-size: 4rem;
-}

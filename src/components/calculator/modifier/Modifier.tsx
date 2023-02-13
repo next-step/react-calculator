@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import './Modifier.css';
 
-type PropsType = {
+type Props = {
   setCalc: Dispatch<SetStateAction<string>>;
 };
 
-const Modifier = ({ setCalc }: PropsType) => {
+const Modifier = ({ setCalc }: Props) => {
   const onClickAC = () => {
     setCalc('0');
   };
