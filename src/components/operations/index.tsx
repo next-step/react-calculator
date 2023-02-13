@@ -3,6 +3,8 @@ import { IOperationsProps } from "../../types/allProps";
 
 const OPERATIONS = ["/", "X", "-", "+"];
 
+const OPERATIONS2 = ["/", "X", "-", "+", "="];
+
 function Operations({ calculation, setCalculation }: IOperationsProps) {
   const [operator, setOperator] = useState("X");
 
