@@ -23,9 +23,9 @@ const Digits = () => {
 
   return (
     <div className="digits flex" onClick={handleDigitClick}>
-      {digitList.map((number) => {
-        return <Digit key={number} number={number} />;
-      })}
+      {digitList.map((number) => (
+        <Digit key={number} number={number} />
+      ))}
     </div>
   );
 };
