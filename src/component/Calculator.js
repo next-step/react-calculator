@@ -54,11 +54,11 @@ export default function Calculator() {
   };
 
   return (
-    <div className="calculator" onClick={setResult}>
+    <div className="calculator">
       <h1 id="total">{calc}</h1>
-      <DigitButtons />
-      <ModifierButtons />
-      <OperationButtons />
+      <DigitButtons onClick={setResult} />
+      <ModifierButtons onClick={setResult} />
+      <OperationButtons onClick={setResult} />
     </div>
   );
 }
