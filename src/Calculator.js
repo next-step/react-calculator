@@ -14,22 +14,27 @@ const Calculator = () => {
   );
 
   const onClickDigit = (i) => {
-    setTotal(i);
+    if (total === 0) {
+      setTotal(i.toString());
+      return;
+    }
+
+    setTotal((prevTotal) => prevTotal + i.toString());
   };
 
   return (
     <div id="app">
-      <div class="calculator">
+      <div className="calculator">
         <h1 id="total">{total}</h1>
         <Digits onClickDigit={onClickDigit} />
-        <div class="modifiers subgrid">
-          <button class="modifier">AC</button>
+        <div className="modifiers subgrid">
+          <button className="modifier">AC</button>
         </div>
-        <div class="operations subgrid">
-          <button class="operation">/</button>
-          <button class="operation">X</button>
-          <button class="operation">-</button>
-          <button class="operation">+</button>
+        <div className="operations subgrid">
+          <button className="operation">/</button>
+          <button className="operation">X</button>
+          <button className="operation">-</button>
+          <button className="operation">+</button>
           <button className="operation">=</button>
         </div>
       </div>
