@@ -1,18 +1,16 @@
-import React from "react";
-import { useCalculator } from "../../../modules/context/Calculator/CalculatorContext";
+import React from 'react';
+import { useCalculator } from '../../../modules/context/Calculator/CalculatorContext';
 
 const Total = () => {
-  const { calculator } = useCalculator();
+  const {
+    calculator: { total, operation, firstDigits, secondDigits },
+  } = useCalculator();
 
-  return (
-    <h1 id="total">
-      {calculator.total
-        ? calculator.total
-        : calculator.operation && calculator.secondDigits !== "0"
-        ? calculator.secondDigits
-        : calculator.firstDigits}
-    </h1>
-  );
+  const digitValue =
+    operation && secondDigits !== '0' ? secondDigits : firstDigits;
+  const displayValue = total ? total : digitValue;
+
+  return <h1 id="total">{displayValue}</h1>;
 };
 
 export default Total;
