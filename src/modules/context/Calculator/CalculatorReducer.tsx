@@ -15,7 +15,7 @@ import {
 } from './CalculatorActionType';
 
 export interface DefaultValueState {
-  total: string;
+  total: string | number;
   firstDigits: string;
   secondDigits: string;
   operation: OperationType | undefined;
@@ -28,7 +28,7 @@ export const defaultValue: DefaultValueState = {
   operation: undefined,
 };
 
-function getTotal(state: DefaultValueState): string {
+function getTotal(state: DefaultValueState): number | string {
   const { firstDigits, secondDigits, operation } = state;
 
   let total = 0;
@@ -50,7 +50,7 @@ function getTotal(state: DefaultValueState): string {
       break;
   }
   if (Number.isFinite(total)) {
-    return total.toString();
+    return total;
   }
   return EROOR;
 }
@@ -64,7 +64,7 @@ function CalculatorReducer(
       if (state.firstDigits === '0') {
         return {
           ...state,
-          total: '',
+          total: 0,
           firstDigits: action.digit,
         };
       }
