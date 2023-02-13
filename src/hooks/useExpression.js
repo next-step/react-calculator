@@ -7,60 +7,86 @@ import { ERROR_MESSAGE, ERROR_TEXT } from '../constants/error';
 const MAX_LENGHT = 3;
 
 const useExpression = () => {
-  const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
+  const [totalText, setTotalText] = useState('0');
+  const [operands, setOperands] = useState([]);
+  const [operations, setOperations] = useState([]);
 
-  const writeExpression = (buttonValue, totalText) => {
-    const { number, operation } = expression;
-    let counter = expression.counter;
-
-    if (isNaN(buttonValue) && !number[counter]) {
-      alert(ERROR_MESSAGE.NUMBER_FIRST);
-      return totalText;
-    }
-
-    if (isNaN(buttonValue)) {
-      operation.push(buttonValue);
-      counter = counter + 1;
-    }
-
-    if (number[counter] && number[counter].length >= MAX_LENGHT) {
-      alert(ERROR_MESSAGE.NUMBER_OF_EXCEPTION);
-      return '';
-    }
-
-    if (!isNaN(buttonValue)) {
-      number[counter] = number[counter] ? number[counter] + buttonValue : buttonValue;
-    }
-
-    setExpression({ number, operation, counter });
-    return buttonValue;
-  };
-
-  const calculateExpression = () => {
-    const number = expression.number.map(Number);
-    const operation = expression.operation[0];
-
-    const result = arithmetic[operation]?.(number[0], number[1]);
-
+  const resetCalculator = (result) => {
     if (!result) {
-      alert(ERROR_MESSAGE.NOT_ALLOWED);
-      return resetExpression(ERROR_TEXT);
+      setOperands([]);
+      setOperations([]);
     }
 
-    return resetExpression(result);
+    setOperands([result]);
+    setOperations([]);
   };
 
-  const resetExpression = (result = '') => {
-    if (result === '') {
-      setExpression({ number: [], operation: [], counter: 0 });
-      return 0;
+  const insertErrorMessage = (message) => {
+    if (message) {
+      alert(message);
     }
 
-    setExpression({ number: [result], operation: [], counter: 0 });
-    return result;
+    resetCalculator();
+    setTotalText(ERROR_TEXT);
   };
 
-  return [writeExpression, calculateExpression, resetExpression];
+  const insertOperation = (buttonValue) => {
+    if (!operands[0]) {
+      alert(ERROR_MESSAGE.NUMBER_FIRST);
+      return;
+    }
+
+    setOperations([buttonValue]);
+    setTotalText(totalText + buttonValue);
+  };
+
+  const insertOperand = (buttonValue) => {
+    const counter = operations.length;
+
+    if (operands[counter]?.length >= MAX_LENGHT) {
+      alert(ERROR_MESSAGE.NUMBER_OF_EXCEPTION);
+      return;
+    }
+
+    operands[counter] = operands[counter] ? operands[counter] + buttonValue : buttonValue;
+
+    setOperands([...operands]);
+    setTotalText(totalText === '0' || totalText === ERROR_TEXT ? buttonValue : totalText + buttonValue);
+  };
+
+  const insertResult = (result) => {
+    if (result === Infinity) {
+      insertErrorMessage();
+      return;
+    }
+
+    resetCalculator(result);
+    setTotalText(String(result));
+  };
+
+  const handleExpressionWrite = (event) => {
+    const buttonValue = event.target.value;
+
+    isNaN(buttonValue) ? insertOperation(buttonValue) : insertOperand(buttonValue);
+  };
+
+  const handleCalculate = () => {
+    const operand = operands.map(Number);
+    const operation = operations[0];
+
+    if (!arithmetic[operation]) {
+      insertErrorMessage(ERROR_MESSAGE.NOT_ALLOWED);
+      return;
+    }
+
+    insertResult(arithmetic[operation]?.(operand[0], operand[1]));
+  };
+
+  const handleAllClear = () => {
+    insertResult('0');
+  };
+
+  return [totalText, handleExpressionWrite, handleCalculate, handleAllClear];
 };
 
 export default useExpression;
