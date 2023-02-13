@@ -52,7 +52,7 @@ function getTotal(state: DefaultValueState): number | string {
   if (Number.isFinite(total)) {
     return total;
   }
-  return ERROR;
+  throw new Error('잘못된 값이 입력됐습니다');
 }
 
 function CalculatorReducer(
@@ -87,10 +87,22 @@ function CalculatorReducer(
     }
     case ADD_OPERATION: {
       if (action.operation === '=') {
-        return {
-          ...defaultValue,
-          total: getTotal(state),
-        };
+        try {
+          const total = getTotal(state);
+
+          return {
+            ...defaultValue,
+            total,
+          };
+        } catch (e) {
+          if (e instanceof Error) {
+            alert(e.message);
+          }
+          return {
+            ...defaultValue,
+            total: ERROR,
+          };
+        }
       }
       return {
         ...state,
