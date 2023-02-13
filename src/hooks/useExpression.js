@@ -74,12 +74,9 @@ const useExpression = () => {
     const operand = operands.map(Number);
     const operation = operations[0];
 
-    if (!arithmetic[operation]) {
-      insertErrorMessage(ERROR_MESSAGE.NOT_ALLOWED);
-      return;
-    }
-
-    insertResult(arithmetic[operation]?.(operand[0], operand[1]));
+    arithmetic[operation]
+      ? insertResult(arithmetic[operation]?.(operand[0], operand[1]))
+      : insertErrorMessage(ERROR_MESSAGE.NOT_ALLOWED);
   };
 
   const handleAllClear = () => {
