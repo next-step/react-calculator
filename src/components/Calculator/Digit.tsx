@@ -2,18 +2,21 @@ import React from 'react';
 
 // 버튼을 눌르면 Total Component가 업데이트
 type DigitProps = {
-    handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Digit = ({ handleClick }: DigitProps) => {
-    const digitButtons=[0,1,2,3,4,5,6,7,8,9].reverse()
-    const renderButton=digitButtons.map((number)=><button value={number} key={number} onClick={handleClick}>{number}</button>)
+  const digits = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
-    return (
-        <div className="digits flex">
-            {renderButton}
-        </div>
-    );
+  return (
+    <div className="digits flex">
+      {digits.map((digit) => (
+        <button value={digit} key={digit} onClick={handleClick}>
+          {digit}
+        </button>
+      ))}
+    </div>
+  );
 };
 
 export default Digit;
