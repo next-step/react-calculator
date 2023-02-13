@@ -7,7 +7,7 @@ import {
   updateOperand,
   updateAccumulator,
   isOperandMaxLength,
-} from 'components/calculator/CalculatorModel';
+} from 'components/Calculator/CalculatorModel';
 
 import { OPERATION, Digit } from 'constants/calculator';
 import { ERROR_MESSAGE } from 'constants/message';

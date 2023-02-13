@@ -4,7 +4,7 @@ import {
   updateOperand,
   updateOperation,
   ICalculator,
-} from 'components/calculator/CalculatorModel';
+} from 'components/Calculator/CalculatorModel';
 import { Digit, OPERATION } from 'constants/calculator';
 
 const initialState: ICalculator = {
