@@ -1,6 +1,6 @@
 import {
   DIVIDE,
-  EROOR,
+  ERROR,
   MINUS,
   MULTIPLY,
   PLUS,
@@ -52,7 +52,7 @@ function getTotal(state: DefaultValueState): number | string {
   if (Number.isFinite(total)) {
     return total;
   }
-  return EROOR;
+  return ERROR;
 }
 
 function CalculatorReducer(
