@@ -26,4 +26,12 @@ describe("계산기", () => {
     cy.get(".digit").contains("4").click();
     cy.get("#total").should("have.text", "123");
   });
+
+  it("AC 버튼을 누르면 display에 0 표시", () => {
+    cy.get(".digit").contains("1").click();
+    cy.get(".digit").contains("2").click();
+    cy.get(".digit").contains("3").click();
+    cy.get(".modifier").click();
+    cy.get("#total").should("have.text", "0");
+  });
 });
