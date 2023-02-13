@@ -4,7 +4,11 @@ import Button from '../common/Button';
 
 import useExpression from '../../hooks/useExpression';
 
+import { DIGITS } from '../../constants/digits';
+import { OPERATIONS } from '../../constants/operations';
 import { ERROR_TEXT } from '../../constants/error';
+
+export const ALL_CLEAR = 'AC';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState(0);
@@ -15,7 +19,7 @@ const Calculator = () => {
 
     const addText = writeExpression(buttonValue, totalText);
 
-    setTotalText(totalText === 0 || totalText === ERROR_TEXT ? addText : totalText + addText);
+    setTotalText(totalText === DIGITS.ZERO || totalText === ERROR_TEXT ? addText : totalText + addText);
   };
 
   const handleCalculate = () => {
@@ -32,26 +36,29 @@ const Calculator = () => {
     <div className="calculator">
       <h1 id="total">{totalText}</h1>
       <div className="digits flex">
-        <Button className="digit" value="9" onClick={handleTextInsert} />
-        <Button className="digit" value="8" onClick={handleTextInsert} />
-        <Button className="digit" value="7" onClick={handleTextInsert} />
-        <Button className="digit" value="6" onClick={handleTextInsert} />
-        <Button className="digit" value="5" onClick={handleTextInsert} />
-        <Button className="digit" value="4" onClick={handleTextInsert} />
-        <Button className="digit" value="3" onClick={handleTextInsert} />
-        <Button className="digit" value="2" onClick={handleTextInsert} />
-        <Button className="digit" value="1" onClick={handleTextInsert} />
-        <Button className="digit" value="0" onClick={handleTextInsert} />
+        {Object.values(DIGITS).map((digit) => (
+          <Button key={digit} className="digit" value={digit} onClick={handleTextInsert}>
+            {digit}
+          </Button>
+        ))}
       </div>
       <div className="modifiers subgrid">
-        <Button className="modifier" value="AC" onClick={handleAllClear} />
+        <Button className="modifier" value={ALL_CLEAR} onClick={handleAllClear}>
+          {ALL_CLEAR}
+        </Button>
       </div>
       <div className="operations subgrid">
-        <Button className="operation" value="/" onClick={handleTextInsert} />
-        <Button className="operation" value="X" onClick={handleTextInsert} />
-        <Button className="operation" value="-" onClick={handleTextInsert} />
-        <Button className="operation" value="+" onClick={handleTextInsert} />
-        <Button className="operation" value="=" onClick={handleCalculate} />
+        {Object.values(OPERATIONS).map((operation) =>
+          operation === OPERATIONS.EQUALS ? (
+            <Button key={operation} className="operation" value={operation} onClick={handleCalculate}>
+              {operation}
+            </Button>
+          ) : (
+            <Button key={operation} className="operation" value={operation} onClick={handleTextInsert}>
+              {operation}
+            </Button>
+          ),
+        )}
       </div>
     </div>
   );

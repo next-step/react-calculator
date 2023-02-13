@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 import { arithmetic } from '../utils/arithmetic';
 
-import { INPUT_NUMBER_FIRST_MESSAGE, NUMBER_OF_EXCEPTION_MESSAGE } from '../constants/error';
+import { ERROR_MESSAGE } from '../constants/error';
+
+const MAX_LENGHT = 3;
 
 const useExpression = () => {
   const [expression, setExpression] = useState({ number: [], operation: [], counter: 0 });
@@ -12,7 +14,7 @@ const useExpression = () => {
     let counter = expression.counter;
 
     if (isNaN(buttonValue) && !number[counter]) {
-      alert(INPUT_NUMBER_FIRST_MESSAGE);
+      alert(ERROR_MESSAGE.NUMBER_FIRST);
       return totalText;
     }
 
@@ -21,8 +23,8 @@ const useExpression = () => {
       counter = counter + 1;
     }
 
-    if (number[counter] && number[counter].length >= 3) {
-      alert(NUMBER_OF_EXCEPTION_MESSAGE);
+    if (number[counter] && number[counter].length >= MAX_LENGHT) {
+      alert(ERROR_MESSAGE.NUMBER_OF_EXCEPTION);
       return '';
     }
 

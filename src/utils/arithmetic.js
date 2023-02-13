@@ -1,17 +1,18 @@
-import { ERROR_TEXT, INPUT_NOT_ALLOWED_MESSAGE } from '../constants/error';
+import { ERROR_TEXT, ERROR_MESSAGE } from '../constants/error';
+import { OPERATIONS } from '../constants/operations';
 
 export const arithmetic = (augend, addend = 0, operation) => {
   switch (operation) {
-    case '+':
+    case OPERATIONS.PLUS:
       return augend + addend;
-    case '-':
+    case OPERATIONS.MINUS:
       return augend - addend;
-    case '/':
+    case OPERATIONS.DIVIDE:
       return Math.floor(augend / addend);
-    case 'X':
+    case OPERATIONS.MULTIPLY:
       return augend * addend;
     default:
-      alert(INPUT_NOT_ALLOWED_MESSAGE);
+      alert(ERROR_MESSAGE.NOT_ALLOWED);
       return ERROR_TEXT;
   }
 };
