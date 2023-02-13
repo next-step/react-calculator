@@ -1,8 +1,8 @@
-import { Operation } from '@/types/calculator'
+import { Operator } from '@/types/calculator'
 
 interface OperationButtonProps {
-  operation: Operation
-  onClick(operation: Operation): void
+  operation: Operator
+  onClick(operation: Operator): void
 }
 
 const OperationButton = ({ operation, onClick }: OperationButtonProps) => {
