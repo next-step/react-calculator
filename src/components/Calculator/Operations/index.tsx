@@ -3,10 +3,8 @@ import { useCalculator } from '../../../modules/context/Calculator/CalculatorCon
 import { OperationType } from '../../../types/calculator';
 import Operation from './Operation';
 
-const operationList: OperationType[] = ['/', 'X', '-', '+', '='];
-
 const Operations = () => {
-  const { addOperation } = useCalculator();
+  const { operationList, addOperation } = useCalculator();
 
   const handleOperationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     addOperation(e.currentTarget.value as OperationType);

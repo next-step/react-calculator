@@ -13,6 +13,7 @@ import CalculatorReducer, {
 
 interface ContextProps {
   readonly calculator: DefaultValueState;
+  readonly operationList: OperationType[];
   addFirstDigit: (digit: string) => void;
   addSecondDigit: (digit: string) => void;
   addOperation: (operation: OperationType) => void;
@@ -21,6 +22,7 @@ interface ContextProps {
 
 export const CalculatorContext = createContext<ContextProps>({
   calculator: defaultValue,
+  operationList: [],
   addFirstDigit: () => {},
   addSecondDigit: () => {},
   addOperation: () => {},
@@ -32,6 +34,7 @@ export const CalculatorProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const operationList: OperationType[] = ['/', 'X', '-', '+', '='];
   const [state, dispatch] = useReducer(CalculatorReducer, defaultValue);
 
   const addFirstDigit = (digit: string): void => {
@@ -54,6 +57,7 @@ export const CalculatorProvider = ({
     <CalculatorContext.Provider
       value={{
         calculator: state,
+        operationList,
         addFirstDigit,
         addSecondDigit,
         addOperation,
