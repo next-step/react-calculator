@@ -2,12 +2,11 @@ import React from 'react';
 
 interface DigitProps {
   number: number;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Digit = ({ number, onClick }: DigitProps) => {
+const Digit = ({ number }: DigitProps) => {
   return (
-    <button type="button" className="digit" onClick={onClick} value={number}>
+    <button type="button" className="digit" value={number}>
       {number}
     </button>
   );
