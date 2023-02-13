@@ -40,10 +40,10 @@ const useExpression = () => {
 
     const result = arithmetic(number[0], number[1], operation);
 
-    return ResetExpression(result);
+    return resetExpression(result);
   };
 
-  const ResetExpression = (result = '') => {
+  const resetExpression = (result = '') => {
     if (result === '') {
       setExpression({ number: [], operation: [], counter: 0 });
       return 0;
@@ -53,7 +53,7 @@ const useExpression = () => {
     return result;
   };
 
-  return [writeExpression, calculateExpression, ResetExpression];
+  return [writeExpression, calculateExpression, resetExpression];
 };
 
 export default useExpression;

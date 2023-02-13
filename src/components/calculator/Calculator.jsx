@@ -8,7 +8,7 @@ import { ERROR_TEXT } from '../../constants/error';
 
 const Calculator = () => {
   const [totalText, setTotalText] = useState(0);
-  const [writeExpression, calculateExpression, ResetExpression] = useExpression();
+  const [writeExpression, calculateExpression, resetExpression] = useExpression();
 
   const handleTextInsert = (event) => {
     const buttonValue = event.target.value;
@@ -25,7 +25,7 @@ const Calculator = () => {
   };
 
   const handleAllClear = () => {
-    setTotalText(ResetExpression());
+    setTotalText(resetExpression());
   };
 
   return (
