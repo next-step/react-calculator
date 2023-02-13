@@ -7,7 +7,7 @@ type Props = {
 
 const Modifier = ({ setCalc }: Props) => {
   const onClickAC = () => {
-    setCalc('0');
+    setCalc('');
   };
 
   return (

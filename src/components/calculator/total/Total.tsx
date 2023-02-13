@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Total = ({ calc }: Props) => {
-  return <h1 id="total">{calc}</h1>;
+  return <h1 id="total">{calc || 0}</h1>;
 };
 
 export default Total;

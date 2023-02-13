@@ -18,30 +18,39 @@ const Operation = ({ calc, setCalc }: Props) => {
   const onClickResult = () => {
     if (calc.includes('+')) {
       const result = calc.split('+');
-      return setCalc(
-        (changeDecimal(result[0]) + changeDecimal(result[1])).toString()
-      );
+
+      return changeDecimal(result[0]) + changeDecimal(result[1]) === Infinity
+        ? setCalc('오류')
+        : setCalc(
+            (changeDecimal(result[0]) + changeDecimal(result[1])).toString()
+          );
     }
 
     if (calc.includes('-')) {
       const result = calc.split('-');
-      return setCalc(
-        (changeDecimal(result[0]) - changeDecimal(result[1])).toString()
-      );
+      return changeDecimal(result[0]) - changeDecimal(result[1]) === Infinity
+        ? setCalc('오류')
+        : setCalc(
+            (changeDecimal(result[0]) - changeDecimal(result[1])).toString()
+          );
     }
 
     if (calc.includes('x')) {
       const result = calc.split('x');
-      return setCalc(
-        (changeDecimal(result[0]) * changeDecimal(result[1])).toString()
-      );
+      return changeDecimal(result[0]) * changeDecimal(result[1]) === Infinity
+        ? setCalc('오류')
+        : setCalc(
+            (changeDecimal(result[0]) * changeDecimal(result[1])).toString()
+          );
     }
 
     if (calc.includes('/')) {
       const result = calc.split('/');
-      return setCalc(
-        (changeDecimal(result[0]) / changeDecimal(result[1])).toString()
-      );
+      return changeDecimal(result[0]) / changeDecimal(result[1]) === Infinity
+        ? setCalc('오류')
+        : setCalc(
+            (changeDecimal(result[0]) / changeDecimal(result[1])).toString()
+          );
     }
   };
 
