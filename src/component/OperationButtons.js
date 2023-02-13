@@ -1,8 +1,8 @@
-import { operators } from "../const";
+import { OPERATORS } from "../const";
 import Button from "./Button";
 
 export default function OperationButtons({ onClick }) {
-  const operations = operators.map((operator) => (
+  const operations = OPERATORS.map((operator) => (
     <Button
       className="operation"
       key={operator}

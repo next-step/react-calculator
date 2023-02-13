@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { operators } from "../const";
+import { OPERATORS } from "../const";
 import DigitButtons from "./DigitButtons";
 import ModifierButtons from "./ModifierButtons";
 import OperationButtons from "./OperationButtons";
@@ -31,7 +31,7 @@ export default function Calculator() {
 
     // 연산자만, 연산자 연속 입력 불가능
     const lastChar = calc.slice(-1);
-    if (operators.includes(lastChar) && isNaN(inputText)) return;
+    if (OPERATORS.includes(lastChar) && isNaN(inputText)) return;
 
     if (calc == "0" || calc == "오류") {
       if (e.target.className == "operation") return;
