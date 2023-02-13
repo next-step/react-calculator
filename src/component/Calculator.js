@@ -5,9 +5,7 @@ import ModifierButtons from "./ModifierButtons";
 import OperationButtons from "./OperationButtons";
 import "../css/index.css";
 
-// key는 어떤 값으로 지정할까?
-// total은 클릭 영역이 아님
-// 기능 분리하기
+// TODO : 기능 분리하기
 
 export default function Calculator() {
   const [calc, setCalc] = useState("0");

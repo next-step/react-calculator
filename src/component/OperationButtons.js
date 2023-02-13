@@ -1,9 +1,14 @@
 import { operators } from "../const";
 import Button from "./Button";
 
-export default function operationButtons({ onClick }) {
-  const operationButtons = operators.map((v) => (
-    <Button className="operation" key={v} value={v} onClick={onClick} />
+export default function OperationButtons({ onClick }) {
+  const operations = operators.map((operator) => (
+    <Button
+      className="operation"
+      key={operator}
+      value={operator}
+      onClick={onClick}
+    />
   ));
-  return <div className="operations subgrid">{operationButtons}</div>;
+  return <div className="operations subgrid">{operations}</div>;
 }
