@@ -1,4 +1,4 @@
-import useCalculator from 'components/calculator/hooks/useCalculator';
+import { useCalculator } from 'components/calculator/hooks';
 
 import { Digit, OPERATION } from 'constants/calculator';
 
