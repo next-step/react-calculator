@@ -2,14 +2,12 @@ type Props = {
   clear: () => void;
 };
 
-export const AllClear = ({ clear }: Props) => {
+export const AllClearButton = ({ clear }: Props) => {
   return (
-    <>
-      <div className="modifiers subgrid">
-        <button className="modifier" onClick={clear}>
-          AC
-        </button>
-      </div>
-    </>
+    <div className="modifiers subgrid">
+      <button className="modifier" onClick={clear}>
+        AC
+      </button>
+    </div>
   );
 };

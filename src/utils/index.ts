@@ -1,4 +1,4 @@
-import { OPERATIONS } from "../constants";
+import { OPERATIONS } from "../constant";
 
 const mapOperation: Record<string, (num1: number, num2: number) => number> = {
   [OPERATIONS.ADD]: (num1: number, num2: number) => num1 + num2,

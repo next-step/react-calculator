@@ -1,22 +1,19 @@
-import { MouseEvent } from "react";
-import { DIGITS } from "../constants";
+const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] as const;
 
 type Props = {
-  addDigits: (e: MouseEvent<HTMLDivElement>) => void;
+  onClickDigit: (event: any) => void;
 };
 
-export const NumberPad = ({ addDigits }: Props) => {
+export const NumberPad = ({ onClickDigit }: Props) => {
   return (
-    <>
-      <div className="digits flex" onClick={addDigits}>
-        {DIGITS.map((number) => {
-          return (
-            <button className="digit" key={number} value={number}>
-              {number}
-            </button>
-          );
-        })}
-      </div>
-    </>
+    <div className="digits flex" >
+      {DIGITS.map((number) => {
+        return (
+          <button className="digit" key={number} value={number} onClick={onClickDigit}>
+            {number}
+          </button>
+        );
+      })}
+    </div>
   );
 };

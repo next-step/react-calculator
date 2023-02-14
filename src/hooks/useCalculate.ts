@@ -1,7 +1,7 @@
 import { MouseEvent, useCallback, useState } from 'react';
-import { DIGIT_MAX_LENGTH, OPERATIONS, ZERO } from '../constants';
-import { calculate } from '../util';
-import { ERROR_MESSAGE } from '../constants/errorMessage';
+import { DIGIT_MAX_LENGTH, OPERATIONS } from '../constant';
+import { calculate } from '../utils';
+import { ERROR_MESSAGE } from '../constant/errorMessage';
 
 const initialState = {
   digit: '',
@@ -13,10 +13,10 @@ export const useCalculate = () => {
 
   const [state, setState] = useState(initialState);
 
-  const addDigits = (event: MouseEvent<HTMLDivElement>) => {
+  const onClickDigit = (event: MouseEvent<HTMLDivElement>) => {
     const { value } = event.target as HTMLButtonElement;
 
-    if (!state.digit && value === ZERO) {
+    if (!state.digit && value === '0') {
       return;
     }
 
@@ -70,7 +70,7 @@ export const useCalculate = () => {
 
   return {
     state,
-    addDigits,
+    onClickDigit,
     operate,
     clear,
     total: getTotal()

@@ -1,17 +1,17 @@
-import { useCalculate } from "../../hooks/useCalculate";
-import { AllClear } from "../AllClear";
-import { NumberPad } from "../NumberPad";
-import { Operation } from "../Operation";
-import { Total } from "../Total";
+import { useCalculate } from "hooks/useCalculate";
+import { AllClearButton } from "components/AllClear";
+import { NumberPad } from "components/NumberPad";
+import { Operation } from "components/Operation";
+import { Total } from "components/Total";
 
 export const Calculator = () => {
-  const { operate, addDigits, clear, total } = useCalculate();
+  const { operate, onClickDigit, clear, total } = useCalculate();
   return (
     <>
       <div className="calculator">
         <Total total={total} />
-        <NumberPad addDigits={addDigits} />
-        <AllClear clear={clear} />
+        <NumberPad onClickDigit={onClickDigit} />
+        <AllClearButton clear={clear} />
         <Operation operate={operate} />
       </div>
     </>
