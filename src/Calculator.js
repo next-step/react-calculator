@@ -40,9 +40,15 @@ const Calculator = () => {
 
   const handleOperationClick = (operation) => {
     const lastChar = total.charAt(total.length - 1);
-    if (/[0-9]/.test(lastChar)) {
+    const isLastCharNumber = /[0-9]/.test(lastChar);
+
+    if (isLastCharNumber) {
       setTotal((prevTotal) => prevTotal + operation);
+      return;
     }
+    const operatorIndex = total.search(/[\+\-\*\/][^0-9]*$/);
+    const newTotal = total.slice(0, operatorIndex) + operation;
+    setTotal(newTotal);
   };
 
   const handleDigitClick = (i) => {
