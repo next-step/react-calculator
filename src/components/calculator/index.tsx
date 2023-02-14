@@ -7,13 +7,11 @@ import { Total } from "components/Total";
 export const Calculator = () => {
   const { operate, onClickDigit, clear, total } = useCalculate();
   return (
-    <>
-      <div className="calculator">
-        <Total total={total} />
-        <NumberPad onClickDigit={onClickDigit} />
-        <AllClearButton clear={clear} />
-        <Operation operate={operate} />
-      </div>
-    </>
+    <div className="calculator">
+      <Total total={total} />
+      <NumberPad onClickDigit={onClickDigit} />
+      <AllClearButton clear={clear} />
+      <Operation operate={operate} />
+    </div>
   );
 };
