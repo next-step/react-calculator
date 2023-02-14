@@ -1,6 +1,7 @@
 const DIGIT_SELECTOR = ".digit";
 const MODIFIER_SELECTOR = ".modifier";
 const DISPLAY_SELECTOR = "#total";
+const OPERATION_SELECTOR = ".operation";
 
 describe("계산기", () => {
   beforeEach("페이지 방문", () => {
@@ -37,5 +38,13 @@ describe("계산기", () => {
     cy.get(DIGIT_SELECTOR).contains("3").click();
     cy.get(MODIFIER_SELECTOR).click();
     cy.get(DISPLAY_SELECTOR).should("have.text", "0");
+  });
+
+  it("숫자 버튼을 누르고 연산자 버튼을 누르면 display에 연산자 표시", () => {
+    cy.get(DIGIT_SELECTOR).contains("1").click();
+    cy.get(DIGIT_SELECTOR).contains("2").click();
+    cy.get(DIGIT_SELECTOR).contains("3").click();
+    cy.get(OPERATION_SELECTOR).contains("+").click();
+    cy.get(DISPLAY_SELECTOR).should("have.text", "123+");
   });
 });
