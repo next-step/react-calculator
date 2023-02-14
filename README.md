@@ -1,60 +1,63 @@
-<br/>
-<br/>
-
-<p align="middle" >
-  <img width="100px;" src="public/images/calculator_icon.png"/>
-</p>
-<h2 align="middle">React 계산기</h2>
-<p align="middle">계산기와 함께하는 Onboarding NEXTSTEP with React</p>
-<p align="middle">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="template version"/>
-  <img src="https://img.shields.io/badge/language-html-red.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/language-css-blue.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/language-js-yellow.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"/>
-</p>
-
-## 🔥 Projects!
-
-<p align="middle">
-  <img width="300" src="public/images/calculator_ui.png">
-</p>
-
-<p align="middle">
-  <a href="https://next-step.github.io/js-calculator/">🖥️ 데모 링크</a>
-</p>
-
 ## 🎯 기능 요구사항
 
-- [ ] 2개의 숫자에 대해 덧셈이 가능하다.
-- [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
-- [ ] 2개의 숫자에 대해 곱셈이 가능하다.
-- [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
-- [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
-- [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
-- [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
-- [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
+- [x] 2개의 숫자에 대해 덧셈이 가능하다.
+- [x] 2개의 숫자에 대해 뺄셈이 가능하다.
+- [x] 2개의 숫자에 대해 곱셈이 가능하다.
+- [x] 2개의 숫자에 대해 나눗셈이 가능하다.
+- [x] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
+- [x] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
+- [x] 계산 결과를 표현할 때 소수점 이하는 버림한다.
+- [x] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
 
-<br/>
+## 🥹 생각해볼 점
 
-## 📄 참고 사항
+1. Styled Component 로 나누는 것이 꼭 필요했을까?
+   1. Vue 로 생각해 봤을 땐... 컴포넌트 내에 이벤트 핸들러가 포함이 되었다면 좋았을 것 같다.
+   2. 그러나... Styled Component 내에 이벤트 핸들러가 포함이 되어도 되는 걸까? 그렇게 만드는 게 맞을까?
+2. state 가 너무 많은 것 같다
+   1. 구현을 하다 보니 점점 필요해져서 많이 만들게 되었는데... 줄일 순 없는 걸까?
+   2. 남발하다 보니 서로 의존도가 높아진 것 같다. 이렇게 되면 나중에 찢기도 힘들어질 것 같은데, 어떻게 줄일 수 있을까? 혹은, 어떻게 의존도를 낮츨 수 있을까?
+3. typescript 를 사용해야 할까?
+   1. 더 자신있는 것이 js 라서 js 로 만들었으나... PR 들을 확인하니 모두 ts 로 작성했다.
+   2. 타입 에러를 잡아주기 때문에 편하지만... 더 빠르게 작성이 가능한 것은 js 이다... 하지만 이것은 공부이기 때문에 ts 로 작성하는 것이 맞을까?
+4. re-render 가 자주 될 것 같은 느낌적인 느낌
+   1. react 는 state 를 바꾸면 re-render 가 되는 것으로 알고 있는데, state 가 너무 많다 보니 그럼 리렌더도 너무 잦을 것 같다. 어떻게 줄일 수 있을까?
+5. 커밋 컨벤션을 맞추는 게 좋을까?
+   1. 회사가 아닌 혼자 작업할 땐 간단하게 올리는 편인데, 나중에 히스토리 파악을 위해 컨벤션을 맞추는게 아무래도.. 좋겠지?
 
-숫자 입력은 **클릭**으로만 가능하다.
+---
 
-<br/>
+> 아래는 코드리뷰 후 작성하는 내용
 
-## 👏 Contributing
+## dependency, devDependency 란 무엇일까?
 
-만약 미션 수행 중에 개선사항이 보인다면, 언제든 자유롭게 PR을 보내주세요.
+- npm 을 사용하면서 간단하게.. 빌드 후 런타임에 필요한 패키지, 개발할 때 필요한 패키지 정도라고 생각했었다.
+- 막상 차이점이 뭔가요? 라는 질문이 들어오니... 말문이 막혔다. 나중을 위해서 미리 정리해 보자
 
-<br/>
+## dependency
 
-## 🐞 Bug Report
+- 현재 프로젝트를 실행하는 데(런타임시) 필수적인 라이브러리들이 포함
+- `yarn add [패키지 명]` 하면 저절로 dependency 에 들어간다.
+- vue 로 치면... vue 나 nuxt 이런 패키지들이 포함된다
 
-버그를 발견한다면, [Issues](https://github.com/next-step/react-calculator/issues)에 등록해주세요.
+## devDependency
 
-<br/>
+- 개발할 땐 필요하지만, 런타임에는 필요하지 않은 패키지이다.
+- `yarn add -D [패키지 명]` 하면 devDependency 에 들어간다.
+- typescript 나 @types 혹은 testing 패키지 같은, 개발 시에는 필요하나 런타임에 필요하지 않은 패키지들이 들어간다.
 
-## 📝 License
+### 그렇다면... CRA 에서는 왜 testing-library 를 dev 에 안 넣어 줬을까?
 
-This project is [MIT](https://github.com/next-step/react-calculator/blob/master/LICENSE) licensed.
+- CRA 프로젝트는 배포할 때 빌드한 static 파일을 배포한다.
+- CRA 프로젝트를 build 할 때 모든 package 를 이용한다.
+- 사실상 모든 dependency, devDependency 가 같다고 봐도 무방하다.
+
+### 그럼, 구분을 안 해도 괜찮지 않을까?
+
+- 개발할 때 가시성을 위해 넣어 주는 것이 좋을 것 같다. (다른 개발자들을 위해...)
+
+## 익명 함수를 넘기게 되면 re-render 가 발생한다
+
+- 리액트는 props 가 변했는지의 여부를 확인하고 re render 를 진행하는데, 익명 함수는 항상 새로운 메모리 값을 반환하기 때문에 무조건 렌더링이 일어난다.
+- 이걸 방지하기 위해서는 익명함수를 생성하는 것이 아닌, 이벤트 핸들러에 함수 자체를 넘겨야 한다.
+- 이번에 해당 피드백을 반영하기 위해서 `handleDigitClick` 가 값을 리턴하던 것을, 함수 자체를 리턴하도록 변경하였다.
