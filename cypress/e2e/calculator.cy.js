@@ -71,4 +71,12 @@ describe("계산기", () => {
     pressDigits(["4", "5", "6"]);
     checkDisplay("123+456");
   });
+
+  it("1번째 숫자와 2번째 숫자를 입력하고 = 버튼을 누르면 display에 계산 결과 표시", () => {
+    pressDigits(["1", "2", "3"]);
+    pressOperation("+");
+    pressDigits(["4", "5", "6"]);
+    pressOperation("=");
+    checkDisplay("579");
+  });
 });
