@@ -57,4 +57,18 @@ describe("계산기", () => {
     pressOperation("+");
     checkDisplay("123+");
   });
+
+  it("연산자 버튼을 여러 번 누르면 display에 마지막 연산자만 표시", () => {
+    pressDigits(["1", "2", "3"]);
+    pressOperation("+");
+    pressOperation("-");
+    checkDisplay("123-");
+  });
+
+  it("2번째 숫자를 입력하면 display에 2번째 숫자를 누적하여 표시", () => {
+    pressDigits(["1", "2", "3"]);
+    pressOperation("+");
+    pressDigits(["4", "5", "6"]);
+    checkDisplay("123+456");
+  });
 });
