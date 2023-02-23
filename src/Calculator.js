@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// Modifiers.js
 const Modifiers = ({ handleAllClearClick }) => (
   <div className="modifiers subgrid">
     <button className="modifier" onClick={() => handleAllClearClick()}>
@@ -25,6 +26,7 @@ const Operations = ({ handleOperationClick }) => (
   </div>
 );
 
+// Digits.js
 const Digits = ({ handleDigitClick }) => (
   <div className="digits flex">
     {Array.from({ length: 10 }, (_, i) => (
@@ -35,6 +37,7 @@ const Digits = ({ handleDigitClick }) => (
   </div>
 );
 
+// Calculator.js
 const Calculator = () => {
   const [total, setTotal] = useState("0");
 
@@ -46,9 +49,32 @@ const Calculator = () => {
       setTotal((prevTotal) => prevTotal + operation);
       return;
     }
+
     const operatorIndex = total.search(/[\+\-\*\/][^0-9]*$/);
     const newTotal = total.slice(0, operatorIndex) + operation;
     setTotal(newTotal);
+
+    if (operation === "=" && newTotal.search(/[\+\-\*\/]/) !== -1) {
+      const operands = newTotal.split(/[\+\-\*\/]/);
+      const operator = newTotal.match(/[\+\-\*\/]/)[0];
+
+      const operations = {
+        "+": (a, b) => Number(a) + Number(b),
+        "-": (a, b) => Number(a) - Number(b),
+        "*": (a, b) => Number(a) * Number(b),
+        "/": (a, b) => Number(a) / Number(b),
+      };
+
+      let result = operations[operator]
+        ? operations[operator](operands[0], operands[1])
+        : NaN;
+
+      if (isNaN(result)) {
+        setTotal("Error");
+        return;
+      }
+      setTotal(`${operands[0]}${operator}${operands[1]}=${result}`);
+    }
   };
 
   const handleDigitClick = (i) => {
@@ -57,8 +83,11 @@ const Calculator = () => {
       return;
     }
 
-    if (total.length >= 3) return;
+    const lastChar = total.charAt(total.length - 1);
+    const isLastCharNumber = /[0-9]/.test(lastChar);
+    if (total.length === 3 && isLastCharNumber) return;
 
+    if (total.length >= 7) return;
     setTotal((prevTotal) => prevTotal + i.toString());
   };
 
