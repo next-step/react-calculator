@@ -44,5 +44,5 @@ export const calculateTotal = (currentTotal) => {
     ? operations[operator](operands[0], operands[1])
     : NaN;
 
-  return result;
+  return isFinite(result) ? result.toString() : "오류";
 };

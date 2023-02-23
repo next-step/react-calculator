@@ -79,4 +79,12 @@ describe("계산기", () => {
     pressOperation("=");
     checkDisplay("579");
   });
+
+  it("연산의 결과값이 Infinity일 경우 오류라는 문자열을 보여준다.", () => {
+    pressDigits(["3"]);
+    pressOperation("/");
+    pressDigits(["0"]);
+    pressOperation("=");
+    checkDisplay("오류");
+  });
 });
