@@ -87,4 +87,12 @@ describe("계산기", () => {
     pressOperation("=");
     checkDisplay("오류");
   });
+
+  it("계산 결과를 표현할 때 소수점 이하는 버림한다", () => {
+    pressDigits(["4"]);
+    pressOperation("/");
+    pressDigits(["3"]);
+    pressOperation("=");
+    checkDisplay("1");
+  });
 });
