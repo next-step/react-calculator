@@ -11,7 +11,7 @@ function Calculator() {
 
   const canAddDigit = () => {
     const lastIndex = expression.length - 1;
-    
+
     if (lastIndex <= 1) {
       return true;
     }
@@ -35,13 +35,20 @@ function Calculator() {
     setExpression((prev) => (prev === "0" ? number : prev + number));
   }
 
+
+  const clear = () => {
+    setExpression("0");
+  }
+
   return (
     <div className="calculator">
       <Total total={expression} />
       <DigitBoard
-        setDigit={setDigit}
+          setDigit={setDigit}
       />
-      <ModifierButton />
+      <ModifierButton
+        clear={clear}
+      />
       <OperationBoard />
     </div>
   )

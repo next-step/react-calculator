@@ -1,7 +1,11 @@
-function ModifierButton() {
+interface ModifierProps {
+  clear(): void;
+}
+
+function ModifierButton({ clear }: ModifierProps) {
   return (
     <div className="modifiers subgrid">
-      <button className="modifier">AC</button>
+      <button className="modifier" onClick={clear}>AC</button>
     </div>
   )
 }
