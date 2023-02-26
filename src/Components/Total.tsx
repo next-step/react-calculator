@@ -1,5 +1,5 @@
 interface TotalProps {
-  total: number;
+  total: string;
 }
 
 function Total({ total } : TotalProps) {
