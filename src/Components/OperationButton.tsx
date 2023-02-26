@@ -1,10 +1,15 @@
 interface OperationProps {
   operation: string;
+  setOperation(operation: string): void
 }
 
-function OperationButton({ operation } : OperationProps) {
+function OperationButton({ operation, setOperation }: OperationProps) {
+  const onClickOperation = (e: React.MouseEvent) => {
+    setOperation(e.currentTarget.textContent || '');
+  }
+
   return (
-    <button className="operation">{operation}</button>
+    <button className="operation"  onClick={onClickOperation}>{operation}</button>
   )
 }
 

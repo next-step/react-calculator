@@ -40,16 +40,37 @@ function Calculator() {
     setExpression("0");
   }
 
+  const canAddOperation = () => {
+    const lastIndex = expression.length - 1;
+
+    if (!isNumeric(expression[lastIndex])) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const setOperation = (operation: string) => {
+    if (!canAddOperation()) {
+      alert("연산자를 추가할 수 없습니다.")
+      return;
+    }
+
+    setExpression((prev) => (prev + operation));
+  }
+
   return (
     <div className="calculator">
       <Total total={expression} />
       <DigitBoard
-          setDigit={setDigit}
+        setDigit={setDigit}
       />
       <ModifierButton
         clear={clear}
       />
-      <OperationBoard />
+      <OperationBoard
+        setOperation={setOperation}
+      />
     </div>
   )
 }
