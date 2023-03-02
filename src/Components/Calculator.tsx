@@ -6,8 +6,10 @@ import OperationBoard from "./OperationBoard";
 import Total from "./Total"
 import { CalculationMessage } from "../Constants/ErrorMessage";
 
+const initState = "0";
+
 function Calculator() {
-  const [expression, setExpression] = useState("0");
+  const [expression, setExpression] = useState(initState);
 
 
   const canAddDigit = () => {
@@ -33,12 +35,12 @@ function Calculator() {
       return;
     }
 
-    setExpression((prev) => (prev === "0" ? number : prev + number));
+    setExpression((prev) => (prev === initState ? number : prev + number));
   }
 
 
   const clear = () => {
-    setExpression("0");
+    setExpression(initState);
   }
 
   const canAddOperation = () => expression.split('').every(isNumeric);
