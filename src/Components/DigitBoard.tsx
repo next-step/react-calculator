@@ -1,6 +1,6 @@
 import DigitButton from './DigitButton';
 
-const digits = ["9", "8", "7", "6", "5", "4", "3", "2", "1"] as const;
+const digits = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"] as const;
 
 interface DigitProps {
   setDigit(number: string): void;
