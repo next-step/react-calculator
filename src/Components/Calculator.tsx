@@ -8,6 +8,8 @@ import { CalculationMessage } from "../Constants/ErrorMessage";
 import { Operation } from "../Constants/Operation";
 
 const initState = "0";
+const errorState = "오류";
+const infinity = "Infinity"
 
 function Calculator() {
   const [expression, setExpression] = useState(initState);
@@ -61,7 +63,7 @@ function Calculator() {
       }
 
       const resultOfCalculation = calculate(expression);
-      setExpression(resultOfCalculation === "Infinity" ? "오류" : resultOfCalculation)
+      setExpression(resultOfCalculation === infinity ? errorState : resultOfCalculation)
       return; 
     }
 
