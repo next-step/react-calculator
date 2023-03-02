@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { isNumeric } from "../Utils/Numeric";
+import { calculate, isNumeric } from "../Utils/Numeric";
 import DigitBoard from "./DigitBoard"
 import ModifierButton from "./ModifierButton"
 import OperationBoard from "./OperationBoard";
@@ -40,17 +40,27 @@ function Calculator() {
     setExpression("0");
   }
 
-  const canAddOperation = () => {
+  const canAddOperation = () => expression.split('').every(isNumeric);
+
+  const canCalculate = () => {
+    const operation =  expression.split('').filter((ex) => !isNumeric(ex));
     const lastIndex = expression.length - 1;
 
-    if (!isNumeric(expression[lastIndex])) {
-      return false;
-    }
-
-    return true;
+    return operation.length === 1 && isNumeric(expression[lastIndex]);
   }
 
   const setOperation = (operation: string) => {
+    if (operation === '=') {
+      if (!canCalculate()) {
+        alert("계산할 수 없는 상태입니다.");
+        return;
+      }
+
+      const resultOfCalculation = calculate(expression);
+      setExpression(resultOfCalculation === "Infinity" ? "오류" : resultOfCalculation)
+      return; 
+    }
+
     if (!canAddOperation()) {
       alert("연산자를 추가할 수 없습니다.")
       return;
