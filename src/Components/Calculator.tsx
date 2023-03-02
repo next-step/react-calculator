@@ -4,6 +4,7 @@ import DigitBoard from "./DigitBoard"
 import ModifierButton from "./ModifierButton"
 import OperationBoard from "./OperationBoard";
 import Total from "./Total"
+import { CalculationMessage } from "../Constants/ErrorMessage";
 
 function Calculator() {
   const [expression, setExpression] = useState("0");
@@ -28,7 +29,7 @@ function Calculator() {
 
   const setDigit = (number: string) => {
     if (!canAddDigit()) {
-      alert("숫자는 3자리까지만 입력 가능합니다!");
+      alert(CalculationMessage.MAX_DIGIT_LENGTH);
       return;
     }
 
@@ -52,7 +53,7 @@ function Calculator() {
   const setOperation = (operation: string) => {
     if (operation === '=') {
       if (!canCalculate()) {
-        alert("계산할 수 없는 상태입니다.");
+        alert(CalculationMessage.CANT_CACLULATE);
         return;
       }
 
@@ -62,7 +63,7 @@ function Calculator() {
     }
 
     if (!canAddOperation()) {
-      alert("연산자를 추가할 수 없습니다.")
+      alert(CalculationMessage.CANT_ADD_OPERATION);
       return;
     }
 
