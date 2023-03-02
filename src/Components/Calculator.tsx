@@ -5,6 +5,7 @@ import ModifierButton from "./ModifierButton"
 import OperationBoard from "./OperationBoard";
 import Total from "./Total"
 import { CalculationMessage } from "../Constants/ErrorMessage";
+import { Operation } from "../Constants/Operation";
 
 const initState = "0";
 
@@ -53,7 +54,7 @@ function Calculator() {
   }
 
   const setOperation = (operation: string) => {
-    if (operation === '=') {
+    if (operation === Operation.EQUAL) {
       if (!canCalculate()) {
         alert(CalculationMessage.CANT_CACLULATE);
         return;
