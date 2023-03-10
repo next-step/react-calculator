@@ -1,91 +1,25 @@
-import { useState } from "react"
-import { calculate, isNumeric } from "../Utils/Numeric";
 import DigitBoard from "./DigitBoard"
 import ModifierButton from "./ModifierButton"
 import OperationBoard from "./OperationBoard";
 import Total from "./Total"
-import { CalculationMessage } from "../Constants/ErrorMessage";
-import { Operation } from "../Constants/Operation";
+import { useCalculate } from "../hooks/useCalculate";
 
-const initState = "0";
-const errorState = "오류";
-const infinity = "Infinity"
 
 function Calculator() {
-  const [expression, setExpression] = useState(initState);
 
-
-  const canAddDigit = () => {
-    const lastIndex = expression.length - 1;
-
-    if (lastIndex <= 1) {
-      return true;
-    }
-
-    // 숫자가 입력됐을 때 마지막 3글자가 숫자인지 판별
-    for (let i = 0; i < 3; i++) {
-      if (lastIndex - i >= 0 && !isNumeric(expression[lastIndex - i])) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  const setDigit = (number: string) => {
-    if (!canAddDigit()) {
-      alert(CalculationMessage.MAX_DIGIT_LENGTH);
-      return;
-    }
-
-    setExpression((prev) => (prev === initState ? number : prev + number));
-  }
-
-
-  const clear = () => {
-    setExpression(initState);
-  }
-
-  const canAddOperation = () => expression.split('').every(isNumeric);
-
-  const canCalculate = () => {
-    const operation =  expression.split('').filter((ex) => !isNumeric(ex));
-    const lastIndex = expression.length - 1;
-
-    return operation.length === 1 && isNumeric(expression[lastIndex]);
-  }
-
-  const setOperation = (operation: string) => {
-    if (operation === Operation.EQUAL) {
-      if (!canCalculate()) {
-        alert(CalculationMessage.CANT_CACLULATE);
-        return;
-      }
-
-      const resultOfCalculation = calculate(expression);
-      setExpression(resultOfCalculation === infinity ? errorState : resultOfCalculation)
-      return; 
-    }
-
-    if (!canAddOperation()) {
-      alert(CalculationMessage.CANT_ADD_OPERATION);
-      return;
-    }
-
-    setExpression((prev) => (prev + operation));
-  }
-
+  const { expression, onOperatorClick, onAllClearClick, onDigitClick } = useCalculate();
+  
   return (
     <div className="calculator">
       <Total total={expression} />
       <DigitBoard
-        setDigit={setDigit}
+        setDigit={onDigitClick}
       />
       <ModifierButton
-        clear={clear}
+        clear={onAllClearClick}
       />
       <OperationBoard
-        setOperation={setOperation}
+        setOperation={onOperatorClick}
       />
     </div>
   )
