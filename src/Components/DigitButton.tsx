@@ -5,12 +5,12 @@ interface DigitProps {
 
 function DigitButton({ number, setDigit }: DigitProps) {
   
-  const onClickDigit = (e: React.MouseEvent) => {
+  const onDigitClick = (e: React.MouseEvent) => {
     setDigit(e.currentTarget.textContent || "");
   }
   
   return (
-    <button className="digit" onClick={onClickDigit}>{number}</button>
+    <button className="digit" onClick={onDigitClick}>{number}</button>
   )
 }
 
