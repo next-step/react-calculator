@@ -1,7 +1,7 @@
-export const Operation = {
-    PLUS : "+",
-    MINUS : "-",
-    MUL : "X",
-    DIV : "/",
-    EQUAL : "="
-}
+export const Operation = new Map([
+    ['DIV', '/'],
+    ['MUL', 'X',],
+    ['MINUS', '-'],
+    ['PLUS', '+',],
+    ['EQUAL', '=', ]
+])
