@@ -1,7 +1,6 @@
 import DigitBoard from "./DigitBoard"
 import ModifierButton from "./ModifierButton"
 import OperationBoard from "./OperationBoard";
-import Total from "./Total"
 import { useCalculate } from "../hooks/useCalculate";
 
 
@@ -11,7 +10,7 @@ function Calculator() {
   
   return (
     <div className="calculator">
-      <Total total={expression} />
+      <h1 id="total">{expression}</h1>
       <DigitBoard
         setDigit={onDigitClick}
       />
