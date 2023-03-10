@@ -12,14 +12,45 @@ export const useCalculate = () => {
 
     const [operand, setOperand] = useState<Operand>({ operands: ['0', ''], index: 0 });
     const [operator, setOperator] = useState<string>('');
+    
+    const validateOperand = (lastNumber: string) => {
+        if (lastNumber.length === MAX_LEN) {
+            return {
+                isValid: false,
+                errorMessage: CalculationMessage.MAX_DIGIT_LENGTH
+            };
+        }
+
+        return {
+            isValid: true,
+            errorMessage: ''
+        }
+    }
+
+    const validateOperator = () => {
+        if (operator) {
+            return {
+                isValid: false,
+                errorMessage: CalculationMessage.CANT_ADD_OPERATION
+            };
+        }
+
+        return {
+            isValid: true,
+            errorMessage : ''
+        }
+    }
+
 
     const onDigitClick = (value: string) => {
         const { operands, index } = operand;
         const lastNumber = operands[index];
         const newNumber = lastNumber === '0' ? value : lastNumber + value;
+        
+        const { isValid, errorMessage } = validateOperand(lastNumber);
 
-        if (lastNumber.length === MAX_LEN) {
-            alert(CalculationMessage.MAX_DIGIT_LENGTH);
+        if (!isValid) {
+            alert(errorMessage);
             return;
         }
 
@@ -35,8 +66,10 @@ export const useCalculate = () => {
     }
 
     const onOperatorClick = (value: string) => {
-        if (operator) {
-            alert(CalculationMessage.CANT_ADD_OPERATION);
+        const { isValid, errorMessage } = validateOperator();
+
+        if (!isValid) {
+            alert(errorMessage);
             return;
         }
 
