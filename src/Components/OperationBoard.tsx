@@ -1,3 +1,4 @@
+import { Operation } from '../Constants/Operation';
 import OperationButton from './OperationButton';
 
 interface OpreationBoardProps {
@@ -5,7 +6,7 @@ interface OpreationBoardProps {
   onClickEqual(operatin: string): void;
 }
 
-const operations = ['/', 'X', '-', '+', '='] as const;
+const operations = Array.from(Operation.values());
 
 function OperationBoard({ setOperation, onClickEqual }: OpreationBoardProps) {
   return (
