@@ -4,33 +4,34 @@ import { calculate } from "../Utils/Numeric";
 
 interface Operand {
     operands: string[],
-    isWriting: boolean
+    index: number
 }
 
 export const useCalculate = () => {
     const MAX_LEN = 3;
 
-    const [operand, setOperand] = useState<Operand>({ operands: [], isWriting: false });
+    const [operand, setOperand] = useState<Operand>({ operands: ['0', ''], index: 0 });
     const [operator, setOperator] = useState<string>('');
 
     const onDigitClick = (value: string) => {
-        const { operands, isWriting } = operand;
+        const { operands, index } = operand;
+        const lastNumber = operands[index];
+        const newNumber = lastNumber === '0' ? value : lastNumber + value;
 
-        if (isWriting) {
-            const lastNumber = operands[operands.length - 1];
-
-            if (lastNumber.length === MAX_LEN) {
-                alert(CalculationMessage.MAX_DIGIT_LENGTH);
-                return;
-            }
-
-            const newNumber = lastNumber + value;
-
-            setOperand((prev) => ({ ...prev, operands: [...prev.operands.slice(0, prev.operands.length - 1), newNumber] }));
+        if (lastNumber.length === MAX_LEN) {
+            alert(CalculationMessage.MAX_DIGIT_LENGTH);
             return;
         }
 
-        setOperand((prev) => ({ operands: [...prev.operands, value], isWriting: true, }));
+        setOperand((prev) => ({
+            ...prev, operands: prev.operands.map((number, idx) => {
+                if (idx === index) {
+                    return newNumber;
+                }
+
+                return number;
+            })
+        }));
     }
 
     const onOperatorClick = (value: string) => {
@@ -40,18 +41,18 @@ export const useCalculate = () => {
         }
 
         setOperator((prev) => (value));
-        setOperand((prev) => ({...prev, isWriting: false}))
+        setOperand((prev) => ({...prev, index: prev.index + 1}))
     }
 
     const onAllClearClick = () => {
-        setOperand({ operands: [], isWriting: false });
+        setOperand({ operands: ['0', ''], index: 0 });
         setOperator('');
     }
 
     const onClickEqual = () => {
         const result = calculate(makeExpression());
 
-        setOperand((prev) => ({ operands: [result], isWriting: false }));
+        setOperand((prev) => ({ operands: [result, ''], index: 0 }));
         setOperator('');
     }
 
