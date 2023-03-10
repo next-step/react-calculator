@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CalculationMessage } from "../Constants/ErrorMessage";
+import { calculate } from "../Utils/Numeric";
 
 interface Operand {
     operands: string[],
@@ -47,6 +48,13 @@ export const useCalculate = () => {
         setOperator('');
     }
 
+    const onClickEqual = () => {
+        const result = calculate(makeExpression());
+
+        setOperand((prev) => ({ operands: [result], isWriting: false }));
+        setOperator('');
+    }
+
     const makeExpression = () => {
         const { operands } = operand;
         return (operands[0] ?? '') + (operator ?? '') + (operands[1] ?? '');
@@ -56,6 +64,7 @@ export const useCalculate = () => {
         expression: makeExpression(),
         onOperatorClick,
         onAllClearClick,
-        onDigitClick
+        onDigitClick,
+        onClickEqual
     }
 }

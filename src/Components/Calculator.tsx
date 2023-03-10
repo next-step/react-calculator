@@ -7,7 +7,7 @@ import { useCalculate } from "../hooks/useCalculate";
 
 function Calculator() {
 
-  const { expression, onOperatorClick, onAllClearClick, onDigitClick } = useCalculate();
+  const { expression, onOperatorClick, onAllClearClick, onDigitClick, onClickEqual } = useCalculate();
   
   return (
     <div className="calculator">
@@ -20,6 +20,7 @@ function Calculator() {
       />
       <OperationBoard
         setOperation={onOperatorClick}
+        onClickEqual={onClickEqual}
       />
     </div>
   )
