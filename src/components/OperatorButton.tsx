@@ -13,9 +13,11 @@ export default function OperatorButton({
 	};
 
 	return (
-		<button className='operation'
+		<button
+			className='operation'
 			onClick={handleClickOperator}
-			value={value}>
+			value={value}
+		>
 			{value}
 		</button>
 	);

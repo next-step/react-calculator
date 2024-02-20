@@ -31,7 +31,8 @@ export default function NumberButton({
 		<button
 			className='digit'
 			onClick={handleClickNumber}
-			value={value}>
+			value={value}
+		>
 			{value}
 		</button>
 	);

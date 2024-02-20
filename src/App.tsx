@@ -7,11 +7,13 @@
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 // - [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
 
+// - [ ] 2자리 수 이상의 숫자는 0이 앞에 올 수 없다.
+
 import {useState} from 'react';
 
 import NumberButton from './components/NumberButton';
 import OperatorButton from './components/OperatorButton';
-import ResultButton from './components/ResultButton';
+import EqualSignButton from './components/EqualSignButton';
 
 function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
@@ -51,7 +53,7 @@ function App() {
 							setOperator={setOperator}
 							value={operator}/>
 					))}
-					<ResultButton value={equalSign} />
+					<EqualSignButton value={equalSign} />
 				</div>
 			</div>
 		</div>
