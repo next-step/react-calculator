@@ -4,19 +4,29 @@ type ResultButtonProps = {
 	value: string;
 	firstNumber: number;
 	secondNumber: number;
+	operator: string;
 };
 
 export default function EqualSignButton({
 	value,
 	firstNumber,
 	secondNumber,
+	operator,
 }: ResultButtonProps) {
 	const handleClickEqualSign = () => {
 		let calculatedResult = 0;
-
 		const calculator = new Calculator();
 
-		calculatedResult = calculator.sum(firstNumber, secondNumber);
+		switch (operator) {
+			case '+':
+				calculatedResult = calculator.sum(firstNumber, secondNumber);
+				break;
+			case '-':
+				calculatedResult = calculator.minus(firstNumber, secondNumber);
+				break;
+			default:
+				break;
+		}
 
 		console.log(calculatedResult);
 	};

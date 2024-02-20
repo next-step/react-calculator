@@ -1,5 +1,5 @@
-// - [ ] 2개의 숫자에 대해 덧셈이 가능하다.
-// - [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
+// - [X] 2개의 숫자에 대해 덧셈이 가능하다.
+// - [X] 2개의 숫자에 대해 뺄셈이 가능하다.
 // - [ ] 2개의 숫자에 대해 곱셈이 가능하다.
 // - [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
 // - [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
@@ -57,6 +57,7 @@ function App() {
             value={equalSign} 
             firstNumber={Number(firstNumber)}
             secondNumber={Number(secondNumber)}
+            operator={operator}
           />
 				</div>
 			</div>
