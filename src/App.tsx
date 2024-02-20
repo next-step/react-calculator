@@ -25,7 +25,7 @@ function App() {
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-  const input = firstNumber + operator + secondNumber;
+  const input = firstNumber + operator + secondNumber || 0;
 
 	return (
 		<div id='app'>
