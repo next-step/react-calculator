@@ -63,11 +63,12 @@ This project is [MIT](https://github.com/next-step/react-calculator/blob/master/
 
 ### Step 0
 
-- [ ] Project setup (vite, vitest, typescript, testing-library)
-
-- [ ] 요구사항 채우고 점검하기
+- [x] Project setup (vite, vitest, typescript, testing-library)
+- [x] 요구사항 채우고 점검하기
 
 ### Step 1
+
+#### requirements
 
 - [ ] 최초 렌더링 시 0을 표시
 - [ ] 숫자를 누르면 해당 숫자표시(한자리, 여러자리)
@@ -77,6 +78,24 @@ This project is [MIT](https://github.com/next-step/react-calculator/blob/master/
 - [ ] 2개의 숫자에 대해 곱셈이 가능하다.
 - [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
 - [ ] AC를 누르면 숫자가 0으로 초기화 된다
+
+#### TO-DO
+
+- [ ] 주어진 입력 값에 피연산자 유효성 검사(숫자 입력 테스트)
+  - [ ] 세자리 까지만 입력 가능 하게 로직 구성
+
+- [ ] 연산시의 유효성 검사
+  - [ ] 연산자/피연산자 입력의 종류를 별도로 정의
+  - [ ] 연산 실행 로직 정의
+    - [ ] 주어진 입력에 대해서 (oprator/operand/operator)를 유효한 형식으로 간주하고 유효성 검사를 진행한다.
+  - [ ] 음수에 대해서 예외 처리
+
+- [ ] 마크다운 및 css 연결
+
+- [ ] 입력 상태 정의 및 초기값 설정을 위한 관련 훅 정의 (`useCalculationState`)
+  - [ ] 타입은 문자열인 상태 정의
+  - [ ] 마우스 클릭 이벤트 바인딩
+  - [ ] 유효성 검사 로직에 맞추어 상태 업데이트
 
 ### Step 2
 
