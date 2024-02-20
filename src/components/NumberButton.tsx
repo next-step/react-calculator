@@ -9,13 +9,13 @@ type NumberButtonProps = {
   
 export default  function NumberButton({setFirstNumber, firstNumber, setSecondNumber, secondNumber, operator, value}: NumberButtonProps ){
     const handleClickNumber= (e: React.MouseEvent<HTMLButtonElement>) => {
-      const { value } = e.currentTarget;
-      const number = value;
-  
-      operator ? 
+      const { value: number } = e.currentTarget;
+
+      (!operator) ? 
       setFirstNumber(firstNumber + number) 
       : setSecondNumber(secondNumber + number);
-    
+      
+      console.log(operator, firstNumber, secondNumber);
     }
   
     return (
