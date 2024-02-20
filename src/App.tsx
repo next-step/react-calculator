@@ -20,12 +20,14 @@ function App() {
 
 	const Numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 	const Operators = ['/', 'X', '-', '+'];
-	const Result = '=';
+	const equalSign = '=';
+
+  const inputResult = firstNumber + operator + secondNumber;
 
 	return (
 		<div id='app'>
 			<div className='calculator'>
-				<h1 id='total'>0</h1>
+				<h1 id='total'>{inputResult}</h1>
 				<div className='digits flex'>
 					{Numbers.map(number => (
 						<NumberButton
@@ -49,7 +51,7 @@ function App() {
 							setOperator={setOperator}
 							value={operator}/>
 					))}
-					<ResultButton value={Result} />
+					<ResultButton value={equalSign} />
 				</div>
 			</div>
 		</div>
