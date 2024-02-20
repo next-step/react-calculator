@@ -18,6 +18,11 @@ function App() {
 
   const NUMBER = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
+  const handleClickOperator = (e) => {
+    const { value: operator } = e.target;
+    setOperator(operator);
+  }
+
   return (
     <div id="app">
       <div className="calculator">
@@ -39,7 +44,11 @@ function App() {
           <button className="modifier">AC</button>
         </div>
         <div className="operations subgrid">
-          <button className="operation">/</button>
+          <button className="operation" 
+            onClick={handleClickOperator} 
+            value={"/"}>
+              /
+          </button>
           <button className="operation">X</button>
           <button className="operation">-</button>
           <button className="operation">+</button>

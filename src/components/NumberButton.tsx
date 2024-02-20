@@ -15,7 +15,7 @@ export default  function NumberButton({setFirstNumber, firstNumber, setSecondNum
       setFirstNumber(firstNumber + number) 
       : setSecondNumber(secondNumber + number);
       
-      console.log(operator, firstNumber, secondNumber);
+      console.log(firstNumber, operator, secondNumber);
     }
   
     return (
