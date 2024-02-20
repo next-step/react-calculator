@@ -1,12 +1,11 @@
 type ResultButtonProps = {
-    value: string;
-}
-  
+	value: string;
+};
+
 export default function ResultButton({value}: ResultButtonProps) {
-    return(
-      <button className="operation">
-      {value}
-    </button>
-    );
-  }
-  
+	return (
+		<button className='operation'>
+			{value}
+		</button>
+	);
+}

@@ -7,53 +7,53 @@
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 // - [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
 
-import { useState } from "react"
+import {useState} from 'react';
 
-import NumberButton from "./components/NumberButton";
-import OperatorButton from "./components/OperatorButton";
-import ResultButton from "./components/ResultButton";
+import NumberButton from './components/NumberButton';
+import OperatorButton from './components/OperatorButton';
+import ResultButton from './components/ResultButton';
 
 function App() {
-  const [firstNumber, setFirstNumber] = useState<string>('');
-  const [secondNumber, setSecondNumber] = useState<string>('');
-  const [operator, setOperator] = useState<string>('');
+	const [firstNumber, setFirstNumber] = useState<string>('');
+	const [secondNumber, setSecondNumber] = useState<string>('');
+	const [operator, setOperator] = useState<string>('');
 
-  const NUMBERS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-  const OPERATORS = ['/', 'X', '-', '+'];
-  const RESULT_BUTTON = '=';
+	const Numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+	const Operators = ['/', 'X', '-', '+'];
+	const Result = '=';
 
-  return (
-    <div id="app">
-      <div className="calculator">
-        <h1 id="total">0</h1>
-        <div className="digits flex">
-          {NUMBERS.map((number) => (
-            <NumberButton
-              key={number}
-              setFirstNumber={setFirstNumber}
-              firstNumber={firstNumber}
-              setSecondNumber={setSecondNumber}
-              secondNumber={secondNumber}
-              operator={operator}
-              value={number}
-            />
-          ))}
-        </div>
-        <div className="modifiers subgrid">
-          <button className="modifier">AC</button>
-        </div>
-        <div className="operations subgrid">
-          {OPERATORS.map((operator) => (
-            <OperatorButton 
-              key={operator}
-              setOperator={setOperator} 
-              value={operator}/>
-          ))}
-          <ResultButton value={RESULT_BUTTON} />
-        </div>
-      </div>
-    </div>
-  )
+	return (
+		<div id='app'>
+			<div className='calculator'>
+				<h1 id='total'>0</h1>
+				<div className='digits flex'>
+					{Numbers.map(number => (
+						<NumberButton
+							key={number}
+							setFirstNumber={setFirstNumber}
+							firstNumber={firstNumber}
+							setSecondNumber={setSecondNumber}
+							secondNumber={secondNumber}
+							operator={operator}
+							value={number}
+						/>
+					))}
+				</div>
+				<div className='modifiers subgrid'>
+					<button className='modifier'>AC</button>
+				</div>
+				<div className='operations subgrid'>
+					{Operators.map(operator => (
+						<OperatorButton
+							key={operator}
+							setOperator={setOperator}
+							value={operator}/>
+					))}
+					<ResultButton value={Result} />
+				</div>
+			</div>
+		</div>
+	);
 }
 
-export default App
+export default App;
