@@ -27,6 +27,9 @@ export default function EqualSignButton({
 			case 'X':
 				calculatedResult = calculator.multiply(firstNumber, secondNumber);
 				break;
+			case '/':
+				calculatedResult = calculator.divide(firstNumber, secondNumber);
+				break;
 			default:
 				break;
 		}
