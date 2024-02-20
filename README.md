@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+<br/>
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="middle" >
+  <img width="100px;" src="public/images/calculator_icon.png"/>
+</p>
+<h2 align="middle">React 계산기</h2>
+<p align="middle">계산기와 함께하는 Onboarding NEXTSTEP with React</p>
+<p align="middle">
+  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="template version"/>
+  <img src="https://img.shields.io/badge/language-html-red.svg?style=flat-square"/>
+  <img src="https://img.shields.io/badge/language-css-blue.svg?style=flat-square"/>
+  <img src="https://img.shields.io/badge/language-js-yellow.svg?style=flat-square"/>
+  <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"/>
+</p>
 
-## Available Scripts
+## 🔥 Projects!
 
-In the project directory, you can run:
+<p align="middle">
+  <img width="300" src="public/images/calculator_ui.png">
+</p>
 
-### `npm start`
+<p align="middle">
+  <a href="https://next-step.github.io/js-calculator/">🖥️ 데모 링크</a>
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🎯 기능 요구사항
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [ ] 2개의 숫자에 대해 덧셈이 가능하다.
+- [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
+- [ ] 2개의 숫자에 대해 곱셈이 가능하다.
+- [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
+- [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
+- [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
+- [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
+- [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
 
-### `npm test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📄 참고 사항
 
-### `npm run build`
+숫자 입력은 **클릭**으로만 가능하다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 👏 Contributing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+만약 미션 수행 중에 개선사항이 보인다면, 언제든 자유롭게 PR을 보내주세요.
 
-### `npm run eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🐞 Bug Report
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+버그를 발견한다면, [Issues](https://github.com/next-step/react-calculator/issues)에 등록해주세요.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📝 License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is [MIT](https://github.com/next-step/react-calculator/blob/master/LICENSE) licensed.
