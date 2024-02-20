@@ -22,7 +22,7 @@ export default function EqualSignButton({
 				calculatedResult = calculator.sum(firstNumber, secondNumber);
 				break;
 			case '-':
-				calculatedResult = calculator.minus(firstNumber, secondNumber);
+				calculatedResult = calculator.subtract(firstNumber, secondNumber);
 				break;
 			default:
 				break;
