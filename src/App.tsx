@@ -17,14 +17,14 @@ function App() {
   const [secondNumber, setSecondNumber] = useState<string>('');
   const [operator, setOperator] = useState<string>('');
 
-  const NUMBER = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+  const NUMBERS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
   return (
     <div id="app">
       <div className="calculator">
         <h1 id="total">0</h1>
         <div className="digits flex">
-          {NUMBER.map((number) => (
+          {NUMBERS.map((number) => (
             <NumberButton
               key={number}
               setFirstNumber={setFirstNumber}
