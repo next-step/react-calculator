@@ -1,11 +1,32 @@
+// - [ ] 2개의 숫자에 대해 덧셈이 가능하다.
+// - [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
+// - [ ] 2개의 숫자에 대해 곱셈이 가능하다.
+// - [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
+// - [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
+// - [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
+// - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
+// - [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
+
+import { useState } from "react"
+
 function App() {
+  const [firstNumber, setFirstNumber] = useState<number>(1);
+  const [secondNumber, setSecondNumber] = useState<number>(1);
+  const [operator, setOperator] = useState<string>('');
+
+  const handleClickAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { value } = e.currentTarget;
+    const number = Number(value);
+
+    operator ? setFirstNumber(number) : setSecondNumber(number);
+  }
 
   return (  
     <div id="app">
       <div className="calculator">
         <h1 id="total">0</h1>
         <div className="digits flex">
-          <button className="digit">9</button>
+          <button className="digit" onClick={handleClickAdd} value={9} >9</button>
           <button className="digit">8</button>
           <button className="digit">7</button>
           <button className="digit">6</button>
@@ -27,7 +48,6 @@ function App() {
           <button className="operation">=</button>
         </div>
       </div>
-      <p className="read-the-docs">
     </div>
   )
 }
