@@ -25,19 +25,20 @@ function App() {
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-  const isBlank = (value: string) => {
-    return value === '' ? true : false;
-  }
-
   const input = firstNumber + operator + secondNumber || 0;
 
   const handleClickAC = () => {
-    setResultNumber(0);
+    setResultNumber('0');
   }
 	return (
 		<div id='app'>
 			<div className='calculator'>
-				<h1 id='total'>{resultNubmber || input}</h1>
+				<h1 id='total'>
+        {
+          resultNubmber === '0' || resultNubmber ?
+          resultNubmber : input
+        }
+        </h1>
 				<div className='digits flex'>
 					{Numbers.map(number => (
 						<NumberButton
