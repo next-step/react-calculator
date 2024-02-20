@@ -11,6 +11,7 @@ import { useState } from "react"
 
 import NumberButton from "./components/NumberButton";
 import OperatorButton from "./components/OperatorButton";
+import ResultButton from "./components/ResultButton";
 
 function App() {
   const [firstNumber, setFirstNumber] = useState<string>('');
@@ -48,9 +49,7 @@ function App() {
               setOperator={setOperator} 
               value={operator}/>
           ))}
-          <button className="operation">
-            {RESULT_BUTTON}
-          </button>
+          <ResultButton value={RESULT_BUTTON} />
         </div>
       </div>
     </div>
