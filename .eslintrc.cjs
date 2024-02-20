@@ -27,5 +27,6 @@ module.exports = {
 		'react',
 	],
 	rules: {
+		'no-alert': 'off',
 	},
 };

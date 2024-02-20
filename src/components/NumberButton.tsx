@@ -15,12 +15,27 @@ export default function NumberButton({
 	operator,
 	value,
 }: NumberButtonProps) {
+	const alertMessage = '숫자는 세 자리까지만 입력 가능합니다!';
+	const isNotValidNumberLength = (number: string) => (number.length > 2);
+
 	const handleClickNumber = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const {value: number} = e.currentTarget;
 
 		if (!operator) {
+			if (isNotValidNumberLength(firstNumber)) {
+				alert(alertMessage);
+				return;
+			}
+
 			setFirstNumber(firstNumber + number);
-		} else if (operator) {
+		}
+
+		if (operator) {
+			if (isNotValidNumberLength(secondNumber)) {
+				alert(alertMessage);
+				return;
+			}
+
 			setSecondNumber(secondNumber + number);
 		}
 
