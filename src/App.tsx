@@ -53,7 +53,11 @@ function App() {
 							setOperator={setOperator}
 							value={operator}/>
 					))}
-					<EqualSignButton value={equalSign} />
+					<EqualSignButton
+            value={equalSign} 
+            firstNumber={Number(firstNumber)}
+            secondNumber={Number(secondNumber)}
+          />
 				</div>
 			</div>
 		</div>
