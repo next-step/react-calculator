@@ -10,6 +10,7 @@
 import { useState } from "react"
 
 import NumberButton from "./components/NumberButton";
+import OperatorButton from "./components/OperatorButton";
 
 function App() {
   const [firstNumber, setFirstNumber] = useState<string>('');
@@ -17,11 +18,6 @@ function App() {
   const [operator, setOperator] = useState<string>('');
 
   const NUMBER = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-
-  const handleClickOperator = (e) => {
-    const { value: operator } = e.target;
-    setOperator(operator);
-  }
 
   return (
     <div id="app">
@@ -44,11 +40,7 @@ function App() {
           <button className="modifier">AC</button>
         </div>
         <div className="operations subgrid">
-          <button className="operation" 
-            onClick={handleClickOperator} 
-            value={"/"}>
-              /
-          </button>
+          <OperatorButton setOperator={setOperator} value={"/"}/>
           <button className="operation">X</button>
           <button className="operation">-</button>
           <button className="operation">+</button>
