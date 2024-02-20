@@ -5,6 +5,7 @@ type ResultButtonProps = {
 	firstNumber: number;
 	secondNumber: number;
 	operator: string;
+	setResultNumber: (value: string) => void;
 };
 
 export default function EqualSignButton({
@@ -12,6 +13,7 @@ export default function EqualSignButton({
 	firstNumber,
 	secondNumber,
 	operator,
+	setResultNumber,
 }: ResultButtonProps) {
 	const handleClickEqualSign = () => {
 		let calculatedResult = 0;
@@ -34,7 +36,7 @@ export default function EqualSignButton({
 				break;
 		}
 
-		console.log(calculatedResult);
+		setResultNumber(String(calculatedResult));
 	};
 
 	return (

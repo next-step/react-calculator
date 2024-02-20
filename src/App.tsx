@@ -1,7 +1,7 @@
 // - [X] 2개의 숫자에 대해 덧셈이 가능하다.
 // - [X] 2개의 숫자에 대해 뺄셈이 가능하다.
 // - [X] 2개의 숫자에 대해 곱셈이 가능하다.
-// - [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
+// - [X] 2개의 숫자에 대해 나눗셈이 가능하다.
 // - [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
 // - [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
 // - [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
@@ -19,17 +19,18 @@ function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
 	const [secondNumber, setSecondNumber] = useState<string>('');
 	const [operator, setOperator] = useState<string>('');
+  const [resultNubmber, setResultNumber] = useState<string>('');
 
 	const Numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-  const inputResult = firstNumber + operator + secondNumber;
+  const input = firstNumber + operator + secondNumber;
 
 	return (
 		<div id='app'>
 			<div className='calculator'>
-				<h1 id='total'>{inputResult}</h1>
+				<h1 id='total'>{resultNubmber || input}</h1>
 				<div className='digits flex'>
 					{Numbers.map(number => (
 						<NumberButton
@@ -58,6 +59,7 @@ function App() {
             firstNumber={Number(firstNumber)}
             secondNumber={Number(secondNumber)}
             operator={operator}
+            setResultNumber={setResultNumber}
           />
 				</div>
 			</div>
