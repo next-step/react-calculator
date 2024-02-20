@@ -25,8 +25,15 @@ function App() {
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
+  const isBlank = (value: string) => {
+    return value === '' ? true : false;
+  }
+
   const input = firstNumber + operator + secondNumber || 0;
 
+  const handleClickAC = () => {
+    setResultNumber(0);
+  }
 	return (
 		<div id='app'>
 			<div className='calculator'>
@@ -45,7 +52,7 @@ function App() {
 					))}
 				</div>
 				<div className='modifiers subgrid'>
-					<button className='modifier'>AC</button>
+					<button className='modifier' onClick={handleClickAC}>AC</button>
 				</div>
 				<div className='operations subgrid'>
 					{Operators.map(operator => (
