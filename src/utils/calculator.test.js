@@ -1,4 +1,3 @@
-import { it } from "node:test";
 import Calculator from "./calculator";
 
 describe("Calculator 함수 테스트", () => {
