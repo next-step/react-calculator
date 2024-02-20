@@ -58,3 +58,29 @@
 ## 📝 License
 
 This project is [MIT](https://github.com/next-step/react-calculator/blob/master/LICENSE) licensed.
+
+## 🏃🏻‍♂️ Milestone (planning)
+
+### Step 0
+
+- [ ] Project setup (vite, vitest, typescript, testing-library)
+
+- [ ] 요구사항 채우고 점검하기
+
+### Step 1
+
+- [ ] 최초 렌더링 시 0을 표시
+- [ ] 숫자를 누르면 해당 숫자표시(한자리, 여러자리)
+  - [ ] 숫자는 한번에 최대 3자리까지만 입력 가능
+- [ ] 2개의 숫자에 대해 덧셈이 가능하다.
+- [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
+- [ ] 2개의 숫자에 대해 곱셈이 가능하다.
+- [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
+- [ ] AC를 누르면 숫자가 0으로 초기화 된다
+
+### Step 2
+
+- [ ] 리뷰사항 반영하기
+- [ ] 계산결과에서 소수점 이하는 버린다
+- [ ] 연산의 결과값이 Infinity일 경우 오류라는 문자열을 보여준다
+- [ ] 리뷰 제출하기
