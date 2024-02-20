@@ -24,6 +24,9 @@ export default function EqualSignButton({
 			case '-':
 				calculatedResult = calculator.subtract(firstNumber, secondNumber);
 				break;
+			case 'X':
+				calculatedResult = calculator.multiply(firstNumber, secondNumber);
+				break;
 			default:
 				break;
 		}
