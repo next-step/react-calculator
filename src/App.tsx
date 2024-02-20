@@ -18,6 +18,8 @@ function App() {
   const [operator, setOperator] = useState<string>('');
 
   const NUMBERS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+  const OPERATORS = ['/', 'X', '-', '+'];
+  const RESULT_BUTTON = '=';
 
   return (
     <div id="app">
@@ -40,11 +42,15 @@ function App() {
           <button className="modifier">AC</button>
         </div>
         <div className="operations subgrid">
-          <OperatorButton setOperator={setOperator} value={"/"}/>
-          <button className="operation">X</button>
-          <button className="operation">-</button>
-          <button className="operation">+</button>
-          <button className="operation">=</button>
+          {OPERATORS.map((operator) => (
+            <OperatorButton 
+              key={operator}
+              setOperator={setOperator} 
+              value={operator}/>
+          ))}
+          <button className="operation">
+            {RESULT_BUTTON}
+          </button>
         </div>
       </div>
     </div>
