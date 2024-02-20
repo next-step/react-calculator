@@ -9,24 +9,26 @@
 
 import { useState } from "react"
 
+import NumberButton from "./components/NumberButton";
+
 function App() {
-  const [firstNumber, setFirstNumber] = useState<number>(1);
-  const [secondNumber, setSecondNumber] = useState<number>(1);
+  const [firstNumber, setFirstNumber] = useState<string>('');
+  const [secondNumber, setSecondNumber] = useState<string>('');
   const [operator, setOperator] = useState<string>('');
-
-  const handleClickAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget;
-    const number = Number(value);
-
-    operator ? setFirstNumber(number) : setSecondNumber(number);
-  }
 
   return (  
     <div id="app">
       <div className="calculator">
         <h1 id="total">0</h1>
         <div className="digits flex">
-          <button className="digit" onClick={handleClickAdd} value={9} >9</button>
+          <NumberButton 
+            setFirstNumber={setFirstNumber}
+            firstNumber={firstNumber}
+            setSecondNumber={setSecondNumber}
+            secondNumber={secondNumber}
+            operator={operator}
+            value={9}
+          />
           <button className="digit">8</button>
           <button className="digit">7</button>
           <button className="digit">6</button>
