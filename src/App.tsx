@@ -27,7 +27,7 @@ function App() {
 
 	const input = firstNumber + operator + secondNumber || 0;
 
-	const handleClickAC = () => {
+	const handleClickAc = () => {
 		setResultNumber('0');
 		setFirstNumber('');
 		setSecondNumber('');
@@ -56,7 +56,7 @@ function App() {
 					))}
 				</div>
 				<div className='modifiers subgrid'>
-					<button className='modifier' onClick={handleClickAC}>AC</button>
+					<button className='modifier' onClick={handleClickAc}>AC</button>
 				</div>
 				<div className='operations subgrid'>
 					{Operators.map(operator => (
