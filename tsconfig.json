@@ -14,7 +14,7 @@
 		"noEmit": true,
 		"jsx": "react-jsx",
 		"baseUrl": ".",
-
+		"esModuleInterop": true,
 		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
