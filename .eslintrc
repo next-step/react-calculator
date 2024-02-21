@@ -31,6 +31,7 @@
     "react/jsx-uses-vars": "error",
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/jsx-no-duplicate-props": "error",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-key": "error"
   }
 }
