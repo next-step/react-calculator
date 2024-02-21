@@ -18,4 +18,8 @@ describe("Calculator 함수 테스트", () => {
   it("div 함수 테스트", () => {
     expect(calculator.div(6, 3)).toBe(2);
   });
+
+  it("소수점 이하 버리기", () => {
+    expect(calculator.div(3, 2)).toBe(1);
+  });
 });

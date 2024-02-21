@@ -12,7 +12,7 @@ class Calculator {
   }
 
   div(a, b) {
-    return a / b;
+    return Math.floor(a / b);
   }
 }
 
