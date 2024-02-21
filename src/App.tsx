@@ -11,18 +11,15 @@
 
 import {useState} from 'react';
 
-import OperatorButton from './components/OperatorButton';
-import EqualSignButton from './components/EqualSignButton';
 import Digits from './components/Digits';
+import Modifiers from './components/Modifiers';
+import Operations from './components/Operations';
 
 function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
 	const [secondNumber, setSecondNumber] = useState<string>('');
 	const [operator, setOperator] = useState<string>('');
 	const [resultNubmber, setResultNumber] = useState<string>('');
-
-	const Operators = ['/', 'X', '-', '+'];
-	const equalSign = '=';
 
 	const equation = firstNumber + operator + secondNumber;
 	const displayResult = equation || resultNubmber || '0';
@@ -47,27 +44,16 @@ function App() {
 					secondNumber={secondNumber}
 					operator={operator}
 				/>
-				<div className='modifiers subgrid'>
-					<button className='modifier' onClick={handleClickAc}>AC</button>
-				</div>
-				<div className='operations subgrid'>
-					{Operators.map(operator => (
-						<OperatorButton
-							key={operator}
-							setOperator={setOperator}
-							value={operator}/>
-					))}
-					<EqualSignButton
-						value={equalSign}
-						firstNumber={firstNumber}
-						secondNumber={secondNumber}
-						operator={operator}
-						setResultNumber={setResultNumber}
-						setFirstNumber={setFirstNumber}
-						setSecondNumber={setSecondNumber}
-						setOperator={setOperator}
-					/>
-				</div>
+				<Modifiers onClickAc={handleClickAc} />
+				<Operations
+					firstNumber={firstNumber}
+					secondNumber={secondNumber}
+					operator={operator}
+					setResultNumber={setResultNumber}
+					setFirstNumber={setFirstNumber}
+					setSecondNumber={setSecondNumber}
+					setOperator={setOperator}
+				/>
 			</div>
 		</div>
 	);
