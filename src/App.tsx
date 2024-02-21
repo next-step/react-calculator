@@ -9,7 +9,7 @@
 
 // - [ ] 2자리 수 이상의 숫자는 0이 앞에 올 수 없다.
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import NumberButton from './components/NumberButton';
 import OperatorButton from './components/OperatorButton';
@@ -25,7 +25,8 @@ function App() {
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-	const input = firstNumber + operator + secondNumber || '0';
+	const equation = firstNumber + operator + secondNumber;
+	const displayResult = equation || resultNubmber || '0';
 
 	const handleClickAc = () => {
 		setResultNumber('0');
@@ -38,9 +39,7 @@ function App() {
 		<div id='app'>
 			<div className='calculator'>
 				<h1 id='total'>
-					{
-						input === '0' || input ? input : resultNubmber
-					}
+					{displayResult}
 				</h1>
 				<div className='digits flex'>
 					{Numbers.map(number => (
