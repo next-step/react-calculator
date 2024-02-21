@@ -12,6 +12,6 @@ export class Calculator {
 	}
 
 	divide(num1: number, num2: number): number {
-		return num1 / num2;
+		return Math.floor(num1 / num2);
 	}
 }
