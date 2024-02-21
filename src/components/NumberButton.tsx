@@ -53,8 +53,6 @@ export default function NumberButton({
 
 			setSecondNumber(secondNumber + number);
 		}
-
-		console.log(firstNumber, operator, secondNumber);
 	};
 
 	return (
