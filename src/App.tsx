@@ -11,9 +11,9 @@
 
 import {useState} from 'react';
 
-import NumberButton from './components/NumberButton';
 import OperatorButton from './components/OperatorButton';
 import EqualSignButton from './components/EqualSignButton';
+import Digits from './components/Digits';
 
 function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
@@ -21,7 +21,6 @@ function App() {
 	const [operator, setOperator] = useState<string>('');
 	const [resultNubmber, setResultNumber] = useState<string>('');
 
-	const Numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
@@ -41,19 +40,13 @@ function App() {
 				<h1 id='total'>
 					{displayResult}
 				</h1>
-				<div className='digits flex'>
-					{Numbers.map(number => (
-						<NumberButton
-							key={number}
-							setFirstNumber={setFirstNumber}
-							firstNumber={firstNumber}
-							setSecondNumber={setSecondNumber}
-							secondNumber={secondNumber}
-							operator={operator}
-							value={number}
-						/>
-					))}
-				</div>
+				<Digits
+					setFirstNumber={setFirstNumber}
+					firstNumber={firstNumber}
+					setSecondNumber={setSecondNumber}
+					secondNumber={secondNumber}
+					operator={operator}
+				/>
 				<div className='modifiers subgrid'>
 					<button className='modifier' onClick={handleClickAc}>AC</button>
 				</div>
