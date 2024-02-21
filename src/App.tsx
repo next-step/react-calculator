@@ -19,29 +19,29 @@ function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
 	const [secondNumber, setSecondNumber] = useState<string>('');
 	const [operator, setOperator] = useState<string>('');
-  const [resultNubmber, setResultNumber] = useState<string>('');
-  
+	const [resultNubmber, setResultNumber] = useState<string>('');
+
 	const Numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-  const input = firstNumber + operator + secondNumber || 0;
+	const input = firstNumber + operator + secondNumber || 0;
 
-  const handleClickAC = () => {
-    setResultNumber('0');
-    setFirstNumber('');
-    setSecondNumber('');
-    setOperator('');
+	const handleClickAC = () => {
+		setResultNumber('0');
+		setFirstNumber('');
+		setSecondNumber('');
+		setOperator('');
+	};
 
-  }
 	return (
 		<div id='app'>
 			<div className='calculator'>
 				<h1 id='total'>
-        {
-          input === '0' || input  ? input : resultNubmber
-        }
-        </h1>
+					{
+						input === '0' || input ? input : resultNubmber
+					}
+				</h1>
 				<div className='digits flex'>
 					{Numbers.map(number => (
 						<NumberButton
@@ -66,15 +66,15 @@ function App() {
 							value={operator}/>
 					))}
 					<EqualSignButton
-            value={equalSign} 
-            firstNumber={Number(firstNumber)}
-            secondNumber={Number(secondNumber)}
-            operator={operator}
-            setResultNumber={setResultNumber}
-            setFirstNumber={setFirstNumber}
-            setSecondNumber={setSecondNumber}
-            setOperator={setOperator}
-          />
+						value={equalSign}
+						firstNumber={Number(firstNumber)}
+						secondNumber={Number(secondNumber)}
+						operator={operator}
+						setResultNumber={setResultNumber}
+						setFirstNumber={setFirstNumber}
+						setSecondNumber={setSecondNumber}
+						setOperator={setOperator}
+					/>
 				</div>
 			</div>
 		</div>
