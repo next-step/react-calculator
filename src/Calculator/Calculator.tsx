@@ -1,4 +1,5 @@
 import DigitButtonList from './DigitButtonList'
+import OperationButtonList from './OperationButtonList'
 
 const Calculator = () => {
   return (
@@ -8,6 +9,7 @@ const Calculator = () => {
       <div className="modifiers subgrid">
         <button className="modifier">AC</button>
       </div>
+      <OperationButtonList />
     </section>
   )
 }
