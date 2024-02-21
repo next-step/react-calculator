@@ -1,10 +1,10 @@
 import DigitButton from './DigitButton'
 
 const DigitButtonList = () => {
-  const MAX_NUMBER = 9
+  const NUMBER_LENGTH = 10
   const NUMBERS = Array.from(
-    { length: MAX_NUMBER },
-    (_, index) => MAX_NUMBER - index,
+    { length: NUMBER_LENGTH },
+    (_, index) => NUMBER_LENGTH - index - 1,
   )
 
   return (
