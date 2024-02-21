@@ -25,7 +25,7 @@ function App() {
 	const Operators = ['/', 'X', '-', '+'];
 	const equalSign = '=';
 
-	const input = firstNumber + operator + secondNumber || 0;
+	const input = firstNumber + operator + secondNumber || '0';
 
 	const handleClickAc = () => {
 		setResultNumber('0');
