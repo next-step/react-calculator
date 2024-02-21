@@ -6,8 +6,8 @@
 // - [X] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
 // - [X] 계산 결과를 표현할 때 소수점 이하는 버림한다.
 // - [X] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고) <- 어떤 값을 0으로 나눌 때
-// - [X] 2자리 수 이상의 숫자는 0이 앞에 올 수 없다. === 현재 아무 값도 없는데 0이면 넣지 않는다.
-// - [ ] 연산자를 입력하지 않고 결과 버튼을 누르면 값이 그래도 있다.
+// - [X] 0이 자릿수의 맨 앞에 오는 경우, 0을 뒤에 연속으로 추가할 수 없다. === 현재 아무 값도 없는데 0이면 넣지 않는다.
+// - [X] 연산자를 입력하지 않고 결과 버튼을 누르면 값이 그대로 있다.
 
 import {useState} from 'react';
 
@@ -66,8 +66,8 @@ function App() {
 					))}
 					<EqualSignButton
 						value={equalSign}
-						firstNumber={Number(firstNumber)}
-						secondNumber={Number(secondNumber)}
+						firstNumber={firstNumber}
+						secondNumber={secondNumber}
 						operator={operator}
 						setResultNumber={setResultNumber}
 						setFirstNumber={setFirstNumber}

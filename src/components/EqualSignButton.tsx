@@ -2,8 +2,8 @@ import {Calculator} from '../utils/Calculator';
 
 type ResultButtonProps = {
 	value: string;
-	firstNumber: number;
-	secondNumber: number;
+	firstNumber: string;
+	secondNumber: string;
 	operator: string;
 	setResultNumber: (value: string) => void;
 	setFirstNumber: (value: string) => void;
@@ -20,26 +20,38 @@ export default function EqualSignButton({
 	setFirstNumber,
 	setSecondNumber,
 	setOperator,
+
 }: ResultButtonProps) {
 	const handleInfinity = (result: string) => result === 'Infinity'
 		? '오류' : result;
 
 	const handleClickEqualSign = () => {
+		if (secondNumber === '') {
+			setResultNumber(firstNumber);
+			setFirstNumber('');
+			setSecondNumber('');
+			setOperator('');
+			return;
+		}
+
 		let calculatedResult = 0;
 		const calculator = new Calculator();
 
+		const num1 = Number(firstNumber);
+		const num2 = Number(secondNumber);
+
 		switch (operator) {
 			case '+':
-				calculatedResult = calculator.sum(firstNumber, secondNumber);
+				calculatedResult = calculator.sum(num1, num2);
 				break;
 			case '-':
-				calculatedResult = calculator.subtract(firstNumber, secondNumber);
+				calculatedResult = calculator.subtract(num1, num2);
 				break;
 			case 'X':
-				calculatedResult = calculator.multiply(firstNumber, secondNumber);
+				calculatedResult = calculator.multiply(num1, num2);
 				break;
 			case '/':
-				calculatedResult = calculator.divide(firstNumber, secondNumber);
+				calculatedResult = calculator.divide(num1, num2);
 				break;
 			default:
 				break;
