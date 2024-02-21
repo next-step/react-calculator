@@ -19,7 +19,7 @@ export default function NumberButton({
 	const isNotValidNumberLength = (number: string) => (number.length > 2);
 	const isNotValidZero = (preNumber: string, number: string) => {
 		if (number === '0') {
-			return preNumber.length === 0;
+			return preNumber === '0';
 		}
 
 		return false;
