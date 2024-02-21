@@ -62,3 +62,51 @@ describe("숫자 입력 테스트", () => {
     expect(result.current[0]).toBe(111);
   });
 });
+
+describe("연산자 입력", () => {
+  it("연산자 먼저 입력하기", () => {
+    const { result } = renderHook(() => useCalculator());
+
+    act(() => {
+      result.current[1]("+");
+    });
+
+    expect(result.current[0]).toBe(0);
+    expect(window.alert).toHaveBeenCalledWith(
+      "숫자를 먼저 입력한 후 연산자를 입력해주세요!"
+    );
+  });
+
+  it("연산자 처리하기", () => {
+    const { result } = renderHook(() => useCalculator());
+
+    act(() => {
+      result.current[1](1);
+      result.current[1](1);
+      result.current[1](1);
+      result.current[1]("+");
+      result.current[1](1);
+      result.current[1](1);
+      result.current[1](1);
+      result.current[1]("=");
+    });
+
+    expect(result.current[0]).toBe(222);
+  });
+
+  it("연산자 연속 입력하기", () => {
+    const { result } = renderHook(() => useCalculator());
+
+    act(() => {
+      result.current[1](1);
+      result.current[1](1);
+      result.current[1]("+");
+      result.current[1]("+");
+    });
+
+    expect(result.current[0]).toBe("11+");
+    expect(window.alert).toHaveBeenCalledWith(
+      "숫자를 먼저 입력한 후 연산자를 입력해주세요!"
+    );
+  });
+});
