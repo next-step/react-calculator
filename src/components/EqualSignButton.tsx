@@ -21,6 +21,9 @@ export default function EqualSignButton({
 	setSecondNumber,
 	setOperator,
 }: ResultButtonProps) {
+	const handleInfinity = (result: string) => result === 'Infinity'
+		? '오류' : result;
+
 	const handleClickEqualSign = () => {
 		let calculatedResult = 0;
 		const calculator = new Calculator();
@@ -42,7 +45,7 @@ export default function EqualSignButton({
 				break;
 		}
 
-		setResultNumber(String(calculatedResult));
+		setResultNumber(handleInfinity(String(calculatedResult)));
 		setFirstNumber('');
 		setSecondNumber('');
 		setOperator('');
