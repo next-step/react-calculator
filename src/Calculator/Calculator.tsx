@@ -5,6 +5,9 @@ const Calculator = () => {
     <section className="calculator">
       <h1 id="total">0</h1>
       <DigitButtonList />
+      <div className="modifiers subgrid">
+        <button className="modifier">AC</button>
+      </div>
     </section>
   )
 }
