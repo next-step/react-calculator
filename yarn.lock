@@ -1046,7 +1046,7 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.1.0, debug@^4.3.1, debug@^4.3.2, debug@^4.3.4:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -1692,6 +1692,11 @@ globby@^11.1.0:
     ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^3.0.0"
+
+globrex@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/globrex/-/globrex-0.1.2.tgz#dd5d9ec826232730cd6793a5e33a9302985e6098"
+  integrity sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==
 
 gopd@^1.0.1:
   version "1.0.1"
@@ -2649,6 +2654,11 @@ ts-api-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.2.1.tgz#f716c7e027494629485b21c0df6180f4d08f5e8b"
   integrity sha512-RIYA36cJn2WiH9Hy77hdF9r7oEwxAtB/TS9/S4Qd90Ap4z5FSiin5zEiTL44OII1Y3IIlEvxwxFUVgrHSZ/UpA==
 
+tsconfck@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tsconfck/-/tsconfck-3.0.2.tgz#d8e279f7a049d55f207f528d13fa493e1d8e7ceb"
+  integrity sha512-6lWtFjwuhS3XI4HsX4Zg0izOI3FU/AI9EGVlPEUMDIhvLPMD4wkiof0WCoDgW7qY+Dy198g4d9miAqUHWHFH6Q==
+
 tsconfig-paths@^3.15.0:
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.15.0.tgz#5299ec605e55b1abb23ec939ef15edaf483070d4"
@@ -2756,6 +2766,15 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+vite-tsconfig-paths@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/vite-tsconfig-paths/-/vite-tsconfig-paths-4.3.1.tgz#28762938151e7c80aec9d70c57e65ddce43a576f"
+  integrity sha512-cfgJwcGOsIxXOLU/nELPny2/LUD/lcf1IbfyeKTv2bsupVbTH/xpFtdQlBmIP1GEK2CjjLxYhFfB+QODFAx5aw==
+  dependencies:
+    debug "^4.1.1"
+    globrex "^0.1.2"
+    tsconfck "^3.0.1"
 
 vite@^5.1.0:
   version "5.1.3"

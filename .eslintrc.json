@@ -86,6 +86,7 @@
     "react/react-in-jsx-scope": "off",
     "no-console": "off",
     "no-alert": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }
