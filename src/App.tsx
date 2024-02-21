@@ -1,6 +1,6 @@
+import Title from "./components/Title";
+import { numberPads, operators } from "./constants";
 import useCalculator from "./hooks/useCalculator";
-
-const numberPads = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
 
 function App() {
   const { result, pressNumber, calculate, pressOperator, allClear } =
@@ -8,7 +8,12 @@ function App() {
   return (
     <div id="app">
       <div className="calculator">
-        <h1 id="total">{result}</h1>
+        <Title as="h1">{result}</Title>
+        <div className="modifiers subgrid">
+          <button className="modifier" onClick={allClear}>
+            AC
+          </button>
+        </div>
         <div className="digits flex">
           {numberPads.map((numberPad) => (
             <button
@@ -20,24 +25,18 @@ function App() {
             </button>
           ))}
         </div>
-        <div className="modifiers subgrid">
-          <button className="modifier" onClick={allClear}>
-            AC
-          </button>
-        </div>
         <div className="operations subgrid">
-          <button className="operation" onClick={() => pressOperator("/")}>
-            /
-          </button>
-          <button className="operation" onClick={() => pressOperator("*")}>
-            X
-          </button>
-          <button className="operation" onClick={() => pressOperator("-")}>
-            -
-          </button>
-          <button className="operation" onClick={() => pressOperator("+")}>
-            +
-          </button>
+          {operators.map((operator) => {
+            return (
+              <button
+                key={operator}
+                className="operation"
+                onClick={() => pressOperator(operator === "X" ? "*" : operator)}
+              >
+                {operator}
+              </button>
+            );
+          })}
           <button className="operation" onClick={calculate}>
             =
           </button>
