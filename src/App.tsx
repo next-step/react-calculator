@@ -1,11 +1,9 @@
-import Calculator from "./components/Calculator";
+import Calculator from './components/Calculator';
 
-function App() {
+export default function App() {
   return (
     <div id="app">
       <Calculator />
     </div>
   );
 }
-
-export default App;
