@@ -6,7 +6,6 @@ const calculator = new Calculator();
 function pressDigits(digits: string[]) {
   digits.forEach((digit) => {
     calculator.pressNumber(digit);
-    calculator.
   });
 }
 
