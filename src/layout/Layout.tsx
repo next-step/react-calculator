@@ -1,4 +1,4 @@
-import { ContainerProps } from '../types/common';
+import { ContainerProps } from '../types/components';
 
 export const Layout = ({ children }: ContainerProps) => {
   return (

@@ -1,7 +1,6 @@
 export const BUTTON = {
   DIGIT: {
-    TYPE: 'digit',
-    CLASSNAME: 'digit',
+    CLASSNAMES: ['digit'],
     CHILDREN: {
       NINE: {
         ID: 'nine',
@@ -47,8 +46,7 @@ export const BUTTON = {
   },
 
   MODIFIER: {
-    TYPE: 'modifier',
-    CLASSNAME: 'modifier',
+    CLASSNAMES: ['modifier'],
     CHILDREN: {
       AC: {
         ID: 'ac',
@@ -58,8 +56,7 @@ export const BUTTON = {
   },
 
   OPERATION: {
-    TYPE: 'operation',
-    CLASSNAME: 'operation',
+    CLASSNAMES: ['operation'],
     CHILDREN: {
       DIVIDE: {
         ID: 'divide',
