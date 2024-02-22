@@ -1,19 +1,12 @@
 import { useState } from "react";
+import Calculator from "../../utils/calculator";
 
 const useCalculator = () => {
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState("0");
+  const calculator = new Calculator();
 
   const update = (value) => {
-    setTotal((prev) => {
-      const updateValue = Number(prev + "" + value);
-
-      if (updateValue > 999) {
-        window.alert("숫자는 세 자리까지만 입력 가능합니다!");
-        return prev;
-      }
-
-      return updateValue;
-    });
+    setTotal((prev) => calculator.update(value, prev));
   };
 
   return [total, update];
