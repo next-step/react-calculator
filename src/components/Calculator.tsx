@@ -1,21 +1,23 @@
 import Key from './Key';
-
-const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-const OPERATORS = ['/', 'X', '-', '+', '='];
+import { OperatorType } from '../common/types';
+import { DIGITS, OPERATORS } from '../common/constants';
+import useCalculator from '../hooks/useCalculator';
 
 export default function Calculator() {
+  const { num1, num2, operator, inputNumber, clear, inputOperator } = useCalculator();
+
   const handleClickDigit = (digit: number) => {
-    console.log(digit);
+    inputNumber(digit);
   };
-  const handleClickAC = () => {
-    console.log('AC@@@@@@');
+
+  const handleClickOperation = (operator: OperatorType) => {
+    inputOperator(operator);
   };
-  const handleClickOperation = (operator: string) => {
-    console.log(operator);
-  };
+
+  const message = num1 === Infinity ? '오류' : `${num1}${operator ?? ''}${num2 ?? ''}`;
   return (
     <div className="calculator">
-      <h1 id="total">0</h1>
+      <h1 id="total">{message}</h1>
       <div className="digits flex">
         {DIGITS.map(digit => (
           <Key
@@ -27,7 +29,7 @@ export default function Calculator() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <Key className="modifier" label="AC" onClick={handleClickAC} />
+        <Key className="modifier" label="AC" onClick={clear} />
       </div>
       <div className="operations subgrid">
         {OPERATORS.map(operator => (
