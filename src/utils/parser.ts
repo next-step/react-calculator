@@ -1,7 +1,7 @@
 import { ClassNames } from '../types/components';
 
 export const Parser = {
-  className(className: ClassNames) {
-    return className.join(' ');
+  classNames(classNames: ClassNames) {
+    return classNames.join(' ');
   },
 };
