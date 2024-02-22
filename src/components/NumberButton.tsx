@@ -1,10 +1,13 @@
+import {type Dispatch, type SetStateAction} from 'react';
+
 import {Validation} from '../utils/Validation';
+
 import fixtures from '../fixtures';
 
 type NumberButtonProps = {
-	setFirstNumber: (value: string) => void;
+	setFirstNumber: Dispatch<SetStateAction<string>>;
 	firstNumber: string;
-	setSecondNumber: (value: string) => void;
+	setSecondNumber: Dispatch<SetStateAction<string>>;
 	secondNumber: string;
 	operator: string;
 	value: string;
@@ -33,7 +36,7 @@ export default function NumberButton({
 				return;
 			}
 
-			setFirstNumber(firstNumber + value);
+			setFirstNumber((prev: string) => prev + value);
 		}
 
 		if (operator) {
@@ -46,7 +49,7 @@ export default function NumberButton({
 				return;
 			}
 
-			setSecondNumber(secondNumber + value);
+			setSecondNumber((prev: string) => prev + value);
 		}
 	};
 
