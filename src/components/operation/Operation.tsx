@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 import Button from "../button/Button";
 import { BUTTON_VARIANTS } from "../button/Button.type";
-import { OperationType } from "./Opertaiton.type";
+import { OPERATION_TYPE_VARIANT, OperationType } from "./Opertaiton.type";
 
 const OPERATION_BUTTON_LIST: { render: ReactNode; type: OperationType }[] = [
-  { render: "/", type: "divide" },
-  { render: "X", type: "multiple" },
-  { render: "-", type: "subtract" },
-  { render: "+", type: "add" },
-  { render: "=", type: "equal" },
+  { render: "/", type: OPERATION_TYPE_VARIANT.DIVIDE },
+  { render: "X", type: OPERATION_TYPE_VARIANT.MULTIPLE },
+  { render: "-", type: OPERATION_TYPE_VARIANT.SUBTRACT },
+  { render: "+", type: OPERATION_TYPE_VARIANT.ADD },
+  { render: "=", type: OPERATION_TYPE_VARIANT.EQUAL },
 ];
 
 const Operation = () => {
