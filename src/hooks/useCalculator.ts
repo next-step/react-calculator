@@ -4,7 +4,7 @@ export default function useCalculator() {
 	const [display, setDisplay] = useState('0');
 
 	const addNumber = (value: string) => {
-		if (display.split(/[+\-*/]/).pop()?.length === 3) {
+		if (display.split(/[+\-x/]/).pop()?.length === 3) {
 			alert('숫자는 3자리까지만 입력 가능합니다.');
 			return;
 		}
@@ -32,7 +32,7 @@ export default function useCalculator() {
 			return;
 		}
 
-		if (/^[+\-*/]$/.test(value)) {
+		if (/^[+\-x/]$/.test(value)) {
 			addOperator(value);
 			return;
 		}
