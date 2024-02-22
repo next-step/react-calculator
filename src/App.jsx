@@ -7,7 +7,7 @@ function App() {
     <div id="app">
       <div className="calculator">
         <h1 id="total">{total}</h1>
-        <div className="digits">
+        <div className="digits flex">
           <button className="digit" onClick={() => update("9")}>
             9
           </button>

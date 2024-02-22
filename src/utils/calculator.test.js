@@ -125,6 +125,14 @@ describe("연산자 입력", () => {
       "숫자를 먼저 입력한 후 연산자를 입력해주세요!"
     );
   });
+
+  it("연산자 2번 입력하기", () => {
+    let total = "99X99";
+
+    total = calculator.updateOperator("X", total);
+    expect(total).toBe("99X99");
+    expect(window.alert).toHaveBeenCalledWith("두개의 숫자 연산만 가능합니다!");
+  });
 });
 
 describe("계산하기", () => {
