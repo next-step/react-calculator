@@ -147,7 +147,7 @@ describe("계산하기", () => {
   });
 
   it("곱셈", () => {
-    const total = "111×111";
+    const total = "111X111";
 
     const mul = calculator.updateCalculate(total);
 
@@ -176,6 +176,29 @@ describe("계산하기", () => {
     const div = calculator.updateCalculate(total);
 
     expect(div).toBe("Infinity");
+  });
+  it("최대값 확인", () => {
+    let total = "999";
+    const max = "X999";
+
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+    total = calculator.updateCalculate(total + max);
+    console.log(total);
+
+    expect(total).toBe("Infinity");
   });
 });
 
