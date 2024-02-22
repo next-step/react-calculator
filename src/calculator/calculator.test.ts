@@ -10,7 +10,7 @@ function pressDigits(digits: string[]) {
 }
 
 function isEqualValueFromDisplay(text: string) {
-  return calculator.getDisplayValue() === text;
+  expect(calculator.getDisplayValue()).toEqual(text);
 }
 
 function pressOperation(arg: "+" | "-" | "*" | "/") {
