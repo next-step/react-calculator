@@ -4,7 +4,7 @@ const ERROR = {
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
 };
 
-const OPERATOR = ["+", "-", "×", "/"];
+export const OPERATOR = ["+", "-", "×", "/"];
 const OPERATOR_REGEX = new RegExp(
   `(${OPERATOR.map((op) => op.replace(/[\+\-\×\/]/g, "\\$&")).join("|")})`
 );
@@ -44,7 +44,7 @@ class Calculator {
     return total + value;
   }
 
-  calculate(total) {
+  updateCalculate(total) {
     const parts = total.split(OPERATOR_REGEX);
 
     const numbers = [];

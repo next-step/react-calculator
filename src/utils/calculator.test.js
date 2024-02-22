@@ -133,7 +133,7 @@ describe("계산하기", () => {
   it("덧셈", () => {
     const total = "111+111";
 
-    const sum = calculator.calculate(total);
+    const sum = calculator.updateCalculate(total);
 
     expect(sum).toBe("222");
   });
@@ -141,7 +141,7 @@ describe("계산하기", () => {
   it("뺄셈", () => {
     const total = "111-111";
 
-    const sub = calculator.calculate(total);
+    const sub = calculator.updateCalculate(total);
 
     expect(sub).toBe("0");
   });
@@ -149,7 +149,7 @@ describe("계산하기", () => {
   it("곱셈", () => {
     const total = "111×111";
 
-    const mul = calculator.calculate(total);
+    const mul = calculator.updateCalculate(total);
 
     expect(mul).toBe("12321");
   });
@@ -157,7 +157,7 @@ describe("계산하기", () => {
   it("나눗셈", () => {
     const total = "111/111";
 
-    const div = calculator.calculate(total);
+    const div = calculator.updateCalculate(total);
 
     expect(div).toBe("1");
   });
@@ -165,7 +165,7 @@ describe("계산하기", () => {
   it("나눗셈 소수점 이하 버리기", () => {
     const total = "3/2";
 
-    const div = calculator.calculate(total);
+    const div = calculator.updateCalculate(total);
 
     expect(div).toBe("1");
   });
@@ -173,8 +173,36 @@ describe("계산하기", () => {
   it("나눗셈 0으로 나누기", () => {
     const total = "3/0";
 
-    const div = calculator.calculate(total);
+    const div = calculator.updateCalculate(total);
 
     expect(div).toBe("Infinity");
+  });
+});
+
+describe("입력 분기 처리", () => {
+  const calculator = new Calculator();
+
+  it("첫번째 숫자 입력", () => {
+    const total = "0";
+
+    expect(calculator.update("1", total)).toBe("1");
+  });
+
+  it("연산자 입력", () => {
+    const total = "1";
+
+    expect(calculator.update("+", total)).toBe("1+");
+  });
+
+  it("두번째 숫자 입력", () => {
+    const total = "1+";
+
+    expect(calculator.update("1", total)).toBe("1+1");
+  });
+
+  it("계산 연산자 입력", () => {
+    const total = "1+1";
+
+    expect(calculator.update("=", total)).toBe("2");
   });
 });
