@@ -1,5 +1,6 @@
 import EqualSignButton from './EqualSignButton';
 import OperatorButton from './OperatorButton';
+import fixtures from '../fixtures';
 
 type OperationsProps = {
 	firstNumber: string;
@@ -20,16 +21,15 @@ export default function Operations({
 	setSecondNumber,
 	setOperator,
 }: OperationsProps) {
-	const Operators = ['/', 'X', '-', '+'];
-	const equalSign = '=';
+	const {operators, equalSign} = fixtures;
 
 	return (
 		<div className='operations subgrid'>
-			{Operators.map(operator => (
+			{operators.map((op: string) => (
 				<OperatorButton
 					key={operator}
 					setOperator={setOperator}
-					value={operator}/>
+					value={op}/>
 			))}
 			<EqualSignButton
 				value={equalSign}
