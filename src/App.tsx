@@ -1,3 +1,5 @@
+import Calculator from './components/Calculator';
+
 export default function App() {
-  return <>계산기</>;
+  return <Calculator />;
 }
