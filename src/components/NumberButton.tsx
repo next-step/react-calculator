@@ -17,13 +17,10 @@ export default function NumberButton({
 }: NumberButtonProps) {
 	const alertMessage = '숫자는 세 자리까지만 입력 가능합니다!';
 	const isNotValidNumberLength = (number: string) => (number.length > 2);
-	const isNotValidZero = (preNumber: string, number: string) => {
-		if (number === '0') {
-			return preNumber === '0';
-		}
-
-		return false;
-	};
+	const isNotValidZero = (
+		preNumber: string,
+		number: string,
+	) => number === '0' && preNumber === '0';
 
 	const handleClickNumber = () => {
 		if (!operator) {
