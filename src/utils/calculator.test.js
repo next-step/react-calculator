@@ -89,7 +89,7 @@ describe("연산자 입력", () => {
 
   it("연산자 먼저 입력하기", () => {
     let total = "0";
-    total = calculator.updateCalculator("+", total);
+    total = calculator.updateOperator("+", total);
 
     expect(total).toBe("0");
     expect(window.alert).toHaveBeenCalledWith(
@@ -103,7 +103,7 @@ describe("연산자 입력", () => {
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
-    total = calculator.updateCalculator("+", total);
+    total = calculator.updateOperator("+", total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
@@ -117,12 +117,64 @@ describe("연산자 입력", () => {
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
-    total = calculator.updateCalculator("+", total);
-    total = calculator.updateCalculator("+", total);
+    total = calculator.updateOperator("+", total);
+    total = calculator.updateOperator("+", total);
 
     expect(total).toBe("111+");
     expect(window.alert).toHaveBeenCalledWith(
       "숫자를 먼저 입력한 후 연산자를 입력해주세요!"
     );
+  });
+});
+
+describe("계산하기", () => {
+  const calculator = new Calculator();
+
+  it("덧셈", () => {
+    const total = "111+111";
+
+    const sum = calculator.calculate(total);
+
+    expect(sum).toBe("222");
+  });
+
+  it("뺄셈", () => {
+    const total = "111-111";
+
+    const sub = calculator.calculate(total);
+
+    expect(sub).toBe("0");
+  });
+
+  it("곱셈", () => {
+    const total = "111×111";
+
+    const mul = calculator.calculate(total);
+
+    expect(mul).toBe("12321");
+  });
+
+  it("나눗셈", () => {
+    const total = "111/111";
+
+    const div = calculator.calculate(total);
+
+    expect(div).toBe("1");
+  });
+
+  it("나눗셈 소수점 이하 버리기", () => {
+    const total = "3/2";
+
+    const div = calculator.calculate(total);
+
+    expect(div).toBe("1");
+  });
+
+  it("나눗셈 0으로 나누기", () => {
+    const total = "3/0";
+
+    const div = calculator.calculate(total);
+
+    expect(div).toBe("Infinity");
   });
 });
