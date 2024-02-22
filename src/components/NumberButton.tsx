@@ -1,3 +1,5 @@
+import {Validation} from '../utils/Validation';
+
 type NumberButtonProps = {
 	setFirstNumber: (value: string) => void;
 	firstNumber: string;
@@ -16,20 +18,16 @@ export default function NumberButton({
 	value,
 }: NumberButtonProps) {
 	const alertMessage = '숫자는 세 자리까지만 입력 가능합니다!';
-	const isNotValidNumberLength = (number: string) => (number.length > 2);
-	const isNotValidZero = (
-		preNumber: string,
-		number: string,
-	) => number === '0' && preNumber === '0';
+	const validation = new Validation();
 
 	const handleClickNumber = () => {
 		if (!operator) {
-			if (isNotValidNumberLength(firstNumber)) {
+			if (validation.isNotValidNumberLength(firstNumber)) {
 				alert(alertMessage);
 				return;
 			}
 
-			if (isNotValidZero(firstNumber, value)) {
+			if (validation.isNotValidZero(firstNumber, value)) {
 				return;
 			}
 
@@ -37,12 +35,12 @@ export default function NumberButton({
 		}
 
 		if (operator) {
-			if (isNotValidNumberLength(secondNumber)) {
+			if (validation.isNotValidNumberLength(secondNumber)) {
 				alert(alertMessage);
 				return;
 			}
 
-			if (isNotValidZero(secondNumber, value)) {
+			if (validation.isNotValidZero(secondNumber, value)) {
 				return;
 			}
 
