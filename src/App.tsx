@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+import { OperatorSymbols } from "./calculator/calculator";
 import Title from "./components/Title";
 import { numberPads, operators } from "./constants";
 import useCalculator from "./hooks/useCalculator";
@@ -5,6 +7,18 @@ import useCalculator from "./hooks/useCalculator";
 function App() {
   const { result, pressNumber, calculate, pressOperator, allClear } =
     useCalculator();
+
+  const bindOperatorPressOperator = useCallback(
+    (operators: OperatorSymbols) => {
+      return () => pressOperator(operators);
+    },
+    []
+  );
+
+  const bindPressNumber = useCallback((number: string) => {
+    return () => pressNumber(number);
+  }, []);
+
   return (
     <div id="app">
       <div className="calculator">
@@ -22,7 +36,7 @@ function App() {
               role={`button_${numberPad}`}
               key={numberPad}
               className="digit"
-              onClick={() => pressNumber(numberPad)}
+              onClick={bindPressNumber(numberPad)}
             >
               {numberPad}
             </button>
@@ -34,7 +48,9 @@ function App() {
               <button
                 key={operator}
                 className="operation"
-                onClick={() => pressOperator(operator === "X" ? "*" : operator)}
+                onClick={bindOperatorPressOperator(
+                  operator === "X" ? "*" : operator
+                )}
               >
                 {operator}
               </button>
