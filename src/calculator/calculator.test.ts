@@ -1,30 +1,30 @@
 import { describe, expect, it } from "vitest";
 import { Calculator } from "./calculator";
 
-const calculator = new Calculator();
-
-function pressDigits(digits: string[]) {
-  digits.forEach((digit) => {
-    calculator.pressNumber(digit);
-  });
-}
-
-function isEqualValueFromDisplay(text: string) {
-  expect(calculator.getDisplayValue()).toEqual(text);
-}
-
-function pressOperation(arg: "+" | "-" | "*" | "/") {
-  calculator.pressOperator(arg);
-}
-
-function calculate() {
-  calculator.calculate();
-}
-
-function clear() {
-  calculator.allClear();
-}
 describe("calculator module features test", () => {
+  const calculator = new Calculator();
+
+  function pressDigits(digits: string[]) {
+    digits.forEach((digit) => {
+      calculator.pressNumber(digit);
+    });
+  }
+
+  function isEqualValueFromDisplay(text: string) {
+    expect(calculator.getDisplayValue()).toEqual(text);
+  }
+
+  function pressOperation(arg: "+" | "-" | "*" | "/") {
+    calculator.pressOperator(arg);
+  }
+
+  function calculate() {
+    calculator.calculate();
+  }
+
+  function clear() {
+    calculator.allClear();
+  }
   it("숫자 버튼을 누르면 display에 숫자가 표시", () => {
     pressDigits(["1"]);
     isEqualValueFromDisplay("1");
