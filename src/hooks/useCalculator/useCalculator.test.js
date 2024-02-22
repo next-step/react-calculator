@@ -17,10 +17,10 @@ describe("입력 테스트", () => {
 
     act(() => {
       result.current[1](1);
-      result.current[1]("+");
+      result.current[1]("＋");
     });
 
-    expect(result.current[0]).toBe("1+");
+    expect(result.current[0]).toBe("1＋");
   });
 
   it("두번째 숫자 입력", () => {
@@ -28,11 +28,11 @@ describe("입력 테스트", () => {
 
     act(() => {
       result.current[1](1);
-      result.current[1]("+");
+      result.current[1]("＋");
       result.current[1](1);
     });
 
-    expect(result.current[0]).toBe("1+1");
+    expect(result.current[0]).toBe("1＋1");
   });
 
   it("계산 연산자 입력", () => {
@@ -40,7 +40,7 @@ describe("입력 테스트", () => {
 
     act(() => {
       result.current[1](1);
-      result.current[1]("+");
+      result.current[1]("＋");
       result.current[1](1);
       result.current[1]("=");
     });
@@ -55,7 +55,7 @@ describe("값 초기화", () => {
 
     act(() => {
       result.current[1](1);
-      result.current[1]("+");
+      result.current[1]("＋");
       result.current[1](1);
       result.current[1]("=");
       result.current[2]();

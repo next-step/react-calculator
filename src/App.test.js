@@ -30,7 +30,7 @@ describe("키 패드 확인", () => {
     const buttonTexts = Array.from(operationButtons).map(
       (button) => button.textContent
     );
-    const expectedTexts = ["+", "-", "X", "/", "="];
+    const expectedTexts = ["＋", "-", "X", "/", "="];
 
     expectedTexts.forEach((text) => {
       expect(buttonTexts).toContain(text);
@@ -67,19 +67,19 @@ describe("입력 테스트", () => {
 
   it("연산자 입력", () => {
     const numberButton = screen.getByRole("button", { name: "1" });
-    const operatorButton = screen.getByRole("button", { name: "+" });
+    const operatorButton = screen.getByRole("button", { name: "＋" });
 
     fireEvent.click(numberButton);
     fireEvent.click(operatorButton);
 
     const total = screen.getByRole("heading", { level: 1 });
 
-    expect(total).toHaveTextContent("1+");
+    expect(total).toHaveTextContent("1＋");
   });
 
   it("두번째 숫자 입력", () => {
     const numberButton = screen.getByRole("button", { name: "1" });
-    const operatorButton = screen.getByRole("button", { name: "+" });
+    const operatorButton = screen.getByRole("button", { name: "＋" });
 
     fireEvent.click(numberButton);
     fireEvent.click(operatorButton);
@@ -87,12 +87,12 @@ describe("입력 테스트", () => {
 
     const total = screen.getByRole("heading", { level: 1 });
 
-    expect(total).toHaveTextContent("1+1");
+    expect(total).toHaveTextContent("1＋1");
   });
 
   it("계산 연산자 입력", () => {
     const numberButton = screen.getByRole("button", { name: "1" });
-    const operatorButton = screen.getByRole("button", { name: "+" });
+    const operatorButton = screen.getByRole("button", { name: "＋" });
     const calculateButton = screen.getByRole("button", { name: "=" });
 
     fireEvent.click(numberButton);
@@ -107,7 +107,7 @@ describe("입력 테스트", () => {
 
   it("초기화 실행", () => {
     const numberButton = screen.getByRole("button", { name: "1" });
-    const operatorButton = screen.getByRole("button", { name: "+" });
+    const operatorButton = screen.getByRole("button", { name: "＋" });
     const calculateButton = screen.getByRole("button", { name: "=" });
     const allClearButton = screen.getByRole("button", { name: "AC" });
 

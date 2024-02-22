@@ -56,8 +56,8 @@ function App() {
           <button className="operation" onClick={() => update("-")}>
             -
           </button>
-          <button className="operation" onClick={() => update("+")}>
-            +
+          <button className="operation" onClick={() => update("＋")}>
+            ＋
           </button>
           <button className="operation" onClick={() => update("=")}>
             =

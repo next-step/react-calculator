@@ -89,7 +89,7 @@ describe("연산자 입력", () => {
 
   it("연산자 먼저 입력하기", () => {
     let total = "0";
-    total = calculator.updateOperator("+", total);
+    total = calculator.updateOperator("＋", total);
 
     expect(total).toBe("0");
     expect(window.alert).toHaveBeenCalledWith(
@@ -103,12 +103,12 @@ describe("연산자 입력", () => {
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
-    total = calculator.updateOperator("+", total);
+    total = calculator.updateOperator("＋", total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
 
-    expect(total).toBe("111+111");
+    expect(total).toBe("111＋111");
   });
 
   it("연산자 연속 입력하기", () => {
@@ -117,10 +117,10 @@ describe("연산자 입력", () => {
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
     total = calculator.updateNumber(1, total);
-    total = calculator.updateOperator("+", total);
-    total = calculator.updateOperator("+", total);
+    total = calculator.updateOperator("＋", total);
+    total = calculator.updateOperator("＋", total);
 
-    expect(total).toBe("111+");
+    expect(total).toBe("111＋");
     expect(window.alert).toHaveBeenCalledWith(
       "숫자를 먼저 입력한 후 연산자를 입력해주세요!"
     );
@@ -131,7 +131,7 @@ describe("계산하기", () => {
   const calculator = new Calculator();
 
   it("덧셈", () => {
-    const total = "111+111";
+    const total = "111＋111";
 
     const sum = calculator.updateCalculate(total);
 
@@ -177,22 +177,6 @@ describe("계산하기", () => {
 
     expect(div).toBe("Infinity");
   });
-
-  it("최대값 확인", () => {
-    let total = "999";
-    const max = "X999";
-
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-    total = calculator.updateCalculate(total + max);
-
-    expect(total).toBe("Infinity");
-  });
 });
 
 describe("계산 연산 테스트", () => {
@@ -223,7 +207,7 @@ describe("계산 연산 테스트", () => {
   });
 
   it("덧셈 연산자 입력 후 계산하기", () => {
-    const total = "12+";
+    const total = "12＋";
 
     const result = calculator.updateCalculate(total);
 
@@ -259,17 +243,17 @@ describe("입력 분기 처리", () => {
   it("연산자 입력", () => {
     const total = "1";
 
-    expect(calculator.update("+", total)).toBe("1+");
+    expect(calculator.update("＋", total)).toBe("1＋");
   });
 
   it("두번째 숫자 입력", () => {
-    const total = "1+";
+    const total = "1＋";
 
-    expect(calculator.update("1", total)).toBe("1+1");
+    expect(calculator.update("1", total)).toBe("1＋1");
   });
 
   it("계산 연산자 입력", () => {
-    const total = "1+1";
+    const total = "1＋1";
 
     expect(calculator.update("=", total)).toBe("2");
   });

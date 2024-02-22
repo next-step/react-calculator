@@ -4,16 +4,16 @@ const ERROR = {
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
 };
 
-const OPERATOR = ["+", "-", "X", "/"];
+const OPERATOR = ["＋", "-", "X", "/"];
 const OPERATOR_REGEX = new RegExp(
-  `(${OPERATOR.map((op) => op.replace(/[\+\-\X\/]/g, "\\$&")).join("|")})`
+  `(${OPERATOR.map((op) => op.replace(/[\＋\-\X\/]/g, "\\$&")).join("|")})`
 );
 
 const CALCULATE = "=";
 
 class Calculator {
   operators = {
-    "+": this.sum,
+    "＋": this.sum,
     "-": this.sub,
     X: this.mul,
     "/": this.div,
@@ -60,8 +60,16 @@ class Calculator {
     return total + value;
   }
 
+  checkBlank(parts) {
+    return parts.filter((part) => part);
+  }
+
   updateCalculate(total) {
     const parts = total.split(OPERATOR_REGEX);
+
+    if (this.checkBlank(parts).length !== 3) {
+      return parts[0];
+    }
 
     const numbers = [];
     let operator;
