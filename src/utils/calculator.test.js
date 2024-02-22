@@ -177,6 +177,7 @@ describe("계산하기", () => {
 
     expect(div).toBe("Infinity");
   });
+
   it("최대값 확인", () => {
     let total = "999";
     const max = "X999";
@@ -191,6 +192,58 @@ describe("계산하기", () => {
     total = calculator.updateCalculate(total + max);
 
     expect(total).toBe("Infinity");
+  });
+});
+
+describe("계산 연산 테스트", () => {
+  const calculator = new Calculator();
+
+  it("바로 계산하기", () => {
+    const total = "0";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(total).toBe("0");
+  });
+
+  it("숫자 입력 후 계산하기", () => {
+    const total = "12";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(result).toBe("12");
+  });
+
+  it("곱셈 연산자 입력 후 계산하기", () => {
+    const total = "12X";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(result).toBe("12");
+  });
+
+  it("덧셈 연산자 입력 후 계산하기", () => {
+    const total = "12+";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(result).toBe("12");
+  });
+
+  it("나눗셈 연산자 입력 후 계산하기", () => {
+    const total = "12/";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(result).toBe("12");
+  });
+
+  it("뺄셈 연산자 입력 후 계산하기", () => {
+    const total = "12-";
+
+    const result = calculator.updateCalculate(total);
+
+    expect(result).toBe("12");
   });
 });
 
