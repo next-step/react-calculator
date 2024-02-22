@@ -27,7 +27,7 @@ export default function Operations({
 		<div className='operations subgrid'>
 			{operators.map((op: string) => (
 				<OperatorButton
-					key={operator}
+					key={op}
 					setOperator={setOperator}
 					value={op}/>
 			))}
