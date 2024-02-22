@@ -4,9 +4,9 @@ const ERROR = {
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
 };
 
-const OPERATOR = ["+", "-", "×", "/"];
+const OPERATOR = ["+", "-", "X", "/"];
 const OPERATOR_REGEX = new RegExp(
-  `(${OPERATOR.map((op) => op.replace(/[\+\-\×\/]/g, "\\$&")).join("|")})`
+  `(${OPERATOR.map((op) => op.replace(/[\+\-\X\/]/g, "\\$&")).join("|")})`
 );
 
 const CALCULATE = "=";
@@ -15,7 +15,7 @@ class Calculator {
   operators = {
     "+": this.sum,
     "-": this.sub,
-    "×": this.mul,
+    X: this.mul,
     "/": this.div,
   };
 
