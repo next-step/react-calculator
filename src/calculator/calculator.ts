@@ -8,10 +8,10 @@ import {
 export type OperatorSymbols = "+" | "*" | "/" | "-";
 
 export class Calculator {
-  private display: string;
-  private targetNumber: string;
-  private constantNumber: string;
-  private operatorContainer: OperatorSymbols | "";
+  protected display: string;
+  protected targetNumber: string;
+  protected constantNumber: string;
+  protected operatorContainer: OperatorSymbols | "";
 
   constructor() {
     this.display = "";
@@ -56,7 +56,7 @@ export class Calculator {
     }
   }
 
-  setDisplay(text: string) {
+  protected setDisplay(text: string) {
     this.display = text === "NaN" ? "오류" : text;
   }
 
@@ -81,7 +81,7 @@ export class Calculator {
     this.setDisplay("0");
   }
 
-  render() {
+  protected render() {
     this.setDisplay(
       this.targetNumber + this.operatorContainer + this.constantNumber
     );
