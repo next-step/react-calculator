@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 import DigitButton from './DigitButton'
 
 type Props = {
@@ -6,7 +6,6 @@ type Props = {
 } & Omit<ComponentProps<'div'>, 'onChange'>
 
 const DigitButtonList = ({ onChange }: Props) => {
-  const [digit, setDigit] = useState(0)
   const NUMBER_LENGTH = 10
   const NUMBERS = Array.from(
     { length: NUMBER_LENGTH },
@@ -16,16 +15,7 @@ const DigitButtonList = ({ onChange }: Props) => {
   return (
     <div className="digits flex">
       {NUMBERS.map((number) => (
-        <DigitButton
-          onClick={() => {
-            const nextDigit = Number(`${digit}${number}`)
-
-            setDigit(nextDigit)
-            onChange(nextDigit)
-          }}
-        >
-          {number}
-        </DigitButton>
+        <DigitButton onClick={() => onChange(number)}>{number}</DigitButton>
       ))}
     </div>
   )
