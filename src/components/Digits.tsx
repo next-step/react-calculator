@@ -1,10 +1,12 @@
+import {type Dispatch, type SetStateAction} from 'react';
+
 import fixtures from '../fixtures';
 import NumberButton from './NumberButton';
 
 type DigitsProps = {
-	setFirstNumber: (value: string) => void;
+	setFirstNumber: Dispatch<SetStateAction<string>>;
 	firstNumber: string;
-	setSecondNumber: (value: string) => void;
+	setSecondNumber: Dispatch<SetStateAction<string>>;
 	secondNumber: string;
 	operator: string;
 };
