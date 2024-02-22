@@ -1,3 +1,4 @@
+import fixtures from '../fixtures';
 import NumberButton from './NumberButton';
 
 type DigitsProps = {
@@ -15,11 +16,11 @@ export default function Digits({
 	secondNumber,
 	operator,
 }: DigitsProps) {
-	const Numbers = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0'];
+	const {numbers} = fixtures;
 
 	return (
 		<div className='digits flex'>
-			{Numbers.map(number => (
+			{numbers.map(number => (
 				<NumberButton
 					key={number}
 					setFirstNumber={setFirstNumber}
