@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Calculator from "../../utils/calculator";
-
-const INITIAL = "0";
+import Calculator, { INITIAL } from "../../utils/calculator";
 
 const useCalculator = () => {
   const [total, setTotal] = useState(INITIAL);

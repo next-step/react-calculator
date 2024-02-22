@@ -4,10 +4,11 @@ const ERROR = {
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
   maxOperator: "두개의 숫자 연산만 가능합니다!",
 };
+export const INITIAL = "0";
 
 const OPERATOR = ["＋", "-", "X", "/"];
 const OPERATOR_REGEX = new RegExp(
-  `(${OPERATOR.map((op) => op.replace(/[\＋\-\X\/]/g, "\\$&")).join("|")})`
+  `(${OPERATOR.map((op) => `\\${op}`).join("|")})`
 );
 
 const CALCULATE = "=";
@@ -51,7 +52,7 @@ class Calculator {
   }
 
   checkOperator(lastChar, total) {
-    return OPERATOR.includes(lastChar) || total === "0";
+    return OPERATOR.includes(lastChar) || total === INITIAL;
   }
 
   checkMaxOperator(total) {
