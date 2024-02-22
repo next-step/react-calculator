@@ -24,9 +24,8 @@ export class Calculator {
     const target = this.operatorContainer
       ? this.constantNumber
       : this.targetNumber;
-    const maxLengthExceeded = isOverMaxWordLength(target, 3);
 
-    if (maxLengthExceeded) return;
+    if (isOverMaxWordLength(target, 3)) return;
 
     const number = isNotZero(Number(target))
       ? mergeStrings([target, num])
@@ -57,12 +56,6 @@ export class Calculator {
     }
   }
 
-  render() {
-    this.setDisplay(
-      this.targetNumber + this.operatorContainer + this.constantNumber
-    );
-  }
-
   setDisplay(text: string) {
     this.display = text === "NaN" ? "오류" : text;
   }
@@ -86,5 +79,11 @@ export class Calculator {
     this.constantNumber = "";
     this.operatorContainer = "";
     this.setDisplay("0");
+  }
+
+  render() {
+    this.setDisplay(
+      this.targetNumber + this.operatorContainer + this.constantNumber
+    );
   }
 }
