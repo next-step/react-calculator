@@ -182,21 +182,13 @@ describe("계산하기", () => {
     const max = "X999";
 
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
     total = calculator.updateCalculate(total + max);
-    console.log(total);
 
     expect(total).toBe("Infinity");
   });

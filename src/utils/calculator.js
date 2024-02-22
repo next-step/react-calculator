@@ -19,6 +19,10 @@ class Calculator {
     "/": this.div,
   };
 
+  isNaN(result) {
+    return isNaN(result) ? "Infinity" : result;
+  }
+
   update(value, total) {
     if (OPERATOR.includes(value)) {
       return this.updateOperator(value, total);
@@ -70,7 +74,7 @@ class Calculator {
       }
     });
 
-    return operator(numbers[0], numbers[1]).toString();
+    return this.isNaN(operator(numbers[0], numbers[1])).toString();
   }
 
   sum(a = 0, b = 0) {
