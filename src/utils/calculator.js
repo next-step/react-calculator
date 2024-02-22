@@ -4,22 +4,35 @@ const ERROR = {
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
 };
 
-class Calculator {
-  total: 0;
+const OPERATOR = ["+", "-", "×", "/"];
 
-  updateNumber(value) {
-    const updateValue = Number(this.total + "" + value);
+class Calculator {
+  updateNumber(value, total) {
+    const updateValue = Number(total + "" + value);
 
     if (updateValue > MAXIMUM) {
       window.alert(ERROR.maximum);
-      return this.total;
+      return total;
     }
 
-    this.total = updateValue;
-    return this.total;
+    return updateValue.toString();
   }
 
-  updateCalculator(value) {}
+  updateCalculator(value, total) {
+    const lastChar = total.slice(-1);
+
+    if (OPERATOR.includes(lastChar)) {
+      window.alert(ERROR.operator);
+      return total;
+    }
+
+    if (total === "0") {
+      window.alert(ERROR.operator);
+      return total;
+    }
+
+    return total + value;
+  }
 
   sum(a, b) {
     return a + b;
