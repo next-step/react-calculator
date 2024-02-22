@@ -2,6 +2,54 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
+describe("키 패드 확인", () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  it("숫자 버튼 확인", () => {
+    const digitButtons = document.querySelectorAll("button.digit");
+
+    expect(digitButtons.length).toBe(10);
+
+    const buttonTexts = Array.from(digitButtons).map(
+      (button) => button.textContent
+    );
+    const expectedTexts = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
+
+    expectedTexts.forEach((text) => {
+      expect(buttonTexts).toContain(text);
+    });
+  });
+
+  it("연산자 버튼 확인", () => {
+    const operationButtons = document.querySelectorAll("button.operation");
+
+    expect(operationButtons.length).toBe(5);
+
+    const buttonTexts = Array.from(operationButtons).map(
+      (button) => button.textContent
+    );
+    const expectedTexts = ["+", "-", "X", "/", "="];
+
+    expectedTexts.forEach((text) => {
+      expect(buttonTexts).toContain(text);
+    });
+  });
+
+  it("초기화 버튼 확인", () => {
+    const modifierButton = document.querySelector("button.modifier");
+
+    expect(modifierButton).toHaveTextContent("AC");
+  });
+
+  it("Total창 확인", () => {
+    const total = document.querySelector("h1#total");
+
+    expect(total).toHaveTextContent("0");
+  });
+});
+
 describe("입력 테스트", () => {
   beforeEach(() => {
     render(<App />);
