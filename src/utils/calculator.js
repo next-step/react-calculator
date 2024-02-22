@@ -6,6 +6,8 @@ const ERROR = {
 };
 export const INITIAL = "0";
 
+const INFINITY = "오류";
+
 const OPERATOR = ["＋", "-", "X", "/"];
 const OPERATOR_REGEX = new RegExp(
   `(${OPERATOR.map((op) => `\\${op}`).join("|")})`
@@ -21,12 +23,14 @@ class Calculator {
     "/": this.div,
   };
 
-  isNaN(result) {
-    return isNaN(result) ? "Infinity" : result;
+  isInfinity(result) {
+    return result === Infinity ? INFINITY : result;
   }
 
   update(value, total) {
-    if (OPERATOR.includes(value)) {
+    if (total === INFINITY) {
+      return total;
+    } else if (OPERATOR.includes(value)) {
       return this.updateOperator(value, total);
     } else if (value === CALCULATE) {
       return this.updateCalculate(total);
@@ -105,7 +109,7 @@ class Calculator {
       }
     });
 
-    return this.isNaN(operator(numbers[0], numbers[1])).toString();
+    return this.isInfinity(operator(numbers[0], numbers[1])).toString();
   }
 
   sum(a = 0, b = 0) {

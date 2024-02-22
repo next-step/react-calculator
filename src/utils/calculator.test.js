@@ -183,7 +183,7 @@ describe("계산하기", () => {
 
     const div = calculator.updateCalculate(total);
 
-    expect(div).toBe("Infinity");
+    expect(div).toBe("오류");
   });
 });
 
