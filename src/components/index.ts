@@ -1,2 +1,3 @@
-export * from './Button.tsx';
-export * from './Calculator.tsx';
+export * from './Button';
+export * from './Calculator';
+export * from './useCalculator';
