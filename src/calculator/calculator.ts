@@ -5,11 +5,13 @@ import {
   mergeStrings,
 } from "../utils";
 
+export type OperatorSymbols = "+" | "*" | "/" | "-";
+
 export class Calculator {
   private display: string;
   private targetNumber: string;
   private constantNumber: string;
-  private operatorContainer: "+" | "*" | "/" | "-" | "";
+  private operatorContainer: OperatorSymbols | "";
 
   constructor() {
     this.display = "";
@@ -39,7 +41,7 @@ export class Calculator {
     this.render();
   }
 
-  pressOperator(operator: "+" | "*" | "/" | "-") {
+  pressOperator(operator: OperatorSymbols) {
     this.operatorContainer = operator;
     this.render();
   }

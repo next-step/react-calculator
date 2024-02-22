@@ -1,7 +1,15 @@
 import { useCallback, useRef, useState } from "react";
-import { Calculator } from "../calculator/calculator";
+import { Calculator, OperatorSymbols } from "../calculator/calculator";
 
-export default function useCalculator() {
+interface useCalculatorOutput {
+  result: string;
+  pressNumber: (numberText: string) => void;
+  calculate: () => void;
+  pressOperator: (operatorSymbol: OperatorSymbols) => void;
+  allClear: () => void;
+}
+
+export default function useCalculator(): useCalculatorOutput {
   const { current: calculator } = useRef<Calculator>(new Calculator());
 
   const [result, setResult] = useState("0");
