@@ -1,30 +1,44 @@
-function Calculator() {
+import Key from './Key';
+
+const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+const OPERATORS = ['/', 'X', '-', '+', '='];
+
+export default function Calculator() {
+  const handleClickDigit = (digit: number) => {
+    console.log(digit);
+  };
+  const handleClickAC = () => {
+    console.log('AC@@@@@@');
+  };
+  const handleClickOperation = (operator: string) => {
+    console.log(operator);
+  };
   return (
     <div className="calculator">
       <h1 id="total">0</h1>
       <div className="digits flex">
-        <button className="digit">9</button>
-        <button className="digit">8</button>
-        <button className="digit">7</button>
-        <button className="digit">6</button>
-        <button className="digit">5</button>
-        <button className="digit">4</button>
-        <button className="digit">3</button>
-        <button className="digit">2</button>
-        <button className="digit">1</button>
-        <button className="digit">0</button>
+        {DIGITS.map(digit => (
+          <Key
+            key={digit}
+            className="digit"
+            label={`${digit}`}
+            onClick={() => handleClickDigit(digit)}
+          />
+        ))}
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <Key className="modifier" label="AC" onClick={handleClickAC} />
       </div>
       <div className="operations subgrid">
-        <button className="operation">/</button>
-        <button className="operation">X</button>
-        <button className="operation">+</button>
-        <button className="operation">=</button>
+        {OPERATORS.map(operator => (
+          <Key
+            key={operator}
+            className="operation"
+            label={operator}
+            onClick={() => handleClickOperation(operator)}
+          />
+        ))}
       </div>
     </div>
   );
 }
-
-export default Calculator;
