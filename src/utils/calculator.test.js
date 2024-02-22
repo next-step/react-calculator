@@ -101,17 +101,11 @@ describe("연산자 입력", () => {
     let total = "0";
 
     total = calculator.updateNumber(1, total);
-
     total = calculator.updateNumber(1, total);
-
     total = calculator.updateNumber(1, total);
-
     total = calculator.updateCalculator("+", total);
-
     total = calculator.updateNumber(1, total);
-
     total = calculator.updateNumber(1, total);
-
     total = calculator.updateNumber(1, total);
 
     expect(total).toBe("111+111");

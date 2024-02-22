@@ -5,28 +5,31 @@ const ERROR = {
 };
 
 const OPERATOR = ["+", "-", "×", "/"];
+const OPERATOR_REGEX = new RegExp(
+  `(${OPERATOR.map((op) => op.replace(/[\+\-\×\/]/g, "\\$&")).join("|")})`
+);
 
 class Calculator {
   updateNumber(value, total) {
-    const updateValue = Number(total + "" + value);
+    const parts = total.split(OPERATOR_REGEX);
+    const lastPart = parts[parts.length - 1];
+
+    const updateValue = Number(lastPart + "" + value);
 
     if (updateValue > MAXIMUM) {
       window.alert(ERROR.maximum);
       return total;
     }
 
-    return updateValue.toString();
+    parts[parts.length - 1] = updateValue.toString();
+
+    return parts.join("");
   }
 
   updateCalculator(value, total) {
     const lastChar = total.slice(-1);
 
-    if (OPERATOR.includes(lastChar)) {
-      window.alert(ERROR.operator);
-      return total;
-    }
-
-    if (total === "0") {
+    if (OPERATOR.includes(lastChar) || total === "0") {
       window.alert(ERROR.operator);
       return total;
     }
