@@ -48,3 +48,19 @@ describe("입력 테스트", () => {
     expect(result.current[0]).toBe("2");
   });
 });
+
+describe("값 초기화", () => {
+  it("초기화 실행", () => {
+    const { result } = renderHook(() => useCalculator());
+
+    act(() => {
+      result.current[1](1);
+      result.current[1]("+");
+      result.current[1](1);
+      result.current[1]("=");
+      result.current[2]();
+    });
+
+    expect(result.current[0]).toBe("0");
+  });
+});
