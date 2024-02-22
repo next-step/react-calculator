@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BUTTON } from '../components/button/button.constant';
-import { Operator } from '../components/button/button.type';
+import { Digit, Modifier, Operator } from '../components/button/button.type';
 
 export const useCalculator = () => {
   const [numbers, setNumbers] = useState<{
@@ -15,7 +15,7 @@ export const useCalculator = () => {
 
   const [operator, setOperator] = useState<Operator | null>(null);
 
-  const handleDigit = (value: number) => {
+  const handleDigit = (value: Digit) => {
     if (!operator) {
       setNumbers((prev) => ({ ...prev, x: prev.x * 10 + value }));
 
@@ -25,7 +25,7 @@ export const useCalculator = () => {
     setNumbers((prev) => ({ ...prev, y: prev.y * 10 + value }));
   };
 
-  const handleModifier = (value: string) => {
+  const handleModifier = (value: Modifier) => {
     if (value === BUTTON.MODIFIER.CHILDREN.AC.VALUE) {
       setNumbers({
         x: 0,
@@ -85,90 +85,3 @@ export const useCalculator = () => {
     handleModifier,
   };
 };
-
-// export const BUTTON = {
-//   DIGIT: {
-//     TYPE: 'digit',
-//     CLASSNAME: 'digit',
-//     CHILDREN: {
-//       NINE: {
-//         ID: 'nine',
-//         VALUE: 9,
-//       },
-//       EIGHT: {
-//         ID: 'eight',
-//         VALUE: 8,
-//       },
-//       SEVEN: {
-//         ID: 'seven',
-//         VALUE: 7,
-//       },
-//       SIX: {
-//         ID: 'six',
-//         VALUE: 6,
-//       },
-//       FIVE: {
-//         ID: 'five',
-//         VALUE: 5,
-//       },
-//       FOUR: {
-//         ID: 'four',
-//         VALUE: 4,
-//       },
-//       THREE: {
-//         ID: 'three',
-//         VALUE: 3,
-//       },
-//       TWO: {
-//         ID: 'two',
-//         VALUE: 2,
-//       },
-//       ONE: {
-//         ID: 'one',
-//         VALUE: 1,
-//       },
-//       ZERO: {
-//         ID: 'zero',
-//         VALUE: 0,
-//       },
-//     },
-//   },
-
-//   MODIFIER: {
-//     TYPE: 'modifier',
-//     CLASSNAME: 'modifier',
-//     CHILDREN: {
-//       AC: {
-//         ID: 'ac',
-//         VALUE: 'AC',
-//       },
-//     },
-//   },
-
-//   OPERATION: {
-//     TYPE: 'operation',
-//     CLASSNAME: 'operation',
-//     CHILDREN: {
-//       DIVIDE: {
-//         ID: 'divide',
-//         VALUE: '/',
-//       },
-//       MULTIPLY: {
-//         ID: 'multiply',
-//         VALUE: 'X',
-//       },
-//       SUBTRACT: {
-//         ID: 'subtract',
-//         VALUE: '-',
-//       },
-//       ADD: {
-//         ID: 'add',
-//         VALUE: '+',
-//       },
-//       EQUAL: {
-//         ID: 'equal',
-//         VALUE: '=',
-//       },
-//     },
-//   },
-// } as const;

@@ -1,19 +1,17 @@
-import { Button } from '.';
 import { BUTTON } from './button/button.constant';
-import { Digit } from './button/button.type';
+import { ButtonGroup } from './buttonGroup/ButtonGroup';
+import { BUTTON_GROUP } from './buttonGroup/buttonGroup.constant';
+import { DigitsButtonGroupProps } from './buttonGroup/buttonGroup.type';
 
-export const Digits = ({ handler }: { handler: (value: Digit) => void }) => {
+export const Digits = ({ onClick }: DigitsButtonGroupProps) => {
   return (
-    <div className='digits flex'>
-      {Object.values(BUTTON.DIGIT.CHILDREN).map(({ ID, VALUE }) => (
-        <Button
-          key={ID}
-          classNames={BUTTON.DIGIT.CLASSNAMES}
-          onClick={() => handler(VALUE)}
-        >
-          {VALUE}
-        </Button>
-      ))}
-    </div>
+    <ButtonGroup
+      classNames={BUTTON_GROUP.DIGITS.CLASSNAMES}
+      buttonConfig={{
+        children: BUTTON.DIGIT.CHILDREN,
+        classNames: BUTTON.DIGIT.CLASSNAMES,
+      }}
+      onClick={onClick}
+    />
   );
 };

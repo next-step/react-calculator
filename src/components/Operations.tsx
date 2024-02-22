@@ -1,23 +1,17 @@
-import { Button } from '.';
 import { BUTTON } from './button/button.constant';
-import { Operator } from './button/button.type';
+import { ButtonGroup } from './buttonGroup/ButtonGroup';
+import { BUTTON_GROUP } from './buttonGroup/buttonGroup.constant';
+import { OperationsButtonGroupProps } from './buttonGroup/buttonGroup.type';
 
-export const Operations = ({
-  handler,
-}: {
-  handler: (value: Operator) => void;
-}) => {
+export const Operations = ({ onClick }: OperationsButtonGroupProps) => {
   return (
-    <div className='operations subgrid'>
-      {Object.values(BUTTON.OPERATION.CHILDREN).map(({ ID, VALUE }) => (
-        <Button
-          key={ID}
-          classNames={BUTTON.OPERATION.CLASSNAMES}
-          onClick={() => handler(VALUE)}
-        >
-          {VALUE}
-        </Button>
-      ))}
-    </div>
+    <ButtonGroup
+      classNames={BUTTON_GROUP.OPERATIONS.CLASSNAMES}
+      buttonConfig={{
+        children: BUTTON.OPERATION.CHILDREN,
+        classNames: BUTTON.OPERATION.CLASSNAMES,
+      }}
+      onClick={onClick}
+    />
   );
 };

@@ -14,3 +14,5 @@ export type Digit =
 
 export type Modifier =
   (typeof BUTTON.MODIFIER.CHILDREN)[keyof typeof BUTTON.MODIFIER.CHILDREN]['VALUE'];
+
+export type ButtonValue = Digit | Operator | Modifier;

@@ -1,23 +1,17 @@
-import { Button } from '.';
 import { BUTTON } from './button/button.constant';
-import { Modifier } from './button/button.type';
+import { ButtonGroup } from './buttonGroup/ButtonGroup';
+import { BUTTON_GROUP } from './buttonGroup/buttonGroup.constant';
+import { ModifiersButtonGroupProps } from './buttonGroup/buttonGroup.type';
 
-export const Modifiers = ({
-  handler,
-}: {
-  handler: (value: Modifier) => void;
-}) => {
+export const Modifiers = ({ onClick }: ModifiersButtonGroupProps) => {
   return (
-    <div className='modifiers subgrid'>
-      {Object.values(BUTTON.MODIFIER.CHILDREN).map(({ ID, VALUE }) => (
-        <Button
-          key={ID}
-          classNames={BUTTON.MODIFIER.CLASSNAMES}
-          onClick={() => handler(VALUE)}
-        >
-          {VALUE}
-        </Button>
-      ))}
-    </div>
+    <ButtonGroup
+      classNames={BUTTON_GROUP.MODIFIERS.CLASSNAMES}
+      buttonConfig={{
+        children: BUTTON.MODIFIER.CHILDREN,
+        classNames: BUTTON.MODIFIER.CLASSNAMES,
+      }}
+      onClick={onClick}
+    />
   );
 };
