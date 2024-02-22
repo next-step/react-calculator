@@ -1,4 +1,5 @@
 import {Validation} from '../utils/Validation';
+import fixtures from '../fixtures';
 
 type NumberButtonProps = {
 	setFirstNumber: (value: string) => void;
@@ -17,8 +18,9 @@ export default function NumberButton({
 	operator,
 	value,
 }: NumberButtonProps) {
-	const alertMessage = '숫자는 세 자리까지만 입력 가능합니다!';
 	const validation = new Validation();
+
+	const {alertMessage} = fixtures;
 
 	const handleClickNumber = () => {
 		if (!operator) {
