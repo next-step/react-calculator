@@ -10,6 +10,13 @@ const OPERATOR_REGEX = new RegExp(
 );
 
 class Calculator {
+  operators = {
+    "+": this.sum,
+    "-": this.sub,
+    "×": this.mul,
+    "/": this.div,
+  };
+
   updateNumber(value, total) {
     const parts = total.split(OPERATOR_REGEX);
     const lastPart = parts[parts.length - 1];
@@ -26,7 +33,7 @@ class Calculator {
     return parts.join("");
   }
 
-  updateCalculator(value, total) {
+  updateOperator(value, total) {
     const lastChar = total.slice(-1);
 
     if (OPERATOR.includes(lastChar) || total === "0") {
@@ -37,19 +44,36 @@ class Calculator {
     return total + value;
   }
 
-  sum(a, b) {
+  calculate(total) {
+    const parts = total.split(OPERATOR_REGEX);
+
+    const numbers = [];
+    let operator;
+
+    parts.forEach((part) => {
+      if (OPERATOR.includes(part)) {
+        operator = this.operators[part];
+      } else {
+        numbers.push(Number(part));
+      }
+    });
+
+    return operator(numbers[0], numbers[1]).toString();
+  }
+
+  sum(a = 0, b = 0) {
     return a + b;
   }
 
-  sub(a, b) {
+  sub(a = 0, b = 0) {
     return a - b;
   }
 
-  mul(a, b) {
+  mul(a = 0, b = 0) {
     return a * b;
   }
 
-  div(a, b) {
+  div(a = 0, b = 0) {
     return Math.floor(a / b);
   }
 }
