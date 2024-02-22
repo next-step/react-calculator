@@ -8,7 +8,9 @@ function App() {
   return (
     <div id="app">
       <div className="calculator">
-        <Title as="h1">{result}</Title>
+        <Title role="display" as="h1">
+          {result}
+        </Title>
         <div className="modifiers subgrid">
           <button className="modifier" onClick={allClear}>
             AC
@@ -17,6 +19,7 @@ function App() {
         <div className="digits flex">
           {numberPads.map((numberPad) => (
             <button
+              role={`button_${numberPad}`}
               key={numberPad}
               className="digit"
               onClick={() => pressNumber(numberPad)}
