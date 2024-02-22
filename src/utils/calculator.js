@@ -2,6 +2,7 @@ const MAXIMUM = 999;
 const ERROR = {
   maximum: "숫자는 세 자리까지만 입력 가능합니다!",
   operator: "숫자를 먼저 입력한 후 연산자를 입력해주세요!",
+  maxOperator: "두개의 숫자 연산만 가능합니다!",
 };
 
 const OPERATOR = ["＋", "-", "X", "/"];
@@ -49,11 +50,32 @@ class Calculator {
     return parts.join("");
   }
 
+  checkOperator(lastChar, total) {
+    return OPERATOR.includes(lastChar) || total === "0";
+  }
+
+  checkMaxOperator(total) {
+    let check = false;
+
+    OPERATOR.forEach((oper) => {
+      if (total.includes(oper)) {
+        check = true;
+      }
+    });
+
+    return check;
+  }
+
   updateOperator(value, total) {
     const lastChar = total.slice(-1);
 
-    if (OPERATOR.includes(lastChar) || total === "0") {
+    if (this.checkOperator(lastChar, total)) {
       window.alert(ERROR.operator);
+      return total;
+    }
+
+    if (this.checkMaxOperator(total)) {
+      window.alert(ERROR.maxOperator);
       return total;
     }
 
