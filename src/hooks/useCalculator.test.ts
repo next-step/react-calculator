@@ -60,7 +60,7 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(global.alert).toHaveBeenCalledWith('숫자는 3자리까지만 입력 가능합니다.');
 		});
 
-		xit('연산자 입력 후 숫자를 3개 초과 입력하면 alert가 발생한다', () => {
+		it('연산자 입력 후 숫자를 3개 초과 입력하면 alert가 발생한다', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -110,6 +110,36 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			});
 
 			expect(result.current.display).toBe('4');
+		});
+	});
+
+	describe('연산자 입력 테스트', () => {
+		it('마지막 입력이 숫자인 경우 연산자를 클릭하면 display에 표시된 연산자가 추가된다', () => {
+			const { result } = renderHook(() => useCalculator());
+
+			act(() => {
+				result.current.enter('3');
+			});
+
+			act(() => {
+				result.current.enter('-');
+			});
+
+			expect(result.current.display).toBe('3-');
+		});
+
+		it('연산자가 연속으로 입력되면 마지막으로 입력한 연산자가 화면에 표시된다.', () => {
+			const { result } = renderHook(() => useCalculator());
+
+			act(() => {
+				result.current.enter('-');
+			});
+
+			act(() => {
+				result.current.enter('+');
+			});
+
+			expect(result.current.display).toBe('0+');
 		});
 	});
 });
