@@ -4,7 +4,7 @@ type NumberButtonProps = {
 	setSecondNumber: (value: string) => void;
 	secondNumber: string;
 	operator: string;
-	value: number;
+	value: string;
 };
 
 export default function NumberButton({
@@ -25,20 +25,18 @@ export default function NumberButton({
 		return false;
 	};
 
-	const handleClickNumber = (e: React.MouseEvent<HTMLButtonElement>) => {
-		const {value: number} = e.currentTarget;
-
+	const handleClickNumber = () => {
 		if (!operator) {
 			if (isNotValidNumberLength(firstNumber)) {
 				alert(alertMessage);
 				return;
 			}
 
-			if (isNotValidZero(firstNumber, number)) {
+			if (isNotValidZero(firstNumber, value)) {
 				return;
 			}
 
-			setFirstNumber(firstNumber + number);
+			setFirstNumber(firstNumber + value);
 		}
 
 		if (operator) {
@@ -47,11 +45,11 @@ export default function NumberButton({
 				return;
 			}
 
-			if (isNotValidZero(secondNumber, number)) {
+			if (isNotValidZero(secondNumber, value)) {
 				return;
 			}
 
-			setSecondNumber(secondNumber + number);
+			setSecondNumber(secondNumber + value);
 		}
 	};
 

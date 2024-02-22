@@ -7,9 +7,8 @@ export default function OperatorButton({
 	setOperator,
 	value,
 }: OperatorButtonProps) {
-	const handleClickOperator = (e: React.MouseEvent<HTMLButtonElement>) => {
-		const {value: operator} = e.currentTarget;
-		setOperator(operator);
+	const handleClickOperator = () => {
+		setOperator(value);
 	};
 
 	return (
