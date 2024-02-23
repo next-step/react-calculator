@@ -25,31 +25,42 @@ export default function NumberButton({
 
 	const {alertMessage} = fixtures;
 
+	const setNumber = (
+		prev: string,
+		current: string,
+		setter: (value: string) => void,
+	) => {
+		if (validation.isNotValidNumberLength(prev)) {
+			alert(alertMessage);
+			return;
+		}
+
+		if (validation.isNotValidZero(prev, current)) {
+			return;
+		}
+
+		setter(value);
+	};
+
 	const handleClickNumber = () => {
 		if (!operator) {
-			if (validation.isNotValidNumberLength(firstNumber)) {
-				alert(alertMessage);
-				return;
-			}
-
-			if (validation.isNotValidZero(firstNumber, value)) {
-				return;
-			}
-
-			setFirstNumber((prev: string) => prev + value);
+			setNumber(
+				firstNumber,
+				value,
+				value => {
+					setFirstNumber(firstNumber => (firstNumber + value));
+				},
+			);
 		}
 
 		if (operator) {
-			if (validation.isNotValidNumberLength(secondNumber)) {
-				alert(alertMessage);
-				return;
-			}
-
-			if (validation.isNotValidZero(secondNumber, value)) {
-				return;
-			}
-
-			setSecondNumber((prev: string) => prev + value);
+			setNumber(
+				secondNumber,
+				value,
+				value => {
+					setSecondNumber((secondNumber: string) => (secondNumber + value));
+				},
+			);
 		}
 	};
 
