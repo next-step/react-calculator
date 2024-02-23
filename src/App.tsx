@@ -8,17 +8,15 @@ function App() {
 		useCalculator();
 
 	return (
-		<>
-			<Calculator>
-				<Calculator.Display value={expression} />
-				<Calculator.Reset onClick={reset} />
-				<Calculator.Keypad onClick={handleInput} />
-				<Calculator.Operators
-					onClick={handleInput}
-					onCalculate={calculateAndUpdateLastOperation}
-				/>
-			</Calculator>
-		</>
+		<Calculator>
+			<Calculator.Display value={expression} />
+			<Calculator.Reset onClick={reset} />
+			<Calculator.Keypad onClick={handleInput} />
+			<Calculator.Operators
+				onClick={handleInput}
+				onCalculate={calculateAndUpdateLastOperation}
+			/>
+		</Calculator>
 	);
 }
 
