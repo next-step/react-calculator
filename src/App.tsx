@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [total, setTotal] = useState(0);
@@ -29,6 +29,6 @@ export default function App() {
 
 const CONST = {
   DIGIT_LIST: Array.from({ length: 10 }, (_, index) => index).reverse(),
-  OPERATION_LIST: ["/", "X", "-", "+", "="],
-  MODIFIER: "AC",
+  OPERATION_LIST: ['/', 'X', '-', '+', '='],
+  MODIFIER: 'AC',
 };
