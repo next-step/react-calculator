@@ -9,7 +9,7 @@ export default function useCalculator() {
 			return;
 		}
 
-		if (display === '0') {
+		if (display === '0' || display === '오류') {
 			setDisplay(value);
 			return;
 		}
@@ -40,7 +40,51 @@ export default function useCalculator() {
 		throw new Error('잘못된 입력입니다.');
 	};
 
-	const calculate = () => {};
+	const executeOperation = (prevState: string) => {
+		if (/[+\-x/]$/.test(prevState)) {
+			alert('숫자를 입력해 주세요.');
+			return prevState;
+		}
+
+		const operations = prevState.split(/([+\-x/])/);
+
+		let result = parseInt(operations[0]);
+
+		for (let i = 1; i < operations.length; i += 2) {
+			const operator = operations[i];
+			const nextValue = parseInt(operations[i + 1]);
+
+			switch (operator) {
+				case '+':
+					result += nextValue;
+					break;
+				case '-':
+					result -= nextValue;
+					break;
+				case 'x':
+					result *= nextValue;
+					break;
+				case '/':
+					if (nextValue === 0) {
+						return '오류';
+					}
+					result = Math.floor(result / nextValue);
+					break;
+				default:
+					return '오류';
+			}
+		}
+
+		if (isNaN(result) || !isFinite(result)) {
+			return '오류';
+		}
+
+		return result.toString();
+	};
+
+	const calculate = () => {
+		setDisplay(executeOperation);
+	};
 
 	return { display, enter, calculate };
 }

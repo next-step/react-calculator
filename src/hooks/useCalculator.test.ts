@@ -86,7 +86,7 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(global.alert).toHaveBeenCalledWith('숫자는 3자리까지만 입력 가능합니다.');
 		});
 
-		xit('에러가 발생했을때 숫자를 입력하면 입력한 숫자로 표시된다.', () => {
+		it('에러가 발생했을때 숫자를 입력하면 입력한 숫자로 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -144,7 +144,7 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 	});
 
 	describe('계산 테스트', () => {
-		xit('3, +, 2, = 을 입력하면 5가 표시된다.', () => {
+		it('3, +, 2, = 을 입력하면 5가 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -165,7 +165,8 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 
 			expect(result.current.display).toBe('5');
 		});
-		xit('3, x, 2, = 을 입력하면 6이 표시된다.', () => {
+
+		it('3, x, 2, = 을 입력하면 6이 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -186,7 +187,8 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 
 			expect(result.current.display).toBe('6');
 		});
-		xit('3, -, 2, = 을 입력하면 1이 표시된다.', () => {
+
+		it('3, -, 2, = 을 입력하면 1이 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -207,7 +209,8 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 
 			expect(result.current.display).toBe('1');
 		});
-		xit('3, /, 2, = 을 입력하면 1이 표시된다.', () => {
+
+		it('3, /, 2, = 을 입력하면 1이 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -228,7 +231,8 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 
 			expect(result.current.display).toBe('1');
 		});
-		xit('3, /, 0, = 을 입력하면 "오류"가 표시된다.', () => {
+
+		it('3, /, 0, = 을 입력하면 "오류"가 표시된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -250,7 +254,7 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(result.current.display).toBe('오류');
 		});
 
-		xit('숫자만 입력되어 있을 때 =을 입력하면 숫자가 유지된다.', () => {
+		it('숫자만 입력되어 있을 때 =을 입력하면 숫자가 유지된다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
@@ -264,7 +268,7 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(result.current.display).toBe('3');
 		});
 
-		xit('마지막 입력값이 연산자인 경우 =을 클릭하면 숫자를 입력해주세요. 라는 alert가 발생한다.', () => {
+		it('마지막 입력값이 연산자인 경우 =을 클릭하면 숫자를 입력해주세요. 라는 alert가 발생한다.', () => {
 			const { result } = renderHook(() => useCalculator());
 
 			act(() => {
