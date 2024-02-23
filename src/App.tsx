@@ -21,7 +21,7 @@ function App() {
 	let isValidNumber = true;
 
 	const validation = new Validation();
-	const {alertMessage} = fixtures;
+	const {alertMessage, infinityMessage} = fixtures;
 
 	const equation = firstNumber + operator + secondNumber;
 	const displayResult = equation || resultNumber || '0';
@@ -99,7 +99,7 @@ function App() {
 	};
 
 	const handleInfinity = (result: string) => result === 'Infinity'
-		? '오류' : result;
+		? infinityMessage : result;
 
 	const handleClickOperator = (value: string) => {
 		setOperator(value);
