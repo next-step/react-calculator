@@ -1,20 +1,18 @@
 type OperatorButtonProps = {
-	setOperator: (value: string) => void;
 	value: string;
+	handleClickOperator: (value: string) => void;
 };
 
 export default function OperatorButton({
-	setOperator,
 	value,
+	handleClickOperator,
 }: OperatorButtonProps) {
-	const handleClickOperator = () => {
-		setOperator(value);
-	};
-
 	return (
 		<button
 			className='operation'
-			onClick={handleClickOperator}
+			onClick={() => {
+				handleClickOperator(value);
+			}}
 			value={value}
 		>
 			{value}

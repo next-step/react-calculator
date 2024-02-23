@@ -1,11 +1,11 @@
 type ModifiersProps = {
-	onClickAc: () => void;
+	handleClickAc: () => void;
 };
 
-export default function Modifiers({onClickAc}: ModifiersProps) {
+export default function Modifiers({handleClickAc}: ModifiersProps) {
 	return (
 		<div className='modifiers subgrid'>
-			<button className='modifier' onClick={onClickAc}>AC</button>
+			<button className='modifier' onClick={handleClickAc}>AC</button>
 		</div>
 	);
 }

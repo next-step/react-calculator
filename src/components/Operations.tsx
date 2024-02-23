@@ -3,43 +3,27 @@ import OperatorButton from './OperatorButton';
 import fixtures from '../fixtures';
 
 type OperationsProps = {
-	firstNumber: string;
-	secondNumber: string;
-	operator: string;
-	setResultNumber: (value: string) => void;
-	setFirstNumber: (value: string) => void;
-	setSecondNumber: (value: string) => void;
-	setOperator: (value: string) => void;
+	handleClickEqualSign: () => void;
+	handleClickOperator: (value: string) => void;
 };
 
 export default function Operations({
-	firstNumber,
-	secondNumber,
-	operator,
-	setResultNumber,
-	setFirstNumber,
-	setSecondNumber,
-	setOperator,
+	handleClickEqualSign,
+	handleClickOperator,
 }: OperationsProps) {
-	const {operators, equalSign} = fixtures;
+	const {operators} = fixtures;
 
 	return (
 		<div className='operations subgrid'>
 			{operators.map((op: string) => (
 				<OperatorButton
 					key={op}
-					setOperator={setOperator}
-					value={op}/>
+					value={op}
+					handleClickOperator={handleClickOperator}
+				/>
 			))}
 			<EqualSignButton
-				value={equalSign}
-				firstNumber={firstNumber}
-				secondNumber={secondNumber}
-				operator={operator}
-				setResultNumber={setResultNumber}
-				setFirstNumber={setFirstNumber}
-				setSecondNumber={setSecondNumber}
-				setOperator={setOperator}
+				handleClickEqualSign={handleClickEqualSign}
 			/>
 		</div>
 	);
