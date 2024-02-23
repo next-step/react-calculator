@@ -1,24 +1,31 @@
 import { useState } from 'react';
+import {
+  INITIAL_DIGIT,
+  INITIAL_VALUE,
+  MAX_DIGIT_LENGTH,
+  MESSAGES,
+} from '../constant/calculator';
 
-const INITIAL_OPERATION = '';
+const INITIAL_OPERATION = INITIAL_VALUE;
 const INITIAL_VALUES = {
-  firstValue: '0',
-  secondValue: '',
+  firstValue: INITIAL_DIGIT,
+  secondValue: INITIAL_VALUE,
 };
+
 export default function useCalculate() {
   const [operation, setOperation] = useState(INITIAL_OPERATION);
   const [values, setValues] = useState(INITIAL_VALUES);
 
   const handleDigitClick = (digit: number) => {
     if (!operation) {
-      if (values.firstValue === '0') {
+      if (values.firstValue === INITIAL_DIGIT) {
         setValues((prevState) => ({
           ...prevState,
           firstValue: String(digit),
         }));
       } else {
-        if (values.firstValue.length >= 3) {
-          alert('숫자는 세 자리까지만 입력 가능합니다!');
+        if (values.firstValue.length >= MAX_DIGIT_LENGTH) {
+          alert(MESSAGES.DIGIT_LIMIT);
           return;
         }
         setValues((prevState) => ({
@@ -27,8 +34,8 @@ export default function useCalculate() {
         }));
       }
     } else {
-      if (values.secondValue.length >= 3) {
-        alert('숫자는 세 자리까지만 입력 가능합니다?');
+      if (values.secondValue.length >= MAX_DIGIT_LENGTH) {
+        alert(MESSAGES.DIGIT_LIMIT);
         return;
       }
       setValues((prevState) => ({
@@ -45,12 +52,12 @@ export default function useCalculate() {
       const total = calculate(operation);
       setValues({
         firstValue: String(total),
-        secondValue: '',
+        secondValue: INITIAL_VALUE,
       });
       setOperation(INITIAL_OPERATION);
     } else {
       if (values === INITIAL_VALUES) {
-        alert('숫자를 먼저 입력한 후 연산자를 입력해 주세요!');
+        alert(MESSAGES.NUMBER_FIRST);
         return;
       }
       setOperation(clickedOperation);

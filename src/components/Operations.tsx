@@ -1,4 +1,5 @@
 import styled from '../css/index.module.css';
+import { OPERATIONS } from '../constant/calculator';
 
 type Props = {
   onOperationClick: (operation: string) => void;
@@ -7,7 +8,7 @@ type Props = {
 export default function Operations({ onOperationClick }: Props) {
   return (
     <div className={`${styled.operations} ${styled.subgrid}`}>
-      {['/', 'X', '-', '+', '='].map((operation, index) => (
+      {OPERATIONS.map((operation, index) => (
         <button
           key={index}
           className={styled.operation}

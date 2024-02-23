@@ -1,4 +1,5 @@
 import styled from '.././css/index.module.css';
+import { DIGITS } from '../constant/calculator';
 
 type Props = {
   onDigitsClick: (digit: number) => void;
@@ -7,7 +8,7 @@ type Props = {
 export default function Digits({ onDigitsClick }: Props) {
   return (
     <div className={styled.digits}>
-      {Array.from({ length: 10 }, (_, i) => 9 - i).map((digit) => (
+      {DIGITS.map((digit) => (
         <button
           key={digit}
           className={styled.digit}
