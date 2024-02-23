@@ -9,6 +9,29 @@ const Calculator = () => {
   const [operation, setOperation] = useState<OPERATION | ''>('')
   const [rightOperand, setRightOperand] = useState('')
 
+  const calculate = ({
+    leftOperand,
+    operation,
+    rightOperand,
+  }: {
+    leftOperand: number
+    operation: OPERATION | ''
+    rightOperand: number
+  }) => {
+    switch (operation) {
+      case '+':
+        return leftOperand + rightOperand
+      case '-':
+        return leftOperand - rightOperand
+      case '/':
+        return leftOperand / rightOperand
+      case 'X':
+        return leftOperand * rightOperand
+      default:
+        return 0
+    }
+  }
+
   return (
     <section className="calculator">
       <h1 id="total">
@@ -29,17 +52,23 @@ const Calculator = () => {
         <button className="modifier">AC</button>
       </div>
       <OperationButtonList
-        onChange={(operation: OPERATION) => {
-          if (operation !== '=') {
-            setOperation(operation)
+        onChange={(nextOperation: OPERATION) => {
+          if (nextOperation !== '=') {
+            setOperation(nextOperation)
 
             return
           }
 
-          setResult(Number(leftOperand) + Number(rightOperand))
-          setLeftOperand('')
-          setRightOperand('')
+          const currentResult = calculate({
+            leftOperand: Number(leftOperand),
+            operation,
+            rightOperand: Number(rightOperand),
+          })
+
+          setResult(currentResult)
+          setLeftOperand(String(currentResult))
           setOperation('')
+          setRightOperand('')
         }}
       />
     </section>
