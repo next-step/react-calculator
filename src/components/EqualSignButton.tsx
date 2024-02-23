@@ -26,7 +26,6 @@ export default function EqualSignButton({
 		? '오류' : result;
 
 	const handleClickEqualSign = () => {
-		console.log(firstNumber, secondNumber, value);
 		if (secondNumber === '') {
 			setResultNumber(firstNumber);
 			setFirstNumber('');

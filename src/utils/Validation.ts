@@ -4,6 +4,6 @@ export class Validation {
 	}
 
 	isNotValidZero(preNumber: string, number: string) {
-		return number === '0' && preNumber === '0';
+		return preNumber.length === 0 && number === '0';
 	}
 }

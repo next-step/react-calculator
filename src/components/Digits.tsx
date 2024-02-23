@@ -1,22 +1,12 @@
-import {type Dispatch, type SetStateAction} from 'react';
-
 import fixtures from '../fixtures';
 import NumberButton from './NumberButton';
 
 type DigitsProps = {
-	setFirstNumber: Dispatch<SetStateAction<string>>;
-	firstNumber: string;
-	setSecondNumber: Dispatch<SetStateAction<string>>;
-	secondNumber: string;
-	operator: string;
+	handleClickNumber: (value: string) => void;
 };
 
 export default function Digits({
-	setFirstNumber,
-	firstNumber,
-	setSecondNumber,
-	secondNumber,
-	operator,
+	handleClickNumber,
 }: DigitsProps) {
 	const {numbers} = fixtures;
 
@@ -25,12 +15,8 @@ export default function Digits({
 			{numbers.map(number => (
 				<NumberButton
 					key={number}
-					setFirstNumber={setFirstNumber}
-					firstNumber={firstNumber}
-					setSecondNumber={setSecondNumber}
-					secondNumber={secondNumber}
-					operator={operator}
 					value={number}
+					handleClickNumber={handleClickNumber}
 				/>
 			))}
 		</div>
