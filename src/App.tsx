@@ -6,6 +6,7 @@ import Operations from './components/Operations';
 
 import {Validation} from './utils/Validation';
 import {Calculator} from './utils/Calculator';
+import checkFirstDigitZero from './utils/checkFirstDigitZero';
 
 import fixtures from './fixtures';
 
@@ -26,19 +27,24 @@ function App() {
 	const displayResult = equation || resultNubmber || '0';
 
 	const setNumber = (
-		prev: string,
+		preNumber: string,
 		currentNumber: string,
 		setter: (currentNumber: string) => void,
 	) => {
 		isValidNumber = true;
 
-		if (validation.isNotValidNumberLength(prev)) {
+		if (validation.isNotValidNumberLength(preNumber)) {
 			alert(alertMessage);
 			isValidNumber = false;
 		}
 
-		if (validation.isNotValidZero(prev, currentNumber)) {
+		if (validation.isNotValidZero(preNumber, currentNumber)) {
 			isValidNumber = false;
+		}
+
+		if (checkFirstDigitZero(preNumber, currentNumber)
+		) {
+			setFirstNumber('');
 		}
 
 		if (isValidNumber) {
