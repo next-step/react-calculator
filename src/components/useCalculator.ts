@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { CalculatorStackElement, Digit, Operation } from '@/types';
 import { ERROR_MESSAGES } from '@/constants';
-import { typeChecker, validator, resolveCalculation } from '@/utils';
+import { typeChecker, resolveCalculation } from '@/utils';
 
 const MAX_DIGIT_LENGTH = 3;
 const INITIAL_CALCULATION_STACK: CalculatorStackElement[] = [];
@@ -30,10 +30,6 @@ export const useCalculator = () => {
         return;
       }
       const calculation = resolveCalculation(calculationStack);
-      const isValidNumber = validator.validNumber(calculation);
-      if (!isValidNumber) {
-        throw new Error(String(calculation));
-      }
       setCalculationStack([String(calculation)]);
     } catch (error) {
       if (error instanceof Error) {
