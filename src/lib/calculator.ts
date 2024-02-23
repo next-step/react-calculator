@@ -56,7 +56,7 @@ export default class Calculator {
     return operand1 * operand2
   }
   divide(operand1: number, operand2: number) {
-    return operand1 / operand2
+    return Math.floor(operand1 / operand2)
   }
 
   calculate() {

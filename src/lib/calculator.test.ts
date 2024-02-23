@@ -18,6 +18,7 @@ describe('Calculator module test', () => {
 
   test('/가 포함된 Input에 대해서 나눗셈 연산을 한다', () => {
     expect(new Calculator('14/2').calculate()).toBe(7)
+    expect(new Calculator('14/3').calculate()).toBe(4)
     expect(new Calculator('14/0').calculate()).toBe(Infinity)
   })
 
