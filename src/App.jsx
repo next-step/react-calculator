@@ -1,42 +1,72 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import Button from './components/Button';
 
 function App() {
     const [firstNumber, setFirstNumber] = useState('');
-    const [operation, setOperation] = useState('');
+    const [operationType, setOperationType] = useState('');
     const [secondNumber, setSecondNumber] = useState('');
 
-    const displayResult = firstNumber + operation + secondNumber || '';
+    const onClickDigitButton = (e) => {
+        const nowClickValue = e.target.value;
+        if (operationType === '') {
+            setFirstNumber(Number(firstNumber + nowClickValue));
+        } else {
+            setSecondNumber(Number(secondNumber + nowClickValue));
+        }
+    };
+    const onClickEqualOperationButton = () => {
+        const num1 = Number(firstNumber);
+        const num2 = Number(secondNumber);
+        switch (operationType) {
+            case '+':
+                setFirstNumber(num1 + num2);
+                break;
+            case '-':
+                setFirstNumber(num1 - num2);
+                break;
+        }
+        setOperationType('');
+        setSecondNumber('');
+    };
+
+    const onClickOpertaionButton = (e) => {
+        const nowOperationType = e.target.value;
+
+        setOperationType(e.target.value);
+    };
+
+    const display = firstNumber + operationType + secondNumber || '0';
 
     return (
         <div id="app">
             <div className="calculator">
-                <div id="total">{displayResult}</div>
+                <div id="total">{display}</div>
 
                 <div className="subgrid modifiers">
                     <button>AC</button>
                 </div>
 
                 <div className="subgrid operations">
-                    <button>/</button>
-                    <button>X</button>
-                    <button>+</button>
-                    <button>-</button>
-                    <button>=</button>
+                    {['/', 'X', '+', '-'].map((value) => {
+                        return (
+                            <button key={value} value={value} onClick={onClickOpertaionButton}>
+                                {value}
+                            </button>
+                        );
+                    })}
+                    <button value="=" onClick={onClickEqualOperationButton}>
+                        =
+                    </button>
                 </div>
 
                 <div className="digits">
-                    <Button value={9} />
-                    <button className="">8</button>
-                    <button className="">7</button>
-                    <button className="">6</button>
-                    <button className="">5</button>
-                    <button className="">4</button>
-                    <button className="">3</button>
-                    <button className="">2</button>
-                    <button className="">1</button>
-                    <button className="">0</button>
+                    {[9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((number) => {
+                        return (
+                            <button key={number} value={number} onClick={onClickDigitButton}>
+                                {number}
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
         </div>
