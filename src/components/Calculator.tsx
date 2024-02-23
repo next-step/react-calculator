@@ -3,22 +3,32 @@ import { ControlAction, Digit, Operation } from '@/types';
 
 import styles from './Calculator.module.css';
 
-const digits = Object.values(Digit).reverse();
-const operations = [Operation.Divide, Operation.Multiply, Operation.Subtract, Operation.Add];
+const DIGITS = [
+  Digit.Nine,
+  Digit.Eight,
+  Digit.Seven,
+  Digit.Six,
+  Digit.Five,
+  Digit.Four,
+  Digit.Three,
+  Digit.Two,
+  Digit.One,
+  Digit.Zero,
+];
+const OPERATIONS = [Operation.Divide, Operation.Multiply, Operation.Subtract, Operation.Add];
 
 export const Calculator = () => {
   const { displayValue, handleClear, handleResult, handleInputProcess } = useCalculator();
-
   return (
     <div className={styles.calculator}>
       <h1 className={styles.total}>{displayValue}</h1>
       <div className={styles.digits}>
-        {digits.map((digit) => {
+        {DIGITS.map((digit) => {
           const handleDigitClick = () => {
             handleInputProcess(digit);
           };
           return (
-            <Button colorScheme="digit" onClick={handleDigitClick}>
+            <Button key={digit} colorScheme="digit" onClick={handleDigitClick}>
               {digit}
             </Button>
           );
@@ -30,12 +40,12 @@ export const Calculator = () => {
         </Button>
       </div>
       <div className={`${styles.operations} ${styles.subgrid}`}>
-        {operations.map((operation) => {
+        {OPERATIONS.map((operation) => {
           const handleOperationClick = () => {
             handleInputProcess(operation);
           };
           return (
-            <Button colorScheme="operation" onClick={handleOperationClick}>
+            <Button key={operation} colorScheme="operation" onClick={handleOperationClick}>
               {operation}
             </Button>
           );

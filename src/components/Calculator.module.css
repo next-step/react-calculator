@@ -35,6 +35,7 @@
     justify-content: flex-end;
     align-items: flex-end;
     font-size: 4rem;
+    white-space: nowrap;
 }
 
 .digits {
