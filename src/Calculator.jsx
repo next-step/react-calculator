@@ -3,7 +3,7 @@ import AcButton from "./Component/AcButton";
 import Number from "./Component/Number";
 import { useState } from "react";
 function Calculotor() {
-  const [expression, setExpression] = useState([]);
+  const [expression, setExpression] = useState([0]);
   const [numberCnt, setNumberCnt] = useState(0);
   return (
     <div className="calculator">
@@ -25,7 +25,17 @@ function Calculotor() {
           setNumberCnt(0);
         }}
       />
-      <Operator />
+      <Operator
+        handleOperation={(operation) => {
+          !isNaN(expression[expression.length - 1])
+            ? setExpression([...expression, operation])
+            : setExpression([
+                ...expression.slice(0, expression.length - 1),
+                operation,
+              ]);
+          setNumberCnt(0);
+        }}
+      />
     </div>
   );
 }

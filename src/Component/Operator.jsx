@@ -1,12 +1,16 @@
-function Operator(number, handleNumber, numberKey) {
-  console.log(number, handleNumber, numberKey);
+function Operator({ handleOperation }) {
+  const operations = ["/", "X", "-", "+", "="];
+
   return (
     <div className="operations subgrid">
-      <button className="operation">/</button>
-      <button className="operation">X</button>
-      <button className="operation">-</button>
-      <button className="operation">+</button>
-      <button className="operation">=</button>
+      {operations.map((operation) => (
+        <button
+          key={operation}
+          className="operation"
+          onClick={() => handleOperation(operation)}>
+          {operation}
+        </button>
+      ))}
     </div>
   );
 }
