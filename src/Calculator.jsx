@@ -19,7 +19,12 @@ function Calculotor() {
               })();
         }}
       />
-      <AcButton />
+      <AcButton
+        handleAc={() => {
+          setExpression([]);
+          setNumberCnt(0);
+        }}
+      />
       <Operator />
     </div>
   );

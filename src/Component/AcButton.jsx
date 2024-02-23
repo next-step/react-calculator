@@ -1,9 +1,10 @@
-function AcButton(number, handleNumber, numberKey) {
-  console.log(number, handleNumber, numberKey);
+function AcButton({ handleAc }) {
   return (
     <>
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <button className="modifier" onClick={handleAc}>
+          AC
+        </button>
       </div>
     </>
   );
