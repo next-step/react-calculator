@@ -42,7 +42,7 @@ const ACTION_TYPES = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case ACTION_TYPES.FIRST_CLICK: {
-      const digit = action.payload?.digit;
+      const digit = action.payload.digit;
       return {
         ...state,
         operands: {
