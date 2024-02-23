@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { CalculatorError, CalculatorStackElement, Digit, Operation } from '@/types';
+import { CalculatorStackElement, Digit, Operation } from '@/types';
 import { ERROR_MESSAGES } from '@/constants';
-import { typeChecker } from '@/utils';
+import { typeChecker, validator, resolveCalculation } from '@/utils';
 
 const MAX_DIGIT_LENGTH = 3;
 const INITIAL_CALCULATION_STACK: CalculatorStackElement[] = [];
@@ -9,18 +9,14 @@ const INITIAL_ERROR = null;
 
 export const useCalculator = () => {
   const [calculationStack, setCalculationStack] = useState<CalculatorStackElement[]>(INITIAL_CALCULATION_STACK);
-  const [error, setError] = useState<CalculatorError | null>(INITIAL_ERROR);
+  const [error, setError] = useState<string | null>(INITIAL_ERROR);
 
   const displayValue = useMemo(() => {
     if (error) {
       return error;
     }
 
-    if (calculationStack.length === 0) {
-      return Digit.Zero;
-    }
-
-    return calculationStack.join('');
+    return calculationStack.length === 0 ? Digit.Zero : calculationStack.join('');
   }, [calculationStack, error]);
 
   const handleClear = () => {
@@ -29,23 +25,29 @@ export const useCalculator = () => {
   };
 
   const handleResult = () => {
-    if (calculationStack.length === 0) {
-      return;
-    }
-    const lastElement = calculationStack[calculationStack.length - 1];
     try {
-      if (typeChecker.validOperation(lastElement)) {
-        // TODO: 마지막 연산자 제거 후 계산
+      if (calculationStack.length === 0) {
         return;
       }
-      // TODO: 계산
-      console.log('result');
-    } catch (e) {
-      // TODO: Infinity, NaN 에러 처리
+      const calculation = resolveCalculation(calculationStack);
+      const isValidNumber = validator.validNumber(calculation);
+      if (!isValidNumber) {
+        throw new Error(String(calculation));
+      }
+      setCalculationStack([String(calculation)]);
+    } catch (error) {
+      if (error instanceof Error) {
+        setCalculationStack(INITIAL_CALCULATION_STACK);
+        setError(error.message);
+      }
     }
   };
 
   const handleInputProcess = (value: Digit | Operation) => {
+    if (error) {
+      setError(INITIAL_ERROR);
+    }
+
     const isEmpty = calculationStack.length === 0;
     const isValidOperation = typeChecker.validOperation(value);
 
@@ -67,6 +69,9 @@ export const useCalculator = () => {
     const lastElement = calculationStack[lastElementIndex];
     if (typeChecker.validOperation(lastElement)) {
       return;
+    }
+    if (error) {
+      setError(INITIAL_ERROR);
     }
     setCalculationStack((prev) => [...prev, operation]);
   };
