@@ -5,4 +5,5 @@ export const validator = {
     }
     return Number.isFinite(value);
   },
+  validInfinity: (value: string | number) => value === Infinity || value === -Infinity,
 };
