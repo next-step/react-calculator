@@ -1,17 +1,17 @@
 import styled from '.././css/index.module.css';
 
-type Values = {
+type Operands = {
   firstValue: string;
   secondValue: string;
 };
 
 type Props = {
-  values: Values;
+  operands: Operands;
   operation: string;
 };
 
-export default function Total({ values, operation }: Props) {
-  const total = values.firstValue + operation + values.secondValue;
+export default function Total({ operands, operation }: Props) {
+  const total = operands.firstValue + operation + operands.secondValue;
 
   return <h1 id={styled.total}>{total}</h1>;
 }

@@ -7,40 +7,40 @@ import {
 } from '../constant/calculator';
 
 const INITIAL_OPERATION = INITIAL_VALUE;
-const INITIAL_VALUES = {
+const INITIAL_OPERANDS = {
   firstValue: INITIAL_DIGIT,
   secondValue: INITIAL_VALUE,
 };
 
 export default function useCalculate() {
   const [operation, setOperation] = useState(INITIAL_OPERATION);
-  const [values, setValues] = useState(INITIAL_VALUES);
+  const [operands, setOperands] = useState(INITIAL_OPERANDS);
 
   const handleDigitClick = (digit: number) => {
     if (!operation) {
-      if (values.firstValue === INITIAL_DIGIT) {
-        setValues((prevState) => ({
-          ...prevState,
+      if (operands.firstValue === INITIAL_DIGIT) {
+        setOperands((prevOperands) => ({
+          ...prevOperands,
           firstValue: String(digit),
         }));
       } else {
-        if (values.firstValue.length >= MAX_DIGIT_LENGTH) {
+        if (operands.firstValue.length >= MAX_DIGIT_LENGTH) {
           alert(MESSAGES.DIGIT_LIMIT);
           return;
         }
-        setValues((prevState) => ({
-          ...prevState,
-          firstValue: prevState.firstValue + String(digit),
+        setOperands((prevOperands) => ({
+          ...prevOperands,
+          firstValue: prevOperands.firstValue + String(digit),
         }));
       }
     } else {
-      if (values.secondValue.length >= MAX_DIGIT_LENGTH) {
+      if (operands.secondValue.length >= MAX_DIGIT_LENGTH) {
         alert(MESSAGES.DIGIT_LIMIT);
         return;
       }
-      setValues((prevState) => ({
-        ...prevState,
-        secondValue: prevState.secondValue + String(digit),
+      setOperands((prevOperands) => ({
+        ...prevOperands,
+        secondValue: prevOperands.secondValue + String(digit),
       }));
     }
   };
@@ -50,13 +50,13 @@ export default function useCalculate() {
       if (!operation) return;
 
       const total = calculate(operation);
-      setValues({
+      setOperands({
         firstValue: String(total),
         secondValue: INITIAL_VALUE,
       });
       setOperation(INITIAL_OPERATION);
     } else {
-      if (values === INITIAL_VALUES) {
+      if (operands === INITIAL_OPERANDS) {
         alert(MESSAGES.NUMBER_FIRST);
         return;
       }
@@ -65,7 +65,7 @@ export default function useCalculate() {
   };
 
   const calculate = (operation: string) => {
-    const { firstValue, secondValue } = values;
+    const { firstValue, secondValue } = operands;
 
     switch (operation) {
       case '/':
@@ -82,7 +82,7 @@ export default function useCalculate() {
   };
 
   const allClear = () => {
-    setValues(INITIAL_VALUES);
+    setOperands(INITIAL_OPERANDS);
     setOperation(INITIAL_OPERATION);
   };
 
@@ -91,7 +91,7 @@ export default function useCalculate() {
   };
 
   return {
-    values,
+    operands,
     operation,
     handleDigitClick,
     handleOperationClick,

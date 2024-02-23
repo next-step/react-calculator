@@ -7,7 +7,7 @@ import useCalculate from '../hooks/useCalculate';
 
 export default function Calculator() {
   const {
-    values,
+    operands,
     operation,
     handleDigitClick,
     handleOperationClick,
@@ -17,7 +17,7 @@ export default function Calculator() {
   return (
     <div id={styled.app}>
       <div className={styled.calculator}>
-        <Total values={values} operation={operation} />
+        <Total operands={operands} operation={operation} />
         <Digits onDigitsClick={handleDigitClick} />
         <Modifiers onModifierClick={handleModifierClick} />
         <Operations onOperationClick={handleOperationClick} />
