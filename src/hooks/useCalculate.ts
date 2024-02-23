@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+import calculate from '../utils/calculate';
 import {
   INITIAL_DIGIT,
   INITIAL_VALUE,
@@ -6,93 +7,153 @@ import {
   MESSAGES,
 } from '../constant/calculator';
 
-const INITIAL_OPERATION = INITIAL_VALUE;
-const INITIAL_OPERANDS = {
-  firstValue: INITIAL_DIGIT,
-  secondValue: INITIAL_VALUE,
+type Operands = {
+  firstValue: string;
+  secondValue: string;
+};
+
+type State = {
+  operation: string;
+  operands: Operands;
+};
+
+type Action = {
+  type: string;
+  payload?: any;
+};
+
+const INITIAL_STATE = {
+  operation: INITIAL_VALUE,
+  operands: {
+    firstValue: INITIAL_DIGIT,
+    secondValue: INITIAL_VALUE,
+  },
+};
+
+const ACTION_TYPES = {
+  FIRST_CLICK: 'first-click',
+  FIRST_DIGITS: 'first-digits',
+  SECOND_DIGITS: 'second-digits',
+  CALCULATE: 'calculate',
+  UPDATE_OPERATION: 'update-operation',
+  ALL_CLEAR: 'all-clear',
+};
+
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case ACTION_TYPES.FIRST_CLICK: {
+      const digit = action.payload?.digit;
+      return {
+        ...state,
+        operands: {
+          ...state.operands,
+          firstValue: String(digit),
+        },
+      };
+    }
+    case ACTION_TYPES.FIRST_DIGITS: {
+      const digit = action.payload.digit;
+      return {
+        ...state,
+        operands: {
+          ...state.operands,
+          firstValue: state.operands.firstValue + String(digit),
+        },
+      };
+    }
+
+    case ACTION_TYPES.SECOND_DIGITS: {
+      const digit = action.payload.digit;
+      return {
+        ...state,
+        operands: {
+          ...state.operands,
+          secondValue: state.operands.secondValue + String(digit),
+        },
+      };
+    }
+
+    case ACTION_TYPES.CALCULATE: {
+      const total = action.payload.total;
+      return {
+        operation: INITIAL_VALUE,
+        operands: {
+          firstValue: String(total),
+          secondValue: INITIAL_VALUE,
+        },
+      };
+    }
+
+    case 'update-operation': {
+      const operation = action.payload.operation;
+      return {
+        ...state,
+        operation,
+      };
+    }
+
+    case ACTION_TYPES.ALL_CLEAR:
+      return INITIAL_STATE;
+
+    default:
+      return state;
+  }
 };
 
 export default function useCalculate() {
-  const [operation, setOperation] = useState(INITIAL_OPERATION);
-  const [operands, setOperands] = useState(INITIAL_OPERANDS);
+  const [{ operation, operands }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  );
 
   const handleDigitClick = (digit: number) => {
     if (!operation) {
       if (operands.firstValue === INITIAL_DIGIT) {
-        setOperands((prevOperands) => ({
-          ...prevOperands,
-          firstValue: String(digit),
-        }));
+        dispatch({ type: ACTION_TYPES.FIRST_CLICK, payload: { digit } });
       } else {
         if (operands.firstValue.length >= MAX_DIGIT_LENGTH) {
           alert(MESSAGES.DIGIT_LIMIT);
           return;
         }
-        setOperands((prevOperands) => ({
-          ...prevOperands,
-          firstValue: prevOperands.firstValue + String(digit),
-        }));
+
+        dispatch({ type: ACTION_TYPES.FIRST_DIGITS, payload: { digit } });
       }
     } else {
       if (operands.secondValue.length >= MAX_DIGIT_LENGTH) {
         alert(MESSAGES.DIGIT_LIMIT);
         return;
       }
-      setOperands((prevOperands) => ({
-        ...prevOperands,
-        secondValue: prevOperands.secondValue + String(digit),
-      }));
+
+      dispatch({ type: ACTION_TYPES.SECOND_DIGITS, payload: { digit } });
     }
   };
 
   const handleOperationClick = (clickedOperation: string) => {
     if (clickedOperation === '=') {
       if (!operation) return;
+      const total = calculate(operation, operands);
 
-      const total = calculate(operation);
-      setOperands({
-        firstValue: String(total),
-        secondValue: INITIAL_VALUE,
-      });
-      setOperation(INITIAL_OPERATION);
+      dispatch({ type: ACTION_TYPES.CALCULATE, payload: { total } });
     } else {
-      if (operands === INITIAL_OPERANDS) {
+      if (operands === INITIAL_STATE.operands) {
         alert(MESSAGES.NUMBER_FIRST);
         return;
       }
-      setOperation(clickedOperation);
+
+      dispatch({
+        type: ACTION_TYPES.UPDATE_OPERATION,
+        payload: { operation: clickedOperation },
+      });
     }
-  };
-
-  const calculate = (operation: string) => {
-    const { firstValue, secondValue } = operands;
-
-    switch (operation) {
-      case '/':
-        return Math.floor(Number(firstValue) / Number(secondValue));
-      case 'X':
-        return Number(firstValue) * Number(secondValue);
-      case '-':
-        return Number(firstValue) - Number(secondValue);
-      case '+':
-        return Number(firstValue) + Number(secondValue);
-      default:
-        break;
-    }
-  };
-
-  const allClear = () => {
-    setOperands(INITIAL_OPERANDS);
-    setOperation(INITIAL_OPERATION);
   };
 
   const handleModifierClick = () => {
-    allClear();
+    dispatch({ type: ACTION_TYPES.ALL_CLEAR });
   };
 
   return {
-    operands,
-    operation,
+    operands: operands,
+    operation: operation,
     handleDigitClick,
     handleOperationClick,
     handleModifierClick,
