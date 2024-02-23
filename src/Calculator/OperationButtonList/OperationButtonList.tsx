@@ -12,6 +12,7 @@ const OperationButtonList = ({ onChange }: Props) => {
     <div className="operations subgrid">
       {OPERATIONS.map((operation) => (
         <OperationButton
+          key={operation}
           operation={operation}
           onClick={() => onChange(operation)}
         />

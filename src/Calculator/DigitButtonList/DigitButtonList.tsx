@@ -15,7 +15,9 @@ const DigitButtonList = ({ onChange }: Props) => {
   return (
     <div className="digits flex">
       {NUMBERS.map((number) => (
-        <DigitButton onClick={() => onChange(number)}>{number}</DigitButton>
+        <DigitButton key={number} onClick={() => onChange(number)}>
+          {number}
+        </DigitButton>
       ))}
     </div>
   )
