@@ -1,12 +1,18 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import Button from './components/Button';
 
 function App() {
-    const [total, setTotal] = useState(0);
+    const [firstNumber, setFirstNumber] = useState('');
+    const [operation, setOperation] = useState('');
+    const [secondNumber, setSecondNumber] = useState('');
+
+    const displayResult = firstNumber + operation + secondNumber || '';
 
     return (
         <div id="app">
             <div className="calculator">
-                <div id="total">{total}</div>
+                <div id="total">{displayResult}</div>
 
                 <div className="subgrid modifiers">
                     <button>AC</button>
@@ -21,7 +27,7 @@ function App() {
                 </div>
 
                 <div className="digits">
-                    <button className="">9</button>
+                    <Button value={9} />
                     <button className="">8</button>
                     <button className="">7</button>
                     <button className="">6</button>
