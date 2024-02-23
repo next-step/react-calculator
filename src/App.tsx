@@ -14,7 +14,7 @@ function App() {
 	const [firstNumber, setFirstNumber] = useState<string>('');
 	const [secondNumber, setSecondNumber] = useState<string>('');
 	const [operator, setOperator] = useState<string>('');
-	const [resultNubmber, setResultNumber] = useState<string>('');
+	const [resultNumber, setResultNumber] = useState<string>('');
 
 	const calculator = new Calculator();
 
@@ -24,7 +24,17 @@ function App() {
 	const {alertMessage} = fixtures;
 
 	const equation = firstNumber + operator + secondNumber;
-	const displayResult = equation || resultNubmber || '0';
+	const displayResult = equation || resultNumber || '0';
+
+	const clearZeroNumber = (
+		preNumber: string,
+		currentNumber: string,
+		setter: (value: string) => void,
+	) => {
+		if (checkFirstDigitZero(preNumber, currentNumber)) {
+			setter('');
+		}
+	};
 
 	const setNumber = (
 		preNumber: string,
@@ -42,11 +52,6 @@ function App() {
 			isValidNumber = false;
 		}
 
-		if (checkFirstDigitZero(preNumber, currentNumber)
-		) {
-			setFirstNumber('');
-		}
-
 		if (isValidNumber) {
 			setter(currentNumber);
 		}
@@ -61,6 +66,12 @@ function App() {
 
 	const handleClickNumber = (currentNumber: string) => {
 		if (!operator) {
+			clearZeroNumber(
+				firstNumber,
+				currentNumber,
+				setFirstNumber,
+			);
+
 			setNumber(
 				firstNumber,
 				currentNumber,
@@ -71,6 +82,12 @@ function App() {
 		}
 
 		if (operator) {
+			clearZeroNumber(
+				secondNumber,
+				currentNumber,
+				setSecondNumber,
+			);
+
 			setNumber(
 				secondNumber,
 				currentNumber,
