@@ -77,7 +77,6 @@ function App() {
 					{displayResult}
 				</h1>
 				<Digits
-					isValidNumber={isValidNumber}
 					handleClickNumber={handleClickNumber}
 				/>
 				<Modifiers onClickAc={handleClickAc} />
