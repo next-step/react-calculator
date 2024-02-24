@@ -33,7 +33,7 @@ export const resolveCalculation = (inputStack: CalculatorStackElement[]): string
     throw new Error(CalculatorError.NaN);
   }
 
-  return calculation;
+  return Math.floor(calculation);
 };
 
 const trimTrailingOperator = (inputStack: CalculatorStackElement[]) => {
