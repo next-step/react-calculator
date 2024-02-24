@@ -1,22 +1,21 @@
-type Operator = '+' | '-' | '*' | '/'
+import { PLUS, SUBTRACT, MULTIPLY, DIVIDE, OPERATORS_REGEX, INIT_OPERAND } from '@/constants'
+
+type Operator = typeof PLUS | typeof SUBTRACT | typeof MULTIPLY | typeof DIVIDE
 
 export default class Calculator {
-  static INIT_OPERAND = ''
-  static OPERATOR_REGEX = /[+\-*/]/
-
   operands: number[]
   operators: Operator[]
-  expressionArr: string[]
+  expressionCharactersArray: string[]
 
   constructor(input: string) {
     this.operands = []
     this.operators = []
-    this.expressionArr = input.split('')
-    this.readExpression()
+    this.expressionCharactersArray = input.split('')
+    this.parseExpression()
   }
 
   isOperand(input: string) {
-    return !Calculator.OPERATOR_REGEX.test(input)
+    return !OPERATORS_REGEX.test(input)
   }
 
   isNonOperatorNegative(character: string, index: number) {
@@ -27,16 +26,16 @@ export default class Calculator {
     this.operands.push(Number(operand))
   }
 
-  readExpression() {
-    let operand = Calculator.INIT_OPERAND
-    for (const [index, character] of this.expressionArr.entries()) {
+  parseExpression() {
+    let operand = INIT_OPERAND
+    for (const [index, character] of this.expressionCharactersArray.entries()) {
       if (this.isOperand(character) || this.isNonOperatorNegative(character, index)) {
         operand += character
       } else {
         this.operators.push(character as Operator)
         if (operand.length > 0) {
           this.addOperand(operand)
-          operand = Calculator.INIT_OPERAND
+          operand = INIT_OPERAND
         }
       }
     }
@@ -60,17 +59,17 @@ export default class Calculator {
   }
 
   calculate() {
-    const operatorMap = {
-      '+': this.sum,
-      '-': this.subtract,
-      '*': this.multiply,
-      '/': this.divide,
-    }
+    const operatorMethodMap = {
+      [PLUS]: this.sum,
+      [SUBTRACT]: this.subtract,
+      [MULTIPLY]: this.multiply,
+      [DIVIDE]: this.divide,
+    } as const
 
     while (this.operands.length >= 2 && this.operators.length > 0) {
       const operand1 = this.operands.shift() as number
       const operand2 = this.operands.shift() as number
-      const operatorMethod = operatorMap[this.operators.shift() as Operator]
+      const operatorMethod = operatorMethodMap[this.operators.shift() as Operator]
       const result = operatorMethod(operand1, operand2)
       this.operands.unshift(result)
     }
