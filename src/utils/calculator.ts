@@ -17,7 +17,17 @@ export class Calculator {
       throw new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
     }
 
-    this.#value = Math.trunc(a + b)
+    const result = Math.trunc(a + b)
+    this.#value = Object.is(result, -0) ? 0 : result
+  }
+
+  subtract(a: number, b: number) {
+    if(!(isNumber(a) && isNumber(a))) {
+      throw new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+    }
+
+    const result = Math.trunc(a - b)
+    this.#value = Object.is(result, -0) ? 0 : result
   }
 
   clear() {
