@@ -1,30 +1,39 @@
 import React from 'react';
 
+import { NUMBERS, OPERATORS } from './constants/calculator';
+import useCalculator from './hooks/useCalculator';
+
+export type Operator = '/' | 'X' | '+' | '-';
+
 export default function App() {
+  const {
+    handleNumberClick,
+    handleOperatorClick,
+    calculateResult,
+    resetCalculator,
+    view,
+  } = useCalculator();
+
   return (
     <div className="calculator">
-      <h1 id="total">0</h1>
+      <h1 id="total">{view}</h1>
       <div className="digits flex">
-        <button className="digit">9</button>
-        <button className="digit">8</button>
-        <button className="digit">7</button>
-        <button className="digit">6</button>
-        <button className="digit">5</button>
-        <button className="digit">4</button>
-        <button className="digit">3</button>
-        <button className="digit">2</button>
-        <button className="digit">1</button>
-        <button className="digit">0</button>
+        {NUMBERS.map((number) => (
+          <button key={number} onClick={() => handleNumberClick(number)}>
+            {number}
+          </button>
+        ))}
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <button onClick={resetCalculator}>AC</button>
       </div>
       <div className="operations subgrid">
-        <button className="operation">/</button>
-        <button className="operation">X</button>
-        <button className="operation">-</button>
-        <button className="operation">+</button>
-        <button className="operation">=</button>
+        {OPERATORS.map((operator) => (
+          <button key={operator} onClick={() => handleOperatorClick(operator)}>
+            {operator}
+          </button>
+        ))}
+        <button onClick={calculateResult}>=</button>
       </div>
     </div>
   );
