@@ -5,6 +5,7 @@ import Display from './components/Display';
 import NumberPad from './components/NumberPad';
 import Operators from './components/Operators';
 import useCalculator from './hooks/useCalculator';
+import { ERROR_MESSAGE } from './constants/calculator';
 
 export default function App() {
   const {
@@ -18,7 +19,7 @@ export default function App() {
   return (
     <div className="calculator">
       <Display view={view} />
-      <NumberPad handleNumberClick={handleNumberClick} />
+      <NumberPad handleNumberClick={view === ERROR_MESSAGE.INFINITY_RESULT_ERROR ? ()=>{} : handleNumberClick} />
       <AllClear resetCalculator={resetCalculator} />
       <Operators
         handleOperatorClick={handleOperatorClick}
