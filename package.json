@@ -42,6 +42,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

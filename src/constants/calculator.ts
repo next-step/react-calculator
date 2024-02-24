@@ -1,4 +1,4 @@
-import { Operator } from '@/App';
+import { Operator } from '@/components/Operators';
 
 export const MAX_NUM = 999;
 export const OPERATORS: Operator[] = ['/', 'X', '-', '+'];
