@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Calculator = () => {
+const useCalculator = () => {
   const [formula, setFormula] = useState('0')
   const [lastChar, setLastChar] = useState('0')
   const [currentNumberCount, setCurrentNumberCount] = useState(0)
@@ -96,4 +96,4 @@ const Calculator = () => {
 }
 }
 
-export default Calculator
+export default useCalculator

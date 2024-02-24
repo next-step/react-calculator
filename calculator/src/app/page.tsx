@@ -1,6 +1,6 @@
 'use client'
 
-import Calculator from "./Calculator";
+import useCalculator from "./useCalculator";
 
 export default function Home() {
 	const {
@@ -12,7 +12,7 @@ export default function Home() {
     divide,
     calculate,
     clearAll
-  } = Calculator()
+  } = useCalculator()
 
   return (
 		<>
