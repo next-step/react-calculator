@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { ERROR_MESSAGE, MAX_NUM } from '../constants/calculator';
 
@@ -9,29 +9,37 @@ export default function useCalculator() {
   const [operator, setOperator] = useState<Operator | ''>('');
   const [view, setView] = useState('0');
 
-  const handleNumberClick = (clickedNum: string) => {
-    const newValue =
-      view === '0' || (operator && !firstNum) ? clickedNum : view + clickedNum;
-    if (Number(newValue) > MAX_NUM) {
-      alert(ERROR_MESSAGE.OVER_MAX_NUMBER);
-      return;
-    }
-    setView(newValue);
-    if (!operator) {
-      setFirstNum(newValue);
-    }
-  };
+  const handleNumberClick = useCallback(
+    (clickedNum: string) => {
+      const newValue =
+        view === '0' || (operator && !firstNum)
+          ? clickedNum
+          : view + clickedNum;
+      if (Number(newValue) > MAX_NUM) {
+        alert(ERROR_MESSAGE.OVER_MAX_NUMBER);
+        return;
+      }
+      setView(newValue);
+      if (!operator) {
+        setFirstNum(newValue);
+      }
+    },
+    [view, operator, firstNum],
+  );
 
-  const handleOperatorClick = (selectedOperator: Operator) => {
-    if (operator) {
-      alert(ERROR_MESSAGE.OPERATOR_ORDER_ERROR);
-      return;
-    }
-    setOperator(selectedOperator);
-    setView(firstNum + selectedOperator);
-  };
+  const handleOperatorClick = useCallback(
+    (selectedOperator: Operator) => {
+      if (operator) {
+        alert(ERROR_MESSAGE.OPERATOR_ORDER_ERROR);
+        return;
+      }
+      setOperator(selectedOperator);
+      setView(firstNum + selectedOperator);
+    },
+    [operator, view],
+  );
 
-  const calculateResult = () => {
+  const calculateResult = useCallback(() => {
     if (!firstNum || !operator) {
       return;
     }
@@ -47,10 +55,10 @@ export default function useCalculator() {
     } else {
       setView(ERROR_MESSAGE.INFINITY_RESULT_ERROR);
     }
-  };
+  }, [firstNum, operator, view]);
 
-  const calculate = (num1: number, num2: number, operator: Operator) => {
-    switch (operator) {
+  const calculate = useCallback((num1: number, num2: number, op: Operator) => {
+    switch (op) {
       case '+':
         return num1 + num2;
       case '-':
@@ -62,13 +70,13 @@ export default function useCalculator() {
       default:
         return 0;
     }
-  };
+  }, []);
 
-  const resetCalculator = () => {
+  const resetCalculator = useCallback(() => {
     setFirstNum('');
     setOperator('');
     setView('0');
-  };
+  }, []);
 
   return {
     handleNumberClick,
