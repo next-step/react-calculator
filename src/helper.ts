@@ -1,1 +1,1 @@
-export const CALCULATOR_NUMBERS = new Set([...Array(10).keys()]);
+export const CALCULATOR_NUMBERS = [...Array(10).keys()];
