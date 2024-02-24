@@ -1,5 +1,18 @@
+import { Operator, useCalculate } from './CalculatorProvider';
+
 function AllClear() {
-  return <button className="modifier">AC</button>;
+  const calculate = useCalculate();
+
+  return (
+    <button
+      className="modifier"
+      onClick={() => {
+        calculate?.clearProcess();
+      }}
+    >
+      {Operator.AllClear}
+    </button>
+  );
 }
 
 const ModifierButton = {

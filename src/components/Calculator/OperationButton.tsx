@@ -1,21 +1,74 @@
+import { Operator, useCalculate } from './CalculatorProvider';
+
 function Divide() {
-  return <button className="operation">/</button>;
+  const calculate = useCalculate();
+
+  return (
+    <button
+      onClick={() => {
+        calculate?.appendOpretionToProcess(Operator.Divide);
+      }}
+      className="operation"
+    >
+      {Operator.Divide}
+    </button>
+  );
 }
 
 function Multiply() {
-  return <button className="operation">X</button>;
+  const calculate = useCalculate();
+  return (
+    <button
+      onClick={() => {
+        calculate?.appendOpretionToProcess(Operator.Multiply);
+      }}
+      className="operation"
+    >
+      {Operator.Multiply}
+    </button>
+  );
 }
 
 function Subtract() {
-  return <button className="operation">-</button>;
+  const calculate = useCalculate();
+  return (
+    <button
+      onClick={() => {
+        calculate?.appendOpretionToProcess(Operator.Subtract);
+      }}
+      className="operation"
+    >
+      {Operator.Subtract}
+    </button>
+  );
 }
 
 function Add() {
-  return <button className="operation">+</button>;
+  const calculate = useCalculate();
+  return (
+    <button
+      onClick={() => {
+        calculate?.appendOpretionToProcess(Operator.Add);
+      }}
+      className="operation"
+    >
+      {Operator.Add}
+    </button>
+  );
 }
 
 function Equal() {
-  return <button className="operation">=</button>;
+  const calculate = useCalculate();
+  return (
+    <button
+      onClick={() => {
+        calculate?.caculateProcess();
+      }}
+      className="operation"
+    >
+      {Operator.Equal}
+    </button>
+  );
 }
 
 const OperationButton = {

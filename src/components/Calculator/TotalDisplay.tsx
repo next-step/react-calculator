@@ -1,3 +1,7 @@
+import { useCalculate } from './CalculatorProvider';
+
 export default function TotalDisplay() {
-  return <h1 id="total">0</h1>;
+  const calculate = useCalculate();
+
+  return <h1 id="total">{calculate?.display}</h1>;
 }

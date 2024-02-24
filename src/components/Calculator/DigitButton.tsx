@@ -1,7 +1,20 @@
+import { Digit, useCalculate } from './CalculatorProvider';
+
 interface DigitButtonProps {
-  number: number;
+  number: Digit;
 }
 
 export default function DigitButton({ number }: DigitButtonProps) {
-  return <button className="digit">{number}</button>;
+  const calculate = useCalculate();
+
+  return (
+    <button
+      className="digit"
+      onClick={() => {
+        calculate?.appendNumberToProcess(number);
+      }}
+    >
+      {number}
+    </button>
+  );
 }
