@@ -1,9 +1,20 @@
 import { useState, MouseEvent } from 'react';
 import { NUMBER_MAX_LENGTH, Operators } from '../../../constants';
 
+type ArithmeticOperators = Exclude<Operators, Operators.EQUALS>;
+
+const operations: {
+  [key in ArithmeticOperators]: (a: number, b: number) => number;
+} = {
+  [Operators.DIVIDE]: (a: number, b: number) => a / b,
+  [Operators.MULTIPLY]: (a: number, b: number) => a * b,
+  [Operators.SUBTRACT]: (a: number, b: number) => a - b,
+  [Operators.ADD]: (a: number, b: number) => a + b,
+};
+
 export const useCalculate = () => {
   const [operand, setOperand] = useState<[number, number]>([0, 0]);
-  const [operator, setOperator] = useState<Operators | null>(null);
+  const [operator, setOperator] = useState<ArithmeticOperators | null>(null);
 
   const clear = () => {
     setOperand([0, 0]);
@@ -15,12 +26,15 @@ export const useCalculate = () => {
     if (!targetOperator) return;
 
     if (targetOperator === Operators.EQUALS) {
-      const result = operations[operator!](operand[0], operand[1]);
+      if (!operator) return;
+
+      const result = operations[operator](operand[0], operand[1]);
       setOperand([result, 0]);
       setOperator(null);
       return;
     }
-    setOperator(targetOperator as Operators);
+
+    setOperator(targetOperator as ArithmeticOperators);
   };
 
   const handleDigit = (e: MouseEvent<HTMLButtonElement>) => {
