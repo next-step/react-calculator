@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Calculator } from './util/Calculator';
+import DigitButton from './components/DigitButton';
+import OperationButton from './components/OperationButton';
 
 function App() {
     const [firstNumber, setFirstNumber] = useState('');
@@ -9,25 +11,10 @@ function App() {
 
     const calculator = new Calculator();
 
-    const getValidateNumber = (prevNumber, nowClickNumber) => {
-        if (prevNumber.length >= 3) {
-            alert('숫자는 세 자리까지만 입력 가능합니다!');
-            return prevNumber;
-        }
-
-        return String(Number(prevNumber + nowClickNumber));
-    };
-
-    const onClickDigitButton = (e) => {
-        const nowClickValue = e.target.value;
-        if (operationType === '') {
-            setFirstNumber(getValidateNumber(firstNumber, nowClickValue));
-        } else {
-            setSecondNumber(getValidateNumber(secondNumber, nowClickValue));
-        }
-    };
-
     const onClickEqualOperationButton = () => {
+        if (operationType === '') {
+            return;
+        }
         const num1 = Number(firstNumber);
         const num2 = Number(secondNumber);
         const calculateResult = (() => {
@@ -43,16 +30,10 @@ function App() {
             }
         })();
 
-        setFirstNumber(String(calculateResult));
+        setFirstNumber(calculateResult === Infinity ? '오류' : String(calculateResult));
 
         setOperationType('');
         setSecondNumber('');
-    };
-
-    const onClickOpertaionButton = (e) => {
-        const nowOperationType = e.target.value;
-
-        setOperationType(e.target.value);
     };
 
     const initalize = () => {
@@ -74,11 +55,7 @@ function App() {
 
                 <div className="subgrid operations">
                     {['/', 'X', '+', '-'].map((value) => {
-                        return (
-                            <button key={value} value={value} onClick={onClickOpertaionButton}>
-                                {value}
-                            </button>
-                        );
+                        return <OperationButton key={value} operationName={value} firstNumber={firstNumber} setOperationType={setOperationType} />;
                     })}
                     <button value="=" onClick={onClickEqualOperationButton}>
                         =
@@ -87,11 +64,7 @@ function App() {
 
                 <div className="digits">
                     {[9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((number) => {
-                        return (
-                            <button key={number} value={number} onClick={onClickDigitButton}>
-                                {number}
-                            </button>
-                        );
+                        return <DigitButton key={number} value={number} firstNumber={firstNumber} setFirstNumber={setFirstNumber} operationType={operationType} secondNumber={secondNumber} setSecondNumber={setSecondNumber} />;
                     })}
                 </div>
             </div>
