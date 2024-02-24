@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ARITHMETIC_OPERATORS, ASSIGN_OPERATOR, OPERANDS, CLEAR_MODIFIER } from '@/constants'
-import { checkValidInput } from '@/lib/validator'
+import Validator from '@/lib/validator'
 import Calculator from '@/lib/calculator'
 
 const INITIAL_EXPRESSION = ''
@@ -10,9 +10,8 @@ function App() {
 
   const handleClickOperand = (operand: string) => () => {
     try {
-      // 0이면 지워버리는 로직 포함해서 바꾸기
       const derivedExpression = expression + operand
-      checkValidInput(derivedExpression)
+      new Validator(derivedExpression).validateExpression()
       setExpression(derivedExpression)
     } catch (error) {
       alert((error as Error)?.message)
@@ -22,7 +21,7 @@ function App() {
   const handleClickArithmeticOperator = (operator: string) => () => {
     try {
       const derivedExpression = expression + operator
-      checkValidInput(derivedExpression)
+      new Validator(derivedExpression).validateExpression()
       setExpression(derivedExpression)
     } catch (error) {
       alert((error as Error)?.message)
