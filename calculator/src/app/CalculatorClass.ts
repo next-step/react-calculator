@@ -1,26 +1,55 @@
 class CalculatorClass {
-  formula = ''
+  private _formula: string
 
-  constructor() {}
+  constructor() {
+    this._formula='0'
+  }
 
+  number (num:number){
+    if (this._formula === '0') {
+      this._formula = num.toString()
+    }
+    else{
+      this._formula += num.toString()
+    }
+    console.log(this._formula)
+    return this._formula
+  }
+  
   add() {
-    return this.formula +'+'
+    this._formula += '+'
+    console.log(this._formula)
+    
+    return this._formula
   }
   subtract() {
-      return this.formula + '-'
+    this._formula += '-'
+    console.log(this._formula)
+    
+    return this._formula
   }
   multiply() {
-    return this.formula + '*'
+    this._formula += '*'
+    console.log(this._formula)
+    
+    return this._formula
   }
   divide() {
-    return this.formula + '/'
+    this._formula += '/'
+    console.log(this._formula)
+    
+    return this._formula
   }
-
+  
   calculate(){
-    return Math.floor(eval(this.formula))
+    this._formula = Math.floor(eval(this._formula)).toString()
+    return this._formula
   }
-
+  
   clearAll(){
-    return 0;
+    this._formula='0'
+    return this._formula
   }
 }
+
+export default CalculatorClass
