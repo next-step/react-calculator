@@ -86,5 +86,9 @@ export default function useCalculator() {
 		setDisplay(executeOperation);
 	};
 
-	return { display, enter, calculate };
+	const clear = () => {
+		setDisplay('0');
+	};
+
+	return { display, enter, calculate, clear };
 }
