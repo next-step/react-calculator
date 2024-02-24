@@ -25,6 +25,12 @@ export const useCalculate = () => {
     const { textContent: targetOperator } = e.currentTarget;
     if (!targetOperator) return;
 
+    const isFirstOperandInputExist = Boolean(operand[0]);
+    if (!isFirstOperandInputExist) {
+      alert('숫자를 먼저 입력해주세요.');
+      return;
+    }
+
     if (targetOperator === Operators.EQUALS) {
       if (!operator) return;
 
@@ -34,6 +40,7 @@ export const useCalculate = () => {
       return;
     }
 
+    if (operand[0] && operand[1]) return;
     setOperator(targetOperator as ArithmeticOperators);
   };
 
