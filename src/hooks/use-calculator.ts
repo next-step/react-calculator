@@ -2,10 +2,10 @@ import { useMemo, useState } from "react";
 import { Messages, OperatorValues, Operators } from "../constants";
 
 const OperatorMap: Record<OperatorValues, (a: number, b: number) => number> = {
-  [Operators.Plus]: (a: number, b: number) => a + b,
-  [Operators.Minus]: (a: number, b: number) => a - b,
-  [Operators.Multiply]: (a: number, b: number) => a * b,
-  [Operators.Divide]: (a: number, b: number) => Math.floor(a / b),
+  [Operators.Plus]: (a, b) => a + b,
+  [Operators.Minus]: (a, b) => a - b,
+  [Operators.Multiply]: (a, b) => a * b,
+  [Operators.Divide]: (a, b) => Math.floor(a / b),
 };
 
 export const useCalculator = () => {
