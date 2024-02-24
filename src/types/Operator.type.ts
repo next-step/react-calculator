@@ -1,4 +1,4 @@
-export enum Operation {
+export enum Operator {
   Add = '+',
   Subtract = '-',
   Multiply = 'X',

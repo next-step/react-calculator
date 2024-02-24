@@ -29,9 +29,9 @@ it('음수를 0으로 나누면 Infinity 반환한다.', () => {
   expect(() => resolveCalculation(inputStack)).toThrowError(CalculatorError.Infinity);
 });
 
-it('연산자가 올바른 위치에 없으면 Invalid Operation 반환한다.', () => {
+it('연산자가 올바른 위치에 없으면 Invalid Operator 반환한다.', () => {
   const inputStack: string[] = ['10', '10', '10'];
-  expect(() => resolveCalculation(inputStack)).toThrowError(CalculatorError.InvalidOperation);
+  expect(() => resolveCalculation(inputStack)).toThrowError(CalculatorError.InvalidOperator);
 });
 
 it('계산한다.', () => {

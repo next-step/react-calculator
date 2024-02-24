@@ -17,7 +17,7 @@
     background-color: #ccc;
 }
 
-.operations button {
+.operators button {
     background-color: orange;
 }
 
@@ -60,7 +60,7 @@
     grid-auto-columns: 1fr;
 }
 
-.operations {
+.operators {
     grid-area: oper;
 }
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { CalculatorStackElement, Digit, Operation } from '@/types';
+import { CalculatorStackElement, Digit, Operator } from '@/types';
 import { ERROR_MESSAGES } from '@/constants';
 import { typeChecker } from '@/utils';
 import { resolveCalculation } from '@/services';
@@ -40,37 +40,37 @@ export const useCalculator = () => {
     }
   };
 
-  const handleInputProcess = (value: Digit | Operation) => {
+  const handleInputProcess = (value: Digit | Operator) => {
     if (error) {
       setError(INITIAL_ERROR);
     }
 
     const isEmpty = calculationStack.length === 0;
-    const isValidOperation = typeChecker.validOperation(value);
+    const isValidOperator = typeChecker.validOperator(value);
 
     // NOTE: 첫 입력 값은 0 또는 연산자가 올 수 없습니다.
-    if (isEmpty && (isValidOperation || value === Digit.Zero)) {
+    if (isEmpty && (isValidOperator || value === Digit.Zero)) {
       return;
     }
 
-    if (isValidOperation) {
-      handleOperation(value);
+    if (isValidOperator) {
+      handleOperator(value);
       return;
     }
 
     handleDigit(value);
   };
 
-  const handleOperation = (operation: Operation) => {
+  const handleOperator = (operator: Operator) => {
     const lastElementIndex = calculationStack.length - 1;
     const lastElement = calculationStack[lastElementIndex];
-    if (typeChecker.validOperation(lastElement)) {
+    if (typeChecker.validOperator(lastElement)) {
       return;
     }
     if (error) {
       setError(INITIAL_ERROR);
     }
-    setCalculationStack((prev) => [...prev, operation]);
+    setCalculationStack((prev) => [...prev, operator]);
   };
 
   const handleDigit = (digit: Digit) => {
@@ -83,7 +83,7 @@ export const useCalculator = () => {
 
     const lastElement = calculationStack[lastElementIndex];
 
-    if (typeChecker.validOperation(lastElement)) {
+    if (typeChecker.validOperator(lastElement)) {
       setCalculationStack((prev) => [...prev, digit]);
       return;
     }

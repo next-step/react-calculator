@@ -1,7 +1,7 @@
-import { Operation } from '@/types';
+import { Operator } from '@/types';
 
-const operationSet: Set<string> = new Set(Object.values(Operation));
+const operatorSet: Set<string> = new Set(Object.values(Operator));
 
 export const typeChecker = {
-  validOperation: (value: string): value is Operation => operationSet.has(value),
+  validOperator: (value: string): value is Operator => operatorSet.has(value),
 };

@@ -1,4 +1,4 @@
-import { CalculatorError, CalculatorStackElement, Operation } from '@/types';
+import { CalculatorError, CalculatorStackElement, Operator } from '@/types';
 import { calculate, typeChecker, validator } from '@/utils';
 
 export const resolveCalculation = (inputStack: CalculatorStackElement[]): string | number => {
@@ -13,16 +13,16 @@ export const resolveCalculation = (inputStack: CalculatorStackElement[]): string
     return firstStackElement;
   }
 
-  const calculation = trimmedStack.reduce((acc, operation, index) => {
+  const calculation = trimmedStack.reduce((acc, operator, index) => {
     if (index % 2 === 0) {
       return acc;
     }
-    if (!typeChecker.validOperation(operation)) {
-      throw new Error(CalculatorError.InvalidOperation);
+    if (!typeChecker.validOperator(operator)) {
+      throw new Error(CalculatorError.InvalidOperator);
     }
 
     const nextOperand = Number(trimmedStack[index + 1]);
-    return calculateOperation(acc, nextOperand, operation);
+    return calculateOperation(acc, nextOperand, operator);
   }, firstStackElement);
 
   if (validator.validateInfinity(calculation)) {
@@ -41,18 +41,18 @@ const trimTrailingOperator = (inputStack: CalculatorStackElement[]) => {
     return inputStack;
   }
   const lastElement = inputStack[inputStack.length - 1];
-  if (typeChecker.validOperation(lastElement)) {
+  if (typeChecker.validOperator(lastElement)) {
     return inputStack.slice(0, -1);
   }
   return inputStack;
 };
 
-const calculateOperation = (operand1: number, operand2: number, operation: Operation) => {
+const calculateOperation = (operand1: number, operand2: number, operation: Operator) => {
   const calculateOperations = {
-    [Operation.Add]: calculate.add,
-    [Operation.Subtract]: calculate.subtract,
-    [Operation.Multiply]: calculate.multiply,
-    [Operation.Divide]: calculate.divide,
+    [Operator.Add]: calculate.add,
+    [Operator.Subtract]: calculate.subtract,
+    [Operator.Multiply]: calculate.multiply,
+    [Operator.Divide]: calculate.divide,
   };
   const operationFunction = calculateOperations[operation];
   return operationFunction(operand1, operand2);

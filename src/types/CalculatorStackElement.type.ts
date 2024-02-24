@@ -1,3 +1,3 @@
-import { Operation } from '@/types/Operation.type';
+import { Operator } from '@/types/Operator.type.ts';
 
-export type CalculatorStackElement = string | Operation;
+export type CalculatorStackElement = string | Operator;

@@ -2,7 +2,7 @@ import { HTMLAttributes, PropsWithChildren } from 'react';
 import styles from './Button.module.css';
 
 type ButtonProps = PropsWithChildren<HTMLAttributes<HTMLButtonElement>> & {
-  colorScheme?: 'digit' | 'operation' | 'modifier';
+  colorScheme?: 'digit' | 'operator' | 'modifier';
 };
 
 export const Button = ({ children, colorScheme, ...props }: ButtonProps) => {

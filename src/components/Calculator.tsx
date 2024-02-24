@@ -1,5 +1,5 @@
 import { Button, useCalculator } from '@/components';
-import { ControlAction, Digit, Operation } from '@/types';
+import { ControlAction, Digit, Operator } from '@/types';
 
 import styles from './Calculator.module.css';
 
@@ -15,7 +15,7 @@ const DIGITS = [
   Digit.One,
   Digit.Zero,
 ];
-const OPERATIONS = [Operation.Divide, Operation.Multiply, Operation.Subtract, Operation.Add];
+const OPERATORS = [Operator.Divide, Operator.Multiply, Operator.Subtract, Operator.Add];
 
 export const Calculator = () => {
   const { displayValue, handleClear, handleResult, handleInputProcess } = useCalculator();
@@ -39,18 +39,18 @@ export const Calculator = () => {
           {ControlAction.Clear}
         </Button>
       </div>
-      <div className={`${styles.operations} ${styles.subgrid}`}>
-        {OPERATIONS.map((operation) => {
-          const handleOperationClick = () => {
-            handleInputProcess(operation);
+      <div className={`${styles.operators} ${styles.subgrid}`}>
+        {OPERATORS.map((operator) => {
+          const handleOperatorClick = () => {
+            handleInputProcess(operator);
           };
           return (
-            <Button key={operation} colorScheme="operation" onClick={handleOperationClick}>
-              {operation}
+            <Button key={operator} colorScheme="operator" onClick={handleOperatorClick}>
+              {operator}
             </Button>
           );
         })}
-        <Button colorScheme="operation" onClick={handleResult}>
+        <Button colorScheme="operator" onClick={handleResult}>
           {ControlAction.Result}
         </Button>
       </div>
