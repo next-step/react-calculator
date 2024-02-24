@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { Calculator } from './util/Calculator';
 
 function App() {
     const [firstNumber, setFirstNumber] = useState('');
     const [operationType, setOperationType] = useState('');
     const [secondNumber, setSecondNumber] = useState('');
+
+    const calculator = new Calculator();
 
     const getValidateNumber = (prevNumber, nowClickNumber) => {
         if (prevNumber.length >= 3) {
@@ -27,14 +30,21 @@ function App() {
     const onClickEqualOperationButton = () => {
         const num1 = Number(firstNumber);
         const num2 = Number(secondNumber);
-        switch (operationType) {
-            case '+':
-                setFirstNumber(num1 + num2);
-                break;
-            case '-':
-                setFirstNumber(num1 - num2);
-                break;
-        }
+        const calculateResult = (() => {
+            switch (operationType) {
+                case '+':
+                    return calculator.sum(num1, num2);
+                case '-':
+                    return calculator.substract(num1, num2);
+                case 'X':
+                    return calculator.multiple(num1, num2);
+                case '/':
+                    return calculator.divide(num1, num2);
+            }
+        })();
+
+        setFirstNumber(String(calculateResult));
+
         setOperationType('');
         setSecondNumber('');
     };
@@ -45,6 +55,12 @@ function App() {
         setOperationType(e.target.value);
     };
 
+    const initalize = () => {
+        setFirstNumber('');
+        setOperationType('');
+        setSecondNumber('');
+    };
+
     const display = firstNumber + operationType + secondNumber || '0';
 
     return (
@@ -53,7 +69,7 @@ function App() {
                 <div id="total">{display}</div>
 
                 <div className="subgrid modifiers">
-                    <button>AC</button>
+                    <button onClick={initalize}>AC</button>
                 </div>
 
                 <div className="subgrid operations">
