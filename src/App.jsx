@@ -43,6 +43,12 @@ function App() {
         return;
       }
 
+      // 결과가 오류일 경우
+      if (display === '오류') {
+        setDisplay(`${value}`);
+        return;
+      }
+
       setDisplay(`${display}${value}`);
     }
 
@@ -62,6 +68,12 @@ function App() {
 
       if (value === '=') {
         calculate(operand, operator);
+        return;
+      }
+
+      // 결과가 오류일 경우
+      if (display === '오류') {
+        alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
         return;
       }
 
