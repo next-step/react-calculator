@@ -15,10 +15,12 @@ const operations: {
 export const useCalculate = () => {
   const [operand, setOperand] = useState<[number, number]>([0, 0]);
   const [operator, setOperator] = useState<ArithmeticOperators | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const clear = () => {
     setOperand([0, 0]);
     setOperator(null);
+    setError(null);
   };
 
   const handleOperator = (e: MouseEvent<HTMLButtonElement>) => {
@@ -35,6 +37,11 @@ export const useCalculate = () => {
       if (!operator) return;
 
       const result = operations[operator](operand[0], operand[1]);
+
+      if (Number.isNaN(result) || !Number.isFinite(result)) {
+        setError(new Error('오류'));
+      }
+
       setOperand([result, 0]);
       setOperator(null);
       return;
@@ -73,6 +80,7 @@ export const useCalculate = () => {
   return {
     operator,
     operand,
+    error,
     clear,
     handleOperator,
     handleDigit,

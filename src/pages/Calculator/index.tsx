@@ -5,11 +5,12 @@ import Operations from './components/Operations';
 import Display from './components/Display';
 
 export default function Calculator() {
-  const { operator, operand, clear, handleDigit, handleOperator } =
+  const { operator, operand, error, clear, handleDigit, handleOperator } =
     useCalculate();
+
   return (
     <div className='calculator'>
-      <Display operand={operand} operator={operator} />
+      <Display operand={operand} operator={operator} error={error} />
       <Digits onClick={handleDigit} />
       <Modifier onClick={clear} />
       <Operations onClick={handleOperator} />
