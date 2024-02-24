@@ -144,4 +144,26 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(result.current.display).toBe('0');
 		});
 	});
+
+	describe('음수 계산 테스트', () => {
+		it('3-7+1 을 계산하면 -3이 출력된다', () => {
+			const result = calculate(enterOperators(['3', '-', '7']));
+
+			expect(result.current.display).toBe('-4');
+
+			act(() => {
+				result.current.enter('+');
+			});
+
+			act(() => {
+				result.current.enter('1');
+			});
+
+			act(() => {
+				result.current.calculate();
+			});
+
+			expect(result.current.display).toBe('-3');
+		});
+	});
 });
