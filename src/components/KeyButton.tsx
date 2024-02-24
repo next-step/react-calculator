@@ -4,7 +4,7 @@ interface KeyProps {
   label: string;
 }
 
-export default function Key({ className, onClick, label }: KeyProps) {
+export default function KeyButton({ className, onClick, label }: KeyProps) {
   return (
     <button className={className} onClick={onClick}>
       {label}

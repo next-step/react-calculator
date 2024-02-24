@@ -1,4 +1,4 @@
-import Key from './Key';
+import KeyButton from './KeyButton';
 import { OperatorType } from '../common/types';
 import { DIGITS, OPERATORS } from '../common/constants';
 import useCalculator from '../hooks/useCalculator';
@@ -20,7 +20,7 @@ export default function Calculator() {
       <h1 id="total">{message}</h1>
       <div className="digits flex">
         {DIGITS.map(digit => (
-          <Key
+          <KeyButton
             key={digit}
             className="digit"
             label={`${digit}`}
@@ -29,11 +29,11 @@ export default function Calculator() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <Key className="modifier" label="AC" onClick={clear} />
+        <KeyButton className="modifier" label="AC" onClick={clear} />
       </div>
       <div className="operations subgrid">
         {OPERATORS.map(operator => (
-          <Key
+          <KeyButton
             key={operator}
             className="operation"
             label={operator}
