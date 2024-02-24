@@ -1,6 +1,5 @@
-import OperationButtonList from './OperationButtonList'
 import { useCalculator } from './Calculator.hook'
-import { DIGITS } from './Calculator.const'
+import { DIGITS, OPERATIONS } from './Calculator.const'
 
 const Calculator = () => {
   const { displayedContents, initialize, updateOperand, updateOperation } =
@@ -23,7 +22,14 @@ const Calculator = () => {
           AC
         </button>
       </div>
-      <OperationButtonList onChange={updateOperation} />
+
+      <div className="operations subgrid">
+        {OPERATIONS.map((operation) => (
+          <button key={operation} onClick={() => updateOperation(operation)}>
+            {operation}
+          </button>
+        ))}
+      </div>
     </section>
   )
 }
