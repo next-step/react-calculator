@@ -1,2 +1,3 @@
-export * from './errorMessages.ts';
-export * from './maxInputDigitLength.ts';
+export * from './errorMessages';
+export * from './maxInputDigitLength';
+export * from './calculatorKeys';
