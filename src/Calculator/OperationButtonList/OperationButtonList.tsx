@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react'
 import OperationButton from './OperationButton'
-import { OPERATIONS } from './OperationButton/OperationButton.const'
-import { OPERATION } from './OperationButton/OperationButton.type'
+import { OPERATIONS } from '../Calculator.const'
+import { OPERATION } from '../Calculator.type'
 
 type Props = {
   onChange: (operation: OPERATION) => void

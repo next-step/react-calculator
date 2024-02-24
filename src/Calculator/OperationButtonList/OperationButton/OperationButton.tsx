@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { OPERATION } from './OperationButton.type'
+import { OPERATION } from '../../Calculator.type'
 
 type Props = { operation: OPERATION } & Omit<
   ComponentProps<'button'>,

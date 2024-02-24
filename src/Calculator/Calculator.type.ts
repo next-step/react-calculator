@@ -1,3 +1,3 @@
-import { OPERATIONS } from './OperationButton.const'
+import { OPERATIONS } from './Calculator.const'
 
 export type OPERATION = (typeof OPERATIONS)[number]

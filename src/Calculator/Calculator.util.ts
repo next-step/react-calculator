@@ -1,4 +1,4 @@
-import { OPERATION } from './OperationButtonList/OperationButton/OperationButton.type'
+import { OPERATION } from './Calculator.type'
 
 export const calculate = ({
   leftOperand,

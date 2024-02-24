@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OPERATION } from './OperationButtonList/OperationButton/OperationButton.type'
+import { OPERATION } from './Calculator.type'
 import { calculate } from './Calculator.util'
 
 export const useCalculator = () => {
