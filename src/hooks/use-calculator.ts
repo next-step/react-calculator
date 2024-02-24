@@ -19,16 +19,16 @@ export const useCalculator = () => {
     return result;
   }, [firstNum, secondNum, operator]);
 
-  const handleNumber = (num: number) => {};
-  const handleOperator = (op: string) => {};
+  const handleNumberInput = (num: number) => {};
+  const handleSetOperator = (op: string) => {};
   const handleCalculate = () => {};
 
   const handleReset = () => {};
 
   return {
     displayText,
-    handleNumber,
-    handleOperator,
+    handleNumberInput,
+    handleSetOperator,
     handleCalculate,
     handleReset,
   };
