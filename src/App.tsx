@@ -8,7 +8,7 @@ function App() {
     try {
       updateExpression(operand)
     } catch (error) {
-      alert((error as Error)?.message)
+      alert((error as Error).message)
     }
   }
 
@@ -16,7 +16,7 @@ function App() {
     try {
       updateExpression(operator)
     } catch (error) {
-      alert((error as Error)?.message)
+      alert((error as Error).message)
     }
   }
 
