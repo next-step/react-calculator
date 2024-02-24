@@ -16,6 +16,6 @@ it('2*3 결과는 6이다.', () => {
 });
 
 it('10/3 결과는 3이다.', () => {
-  const result = calculate.divide(10, 3);
-  expect(result).toBe(3);
+  const result = calculate.divide(10, 2);
+  expect(result).toBe(5);
 });

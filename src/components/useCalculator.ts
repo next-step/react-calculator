@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
 import { CalculatorStackElement, Digit, Operator } from '@/types';
-import { ERROR_MESSAGES } from '@/constants';
+import { ERROR_MESSAGES, MAX_INPUT_DIGIT_LENGTH } from '@/constants';
 import { typeChecker } from '@/utils';
 import { resolveCalculation } from '@/services';
 
-const MAX_DIGIT_LENGTH = 3;
 const INITIAL_CALCULATION_STACK: CalculatorStackElement[] = [];
 const INITIAL_ERROR = null;
 
@@ -77,19 +76,19 @@ export const useCalculator = () => {
     const lastElementIndex = calculationStack.length - 1;
 
     if (lastElementIndex < 0) {
-      setCalculationStack([digit]);
+      setCalculationStack([String(digit)]);
       return;
     }
 
     const lastElement = calculationStack[lastElementIndex];
 
     if (typeChecker.validOperator(lastElement)) {
-      setCalculationStack((prev) => [...prev, digit]);
+      setCalculationStack((prev) => [...prev, String(digit)]);
       return;
     }
 
-    if (lastElement.length >= MAX_DIGIT_LENGTH) {
-      alert(ERROR_MESSAGES.MAX_DIGIT_LENGTH);
+    if (lastElement.length >= MAX_INPUT_DIGIT_LENGTH) {
+      alert(ERROR_MESSAGES.INPUT_DIGIT_LIMIT);
       return;
     }
 

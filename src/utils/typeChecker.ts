@@ -1,7 +1,7 @@
 import { Operator } from '@/types';
 
-const operatorSet: Set<string> = new Set(Object.values(Operator));
+const operatorSet: Set<string | number> = new Set(Object.values(Operator));
 
 export const typeChecker = {
-  validOperator: (value: string): value is Operator => operatorSet.has(value),
+  validOperator: (value: string | number): value is Operator => operatorSet.has(value),
 };
