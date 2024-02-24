@@ -1,6 +1,6 @@
 import type { Digit } from '@/types';
 import type { CalculatorKeyConfig } from '@/components';
-import { CalculatorDisplay, CalculatorKeyLayout } from '@/components';
+import { CalculatorDisplay, CalculatorKeySet } from '@/components';
 import { parseCalculatorKeys } from '@/services';
 
 import styles from './Calculator.module.css';
@@ -22,13 +22,13 @@ export const Calculator = ({ calculatorKeys, displayValue, handleInputProcess }:
   return (
     <div className={styles.calculator}>
       <CalculatorDisplay>{displayValue}</CalculatorDisplay>
-      <CalculatorKeyLayout className={KEY_LAYOUT_CLASS_NAME.DIGITS} keys={digitKey} onKeyClick={handleInputProcess} />
-      <CalculatorKeyLayout
+      <CalculatorKeySet className={KEY_LAYOUT_CLASS_NAME.DIGITS} keys={digitKey} onKeyClick={handleInputProcess} />
+      <CalculatorKeySet
         className={KEY_LAYOUT_CLASS_NAME.MODIFIERS}
         keys={allClearKey}
         onKeyClick={handleInputProcess}
       />
-      <CalculatorKeyLayout
+      <CalculatorKeySet
         className={KEY_LAYOUT_CLASS_NAME.OPERATORS}
         keys={operatorKey}
         onKeyClick={handleInputProcess}

@@ -1,13 +1,13 @@
 import type { CalculatorKeyConfig, ButtonColorScheme } from '@/components';
 import { Button, CalculatorKeyType } from '@/components';
 
-type CalculatorKeyLayoutProps = {
+type CalculatorKeySetProps = {
   className?: string;
   keys: CalculatorKeyConfig[];
   onKeyClick: (value: string | number) => void;
 };
 
-export const CalculatorKeyLayout = ({ className, keys, onKeyClick }: CalculatorKeyLayoutProps) => (
+export const CalculatorKeySet = ({ className, keys, onKeyClick }: CalculatorKeySetProps) => (
   <div className={className}>
     {keys.map(({ type, value, label }) => {
       const colorScheme = getButtonColorScheme(type);
