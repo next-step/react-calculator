@@ -1,13 +1,20 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Digit from './components/button/Digit';
 import Modifier from './components/button/Modifier';
 import Operator from './components/button/Operator';
+import useCalculation from './hooks/useCalculation';
 
 function App() {
   const [display, setDisplay] = useState('');
   const [allClear, setAllClear] = useState(true);
   const [operator, setOperator] = useState(null);
+  const { result, calculate } = useCalculation();
+
+  useEffect(() => {
+    setDisplay(result);
+    setOperator(null);
+  }, [result]);
 
   const onClick = (value, type) => {
     // AC버튼 클릭
@@ -28,7 +35,6 @@ function App() {
         }
       }
 
-      // 피연산자의 자릿수가 3 이상인 경우
       if (
         (!operator && display.length >= 3)
         || (operand.length >= 2 && operand[1].length >= 3)
@@ -45,6 +51,17 @@ function App() {
       // 처음에 연산자가 입력된 경우
       if (display === '') {
         alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
+        return;
+      }
+
+      // 결과값이 3자리 이상일 때 연산자를 입력하는 경우
+      if (!operator && display.length > 3) {
+        alert('숫자는 세 자리까지만 입력 가능합니다!');
+        return;
+      }
+
+      if (value === '=') {
+        calculate(operand, operator);
         return;
       }
 
