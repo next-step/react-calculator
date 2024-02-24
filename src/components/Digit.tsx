@@ -3,13 +3,11 @@ import styled from '../css/index.module.css'
 const Digit = ({ onDigitClick }: { onDigitClick: (param: number) => void }) => {
   return (
     <div className={`${styled.digits} ${styled.flex}`}>
-      {Array.from({ length: 10 }, (_, i) => i)
-        .reverse()
-        .map((v, i) => (
-          <button key={i} className={styled.digit} onClick={() => onDigitClick(v)}>
-            {v}
-          </button>
-        ))}
+      {[9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((value, idx) => (
+        <button type="button" key={idx} className={styled.digit} onClick={() => onDigitClick(value)}>
+          {value}
+        </button>
+      ))}
     </div>
   )
 }
