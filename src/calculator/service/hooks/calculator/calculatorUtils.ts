@@ -69,7 +69,7 @@ export const extractLastOperation = (
 			lastNumber = parseFloat(value);
 		}
 		if (isOperator(value)) {
-			lastOperator = value as OPERATORS_TYPE;
+			lastOperator = value;
 			break;
 		}
 	}
