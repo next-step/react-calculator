@@ -1,5 +1,11 @@
+import Calculator from './pages/Calculator';
+
 function App() {
-  return <h1>Calculator</h1>;
+  return (
+    <div id='app'>
+      <Calculator />
+    </div>
+  );
 }
 
 export default App;
