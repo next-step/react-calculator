@@ -1,9 +1,10 @@
+import { CalculatorProps } from './Calculator.type'
 import { useCalculator } from './Calculator.hook'
 import { DIGITS, OPERATIONS } from './Calculator.const'
 
-const Calculator = () => {
+const Calculator = ({ maxNumberLength }: CalculatorProps) => {
   const { displayedContents, initialize, updateOperand, updateOperation } =
-    useCalculator()
+    useCalculator({ maxNumberLength })
 
   return (
     <section className="calculator">

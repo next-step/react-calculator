@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { OPERATION } from './Calculator.type'
+import { OPERATION, UseCalculatorProps } from './Calculator.type'
 import { calculate } from './Calculator.util'
-import { MAX_NUMBER_LENGTH } from './Calculator.const'
+import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 
-export const useCalculator = () => {
+export const useCalculator = ({
+  maxNumberLength = DEFAULT_MAX_NUMBER_LENGTH,
+}: UseCalculatorProps) => {
   const [result, setResult] = useState(0)
   const [leftOperand, setLeftOperand] = useState('')
   const [operation, setOperation] = useState<OPERATION | ''>('')
@@ -24,8 +26,8 @@ export const useCalculator = () => {
       ? `${leftOperand}${addedDigit}`
       : `${rightOperand}${addedDigit}`
 
-    if (nextDigit.length > MAX_NUMBER_LENGTH) {
-      alert(`숫자는 최대 ${MAX_NUMBER_LENGTH}자리 까지 입력이 가능합니다.`)
+    if (nextDigit.length > maxNumberLength) {
+      alert(`숫자는 최대 ${maxNumberLength}자리 까지 입력이 가능합니다.`)
 
       return
     }
