@@ -6,9 +6,9 @@ import Operation from "./Operation";
 
 const Calculrator = () => {
   const {
+    handleDigit,
     handleOperation,
     handleCalculate,
-    handleDigit,
     reset,
     calculrateState,
   } = useCalculate();
