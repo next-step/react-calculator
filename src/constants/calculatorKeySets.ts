@@ -24,4 +24,4 @@ const OPERATORS = [
 
 const CONTROL_ACTIONS = [{ type: CalculatorKeyType.AllClearKey, value: ControlAction.Clear, label: 'AC' }];
 
-export const CALCULATOR_KEYS = [...DIGITS, ...OPERATORS, ...CONTROL_ACTIONS];
+export const CALCULATOR_KEY_SETS = [...DIGITS, ...OPERATORS, ...CONTROL_ACTIONS];

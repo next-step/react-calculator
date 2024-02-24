@@ -1,4 +1,3 @@
-import type { Digit } from '@/types';
 import type { CalculatorKeyConfig } from '@/components';
 import { CalculatorDisplay, CalculatorKeySet } from '@/components';
 import { parseCalculatorKeys } from '@/services';
@@ -12,13 +11,13 @@ const KEY_LAYOUT_CLASS_NAME = {
 };
 
 type CalculatorProps = {
-  calculatorKeys: CalculatorKeyConfig[];
-  displayValue: string | Digit;
+  keySets: CalculatorKeyConfig[];
+  displayValue: string;
   handleInputProcess: (value: string | number) => void;
 };
 
-export const Calculator = ({ calculatorKeys, displayValue, handleInputProcess }: CalculatorProps) => {
-  const { digitKey, operatorKey, allClearKey } = parseCalculatorKeys(calculatorKeys);
+export const Calculator = ({ keySets, displayValue, handleInputProcess }: CalculatorProps) => {
+  const { digitKey, operatorKey, allClearKey } = parseCalculatorKeys(keySets);
   return (
     <div className={styles.calculator}>
       <CalculatorDisplay>{displayValue}</CalculatorDisplay>

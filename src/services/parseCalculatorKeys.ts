@@ -1,8 +1,8 @@
-import type { CalculatorKeyConfig, CalculatorKeypad } from '@/components';
+import type { CalculatorKeyConfig, CalculatorKeyMapping } from '@/components';
 import { CalculatorKeyType } from '@/components';
 
-export const parseCalculatorKeys = (calculatorKeys: CalculatorKeyConfig[]): CalculatorKeypad =>
-  calculatorKeys.reduce<CalculatorKeypad>(
+export const parseCalculatorKeys = (calculatorKeys: CalculatorKeyConfig[]): CalculatorKeyMapping =>
+  calculatorKeys.reduce<CalculatorKeyMapping>(
     (keypad, key) => {
       if (isKeyType(key, CalculatorKeyType.DigitKey)) {
         keypad[CalculatorKeyType.DigitKey].push(key);

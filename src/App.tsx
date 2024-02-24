@@ -1,11 +1,12 @@
 import { Calculator, useCalculator } from '@/components';
+import { CALCULATOR_KEY_SETS } from '@/constants';
+
 import './App.css';
-import { CALCULATOR_KEYS } from '@/constants/calculatorKeys.ts';
 
 const App = () => {
   const { displayValue, handleInputProcess } = useCalculator();
   return (
-    <Calculator calculatorKeys={CALCULATOR_KEYS} displayValue={displayValue} handleInputProcess={handleInputProcess} />
+    <Calculator keySets={CALCULATOR_KEY_SETS} displayValue={displayValue} handleInputProcess={handleInputProcess} />
   );
 };
 

@@ -12,7 +12,7 @@ export type CalculatorKeyConfig<KeyType extends CalculatorKeyType = CalculatorKe
   type: KeyType;
 };
 
-export type CalculatorKeypad = {
+export type CalculatorKeyMapping = {
   [KeyType in CalculatorKeyType]: CalculatorKeyConfig<KeyType>[];
 };
 

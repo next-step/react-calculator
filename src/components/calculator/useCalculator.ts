@@ -17,7 +17,7 @@ export const useCalculator = () => {
       return error;
     }
 
-    return calculationStack.length === 0 ? Digit.Zero : calculationStack.join('');
+    return calculationStack.length === 0 ? String(Digit.Zero) : calculationStack.join('');
   }, [calculationStack, error]);
 
   const handleInputProcess = (value: string | number) => {
