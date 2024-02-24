@@ -25,11 +25,11 @@ export default function Home() {
 					<button className="modifier" onClick={() => clearAll()}>AC</button>
 				</div>
 				<div className="operations subgrid">
-					<button className="operation" onClick={()=>divide()}>/</button>
-					<button className="operation" onClick={()=>multiply()}>X</button>
-					<button className="operation" onClick={()=>subtract()}>-</button>
-					<button className="operation" onClick={()=>add()}>+</button>
-					<button className="operation" onClick={()=>calculate()}>=</button>
+					<button className="operation" onClick={()=> divide()}>/</button>
+					<button className="operation" onClick={()=> multiply()}>X</button>
+					<button className="operation" onClick={()=> subtract()}>-</button>
+					<button className="operation" onClick={()=> add()}>+</button>
+					<button className="operation" onClick={()=> calculate()}>=</button>
 				</div>
 			</div>
 		</>
