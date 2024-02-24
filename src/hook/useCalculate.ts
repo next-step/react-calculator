@@ -2,8 +2,8 @@ import { calculrate, isNumberLengthValidate, isOperatorValidate } from "@/util";
 import { useState } from "react";
 
 const initialState = {
-  prev: "",
-  next: "",
+  first: "",
+  second: "",
   operator: "",
   display: "",
   computed: 0,
@@ -11,10 +11,10 @@ const initialState = {
 
 const useCalculate = () => {
   const [calculrateState, setCalculrateState] = useState(initialState);
-  const { prev, next, operator, display, computed } = calculrateState;
+  const { first, second, operator, display, computed } = calculrateState;
 
   const handleOperation = (operation: string) => {
-    if (isOperatorValidate(prev)) {
+    if (isOperatorValidate(first)) {
       setCalculrateState((prev) => ({
         ...prev,
         operator: operation,
@@ -24,7 +24,7 @@ const useCalculate = () => {
   };
 
   const handleCalculate = () => {
-    const computed = calculrate(prev, next, operator);
+    const computed = calculrate({ first, second, operator });
     setCalculrateState({ ...initialState, computed });
   };
 
@@ -33,19 +33,19 @@ const useCalculate = () => {
       setCalculrateState(initialState);
     }
 
-    if (!operator && isNumberLengthValidate(prev)) {
-      setCalculrateState((previous) => ({
-        ...previous,
-        prev: prev + digit,
+    if (!operator && isNumberLengthValidate(first)) {
+      setCalculrateState((prev) => ({
+        ...prev,
+        first: first + digit,
         display: display + digit,
       }));
       return;
     }
 
-    if (operator && isNumberLengthValidate(next)) {
-      setCalculrateState((previous) => ({
-        ...previous,
-        next: next + digit,
+    if (operator && isNumberLengthValidate(second)) {
+      setCalculrateState((prev) => ({
+        ...prev,
+        second: second + digit,
         display: display + digit,
       }));
       return;

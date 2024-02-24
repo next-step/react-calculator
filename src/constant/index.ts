@@ -5,6 +5,7 @@ export const OPERATIONS = {
   MINUS: "+",
 };
 export const EQUAL = "=";
+
 export const CALCULATOR_MAX_DIGIT = 9;
 
 export const MODIFIER = "AC";

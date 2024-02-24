@@ -2,8 +2,8 @@ import { ERROR_INFINITY } from "@/constant";
 
 interface CalculateDisplay {
   calculrateState: {
-    prev: string;
-    next: string;
+    first: string;
+    second: string;
     operator: string;
     computed: number;
     display: string;

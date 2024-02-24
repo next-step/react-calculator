@@ -1,36 +1,33 @@
 import {
-  ERROR_INFINITY,
   NUMBER_LENGTH,
   OPERATOR_VALIDATE_MESSAGE,
   VALIDATE_MESSAGE,
 } from "@/constant";
+import { CalculateParams, OperationKeyType } from "@/type";
 
-export const isOperatorValidate = (data: any) => {
+export const isOperatorValidate = (data: string) => {
   if (!data) {
     alert(OPERATOR_VALIDATE_MESSAGE);
     return false;
   }
   return true;
 };
-export const isNumberLengthValidate = (number: any) => {
-  if (String(number).length >= NUMBER_LENGTH) {
+
+export const isNumberLengthValidate = (data: string) => {
+  if (data.length >= NUMBER_LENGTH) {
     alert(VALIDATE_MESSAGE);
     return false;
   }
   return true;
 };
 
-type OperatiorType = {
-  [key: string]: number;
-};
-
-export const calculrate = (prev: string, next: string, operate: string) => {
-  const result: OperatiorType = {
-    "+": Number(prev) + Number(next),
-    "-": Number(prev) - Number(next),
-    "/": Number(prev) / Number(next),
-    X: Number(prev) * Number(next),
+export const calculrate = ({ first, second, operator }: CalculateParams) => {
+  const result: OperationKeyType = {
+    "+": Number(first) + Number(second),
+    "-": Number(first) - Number(second),
+    "/": Number(first) / Number(second),
+    X: Number(first) * Number(second),
   };
 
-  return result[operate];
+  return result[operator];
 };

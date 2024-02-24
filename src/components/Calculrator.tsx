@@ -12,6 +12,7 @@ const Calculrator = () => {
     reset,
     calculrateState,
   } = useCalculate();
+
   return (
     <div className="calculator">
       <CalculateDisplay calculrateState={calculrateState} />
