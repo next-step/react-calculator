@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from 'react';
-import { Operators, operations } from '../../../constants';
+import { NUMBER_MAX_LENGTH, Operators } from '../../../constants';
 
 export const useCalculate = () => {
   const [operand, setOperand] = useState<[number, number]>([0, 0]);
@@ -30,12 +30,20 @@ export const useCalculate = () => {
     const isFirstOperandInput = !operand[1] && !operator;
     if (isFirstOperandInput) {
       const value = operand[0] + digit;
+      if (value.length > NUMBER_MAX_LENGTH) {
+        alert('숫자는 3자리까지만 입력 가능합니다.');
+        return;
+      }
 
       setOperand([Number(value), operand[1]]);
     }
 
     if (!isFirstOperandInput) {
       const value = operand[1] + digit;
+      if (value.length > NUMBER_MAX_LENGTH) {
+        alert('숫자는 3자리까지만 입력 가능합니다.');
+        return;
+      }
 
       setOperand([operand[0], Number(value)]);
     }
