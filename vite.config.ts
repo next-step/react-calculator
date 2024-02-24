@@ -7,6 +7,8 @@ export default defineConfig({
     alias: {
       data: "/src/data",
       components: "/src/components",
+      context: "/src/context",
+      utils: "/src/utils",
     },
   },
 });
