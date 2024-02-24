@@ -132,4 +132,16 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(global.alert).toHaveBeenCalledWith('숫자를 입력해 주세요.');
 		});
 	});
+
+	describe('초기화 테스트', () => {
+		it('AC를 입력하면 display가 0으로 초기화된다.', () => {
+			const result = enterOperators(['3', '+']);
+
+			act(() => {
+				result.current.clear();
+			});
+
+			expect(result.current.display).toBe('0');
+		});
+	});
 });
