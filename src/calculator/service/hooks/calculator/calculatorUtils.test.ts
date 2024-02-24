@@ -49,13 +49,18 @@ describe("계산기 유틸리티 함수 테스트", () => {
 	});
 
 	describe("performCalculation 함수 검증", () => {
-		it("주어진 파싱된 표현식에 대한 계산을 올바르게 수행한다", () => {
-			// Given: '10 + 20' 표현식이 주어졌을 때
-			// When: 계산을 수행했을 때
-			// Then: 결과값으로 30이 반환되어야 한다
-			receiver.setInput("0"); // 리시버를 0으로 초기화
-			const result = performCalculation(receiver, ["10", "+", "20"]);
-			expect(result).toBe(30);
+		it.each([
+			["10+20", 30],
+			["10-20", -10],
+			["-1/1", -1],
+			["0/1", 0],
+			["1/0", "오류"],
+			["1X2", 2],
+			["2X3", 6]
+		])("표현식 '%s'의 계산 결과는 %s이다", (expression, expected) => {
+			const parsedExpression = parseFourBasicOperationsExpression(expression);
+			const result = performCalculation(receiver, parsedExpression);
+			expect(result).toBe(expected);
 		});
 	});
 
