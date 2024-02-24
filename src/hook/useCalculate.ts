@@ -11,7 +11,7 @@ const initialState = {
 
 const useCalculate = () => {
   const [calculrateState, setCalculrateState] = useState(initialState);
-  const { first, second, operator, display, computed } = calculrateState;
+  const { first, second, operator, display } = calculrateState;
 
   const handleOperation = (operation: string) => {
     if (isOperatorValidate(first)) {
@@ -29,16 +29,12 @@ const useCalculate = () => {
   };
 
   const handleDigit = (digit: number) => {
-    if (computed) {
-      setCalculrateState(initialState);
-    }
-
     if (!operator && isNumberLengthValidate(first)) {
-      setCalculrateState((prev) => ({
-        ...prev,
+      setCalculrateState({
+        ...initialState,
         first: first + digit,
         display: display + digit,
-      }));
+      });
       return;
     }
 

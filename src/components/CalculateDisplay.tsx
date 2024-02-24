@@ -13,6 +13,7 @@ interface CalculateDisplay {
 const CalculateDisplay = ({ calculrateState }: CalculateDisplay) => {
   const { display, computed } = calculrateState;
   const result = computed === Infinity ? ERROR_INFINITY : Math.floor(computed);
+
   return <h1 id="total">{result || display || 0}</h1>;
 };
 
