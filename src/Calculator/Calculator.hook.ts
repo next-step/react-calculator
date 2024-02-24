@@ -6,7 +6,7 @@ import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 export const useCalculator = ({
   maxNumberLength = DEFAULT_MAX_NUMBER_LENGTH,
 }: UseCalculatorProps) => {
-  const [result, setResult] = useState(0)
+  const [result, setResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
   const [operation, setOperation] = useState<OPERATION | ''>('')
   const [rightOperand, setRightOperand] = useState('')
@@ -15,7 +15,7 @@ export const useCalculator = ({
     : `${leftOperand}${operation}${rightOperand}`
 
   const initialize = () => {
-    setResult(0)
+    setResult('0')
     setLeftOperand('')
     setOperation('')
     setRightOperand('')
@@ -56,7 +56,16 @@ export const useCalculator = ({
       }),
     )
 
-    setResult(currentResult)
+    if (currentResult === Infinity || currentResult === -Infinity) {
+      setResult('오류')
+      setLeftOperand('')
+      setOperation('')
+      setRightOperand('')
+
+      return
+    }
+
+    setResult(String(currentResult))
     setLeftOperand(String(currentResult))
     setOperation('')
     setRightOperand('')
