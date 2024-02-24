@@ -34,7 +34,7 @@ export const useCalculator = () => {
       return;
     }
 
-    if (value === ControlAction.Clear) {
+    if (value === ControlAction.AllClear) {
       handleClear();
       return;
     }

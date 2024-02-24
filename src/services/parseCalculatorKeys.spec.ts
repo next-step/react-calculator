@@ -8,7 +8,7 @@ describe('parseCalculatorKeys', () => {
       { type: CalculatorKeyType.DigitKey, value: 1, label: '1' },
       { type: CalculatorKeyType.DigitKey, value: 2, label: '2' },
       { type: CalculatorKeyType.OperatorKey, value: Operator.Add, label: '+' },
-      { type: CalculatorKeyType.AllClearKey, value: ControlAction.Clear, label: 'AC' },
+      { type: CalculatorKeyType.AllClearKey, value: ControlAction.AllClear, label: 'AC' },
     ];
     const result = parseCalculatorKeys(keys);
     expect(result).toEqual({
@@ -17,7 +17,7 @@ describe('parseCalculatorKeys', () => {
         { type: CalculatorKeyType.DigitKey, value: 2, label: '2' },
       ],
       operatorKey: [{ type: CalculatorKeyType.OperatorKey, value: Operator.Add, label: '+' }],
-      allClearKey: [{ type: CalculatorKeyType.AllClearKey, value: ControlAction.Clear, label: 'AC' }],
+      allClearKey: [{ type: CalculatorKeyType.AllClearKey, value: ControlAction.AllClear, label: 'AC' }],
     });
   });
 });

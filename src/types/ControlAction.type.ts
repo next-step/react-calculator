@@ -1,4 +1,4 @@
 export enum ControlAction {
-  Clear = 'AC',
+  AllClear = 'AC',
   Result = '=',
 }

@@ -19,7 +19,7 @@ export type CalculatorKeyMapping = {
 type CalculatorKeyValueMapping = {
   [CalculatorKeyType.DigitKey]: Digit;
   [CalculatorKeyType.OperatorKey]: Operator | ControlAction.Result;
-  [CalculatorKeyType.AllClearKey]: ControlAction.Clear;
+  [CalculatorKeyType.AllClearKey]: ControlAction.AllClear;
 };
 
 export type ValueForType<KeyType extends CalculatorKeyType> = CalculatorKeyValueMapping[KeyType];

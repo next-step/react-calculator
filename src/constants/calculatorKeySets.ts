@@ -1,27 +1,28 @@
 import { CalculatorKeyType } from '@/components';
 import { ControlAction, Digit, Operator } from '@/types';
+import { generateCalculatorKey } from '@/services';
 
 const DIGITS = [
-  { type: CalculatorKeyType.DigitKey, value: Digit.Nine, label: '9' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Eight, label: '8' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Seven, label: '7' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Six, label: '6' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Five, label: '5' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Four, label: '4' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Three, label: '3' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Two, label: '2' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.One, label: '1' },
-  { type: CalculatorKeyType.DigitKey, value: Digit.Zero, label: '0' },
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Nine, '9'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Eight, '8'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Seven, '7'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Six, '6'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Five, '5'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Four, '4'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Three, '3'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Two, '2'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.One, '1'),
+  generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Zero, '0'),
 ];
 
 const OPERATORS = [
-  { type: CalculatorKeyType.OperatorKey, value: Operator.Divide, label: '/' },
-  { type: CalculatorKeyType.OperatorKey, value: Operator.Multiply, label: 'X' },
-  { type: CalculatorKeyType.OperatorKey, value: Operator.Subtract, label: '-' },
-  { type: CalculatorKeyType.OperatorKey, value: Operator.Add, label: '+' },
-  { type: CalculatorKeyType.OperatorKey, value: ControlAction.Result, label: '=' },
+  generateCalculatorKey(CalculatorKeyType.OperatorKey, Operator.Divide, '/'),
+  generateCalculatorKey(CalculatorKeyType.OperatorKey, Operator.Multiply, 'X'),
+  generateCalculatorKey(CalculatorKeyType.OperatorKey, Operator.Subtract, '-'),
+  generateCalculatorKey(CalculatorKeyType.OperatorKey, Operator.Add, '+'),
+  generateCalculatorKey(CalculatorKeyType.OperatorKey, ControlAction.Result, '='),
 ];
 
-const CONTROL_ACTIONS = [{ type: CalculatorKeyType.AllClearKey, value: ControlAction.Clear, label: 'AC' }];
+const CONTROL_ACTIONS = [generateCalculatorKey(CalculatorKeyType.AllClearKey, ControlAction.AllClear, 'AC')];
 
 export const CALCULATOR_KEY_SETS = [...DIGITS, ...OPERATORS, ...CONTROL_ACTIONS];
