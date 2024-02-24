@@ -93,8 +93,7 @@ describe("계산기 기능 테스트", () => {
 	});
 
 	it("AC(All Clear)버튼을 누르면 0으로 초기화한다", () => {
-		// Given: 사용자가 임의의 연산을 수행했다고 가정할 때
-		// 예: 7 + 2의 연산을 가정합니다.
+		// Given: 사용자가 7, 2를 입력했을 때
 		invoker.invoke(new AddCommand(receiver, 7));
 		invoker.invoke(new AddCommand(receiver, 2));
 
