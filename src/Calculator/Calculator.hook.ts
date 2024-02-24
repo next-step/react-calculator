@@ -48,11 +48,13 @@ export const useCalculator = ({
       return
     }
 
-    const currentResult = calculate({
-      leftOperand: Number(leftOperand),
-      operation,
-      rightOperand: Number(rightOperand),
-    })
+    const currentResult = Math.floor(
+      calculate({
+        leftOperand: Number(leftOperand),
+        operation,
+        rightOperand: Number(rightOperand),
+      }),
+    )
 
     setResult(currentResult)
     setLeftOperand(String(currentResult))
