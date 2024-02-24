@@ -6,7 +6,7 @@ type ArithmeticOperators = Exclude<Operators, Operators.EQUALS>;
 const operations: {
   [key in ArithmeticOperators]: (a: number, b: number) => number;
 } = {
-  [Operators.DIVIDE]: (a: number, b: number) => a / b,
+  [Operators.DIVIDE]: (a: number, b: number) => Math.floor(a / b),
   [Operators.MULTIPLY]: (a: number, b: number) => a * b,
   [Operators.SUBTRACT]: (a: number, b: number) => a - b,
   [Operators.ADD]: (a: number, b: number) => a + b,
