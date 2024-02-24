@@ -6,14 +6,24 @@ function App() {
     const [operationType, setOperationType] = useState('');
     const [secondNumber, setSecondNumber] = useState('');
 
+    const getValidateNumber = (prevNumber, nowClickNumber) => {
+        if (prevNumber.length >= 3) {
+            alert('숫자는 세 자리까지만 입력 가능합니다!');
+            return prevNumber;
+        }
+
+        return String(Number(prevNumber + nowClickNumber));
+    };
+
     const onClickDigitButton = (e) => {
         const nowClickValue = e.target.value;
         if (operationType === '') {
-            setFirstNumber(Number(firstNumber + nowClickValue));
+            setFirstNumber(getValidateNumber(firstNumber, nowClickValue));
         } else {
-            setSecondNumber(Number(secondNumber + nowClickValue));
+            setSecondNumber(getValidateNumber(secondNumber, nowClickValue));
         }
     };
+
     const onClickEqualOperationButton = () => {
         const num1 = Number(firstNumber);
         const num2 = Number(secondNumber);
