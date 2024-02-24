@@ -1,30 +1,27 @@
 import { useCallback, useMemo, useState } from 'react'
+import { Operation } from '../constants/operation'
 
-export enum Operation {
-  SUM = '+',
-  MINUS = '-',
-  MULTIPLE = 'X',
-  DIVIDED = '/',
-  EQUAL = '=',
-}
-export const regx = /[+\-x/]/gi
+const regx = /[+\-x/]/gi
 
 const useCalculator = () => {
   const [totalValue, setTotalValue] = useState('0') //현재
 
-  const checkOperator = useMemo(() => {
+  const checkOperator = () => {
     const lastIndex = totalValue.length
     return totalValue === '0' || totalValue.charAt(lastIndex - 1).match(regx)
-  }, [totalValue])
+  }
 
-  const limitDigitLength = useMemo(() => {
+  const limitDigitLength = () => {
     const splitTotal = totalValue.split(regx)
 
-    if (splitTotal.length > 3) return splitTotal
-    else return splitTotal[splitTotal.length - 1]
-  }, [totalValue])
+    if (splitTotal.length > 3) {
+      return splitTotal
+    } else {
+      return splitTotal[splitTotal.length - 1]
+    }
+  }
 
-  const calculator = useCallback((opr: string, val: string[]) => {
+  const calculator = (opr: string, val: string[]) => {
     switch (opr) {
       case '/':
         return Math.floor(Number(val[0]) / Number(val[1]))
@@ -38,37 +35,36 @@ const useCalculator = () => {
       default:
         break
     }
-  }, [])
+  }
 
-  const operation = useCallback(
-    (operation: Operation) => {
-      if (checkOperator) return alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!')
+  const operation = (operation: Operation) => {
+    if (checkOperator()) return alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!')
+    // 리뷰 코멘트 한번 더 확인해보기!
+    const findChar = totalValue.match(regx)
+    const splitTotal = totalValue.split(regx).splice(0, 2)
 
-      const findChar = totalValue.match(regx)
-      const splitTotal = totalValue.split(regx).splice(0, 2)
+    if (operation === Operation.EQUAL) {
+      if (!findChar) return
 
-      if (operation === Operation.EQUAL) {
-        if (!findChar) return
-        setTotalValue(String(calculator(findChar[0], splitTotal)))
+      setTotalValue(String(calculator(findChar[0], splitTotal)))
+    } else {
+      setTotalValue((state) => state + operation)
+    }
+  }
+
+  const onDigitClick = (value: number) => {
+    const temp = totalValue
+
+    if (limitDigitLength().length < 3) {
+      if (temp !== '0') {
+        setTotalValue(temp + String(value))
       } else {
-        setTotalValue((state) => state + operation)
+        setTotalValue(String(value))
       }
-    },
-    [calculator, checkOperator, totalValue]
-  )
-
-  const onDigitClick = useCallback(
-    (value: number) => {
-      const temp = totalValue
-
-      if (limitDigitLength.length < 3) {
-        temp !== '0' ? setTotalValue(temp + String(value)) : setTotalValue(String(value))
-      } else {
-        alert('숫자는 세 자리까지만 입력 가능합니다.')
-      }
-    },
-    [limitDigitLength, totalValue]
-  )
+    } else {
+      alert('숫자는 세 자리까지만 입력 가능합니다.')
+    }
+  }
 
   return [totalValue, setTotalValue, operation, onDigitClick] as const
 }
