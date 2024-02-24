@@ -46,11 +46,19 @@ export default function useCalculator() {
 			return prevState;
 		}
 
-		const operations = prevState.split(/([+\-x/])/);
+		const operations = prevState.split(/([+\-x/])/).filter(Boolean);
 
-		let result = parseInt(operations[0]);
+		let startIndex = 1;
+		let result: number;
 
-		for (let i = 1; i < operations.length; i += 2) {
+		if (operations[0] === '-' && operations.length > 1) {
+			result = -parseInt(operations[1]);
+			startIndex = 2;
+		} else {
+			result = parseInt(operations[0]);
+		}
+
+		for (let i = startIndex; i < operations.length; i += 2) {
 			const operator = operations[i];
 			const nextValue = parseInt(operations[i + 1]);
 
