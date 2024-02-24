@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from 'react';
-import { Operators } from '../../../constants';
+import { Operators, operations } from '../../../constants';
 
 export const useCalculate = () => {
   const [operand, setOperand] = useState<[number, number]>([0, 0]);
@@ -11,15 +11,16 @@ export const useCalculate = () => {
   };
 
   const handleOperator = (e: MouseEvent<HTMLButtonElement>) => {
-    const { textContent: operator } = e.currentTarget;
-    if (!operator) return;
+    const { textContent: targetOperator } = e.currentTarget;
+    if (!targetOperator) return;
 
-    if (operator === Operators.EQUALS) {
-      // 연산
+    if (targetOperator === Operators.EQUALS) {
+      const result = operations[operator!](operand[0], operand[1]);
+      setOperand([result, 0]);
+      setOperator(null);
       return;
     }
-
-    setOperator(operator as Operators);
+    setOperator(targetOperator as Operators);
   };
 
   const handleDigit = (e: MouseEvent<HTMLButtonElement>) => {
