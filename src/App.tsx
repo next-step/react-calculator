@@ -1,18 +1,12 @@
-import { useState } from 'react'
 import { ARITHMETIC_OPERATORS, ASSIGN_OPERATOR, OPERANDS, CLEAR_MODIFIER } from '@/constants'
-import Validator from '@/lib/validator'
-import Calculator from '@/lib/calculator'
-
-const INITIAL_EXPRESSION = ''
+import { useExpressionState } from '@/hooks/use-expression-state'
 
 function App() {
-  const [expression, setExpression] = useState(INITIAL_EXPRESSION)
+  const [expression, updateExpression, calculateExpression, clearExpression] = useExpressionState()
 
   const handleClickOperand = (operand: string) => () => {
     try {
-      const derivedExpression = expression + operand
-      new Validator(derivedExpression).validateExpression()
-      setExpression(derivedExpression)
+      updateExpression(operand)
     } catch (error) {
       alert((error as Error)?.message)
     }
@@ -20,25 +14,23 @@ function App() {
 
   const handleClickArithmeticOperator = (operator: string) => () => {
     try {
-      const derivedExpression = expression + operator
-      new Validator(derivedExpression).validateExpression()
-      setExpression(derivedExpression)
+      updateExpression(operator)
     } catch (error) {
       alert((error as Error)?.message)
     }
   }
 
   const handleClickAssignOperator = () => {
-    setExpression(String(new Calculator(expression).calculate()))
+    calculateExpression()
   }
 
   const handleClickClearModifer = () => {
-    setExpression(INITIAL_EXPRESSION)
+    clearExpression()
   }
 
   return (
     <div className="calculator">
-      <div id="total">{expression === INITIAL_EXPRESSION ? '0' : expression}</div>
+      <div id="total">{expression}</div>
       <div className="modifiers subgrid">
         <button onClick={handleClickClearModifer}>{CLEAR_MODIFIER}</button>
       </div>
@@ -50,7 +42,7 @@ function App() {
         ))}
         <button onClick={handleClickAssignOperator}>{ASSIGN_OPERATOR}</button>
       </div>
-      <div className="digits">
+      <div className="digits flex">
         {OPERANDS.map(operand => (
           <button key={operand} onClick={handleClickOperand(operand)}>
             {operand}
