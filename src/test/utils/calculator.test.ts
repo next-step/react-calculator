@@ -177,4 +177,55 @@ describe('Calculator', () => {
       expect(calculator.getValue()).toBe(2)
     })
   })
+
+  describe('division()', () => {
+    test.each([
+      [1,2],
+      [10, 2],
+      [100, 2],
+      [1, -1]
+    ])('2개의 숫자를 인자로 받고 나눗셈한 결과를 반환한다.', (first, second) => {
+      // Given, When
+      calculator.division(first, second)
+
+      // Then
+      expect(calculator.getValue()).toBe(Math.trunc(first / second))
+    });
+
+    test.each([
+      ['1', 2],
+      [NaN, 2],
+      [null ,2],
+      [undefined, 2],
+      [Symbol(1), 2]
+    ])('인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.', (first: any, second: any) => {
+      // When, Then
+      expect(() => calculator.division(first, second)).toThrow(
+        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+      )
+    });
+
+    test('계산 결과 값이 Infinity일 경우, 오류를 발생시킨다.', () => {
+      // Given
+      const first = Infinity
+      const second = 2
+
+      // When, Then
+      expect(() => calculator.division(first, second)).toThrow(
+        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+      )
+    })
+
+    test('계산 결과에 소수점 값이 포함되어 있는 경우, 소수점 이하는 버림하여 반환한다.', () => {
+      // Given
+      const first = 1.1
+      const second = 2
+
+      // When
+      calculator.division(first, second)
+
+      // Then
+      expect(calculator.getValue()).toBe(0)
+    })
+  })
 })
