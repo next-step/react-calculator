@@ -2,27 +2,50 @@ import { Button } from "./components/button";
 import { Layout } from "./components/layout";
 import { TotalDisplay } from "./components/total-display";
 import { Operators } from "./constants";
+import { useCalculator } from "./hooks/use-calculator";
 
-export const App = () => {
+export const CalculatorApp = () => {
+  const {
+    displayText,
+    handleCalculate,
+    handleNumberInput,
+    handleReset,
+    handleSetOperator,
+  } = useCalculator();
+
   return (
     <Layout>
-      <TotalDisplay>0</TotalDisplay>
+      <TotalDisplay>{displayText}</TotalDisplay>
       <Layout.Digits>
         {Array.from({ length: 10 }, (_, i) => (
-          <Button key={i} variant="digit">
+          <Button key={i} variant="digit" onClick={() => handleNumberInput(i)}>
             {i}
           </Button>
         )).reverse()}
       </Layout.Digits>
       <Layout.Modifiers>
-        <Button variant="modifier">AC</Button>
+        <Button variant="modifier" onClick={handleReset}>
+          AC
+        </Button>
       </Layout.Modifiers>
       <Layout.Operations>
-        <Button variant="operation">{Operators.Divide}</Button>
-        <Button variant="operation">{Operators.Multiply}</Button>
-        <Button variant="operation">{Operators.Minus}</Button>
-        <Button variant="operation">{Operators.Plus}</Button>
-        <Button variant="operation">=</Button>
+        {[
+          Operators.Divide,
+          Operators.Multiply,
+          Operators.Minus,
+          Operators.Plus,
+        ].map((operator) => (
+          <Button
+            key={operator}
+            variant="operation"
+            onClick={() => handleSetOperator(operator)}
+          >
+            {operator}
+          </Button>
+        ))}
+        <Button variant="operation" onClick={handleCalculate}>
+          =
+        </Button>
       </Layout.Operations>
     </Layout>
   );
