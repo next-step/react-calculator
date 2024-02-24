@@ -25,7 +25,7 @@ export const resolveCalculation = (inputStack: CalculatorStackElement[]): string
     return calculateOperation(acc, nextOperand, operation);
   }, firstStackElement);
 
-  if (validator.validInfinity(calculation)) {
+  if (validator.validateInfinity(calculation)) {
     throw new Error(CalculatorError.Infinity);
   }
 
