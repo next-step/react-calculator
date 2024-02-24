@@ -49,7 +49,17 @@ const Calculator = () => {
         }}
       />
       <div className="modifiers subgrid">
-        <button className="modifier">AC</button>
+        <button
+          className="modifier"
+          onClick={() => {
+            setResult(0)
+            setLeftOperand('')
+            setOperation('')
+            setRightOperand('')
+          }}
+        >
+          AC
+        </button>
       </div>
       <OperationButtonList
         onChange={(nextOperation: OPERATION) => {
