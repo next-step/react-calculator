@@ -41,11 +41,19 @@ export const performCalculation = (
 	receiver: CalculatorReceiver,
 	parsedExpression: string[]
 ): string | number => {
-	const total = parseFloat(parsedExpression[0]);
-	receiver.setInput(total.toString());
+	let initialNumberIndex = 0;
+	if (
+		!isFinite(parseFloat(parsedExpression[0])) &&
+		parsedExpression.length > 1
+	) {
+		initialNumberIndex = 1;
+		receiver.setInput(parsedExpression[0] + parsedExpression[1]);
+	} else {
+		receiver.setInput(parsedExpression[0]);
+	}
 
 	let operator: OPERATORS_TYPE = "+";
-	for (let i = 1; i < parsedExpression.length; i++) {
+	for (let i = initialNumberIndex + 1; i < parsedExpression.length; i++) {
 		const val = parsedExpression[i];
 		if (isNaN(parseFloat(val))) {
 			operator = val as OPERATORS_TYPE;
@@ -53,9 +61,9 @@ export const performCalculation = (
 			receiver.calculate(operator, parseFloat(val));
 		}
 	}
-	return receiver.getCurrentValue() === Infinity
-		? "오류"
-		: receiver.getCurrentValue();
+
+	const currentValue = receiver.getCurrentValue();
+	return isFinite(currentValue) ? currentValue : "오류";
 };
 
 export const extractLastOperation = (

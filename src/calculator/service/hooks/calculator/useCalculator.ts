@@ -33,6 +33,12 @@ export const useCalculator = () => {
 			return;
 		}
 
+		// 음수 입력
+		if (expression === "0" && input === "-") {
+			setExpression(input);
+			return;
+		}
+
 		// 연산자 이후 0을 입력하면 0을 제거하고 입력
 		if (expression.slice(-1) === "0" && !isOperator(input)) {
 			setExpression((prev) => prev.slice(0, -1) + input);
@@ -51,13 +57,14 @@ export const useCalculator = () => {
 		if (lastOperation.operator === null) {
 			return receiver.getCurrentValue();
 		}
+
 		return receiver.calculate(lastOperation.operator, lastOperation.number);
 	};
 
 	const calculateAndUpdateLastOperation = () => {
 		const parsedExpression = parseFourBasicOperationsExpression(expression);
 
-		if (parsedExpression.length < 2) {
+		if (parsedExpression.length < 3) {
 			setExpression(repeatLastOperation(lastOperation).toString());
 			return;
 		}
