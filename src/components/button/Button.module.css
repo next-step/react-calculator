@@ -1,0 +1,16 @@
+.button {
+    font-size: 2rem;
+    border: 0.5px solid #98999b;
+}
+
+.basic {
+    background-color: #efefef;
+}
+
+.accent {
+    background-color: orange;
+}
+
+.light {
+    background-color: #d4d4d2;
+}
