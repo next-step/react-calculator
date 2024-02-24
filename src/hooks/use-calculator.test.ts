@@ -57,7 +57,7 @@ describe("useCalculator", () => {
       act(() => result.current.handleNumberInput(4));
       act(() => result.current.handleNumberInput(5));
 
-      expect(result.current.displayText).toBe("1 + 234");
+      expect(result.current.displayText).toBe("1+234");
       expect(window.alert).toHaveBeenCalledWith(Messages.MaxInputLength);
     });
 
@@ -66,7 +66,7 @@ describe("useCalculator", () => {
         act(() => result.current.handleNumberInput(1));
         act(() => result.current.handleSetOperator(Operators.Plus));
 
-        expect(result.current.displayText).toBe("1 +");
+        expect(result.current.displayText).toBe("1+");
       });
     });
 
@@ -84,7 +84,7 @@ describe("useCalculator", () => {
       act(() => result.current.handleSetOperator(Operators.Plus));
       act(() => result.current.handleSetOperator(Operators.Minus));
 
-      expect(result.current.displayText).toBe("1 +");
+      expect(result.current.displayText).toBe("1+");
       expect(window.alert).toHaveBeenCalledWith(Messages.InputOperatorOnce);
     });
   });

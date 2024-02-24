@@ -16,8 +16,8 @@ export const useCalculator = () => {
   const displayText = useMemo(() => {
     let result = firstNum.toString();
 
-    if (operator) result += ` ${operator}`;
-    if (secondNum !== 0) result += ` ${secondNum}`;
+    if (operator) result += `${operator}`;
+    if (secondNum !== 0) result += `${secondNum}`;
 
     return result;
   }, [firstNum, secondNum, operator]);
