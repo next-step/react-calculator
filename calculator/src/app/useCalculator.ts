@@ -33,24 +33,26 @@ const useCalculator = () => {
   
   const add=()=> {
     if (isLastCharOperator()){
-      alert('숫자를 먼저 입력하고 연산자를 입력해주세요! ')
+      alert('숫자를 먼저 입력하고 연산자를 입력해주세요!')
       return 
     }
     setFormula(formula +'+')
     setLastChar('+')
     
   }
+  
   const subtract=()=> {
     if (isLastCharOperator()){
-      alert('숫자를 먼저 입력하고 연산자를 입력해주세요! ')
+      alert('숫자를 먼저 입력하고 연산자를 입력해주세요!')
       return 
     }
     setFormula(formula +'-')
     setLastChar('-')
   }
+
   const multiply=()=> {
     if (isLastCharOperator()){
-      alert('숫자를 먼저 입력하고 연산자를 입력해주세요! ')
+      alert('숫자를 먼저 입력하고 연산자를 입력해주세요!')
       return 
     }
     setFormula(formula +'*')
@@ -59,7 +61,7 @@ const useCalculator = () => {
   }
   const divide=()=> {
     if (isLastCharOperator()){
-      alert('숫자를 먼저 입력하고 연산자를 입력해주세요! ')
+      alert('숫자를 먼저 입력하고 연산자를 입력해주세요!')
       return 
     }
     setFormula(formula +'/')
@@ -84,6 +86,7 @@ const useCalculator = () => {
     setFormula('0')
     setCurrentNumberCount(1)
   }
+  
   return {
     formula,
     number,
