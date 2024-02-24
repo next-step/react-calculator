@@ -41,11 +41,6 @@ export default function useCalculator() {
 	};
 
 	const executeOperation = (prevState: string) => {
-		if (/[+\-x/]$/.test(prevState)) {
-			alert('숫자를 입력해 주세요.');
-			return prevState;
-		}
-
 		const operations = prevState.split(/([+\-x/])/).filter(Boolean);
 
 		let startIndex = 1;
@@ -91,6 +86,11 @@ export default function useCalculator() {
 	};
 
 	const calculate = () => {
+		if (/[+\-x/]$/.test(display)) {
+			alert('숫자를 입력해 주세요.');
+			return;
+		}
+
 		setDisplay(executeOperation);
 	};
 
