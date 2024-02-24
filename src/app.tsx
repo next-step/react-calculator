@@ -1,6 +1,7 @@
 import { Button } from "./components/button";
 import { Layout } from "./components/layout";
 import { TotalDisplay } from "./components/total-display";
+import { Operators } from "./constants";
 
 export const App = () => {
   return (
@@ -17,10 +18,10 @@ export const App = () => {
         <Button variant="modifier">AC</Button>
       </Layout.Modifiers>
       <Layout.Operations>
-        <Button variant="operation">/</Button>
-        <Button variant="operation">X</Button>
-        <Button variant="operation">-</Button>
-        <Button variant="operation">+</Button>
+        <Button variant="operation">{Operators.Divide}</Button>
+        <Button variant="operation">{Operators.Multiply}</Button>
+        <Button variant="operation">{Operators.Minus}</Button>
+        <Button variant="operation">{Operators.Plus}</Button>
         <Button variant="operation">=</Button>
       </Layout.Operations>
     </Layout>
