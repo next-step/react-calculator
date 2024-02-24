@@ -1,46 +1,16 @@
-import KeyButton from './KeyButton';
-import { OperatorType } from '../common/types';
-import { DIGITS, OPERATORS } from '../common/constants';
 import useCalculator from '../hooks/useCalculator';
+import Key from './key/KeyButton';
 
 export default function Calculator() {
   const { num1, num2, operator, inputNumber, clear, inputOperator } = useCalculator();
-
-  const handleClickDigit = (digit: number) => {
-    inputNumber(digit);
-  };
-
-  const handleClickOperation = (operator: OperatorType) => {
-    inputOperator(operator);
-  };
 
   const message = num1 === Infinity ? '오류' : `${num1}${operator ?? ''}${num2 ?? ''}`;
   return (
     <div className="calculator">
       <h1 id="total">{message}</h1>
-      <div className="digits flex">
-        {DIGITS.map(digit => (
-          <KeyButton
-            key={digit}
-            className="digit"
-            label={`${digit}`}
-            onClick={() => handleClickDigit(digit)}
-          />
-        ))}
-      </div>
-      <div className="modifiers subgrid">
-        <KeyButton className="modifier" label="AC" onClick={clear} />
-      </div>
-      <div className="operations subgrid">
-        {OPERATORS.map(operator => (
-          <KeyButton
-            key={operator}
-            className="operation"
-            label={operator}
-            onClick={() => handleClickOperation(operator)}
-          />
-        ))}
-      </div>
+      <Key.Digits onClick={inputNumber} />
+      <Key.Modifiers onClick={clear} />
+      <Key.Operations onClick={inputOperator} />
     </div>
   );
 }
