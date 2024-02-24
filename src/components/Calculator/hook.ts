@@ -129,8 +129,18 @@ export const useCalculator = () => {
     }, '')
   }
 
+  const parseResultWindow = () => {
+    if (showOutput) {
+      const res = getResult()
+
+      return Number.isFinite(res) ? res : '오류'
+    }
+
+    return getUserInputs()
+  }
+
   return {
-    resultWindow: showOutput ? getResult() : getUserInputs(),
+    resultWindow: parseResultWindow(),
     handler: {
       onClickNumber,
       onClickOperator,
