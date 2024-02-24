@@ -1,4 +1,4 @@
-import { resolveCalculation } from '@/utils';
+import { resolveCalculation } from '@/services';
 import { CalculatorError } from '@/types';
 
 it('비어있는 경우 0을 반환한다.', () => {

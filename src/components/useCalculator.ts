@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { CalculatorStackElement, Digit, Operation } from '@/types';
 import { ERROR_MESSAGES } from '@/constants';
-import { typeChecker, resolveCalculation } from '@/utils';
+import { typeChecker } from '@/utils';
+import { resolveCalculation } from '@/services';
 
 const MAX_DIGIT_LENGTH = 3;
 const INITIAL_CALCULATION_STACK: CalculatorStackElement[] = [];
