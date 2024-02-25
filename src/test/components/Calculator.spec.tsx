@@ -55,7 +55,7 @@ describe('Calculator Spec', () => {
     // Given
     const { user } = render(<Calculator/>)
     const NumberButtons = getSortedNumberButtons()
-    const MultiplyButton = screen.getByRole('button', { name: 'x'})
+    const MultiplyButton = screen.getByRole('button', { name: 'X'})
     const SubmitButton = screen.getByRole('button', { name: '='})
     const ResultInput = screen.getByRole('textbox')
 

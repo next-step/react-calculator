@@ -14,34 +14,30 @@ export const Calculator = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-    <input id="result" type="text" value={formula || 0} readOnly/>
-    <div>
-      <button type="button" onClick={clearFormula}>AC</button>
-      <button type="button" onClick={handleClickOperation('division')}>/</button>
-    </div>
-    <div>
-      {[7, 8, 9].map(num => (
-        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
-      ))}
-      <button type="button" onClick={handleClickOperation('multiply')}>x</button>
-    </div>
-    <div>
-      {[4, 5, 6].map(num => (
-        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
-      ))}
-      <button type="button" onClick={handleClickOperation('subtract')}>-</button>
-    </div>
-    <div>
-      {[1, 2, 3].map(num => (
-        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
-      ))}
-      <button type="button" onClick={handleClickOperation('sum')}>+</button>
-    </div>
-    <div>
-      <button type="button" onClick={handleClickNumber(0)}>0</button>
-      <button type="submit">=</button>
-    </div>
-  </form>
+    <form onSubmit={handleSubmit} className="calculator">
+      <input id="total" type="text" value={formula || 0} readOnly/>
+      <div className="digits flex">
+        {
+          Array.from({ length: 10 })
+          .map((_, idx) => idx)
+          .reverse()
+          .map((num) => (
+            <button key={`num-${num}`} className="digit" type="button" onClick={handleClickNumber(num)}>
+              {num}
+            </button>
+          ))
+        }
+      </div>
+      <div className="modifiers subgrid">
+        <button type="button" className="modifier" onClick={clearFormula}>AC</button>
+      </div>
+      <div className="operations subgrid">
+        <button type="button" className="operation" onClick={handleClickOperation('division')}>/</button>
+        <button type="button" className="operation" onClick={handleClickOperation('multiply')}>X</button>
+        <button type="button" className="operation" onClick={handleClickOperation('subtract')}>-</button>
+        <button type="button" className="operation" onClick={handleClickOperation('sum')}>+</button>
+        <button type="submit" className="operation" id="equal-sign" >=</button>
+      </div>
+    </form>
   )
 }
