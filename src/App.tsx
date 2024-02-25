@@ -1,7 +1,7 @@
 import { useCalculator } from "./calculator/service/hooks/calculator/useCalculator";
 import Calculator from "./calculator/ui/Calculator";
-import "./css/index.css";
 import "./css/reset.css";
+import "./css/index.css";
 
 function App() {
 	const { expression, handleInput, reset, calculateAndUpdateLastOperation } =
