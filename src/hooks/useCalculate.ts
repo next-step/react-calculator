@@ -6,11 +6,7 @@ import {
   MAX_DIGIT_LENGTH,
   MESSAGES,
 } from '../constant/calculator';
-
-type Operands = {
-  firstValue: string;
-  secondValue: string;
-};
+import { Operands } from '../types/calculate';
 
 type State = {
   operation: string;
@@ -42,7 +38,7 @@ const ACTION_TYPES = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case ACTION_TYPES.FIRST_CLICK: {
-      const digit = action.payload.digit;
+      const digit = action.payload?.digit;
       return {
         ...state,
         operands: {
@@ -52,7 +48,7 @@ const reducer = (state: State, action: Action) => {
       };
     }
     case ACTION_TYPES.FIRST_DIGITS: {
-      const digit = action.payload.digit;
+      const digit = action.payload?.digit;
       return {
         ...state,
         operands: {
@@ -63,7 +59,7 @@ const reducer = (state: State, action: Action) => {
     }
 
     case ACTION_TYPES.SECOND_DIGITS: {
-      const digit = action.payload.digit;
+      const digit = action.payload?.digit;
       return {
         ...state,
         operands: {
@@ -74,7 +70,7 @@ const reducer = (state: State, action: Action) => {
     }
 
     case ACTION_TYPES.CALCULATE: {
-      const total = action.payload.total;
+      const total = action.payload?.total;
       return {
         operation: INITIAL_VALUE,
         operands: {
@@ -85,7 +81,7 @@ const reducer = (state: State, action: Action) => {
     }
 
     case 'update-operation': {
-      const operation = action.payload.operation;
+      const operation = action.payload?.operation;
       return {
         ...state,
         operation,

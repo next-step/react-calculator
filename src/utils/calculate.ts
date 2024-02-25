@@ -1,7 +1,4 @@
-type Operands = {
-  firstValue: string;
-  secondValue: string;
-};
+import { Operands } from '../types/calculate';
 
 const calculate = (operation: string, operands: Operands) => {
   const { firstValue, secondValue } = operands;
