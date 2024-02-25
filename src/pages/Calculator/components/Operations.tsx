@@ -1,15 +1,15 @@
 import { MouseEvent } from 'react';
-import { Operators } from '../../../constants';
+import { OPERATORS } from '../../../constants';
 
 interface Props {
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleOperator: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Operations({ onClick }: Props) {
+export default function Operations({ handleOperator }: Props) {
   return (
     <div className='operations subgrid'>
-      {Object.values(Operators).map((operator) => (
-        <button key={operator} className='opration' onClick={onClick}>
+      {Object.values(OPERATORS).map((operator) => (
+        <button key={operator} className='opration' onClick={handleOperator}>
           {operator}
         </button>
       ))}

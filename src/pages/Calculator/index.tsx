@@ -11,9 +11,9 @@ export default function Calculator() {
   return (
     <div className='calculator'>
       <Display operand={operand} operator={operator} error={error} />
-      <Digits onClick={handleDigit} />
-      <Modifier onClick={clear} />
-      <Operations onClick={handleOperator} />
+      <Digits handleDigit={handleDigit} />
+      <Modifier handleClear={clear} />
+      <Operations handleOperator={handleOperator} />
     </div>
   );
 }
