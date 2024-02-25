@@ -9,25 +9,29 @@ export const useCalculator = () => {
   const calculator = new CalculatorApp();
   const [formula, setFormula] = useState('');
 
-  const performCalculation = () => {
-    const tokens = formula.split(REGEXP.OPERATOR);
+  const tokenizeFormula = () => formula.split(REGEXP.OPERATOR);
+
+  const performOperation = (currentValue: number, nextValue: number, operator: Operator) => {
     const operations = {
       '+': calculator.sum,
       '-': calculator.subtract,
       'x': calculator.multiply,
-      '/': calculator.division
+      '/': calculator.division,
     };
 
-    let index = 0;
-    let currentValue = Number(tokens[index]);
+    operations[operator].call(calculator, currentValue, nextValue)
+    return calculator.getValue();
+  };
 
-    while (index < tokens.length - 1) {
-      const operator = tokens[index + 1] as Operator
-      const nextValue = Number(tokens[index + 2]);
+  const performCalculation = () => {
+    const tokens = tokenizeFormula();
+    let currentValue = Number(tokens[0]);
 
-      operations[operator].call(calculator, currentValue, nextValue);
-      currentValue = calculator.getValue();
-      index += 2;
+    for (let index = 1; index < tokens.length; index += 2) {
+      const operator = tokens[index] as Operator;
+      const nextValue = Number(tokens[index + 1]);
+
+      currentValue = performOperation(currentValue, nextValue, operator);
     }
 
     return currentValue;
@@ -45,8 +49,8 @@ export const useCalculator = () => {
   };
 
   const appendNumber = (num: number) => {
-    const currentFormula = formula.startsWith('0') && formula.length === 1 ? '' : formula;
-    const newFormula = `${currentFormula}${num}`;
+    const isStartZero = formula.startsWith('0') && formula.length === 1
+    const newFormula = isStartZero ? num.toString() : `${formula}${num}`;
 
     if (REGEXP.MAX_LENGTH_NUMBER.test(newFormula)) {
       alert(ERROR_MESSAGE.MAX_LENGTH_NUMBER);
