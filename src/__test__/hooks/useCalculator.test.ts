@@ -3,6 +3,7 @@ import { useCalculator } from '../../hooks/useCalculator';
 import { beforeEach, describe, expect, test } from 'vitest';
 import { BUTTON } from '../../components/button/button.constant';
 import { handleActions } from '../utils/handleActions';
+import { MESSAGE } from '../../constants/message';
 
 describe('useCalculator 테스트', () => {
   let calculator: RenderResult<ReturnType<typeof useCalculator>>;
@@ -36,30 +37,34 @@ describe('useCalculator 테스트', () => {
     );
   });
 
-  describe('handleDigit 테스트', () => {
+  describe('숫자 입력(handleDigit) 테스트', () => {
     describe('x 입력 테스트', () => {
       /**
        * handleDigit을 사용하여 x를 입력하면, x는 해당 숫자로 설정되어야 한다.
        * 연속적으로 입력이 들어올 경우, 기존의 값에 10을 곱한 후 입력값을 더해야 한다.
        */
       const testCases = [
-        { input1: 1, input2: null, expected: 1 },
-        { input1: null, input2: 8, expected: 8 },
-        { input1: 1, input2: 0, expected: 10 },
-        { input1: 0, input2: 5, expected: 5 },
-        { input1: 3, input2: 4, expected: 34 },
+        { input1: 1, input2: null, input3: 1, expected: 11 },
+        { input1: null, input2: 8, input3: 1, expected: 81 },
+        { input1: 1, input2: 0, input3: 3, expected: 103 },
+        { input1: 0, input2: 5, input3: 4, expected: 54 },
+        { input1: 3, input2: 4, input3: 0, expected: 340 },
+        { input1: 9, input2: 9, input3: 9, expected: 999 },
       ];
 
       test.each(testCases)(
-        'handleDigit으로 $input1와 $input2를 입력하면, x는 $expected 이어야 한다',
-        ({ input1, input2, expected }) => {
+        'handleDigit으로 $input1, $input2, $input3를 입력하면, x는 $expected 이어야 한다',
+        ({ input1, input2, input3, expected }) => {
           const optionalInput1 = (input1 !== null &&
             calculator.current.handleDigit(input1)) as void | null;
 
           const optionalInput2 = (input2 !== null &&
             calculator.current.handleDigit(input2)) as void | null;
 
-          handleActions([optionalInput1, optionalInput2]);
+          const optionalInput3 = (input3 !== null &&
+            calculator.current.handleDigit(input3)) as void | null;
+
+          handleActions([optionalInput1, optionalInput2, optionalInput3]);
 
           expect(calculator.current.current.x).toBe(expected);
         }
@@ -107,6 +112,93 @@ describe('useCalculator 테스트', () => {
           ]);
 
           expect(calculator.current.current.y).toBe(expected);
+        }
+      );
+    });
+
+    describe('예외 테스트', () => {
+      describe('x 입력 예외 테스트', () => {
+        /**
+         * handleDigit을 사용하여 x를 입력하면, x는 해당 숫자로 설정되어야 한다.
+         * 연속적으로 입력이 들어올 경우, 기존의 값에 10을 곱한 후 입력값을 더해야 한다.
+         * 네 자리 이상의 숫자를 입력하면, 에러가 발생해야 한다.
+         */
+        const testCases = [
+          { input1: 1, input2: 0, input3: 1, input4: 0 },
+          { input1: 9, input2: 9, input3: 9, input4: 9 },
+        ];
+
+        test.each(testCases)(
+          'handleDigit으로 네 자리 이상의 숫자를 입력하면, 에러가 발생해야 한다',
+          ({ input1, input2, input3, input4 }) => {
+            const inputDigits = () => {
+              handleActions([
+                calculator.current.handleDigit(input1),
+                calculator.current.handleDigit(input2),
+                calculator.current.handleDigit(input3),
+                calculator.current.handleDigit(input4),
+              ]);
+            };
+
+            expect(inputDigits).toThrowError(
+              MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS
+            );
+          }
+        );
+      });
+    });
+
+    describe('y 입력 예외 테스트', () => {
+      /**
+       * handleOperator를 사용하여 operator를 설정한 후,
+       * handleDigit을 사용하여 y를 입력하면, y는 해당 숫자로 설정되어야 한다.
+       * 연속적으로 입력이 들어올 경우, 기존의 값에 10을 곱한 후 입력값을 더해야 한다.
+       * 네 자리 이상의 숫자를 입력하면, 에러가 발생해야 한다.
+       */
+      const testCases = [
+        {
+          inputX: 1,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 1,
+          inputY2: 0,
+          inputY3: 0,
+          inputY4: 0,
+        },
+        {
+          inputX: 1,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 1,
+          inputY2: 2,
+          inputY3: 3,
+          inputY4: 4,
+        },
+        {
+          inputX: 1,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 9,
+          inputY2: 9,
+          inputY3: 9,
+          inputY4: 9,
+        },
+      ];
+
+      test.each(testCases)(
+        'handleDigit으로 네 자리 이상의 숫자를 입력하면, 에러가 발생해야 한다',
+        ({ inputX, operator, inputY1, inputY2, inputY3, inputY4 }) => {
+          const inputDigits = () => {
+            handleActions([
+              calculator.current.handleDigit(inputX),
+              calculator.current.handleOperator(operator),
+              calculator.current.handleDigit(inputY1),
+              calculator.current.handleDigit(inputY2),
+              calculator.current.handleDigit(inputY3),
+              calculator.current.handleDigit(inputY4),
+            ]);
+          };
+
+          expect(inputDigits).toThrowError(
+            MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS
+          );
         }
       );
     });

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BUTTON } from '../components/button/button.constant';
 import { Modifier, Operator } from '../components/button/button.type';
+import { MESSAGE } from '../constants/message';
 
 export const useCalculator = () => {
   const [state, setState] = useState<{
@@ -18,7 +19,7 @@ export const useCalculator = () => {
   const handleDigit = (value: number) => {
     if (!state.operator) {
       if (state.x * 10 > 999) {
-        alert('숫자는 세자리 이하로 입력해주세요');
+        throw new Error(MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS);
       }
 
       setState((prev) => ({ ...prev, x: prev.x * 10 + value }));
@@ -27,7 +28,7 @@ export const useCalculator = () => {
     }
 
     if (state.y * 10 > 999) {
-      alert('숫자는 세자리 이하로 입력해주세요');
+      throw new Error(MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS);
     }
 
     setState((prev) => ({ ...prev, y: prev.y * 10 + value }));
