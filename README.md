@@ -1,8 +1,6 @@
-# React + Vite
+안녕하세요 이번에 코드 구현하면서 아쉬운 점이 너무 많지만 일단 기능구현하고 커밋하였습니다.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.연산로직을 구현하면서 switch문을 사용하였는데 구현하다보니 각자 연산자 함수를 구현하는것이 확장성이 좋지않을까라는 고민을 하였습니다.
+2.각 컴포넌트에서 prop을 전달할떄 변수명을 어떻게하면 좋을지 나머지 연산자는 언제 쓰면 좋을지 궁금합니다.
+3.key로 배열 index주는 것은 좋지 않다고 하였지만 이번경우 리렌더링(배열이 동적으로 안바뀌기에)이 발생하지 않아 키값으로 주었습니다.
+4.아직 공통 컴포넌트로 묶는게 와닿지 않는데 어떻게 하면 좀더 좋은 공통 컴포넌트로 묶을수 있을지 고민입니다.(사실 공통 컴포넌트 구현하는게 어색하고 막상하니 스파게티 코드가 되네요) 버튼 컴포넌트도 어떻게 하면 잘 나눌 수 있을지 고민입니다.
