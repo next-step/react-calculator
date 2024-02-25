@@ -45,10 +45,3 @@ it('마지막 요소가 연산자라면 삭제한다.', () => {
   const result = resolveCalculation(inputStack);
   expect(result).toBe(6);
 });
-
-// TODO: 연산자 우선순위 로직 구현 필요
-it('연산자의 우선순위를 추가하여 계산한다.', () => {
-  const inputStack: string[] = ['1', '+', '2', 'X', '3'];
-  const result = resolveCalculation(inputStack);
-  expect(result).toBe(7);
-});

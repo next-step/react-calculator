@@ -1,6 +1,6 @@
-import { CalculatorKeyType } from '@/components';
-import { ControlAction, Digit, Operator } from '@/types';
-import { generateCalculatorKey } from '@/services';
+import { Digit, Operator, ControlAction } from '@/types';
+import { CalculatorKeyType } from '@/components/calculator';
+import { generateCalculatorKey } from '@/services/generateCalculatorKey';
 
 const DIGITS = [
   generateCalculatorKey(CalculatorKeyType.DigitKey, Digit.Nine, '9'),
