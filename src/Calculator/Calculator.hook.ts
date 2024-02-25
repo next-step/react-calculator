@@ -26,6 +26,11 @@ export const useCalculator = ({
       ? `${leftOperand}${addedDigit}`
       : `${rightOperand}${addedDigit}`
 
+    /** 중복된 0 입력 무효 처리 */
+    if (Number(nextDigit) === 0) {
+      return
+    }
+
     if (nextDigit.length > maxNumberLength) {
       alert(`숫자는 최대 ${maxNumberLength}자리 까지 입력이 가능합니다.`)
 
