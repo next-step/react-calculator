@@ -5,12 +5,12 @@ import { Operation } from './components/Operation';
 import { useCalculator } from './hooks/useCalculator';
 
 function App() {
-  const { display, onClickDigit, onClickModifier, onClickOperation } = useCalculator();
+  const { calculatorStatus, onClickDigit, onClickModifier, onClickOperation } = useCalculator();
 
   return (
     <div id={'app'}>
       <div className={'calculator'}>
-        <h1 id={'total'}>{display}</h1>
+        <h1 id={'total'}>{calculatorStatus.display}</h1>
         <div className={'digits flex'}>
           {DIGITS.map((d) => (
             <Digit key={d} digit={d} onClick={() => onClickDigit(d)} />
@@ -21,7 +21,12 @@ function App() {
         </div>
         <div className={'operations subgrid'}>
           {Object.values(OPERATION_SIGN).map((op) => (
-            <Operation key={op} operation={op} onClick={() => onClickOperation(op)} />
+            <Operation
+              key={op}
+              operation={op}
+              currOperation={calculatorStatus.operation}
+              onClick={() => onClickOperation(op)}
+            />
           ))}
         </div>
       </div>

@@ -1,11 +1,13 @@
-import { MouseEventHandler, useRef, useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { DIGITS, OPERATION_SIGN } from '../constants';
+import { checkIsValidDigits } from '../utils/checkDigits';
 
 const INITIAL_DISPLAY_VALUE = 0;
-const INITIAL_OPERATION = null;
-const INITIAL_OPERANDS = {
-  first: INITIAL_DISPLAY_VALUE,
-  second: null,
+const INITIAL_CALCULATOR_STATUS = {
+  display: INITIAL_DISPLAY_VALUE,
+  operation: null,
+  operand1: INITIAL_DISPLAY_VALUE,
+  operand2: null,
 };
 
 const calculate = (
@@ -29,75 +31,80 @@ const calculate = (
 };
 
 export const useCalculator = () => {
-  const [display, setDisplay] = useState(INITIAL_DISPLAY_VALUE);
-
-  const operationRef = useRef<(typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN] | null>(
-    INITIAL_OPERATION,
-  );
-  const operandsRef = useRef<{ first: number; second: number | null }>(INITIAL_OPERANDS);
-  console.log('operandsRef.current', operandsRef.current);
+  const [calculatorStatus, setCalculatorStatus] = useState<{
+    display: number;
+    operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN] | null;
+    operand1: number;
+    operand2: number | null;
+  }>(INITIAL_CALCULATOR_STATUS);
 
   const onClickDigit = (digit: (typeof DIGITS)[number]) => {
-    console.log('operandsRef.current', operandsRef.current);
-    console.log('digit', digit);
-    if (!operationRef.current) {
+    if (!calculatorStatus.operation) {
       // 첫번째 피연산자 입력
-      if (operandsRef.current.first / 100 >= 1) {
+      if (!checkIsValidDigits(calculatorStatus.operand1 * digit)) {
         // 최대 3자리 수까지 입력 가능
         return;
       }
 
-      operandsRef.current.first = operandsRef.current.first * 10 + digit;
-      setDisplay(operandsRef.current.first);
+      setCalculatorStatus((prev) => ({
+        ...prev,
+        operand1: prev.operand1 * 10 + digit,
+        display: prev.operand1 * 10 + digit,
+      }));
       return;
     }
 
     // 두번째 피연산자 입력
-    if (operandsRef.current.second === null) {
+    if (calculatorStatus.operand2 === null) {
       // 두번째 피연산자 초기 입력
-      operandsRef.current.second = digit;
-      setDisplay(operandsRef.current.second);
+      setCalculatorStatus((prev) => ({
+        ...prev,
+        operand2: digit,
+        display: digit,
+      }));
       return;
     }
 
-    if (operandsRef.current.second / 100 >= 1) {
+    if (!checkIsValidDigits(calculatorStatus.operand2 * digit)) {
       // 최대 3자리 수까지 입력 가능
       return;
     }
 
-    operandsRef.current.second = operandsRef.current.second * 10 + digit;
-    setDisplay(operandsRef.current.second);
+    setCalculatorStatus((prev) => ({
+      ...prev,
+      operand2: prev.operand2! * 10 + digit,
+      display: prev.operand2! * 10 + digit,
+    }));
   };
 
   const onClickModifier: MouseEventHandler<HTMLButtonElement> = () => {
-    console.log('계산기 초기화');
-    operationRef.current = INITIAL_OPERATION;
-    // operandsRef.current.first = INITIAL_OPERANDS.first;
-    // operandsRef.current.second = INITIAL_OPERANDS.second;
-    operandsRef.current = INITIAL_OPERANDS;
-
-    setDisplay(INITIAL_DISPLAY_VALUE);
+    setCalculatorStatus(INITIAL_CALCULATOR_STATUS);
   };
 
   const onClickOperation = (operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN]) => {
     if (operation === OPERATION_SIGN.equals) {
-      const result = calculate(
-        {
-          operand1: operandsRef.current.first,
-          operand2: operandsRef.current.second ?? operandsRef.current.first,
-        },
-        operationRef.current ?? OPERATION_SIGN.equals,
+      // 결과 출력
+      const result = Math.floor(
+        calculate(
+          {
+            operand1: calculatorStatus.operand1,
+            operand2: calculatorStatus.operand2 ?? calculatorStatus.operand1,
+          },
+          calculatorStatus.operation ?? OPERATION_SIGN.equals,
+        ),
       );
 
-      operationRef.current = INITIAL_OPERATION;
-      operandsRef.current.first = INITIAL_OPERANDS.first;
-      operandsRef.current.second = INITIAL_OPERANDS.second;
-      setDisplay(result);
+      setCalculatorStatus({
+        ...INITIAL_CALCULATOR_STATUS,
+        operand1: result,
+        display: result,
+      });
       return;
     }
 
-    operationRef.current = operation;
+    // 연산자 반영
+    setCalculatorStatus((prev) => ({ ...prev, operation }));
   };
 
-  return { display, onClickDigit, onClickModifier, onClickOperation };
+  return { calculatorStatus, onClickDigit, onClickModifier, onClickOperation };
 };

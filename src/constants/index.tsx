@@ -7,3 +7,5 @@ export const OPERATION_SIGN = {
   multiplication: 'X',
   equals: '=',
 } as const;
+
+export const MAX_DIGITS = 3;

@@ -38,6 +38,11 @@ button {
 
 .operations button {
   background-color: orange;
+  transition: background-color 0.2s;
+}
+
+.operations button.curr-operation {
+  background-color: white;
 }
 
 .digits button {
