@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BUTTON } from '../components/button/button.constant';
 import { Modifier, Operator } from '../components/button/button.type';
-import { MESSAGE } from '../constants/message';
+import { Validation } from '../utils/validation';
 
 export const useCalculator = () => {
   const [state, setState] = useState<{
@@ -18,18 +18,14 @@ export const useCalculator = () => {
 
   const handleDigit = (value: number) => {
     if (!state.operator) {
-      if (state.x * 10 > 999) {
-        throw new Error(MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS);
-      }
+      Validation.digitOverThreeDigits(state.x);
 
       setState((prev) => ({ ...prev, x: prev.x * 10 + value }));
 
       return;
     }
 
-    if (state.y * 10 > 999) {
-      throw new Error(MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS);
-    }
+    Validation.digitOverThreeDigits(state.y);
 
     setState((prev) => ({ ...prev, y: prev.y * 10 + value }));
   };
@@ -57,24 +53,31 @@ export const useCalculator = () => {
         switch (state.operator) {
           case BUTTON.OPERATION.CHILDREN.ADD.VALUE: {
             result = prev.x + prev.y;
+            Validation.add(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.SUBTRACT.VALUE: {
             result = prev.x - prev.y;
+            Validation.subtract(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.MULTIPLY.VALUE: {
             result = prev.x * prev.y;
+            Validation.multiply(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.DIVIDE.VALUE: {
+            Validation.divide(prev.y);
+
             result = Math.round((prev.x / prev.y) * 10) / 10;
+
+            Validation.isInfinite(result);
 
             break;
           }
@@ -94,7 +97,6 @@ export const useCalculator = () => {
     }
   };
 
-  console.log(state);
   const handleOperator = (value: Operator) => {
     if (value !== BUTTON.OPERATION.CHILDREN.EQUAL.VALUE) {
       setState((prev) => ({ ...prev, operator: value }));
