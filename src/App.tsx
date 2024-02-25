@@ -68,7 +68,7 @@ function App() {
       setScreenValue(`${numbers[0]}`);
       return;
     }
-    const result = calculate(numbers, operator);
+    const result = calculate(numbers as [number, number], operator);
     const newScreenValue = !Number.isFinite(result) ? '오류' : `${result}`;
     setScreenValue(newScreenValue);
   };

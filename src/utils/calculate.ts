@@ -13,7 +13,7 @@ const OPERATOR_ACTIONS = {
   divide,
 };
 
-const calculate = (numbers: number[], operator: OperatorType) => {
+const calculate = (numbers: [number, number], operator: OperatorType) => {
   const [num1, num2] = numbers;
   const operateAction = OPERATORS.find((op) => op.label === operator)?.action;
   if (!operateAction) {
