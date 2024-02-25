@@ -5,9 +5,12 @@ import { OPERATION_REGEX } from "./constants";
 import "./css/index.css";
 import { EOPERATIONS } from "./enums";
 import { CALCULATOR_NUMBERS } from "./helper";
+import { calculateByOperator } from "./utils";
 
 function App() {
+  /**화면에 표시되는 수식들 */
   const [inputtedTotalValue, setInputtedTotalValue] = useState<string>("0");
+  /**사용자가 현재 입력하고 있는 숫자 */
   const currNumber = useRef<string>();
 
   const handleClickNumberButton = (value: number) => {
@@ -26,19 +29,27 @@ function App() {
   };
 
   const handleClickOperationButton = (operator: keyof typeof EOPERATIONS) => {
+    const lastInputtedValue = inputtedTotalValue[inputtedTotalValue.length - 1];
     /**최종 입력된 값이 숫자인지 연산자인지 */
-    const isLastWordTypeNumber = !isNaN(
-      +inputtedTotalValue[inputtedTotalValue.length - 1]
-    );
+    const isLastWordTypeNumber = !isNaN(+lastInputtedValue);
+
     /**연산을 위한 숫자와 연산자들이 담긴 배열 ex)['1','+','2'] */
     const arrItemsForCalc = inputtedTotalValue
       .split(OPERATION_REGEX)
       .filter(Boolean);
 
-    /**최종 입력된 값이 연산자인 상태에서 숫자가 아닌 연산자를 입력받았을 때  */
-    if (inputtedTotalValue === "0" || !isLastWordTypeNumber) {
+    /**최종 입력된 값이 연산자인 상태에서 숫자가 아닌 연산자(-를 제외한)를 입력받았을 때  */
+    if (
+      inputtedTotalValue === "0" ||
+      (!isLastWordTypeNumber && operator !== "-") ||
+      (lastInputtedValue === "-" && operator === "-")
+    ) {
       alert("숫자를 먼저 입력한 후 연산자를 입력해주세요!");
       return;
+    }
+
+    if (operator === "-") {
+      currNumber.current = operator;
     }
 
     /**식이 완성되지 않은 상태에서 =을 눌렀을때 */
@@ -46,11 +57,12 @@ function App() {
       return;
     }
 
-    currNumber.current = undefined;
     const num1 = +arrItemsForCalc[0];
     const oper = arrItemsForCalc[1] as keyof typeof EOPERATIONS;
-    const num2 = +arrItemsForCalc[2];
+    const num2 =
+      arrItemsForCalc[2] === "-" ? -+arrItemsForCalc[3] : +arrItemsForCalc[2];
 
+    currNumber.current = undefined;
     if (operator === "=" && arrItemsForCalc.length >= 3) {
       const calculatedResult = calculateByOperator(
         oper,
@@ -60,12 +72,12 @@ function App() {
 
       if (calculatedResult === "Infinity") {
         setInputtedTotalValue("오류");
-        currNumber.current = "0";
+        currNumber.current = undefined;
         return;
       }
 
-      currNumber.current = calculatedResult;
       setInputtedTotalValue(calculatedResult);
+      currNumber.current = !!+calculatedResult ? calculatedResult : undefined;
     } else {
       setInputtedTotalValue((prev) => prev + operator);
     }
