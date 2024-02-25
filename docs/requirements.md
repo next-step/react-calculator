@@ -52,10 +52,10 @@
 
 ## useCalculator hook
 
-[ ] formula - 현재 연산 결과가 없는 경우, 빈 문자열이 보여져야 한다.
-[ ] clearFormula() - 현재 연산 결과를 빈 문자열로 초기화한다.
-[ ] appendOperation() - 현재 연산 결과에 연산 기호를 추가한다.
-[ ] appendOperation() - 추가하려는 연산 결과에 이미 연산 기호가 추가되어 있는 경우, 오류를 발생시킨다.
-[ ] appendNumber() - 현재 연산 결과에 숫자 기호를 추가한다.
-[ ] appendNumber() - 추가하려는 숫자가 세 자리가 넘어가는 경우, 오류를 발생시킨다.
-[ ] calculateAndSetFormula() - 연산 결과값이 formula에 반영되어야 한다.
+[X] formula - 현재 연산 결과가 없는 경우, 빈 문자열이 보여져야 한다.
+[X] clearFormula() - 현재 연산 결과를 빈 문자열로 초기화한다.
+[X] appendOperation() - 현재 연산 결과에 연산 기호를 추가한다.
+[X] appendOperation() - 추가하려는 연산 결과에 이미 연산 기호가 추가되어 있는 경우, 오류를 발생시킨다.
+[X] appendNumber() - 현재 연산 결과에 숫자 기호를 추가한다.
+[X] appendNumber() - 추가하려는 숫자가 세 자리가 넘어가는 경우, 오류를 발생시킨다.
+[X] calculateAndSetFormula() - 연산 결과값이 formula에 반영되어야 한다.
