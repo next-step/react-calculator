@@ -1,4 +1,4 @@
-import { OPERATORS } from '../../constants';
+import { OPERATORS } from '../../../constants';
 
 export type OperationState = {
   operator: ArithmeticOperators | null;

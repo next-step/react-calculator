@@ -1,6 +1,7 @@
 import { useState, MouseEvent } from 'react';
-import { NUMBER_MAX_LENGTH, OPERATORS } from '../../../constants';
+import { OPERATORS } from '../../../constants';
 import { ArithmeticOperators, OperationState } from '../types';
+import { validateDigitLength } from '../utils';
 
 const operations: {
   [key in ArithmeticOperators]: (a: number, b: number) => number;
@@ -71,10 +72,7 @@ export const useCalculate = () => {
 
     if (isFirstOperandInput) {
       const value = operand1 + digit;
-      if (value.length > NUMBER_MAX_LENGTH) {
-        alert('숫자는 3자리까지만 입력 가능합니다.');
-        return;
-      }
+      validateDigitLength(value);
 
       setOperationState((prev) => ({
         ...prev,
@@ -92,10 +90,7 @@ export const useCalculate = () => {
       }
 
       const value = operand2 + digit;
-      if (value.length > NUMBER_MAX_LENGTH) {
-        alert('숫자는 3자리까지만 입력 가능합니다.');
-        return;
-      }
+      validateDigitLength(value);
 
       setOperationState((prev) => ({
         ...prev,
