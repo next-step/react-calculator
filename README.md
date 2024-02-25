@@ -2,7 +2,7 @@
 <br/>
 
 <p align="middle" >
-  <img width="100px;" src="public/images/calculator_icon.png"/>
+  <img width="100px;" src="src/assets/calculator_icon.png"/>
 </p>
 <h2 align="middle">React 계산기</h2>
 <p align="middle">계산기와 함께하는 Onboarding NEXTSTEP with React</p>
@@ -17,7 +17,7 @@
 ## 🔥 Projects!
 
 <p align="middle">
-  <img width="300" src="public/images/calculator_ui.png">
+  <img width="300" src="src/assets/calculator_ui.png">
 </p>
 
 <p align="middle">
