@@ -14,8 +14,10 @@ import {
   MSG_ERROR_RESULT,
 } from './constants/messages';
 
+const ZERO = '0';
+
 function App() {
-  const [resultNumber, setResultNumber] = useState('0');
+  const [resultNumber, setResultNumber] = useState(ZERO);
   const [operator, setOperator] = useState(null);
   const { result, count, calculate } = useCalculation();
 
@@ -24,68 +26,75 @@ function App() {
     setOperator(null);
   }, [result, count]);
 
+  const [firstOperand, secondOperand] = resultNumber.split(operator);
+  const initialState = resultNumber === ZERO;
+  const errorState = resultNumber === MSG_ERROR_RESULT;
+  const hasOperator = !!operator;
+
   const onClickModifier = () => {
     setOperator(null);
-    setResultNumber('0');
+    setResultNumber(ZERO);
   };
 
   const onClickDigit = (value) => {
-    const operand = resultNumber.split(operator);
-
-    // 처음에 0이 입력된 경우
-    if (resultNumber === '0' && value === 0) {
+    if (initialState && value === 0) {
       return;
     }
 
     if (
-      (!operator && resultNumber.length >= MAX_DIGITS)
-      || (operand.length >= MAX_CALCULABLE_NUMBER_COUNT
-        && operand[1].length >= MAX_DIGITS)
+      (!hasOperator && resultNumber.length >= MAX_DIGITS)
+      || (firstOperand.length >= MAX_CALCULABLE_NUMBER_COUNT
+        && secondOperand?.length >= MAX_DIGITS)
     ) {
       alert(MSG_WARNING_INPUT_MAX_DIGITS);
       return;
     }
 
-    if (resultNumber === MSG_ERROR_RESULT) {
+    if (errorState) {
       setResultNumber(`${value}`);
       return;
     }
 
-    if (resultNumber === '0') {
+    if (initialState) {
       setResultNumber(`${value}`);
     } else {
       setResultNumber(`${resultNumber}${value}`);
     }
   };
 
-  const onClickOperator = (value) => {
-    const operand = resultNumber.split(operator);
+  function isEqualOperator(value) {
+    return value === '=';
+  }
 
-    // 처음에 연산자가 입력된 경우
-    if (resultNumber === '0') {
+  const onClickOperator = (value) => {
+    if (initialState) {
       alert(MSG_WARNING_INPUT_ORDER);
+      return;
+    }
+
+    if ((hasOperator && secondOperand.length >= MAX_DIGITS) && !isEqualOperator(value)) {
       return;
     }
 
     // 결과값이 3자리 이상일 때 연산자를 입력하는 경우
-    if (!operator && resultNumber.length > MAX_DIGITS) {
+    if (!hasOperator && resultNumber.length > MAX_DIGITS) {
       alert(MSG_WARNING_INPUT_MAX_DIGITS);
       return;
     }
 
-    if (value === '=') {
-      calculate(operand, operator);
+    if (isEqualOperator(value)) {
+      calculate([firstOperand, secondOperand], operator);
       return;
     }
 
-    if (resultNumber === MSG_ERROR_RESULT) {
+    if (errorState) {
       alert(MSG_WARNING_INPUT_ORDER);
       return;
     }
 
-    // 연산자가 연달아 입력되는 경우 마지막 연산자로 세팅
+    // 연산자가 연달아 입력되는 경우 마지막 연산자로 설정
     setOperator(value);
-    if (operator && !operand[1]) {
+    if (hasOperator && !secondOperand) {
       setResultNumber(resultNumber.slice(0, -1) + value);
     } else {
       setResultNumber(`${resultNumber}${value}`);
