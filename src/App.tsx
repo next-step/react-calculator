@@ -19,18 +19,18 @@ export default function App() {
 
   const { display } = calculatorState;
 
-  const digitButtonClickHandler = (value: string) => {
+  const handleDigitButton = (value: string) => {
     setCalculatorState({
       type: CALCULATOR_ACTIONS.INPUT_DIGIT,
       payload: { value },
     });
   };
 
-  const resetButtonClickHandler = () => {
+  const handleResetButton = () => {
     setCalculatorState({ type: CALCULATOR_ACTIONS.CLEAR });
   };
 
-  const operatorButtonClickHandler = (operator: string) => {
+  const handleCalculationOperatorButton = (operator: string) => {
     setCalculatorState({
       type: CALCULATOR_ACTIONS.OPERATOR,
       payload: { operator },
@@ -40,9 +40,9 @@ export default function App() {
   return (
     <div className="calculator">
       <CalculatorDisplay display={display} />
-      <DigitButtons onDigitClick={digitButtonClickHandler} />
-      <ModifyButton onResetClick={resetButtonClickHandler} />
-      <OperatorButtons onOperatorClick={operatorButtonClickHandler} />
+      <DigitButtons onDigitClick={handleDigitButton} />
+      <ModifyButton onResetClick={handleResetButton} />
+      <OperatorButtons onOperatorClick={handleCalculationOperatorButton} />
     </div>
   );
 }

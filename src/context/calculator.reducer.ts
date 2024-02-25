@@ -1,8 +1,8 @@
 import { CALCULATOR } from "data/constant";
 import {
-  digitInputHandler,
-  equalOperatorInputHandler,
-  operatorInputHandler,
+  handleInputDigit,
+  handleInputEqualOperator,
+  handleInputOperator,
 } from "utils/inputHandlers";
 
 export interface CalculatorState {
@@ -55,7 +55,7 @@ export const calculatorReducer = (
         };
       }
 
-      return digitInputHandler(state, action.payload.value);
+      return handleInputDigit(state, action.payload.value);
     }
 
     case CALCULATOR_ACTIONS.OPERATOR:
@@ -68,9 +68,9 @@ export const calculatorReducer = (
       }
 
       if (action.payload.operator === "=") {
-        return equalOperatorInputHandler(state);
+        return handleInputEqualOperator(state);
       } else {
-        return operatorInputHandler(state, action.payload.operator);
+        return handleInputOperator(state, action.payload.operator);
       }
 
     default: {

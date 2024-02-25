@@ -4,12 +4,12 @@ interface DigitButtonProps {
 }
 
 export default function DigitButton({ digit, onDigitClick }: DigitButtonProps) {
-  const buttonClickHandler = () => {
+  const handleDigitButton = () => {
     onDigitClick(String(digit));
   };
 
   return (
-    <button className="digit" onClick={buttonClickHandler}>
+    <button className="digit" onClick={handleDigitButton}>
       {digit}
     </button>
   );

@@ -7,12 +7,12 @@ export default function OperateButton({
   operate,
   onOperatorClick,
 }: OperateButtonProps) {
-  const operatorButtonClickHandler = () => {
+  const handleOperatorButton = () => {
     onOperatorClick(operate);
   };
 
   return (
-    <button className="operation" onClick={operatorButtonClickHandler}>
+    <button className="operation" onClick={handleOperatorButton}>
       {operate}
     </button>
   );

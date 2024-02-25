@@ -2,7 +2,7 @@ import { CalculatorState } from "context/calculator.reducer";
 import { CALCULATOR, MAX_INPUT_DIGIT_LENGTH } from "data/constant";
 import { calculate } from "utils/calculate";
 
-export const digitInputHandler = (state: CalculatorState, digit: string) => {
+export const handleInputDigit = (state: CalculatorState, digit: string) => {
   const { operator, firstOperand, secondOperand, display } = state;
 
   const isSecondOperand = !!operator;
@@ -29,7 +29,7 @@ export const digitInputHandler = (state: CalculatorState, digit: string) => {
   };
 };
 
-export const equalOperatorInputHandler = (state: CalculatorState) => {
+export const handleInputEqualOperator = (state: CalculatorState) => {
   const { firstOperand, operator, secondOperand } = state;
 
   const result = calculate(firstOperand, operator, secondOperand);
@@ -50,7 +50,7 @@ export const equalOperatorInputHandler = (state: CalculatorState) => {
   };
 };
 
-export const operatorInputHandler = (
+export const handleInputOperator = (
   state: CalculatorState,
   operator: string
 ) => {
