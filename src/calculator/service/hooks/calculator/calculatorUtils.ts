@@ -12,16 +12,16 @@ export const isValidExpressionAndUnderLimit = (
 	input: string,
 	limit: number
 ): boolean => {
-	const isOperator = /[+\-X\\/]/.test(input);
+	const isInputIsOperator = isOperator(input);
 	// 마지막 문자가 연산자인지 확인
-	const lastCharIsOperator = /[+\-X\\/]/.test(currentExpression.slice(-1));
+	const isLastCharIsOperator = isOperator(currentExpression.slice(-1));
 
-	if (isOperator) {
+	if (isInputIsOperator) {
 		// 연산자가 연속으로 입력되는 경우를 방지
-		return !lastCharIsOperator;
+		return !isLastCharIsOperator;
 	} else {
 		// 숫자 입력의 경우
-		const newExpression = lastCharIsOperator
+		const newExpression = isLastCharIsOperator
 			? input
 			: currentExpression.concat(input);
 		const matches = newExpression.match(/(\d+)$/);
