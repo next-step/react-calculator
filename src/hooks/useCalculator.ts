@@ -78,7 +78,7 @@ export default function useCalculator() {
 			}
 		}
 
-		if (isNaN(result) || !isFinite(result)) {
+		if (Number.isNaN(result) || !Number.isFinite(result)) {
 			return '오류';
 		}
 
