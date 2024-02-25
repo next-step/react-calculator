@@ -67,11 +67,6 @@ button {
   flex: 1 0 30%;
 }
 
-.digit.wide {
-  flex: 2 0 60%;
-  order: 1;
-}
-
 .modifiers {
   grid-area: modif;
   grid-auto-flow: column;
