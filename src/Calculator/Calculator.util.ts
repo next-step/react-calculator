@@ -1,15 +1,15 @@
-import { Operation } from './Calculator.type'
+import { Operator } from './Calculator.type'
 
 export const calculate = ({
   leftOperand,
-  operation,
+  operator,
   rightOperand,
 }: {
   leftOperand: number
-  operation: Operation | ''
+  operator: Operator | ''
   rightOperand: number
 }) => {
-  switch (operation) {
+  switch (operator) {
     case '+':
       return leftOperand + rightOperand
     case '-':

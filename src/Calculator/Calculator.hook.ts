@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Operation, UseCalculatorProps } from './Calculator.type'
+import { Operator, UseCalculatorProps } from './Calculator.type'
 import { calculate } from './Calculator.util'
 import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 
@@ -9,21 +9,21 @@ export const useCalculator = ({
   const [isCalculating, setIsCalculating] = useState(false)
   const [calculatedResult, setCalculatedResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
-  const [operation, setOperation] = useState<Operation | ''>('')
+  const [operator, setOperator] = useState<Operator | ''>('')
   const [rightOperand, setRightOperand] = useState('')
   const displayedContents = !isCalculating
     ? calculatedResult
-    : `${leftOperand}${operation}${rightOperand}`
+    : `${leftOperand}${operator}${rightOperand}`
 
   const initialize = () => {
     setCalculatedResult('0')
     setLeftOperand('')
-    setOperation('')
+    setOperator('')
     setRightOperand('')
   }
 
   const updateOperand = (addedDigit: number) => {
-    const nextDigit = !operation
+    const nextDigit = !operator
       ? `${leftOperand}${addedDigit}`
       : `${rightOperand}${addedDigit}`
 
@@ -40,7 +40,7 @@ export const useCalculator = ({
 
     setIsCalculating(true)
 
-    if (!operation) {
+    if (!operator) {
       setLeftOperand(nextDigit)
 
       return
@@ -49,10 +49,10 @@ export const useCalculator = ({
     setRightOperand(nextDigit)
   }
 
-  const updateOperation = (nextOperation: Operation) => {
+  const updateOperator = (nextOperation: Operator) => {
     if (nextOperation !== '=') {
       setIsCalculating(true)
-      setOperation(nextOperation)
+      setOperator(nextOperation)
 
       return
     }
@@ -60,7 +60,7 @@ export const useCalculator = ({
     updateCalculatedValue(
       calculate({
         leftOperand: Number(leftOperand),
-        operation,
+        operator,
         rightOperand: Number(rightOperand),
       }),
     )
@@ -70,7 +70,7 @@ export const useCalculator = ({
     if (calculatedValue === Infinity || calculatedValue === -Infinity) {
       setCalculatedResult('오류')
       setLeftOperand('')
-      setOperation('')
+      setOperator('')
       setRightOperand('')
 
       return
@@ -78,7 +78,7 @@ export const useCalculator = ({
 
     setCalculatedResult(String(calculatedValue))
     setLeftOperand(String(calculatedValue))
-    setOperation('')
+    setOperator('')
     setRightOperand('')
   }
 
@@ -86,6 +86,6 @@ export const useCalculator = ({
     displayedContents,
     initialize,
     updateOperand,
-    updateOperation,
+    updateOperator,
   }
 }

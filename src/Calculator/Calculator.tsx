@@ -1,9 +1,9 @@
 import { CalculatorProps } from './Calculator.type'
 import { useCalculator } from './Calculator.hook'
-import { DIGITS, OPERATIONS } from './Calculator.const'
+import { DIGITS, OPERATORS } from './Calculator.const'
 
 const Calculator = ({ maxNumberLength }: CalculatorProps) => {
-  const { displayedContents, initialize, updateOperand, updateOperation } =
+  const { displayedContents, initialize, updateOperand, updateOperator } =
     useCalculator({ maxNumberLength })
 
   return (
@@ -25,9 +25,9 @@ const Calculator = ({ maxNumberLength }: CalculatorProps) => {
       </div>
 
       <div className="operations subgrid">
-        {OPERATIONS.map((operation) => (
-          <button key={operation} onClick={() => updateOperation(operation)}>
-            {operation}
+        {OPERATORS.map((operator) => (
+          <button key={operator} onClick={() => updateOperator(operator)}>
+            {operator}
           </button>
         ))}
       </div>
