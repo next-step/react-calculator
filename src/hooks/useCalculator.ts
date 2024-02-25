@@ -47,50 +47,61 @@ export default function useCalculator(
 
 		throw new Error('잘못된 입력입니다.');
 	};
+	const getOperationsTuple = (operations: string[]) => {
+		if (operations[0] === '-') {
+			operations[0] = '+';
+			operations[1] = '-' + operations[1];
+		} else {
+			operations.unshift('+');
+		}
+
+		const operationsTuple: [string, string][] = [];
+
+		for (let i = 0; i < operations.length; i += 2) {
+			operationsTuple.push([operations[i], operations[i + 1]]);
+		}
+
+		return operationsTuple;
+	};
+
+	const reduceOperations = (prev: number, next: [string, string]) => {
+		const lookup: Record<string, (prev: number, next: number) => number> = {
+			'+': (prev: number, next: number) => prev + next,
+			'-': (prev: number, next: number) => prev - next,
+			x: (prev: number, next: number) => prev * next,
+			'/': (prev: number, next: number) => Math.floor(prev / next),
+		};
+
+		const operator = next[0];
+		const nextValue = parseInt(next[1]);
+
+		if (!lookup[operator]) {
+			throw new Error('잘못된 연산자입니다.');
+		}
+
+		return lookup[operator](prev, nextValue);
+	};
 
 	const executeOperation = (prevState: string) => {
 		const operations = prevState.split(/([+\-x/])/).filter(Boolean);
 
-		let startIndex = 1;
-		let result: number;
+		const operationsTuple = getOperationsTuple(operations);
 
-		if (operations[0] === '-' && operations.length > 1) {
-			result = -parseInt(operations[1]);
-			startIndex = 2;
-		} else {
-			result = parseInt(operations[0]);
-		}
+		try {
+			const operationResult = operationsTuple.reduce(reduceOperations, 0);
 
-		for (let i = startIndex; i < operations.length; i += 2) {
-			const operator = operations[i];
-			const nextValue = parseInt(operations[i + 1]);
-
-			switch (operator) {
-				case '+':
-					result += nextValue;
-					break;
-				case '-':
-					result -= nextValue;
-					break;
-				case 'x':
-					result *= nextValue;
-					break;
-				case '/':
-					if (nextValue === 0) {
-						return '오류';
-					}
-					result = Math.floor(result / nextValue);
-					break;
-				default:
-					return '오류';
+			if (Number.isNaN(operationResult) || !Number.isFinite(operationResult)) {
+				return '오류';
 			}
-		}
 
-		if (Number.isNaN(result) || !Number.isFinite(result)) {
+			return operationResult.toString();
+		} catch (error) {
+			if (error instanceof Error) {
+				return error.message;
+			}
+
 			return '오류';
 		}
-
-		return result.toString();
 	};
 
 	const calculate = () => {
