@@ -13,8 +13,6 @@ const Digits = ({ handleClickDigit }: DigitsProps) => {
           key={digit}
           className='digit'
           onClick={() => handleClickDigit(digit)}
-          role='button'
-          data-testid={`digit-${digit}`}
         >
           {digit}
         </button>

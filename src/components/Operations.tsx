@@ -17,18 +17,11 @@ const Operations = ({
           key={operator.action}
           className='operation'
           onClick={() => handleClickOperator(operator.label)}
-          role='button'
-          data-testid={operator.action}
         >
           {operator.label}
         </button>
       ))}
-      <button
-        className='operation'
-        onClick={handleClickCalculate}
-        role='button'
-        data-testid={'='}
-      >
+      <button className='operation' onClick={handleClickCalculate}>
         =
       </button>
     </div>
