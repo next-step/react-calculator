@@ -1,16 +1,16 @@
 import { OPERATORS } from '../../common/constants';
 import { OperatorType } from '../../common/types';
-import { KeyButton } from './KeyButton';
+import { ButtonBase } from './ButtonBase';
 
-interface OperationsProps {
+interface OperationButtonsProps {
   onClick: (operator: OperatorType) => void;
 }
 
-export default function Operations({ onClick }: OperationsProps) {
+export default function OperationButtons({ onClick }: OperationButtonsProps) {
   return (
     <div className="operations subgrid">
       {OPERATORS.map(operator => (
-        <KeyButton
+        <ButtonBase
           key={operator}
           className="operation"
           label={operator}

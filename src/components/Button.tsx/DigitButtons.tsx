@@ -1,15 +1,15 @@
 import { DIGITS } from '../../common/constants';
-import { KeyButton } from './KeyButton';
+import { ButtonBase } from './ButtonBase';
 
-interface DigitsProps {
+interface DigitButtonsProps {
   onClick: (digit: number) => void;
 }
 
-export function Digits({ onClick }: DigitsProps) {
+export function DigitButtons({ onClick }: DigitButtonsProps) {
   return (
     <div className="digits flex">
       {DIGITS.map(digit => (
-        <KeyButton
+        <ButtonBase
           key={digit}
           className="digit"
           label={`${digit}`}

@@ -1,5 +1,5 @@
 import useCalculator from '../hooks/useCalculator';
-import Key from './key/KeyButton';
+import Button from './Button.tsx/ButtonBase';
 
 export default function Calculator() {
   const { num1, num2, isNum2Negative, operator, inputNumber, clear, inputOperator } =
@@ -10,9 +10,9 @@ export default function Calculator() {
   return (
     <div className="calculator">
       <h1 id="total">{message}</h1>
-      <Key.Digits onClick={inputNumber} />
-      <Key.Modifiers onClick={clear} />
-      <Key.Operations onClick={inputOperator} />
+      <Button.Digits onClick={inputNumber} />
+      <Button.Modifiers onClick={clear} />
+      <Button.Operations onClick={inputOperator} />
     </div>
   );
 }
