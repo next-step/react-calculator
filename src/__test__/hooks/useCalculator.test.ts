@@ -37,35 +37,89 @@ describe('useCalculator 테스트', () => {
   });
 
   describe('handleDigit 테스트', () => {
-    test('handleDigit을 사용하여 숫자를 입력하면, 해당 숫자가 x에 설정되어야 한다', () => {
-      calculator.current.handleDigit(1);
+    describe('x 입력 테스트', () => {
+      /**
+       * handleDigit을 사용하여 x를 입력하면, x는 해당 숫자로 설정되어야 한다.
+       * 연속적으로 입력이 들어올 경우, 기존의 값에 10을 곱한 후 입력값을 더해야 한다.
+       */
+      const testCases = [
+        { input1: 1, input2: null, expected: 1 },
+        { input1: null, input2: 8, expected: 8 },
+        { input1: 1, input2: 0, expected: 10 },
+        { input1: 0, input2: 5, expected: 5 },
+        { input1: 3, input2: 4, expected: 34 },
+      ];
 
-      expect(calculator.current.current.x).toBe(1);
+      test.each(testCases)(
+        'handleDigit으로 $input1와 $input2를 입력하면, x는 $expected 이어야 한다',
+        ({ input1, input2, expected }) => {
+          const optionalInput1 = (input1 !== null &&
+            calculator.current.handleDigit(input1)) as void | null;
+
+          const optionalInput2 = (input2 !== null &&
+            calculator.current.handleDigit(input2)) as void | null;
+
+          handleActions([optionalInput1, optionalInput2]);
+
+          expect(calculator.current.current.x).toBe(expected);
+        }
+      );
     });
 
-    test('operator가 존재할 때, handleDigit을 사용하여 숫자를 입력하면, 해당 숫자가 y에 설정되어야 한다', () => {
-      const { result } = renderHook(() => useCalculator());
+    describe('y 입력 테스트', () => {
+      /**
+       * handleOperator를 사용하여 operator를 설정한 후,
+       * handleDigit을 사용하여 y를 입력하면, y는 해당 숫자로 설정되어야 한다.
+       * 연속적으로 입력이 들어올 경우, 기존의 값에 10을 곱한 후 입력값을 더해야 한다.
+       */
+      const testCases = [
+        {
+          inputX: 1,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 3,
+          inputY2: 1,
+          expected: 31,
+        },
+        {
+          inputX: 1,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 0,
+          inputY2: 1,
+          expected: 1,
+        },
+        {
+          inputX: 0,
+          operator: BUTTON.OPERATION.CHILDREN.ADD.VALUE,
+          inputY1: 5,
+          inputY2: 2,
+          expected: 52,
+        },
+      ];
 
-      handleActions([
-        result.current.handleDigit(1),
-        result.current.handleOperator(BUTTON.OPERATION.CHILDREN.ADD.VALUE),
-        result.current.handleDigit(2),
-      ]);
+      test.each(testCases)(
+        'handleDigit으로 $input1와 $input2를 입력하면, y는 $expected 이어야 한다',
+        ({ inputX, operator, inputY1, inputY2, expected }) => {
+          handleActions([
+            calculator.current.handleDigit(inputX),
+            calculator.current.handleOperator(operator),
+            calculator.current.handleDigit(inputY1),
+            calculator.current.handleDigit(inputY2),
+          ]);
 
-      expect(result.current.current.x).toBe(1);
-      expect(result.current.current.y).toBe(2);
-      expect(result.current.operator).toBe(BUTTON.OPERATION.CHILDREN.ADD.VALUE);
+          expect(calculator.current.current.y).toBe(expected);
+        }
+      );
     });
   });
 
   describe('덧셈 연산 테스트', () => {
-    const addCases = [
+    const testCases = [
       { input1: -1, input2: 1, expected: 0 },
       { input1: 1, input2: 1, expected: 2 },
       { input1: 100, input2: 200, expected: 300 },
     ];
 
-    test.each(addCases)(
+    test.each(testCases)(
       'handleDigit으로 $input1과 $input2를 입력 후, "+" 연산자를 사용하면 결과는 $expected 이어야 한다',
       ({ input1, input2, expected }) => {
         handleActions([
