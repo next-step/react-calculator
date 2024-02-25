@@ -26,7 +26,7 @@ describe('Calculator', () => {
 
   describe('sum()', () => {
     test.each([
-      [1,2],
+      [1, 2],
       [10, 2],
       [100, 2],
       [1, -1]
@@ -36,20 +36,23 @@ describe('Calculator', () => {
 
       // Then
       expect(calculator.getValue()).toBe(first + second)
-    });
+    })
 
     test.each([
       ['1', 2],
       [NaN, 2],
-      [null ,2],
+      [null, 2],
       [undefined, 2],
       [Symbol(1), 2]
-    ])('인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.', (first: any, second: any) => {
-      // When, Then
-      expect(() => calculator.sum(first, second)).toThrow(
-        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
-      )
-    });
+    ])(
+      '인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.',
+      (first: any, second: any) => {
+        // When, Then
+        expect(() => calculator.sum(first, second)).toThrow(
+          new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+        )
+      }
+    )
 
     test('계산 결과 값이 Infinity일 경우, 오류를 발생시킨다.', () => {
       // Given
@@ -70,7 +73,6 @@ describe('Calculator', () => {
       // When
       calculator.sum(first, second)
 
-
       // Then
       expect(calculator.getValue()).toBe(3)
     })
@@ -78,7 +80,7 @@ describe('Calculator', () => {
 
   describe('subtract()', () => {
     test.each([
-      [1,2],
+      [1, 2],
       [10, 2],
       [100, 2],
       [1, -1]
@@ -88,20 +90,23 @@ describe('Calculator', () => {
 
       // Then
       expect(calculator.getValue()).toBe(first - second)
-    });
+    })
 
     test.each([
       ['1', 2],
       [NaN, 2],
-      [null ,2],
+      [null, 2],
       [undefined, 2],
       [Symbol(1), 2]
-    ])('인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.', (first: any, second: any) => {
-      // When, Then
-      expect(() => calculator.subtract(first, second)).toThrow(
-        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
-      )
-    });
+    ])(
+      '인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.',
+      (first: any, second: any) => {
+        // When, Then
+        expect(() => calculator.subtract(first, second)).toThrow(
+          new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+        )
+      }
+    )
 
     test('계산 결과 값이 Infinity일 경우, 오류를 발생시킨다.', () => {
       // Given
@@ -129,7 +134,7 @@ describe('Calculator', () => {
 
   describe('multiply()', () => {
     test.each([
-      [1,2],
+      [1, 2],
       [10, 2],
       [100, 2],
       [1, -1]
@@ -139,20 +144,23 @@ describe('Calculator', () => {
 
       // Then
       expect(calculator.getValue()).toBe(first * second)
-    });
+    })
 
     test.each([
       ['1', 2],
       [NaN, 2],
-      [null ,2],
+      [null, 2],
       [undefined, 2],
       [Symbol(1), 2]
-    ])('인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.', (first: any, second: any) => {
-      // When, Then
-      expect(() => calculator.multiply(first, second)).toThrow(
-        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
-      )
-    });
+    ])(
+      '인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.',
+      (first: any, second: any) => {
+        // When, Then
+        expect(() => calculator.multiply(first, second)).toThrow(
+          new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+        )
+      }
+    )
 
     test('계산 결과 값이 Infinity일 경우, 오류를 발생시킨다.', () => {
       // Given
@@ -180,30 +188,36 @@ describe('Calculator', () => {
 
   describe('division()', () => {
     test.each([
-      [1,2],
+      [1, 2],
       [10, 2],
       [100, 2],
       [1, -1]
-    ])('2개의 숫자를 인자로 받고 나눗셈한 결과를 반환한다.', (first, second) => {
-      // Given, When
-      calculator.division(first, second)
+    ])(
+      '2개의 숫자를 인자로 받고 나눗셈한 결과를 반환한다.',
+      (first, second) => {
+        // Given, When
+        calculator.division(first, second)
 
-      // Then
-      expect(calculator.getValue()).toBe(Math.trunc(first / second))
-    });
+        // Then
+        expect(calculator.getValue()).toBe(Math.trunc(first / second))
+      }
+    )
 
     test.each([
       ['1', 2],
       [NaN, 2],
-      [null ,2],
+      [null, 2],
       [undefined, 2],
       [Symbol(1), 2]
-    ])('인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.', (first: any, second: any) => {
-      // When, Then
-      expect(() => calculator.division(first, second)).toThrow(
-        new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
-      )
-    });
+    ])(
+      '인자로 받은 값이 숫자가 아닌 경우, 오류를 발생시킨다.',
+      (first: any, second: any) => {
+        // When, Then
+        expect(() => calculator.division(first, second)).toThrow(
+          new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
+        )
+      }
+    )
 
     test('계산 결과 값이 Infinity일 경우, 오류를 발생시킨다.', () => {
       // Given

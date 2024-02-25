@@ -1,9 +1,9 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
 afterEach(() => {
-  vi.clearAllMocks();
-});
+  vi.clearAllMocks()
+})
 
 afterAll(() => {
-  vi.resetAllMocks();
-});
+  vi.resetAllMocks()
+})

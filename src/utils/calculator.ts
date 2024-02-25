@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from "@/constants/message"
-import { isNumber } from "./validation"
+import { ERROR_MESSAGE } from '@/constants/message'
+import { isNumber } from './validation'
 
 export class Calculator {
   #value: number
@@ -13,22 +13,22 @@ export class Calculator {
   }
 
   sum(a: number, b: number) {
-    this.#validateNumber(a,b)
+    this.#validateNumber(a, b)
     this.#setValue(a + b)
   }
 
   subtract(a: number, b: number) {
-    this.#validateNumber(a,b)
+    this.#validateNumber(a, b)
     this.#setValue(a - b)
   }
 
   multiply(a: number, b: number) {
-    this.#validateNumber(a,b)
+    this.#validateNumber(a, b)
     this.#setValue(a * b)
   }
 
   division(a: number, b: number) {
-    this.#validateNumber(a,b)
+    this.#validateNumber(a, b)
     this.#setValue(a / b)
   }
 
@@ -37,7 +37,7 @@ export class Calculator {
   }
 
   #validateNumber(a: number, b: number) {
-    if(!(isNumber(a) && isNumber(b))) {
+    if (!(isNumber(a) && isNumber(b))) {
       throw new Error(ERROR_MESSAGE.NOT_VALID_NUMBER)
     }
   }
