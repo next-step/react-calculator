@@ -18,7 +18,6 @@ const expectDisplayValue = (expectedValue: string) => {
   expect(display).toBeInTheDocument();
 };
 
-// App 컴포넌트가 정상적으로 렌더링되는지 확인
 it('App 컴포넌트가 정상적으로 렌더링된다.', async () => {
   const display = screen.getByRole('heading', { name: '0' });
   expect(display).toBeInTheDocument();
