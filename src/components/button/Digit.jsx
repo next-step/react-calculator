@@ -1,6 +1,6 @@
-function Digit({ onClick }) {
-  const digits = Array.from({ length: 10 }, (_, i) => 9 - i);
+const digits = Array.from({ length: 10 }, (_, i) => 9 - i);
 
+function Digit({ onClick }) {
   const handleClick = (value) => {
     onClick(value, 'digit');
   };
