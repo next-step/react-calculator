@@ -19,7 +19,7 @@ export default class Validator {
   }
 
   isOnlyNumber() {
-    return OPERATORS_REGEX.test(this.expression) === false
+    return !Number.isNaN(Number(this.expression))
   }
 
   hasSuccessiveOperators() {
