@@ -1,11 +1,16 @@
 import { useState } from 'react'
-import { Operator, UseCalculatorProps } from './Calculator.type'
+import { Operator } from './Calculator.type'
 import { calculate } from './Calculator.util'
 import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 
+export type Props = {
+  /** 입력할 수 있는 숫자의 최대 자리 수 */
+  maxNumberLength?: number
+}
+
 export const useCalculator = ({
   maxNumberLength = DEFAULT_MAX_NUMBER_LENGTH,
-}: UseCalculatorProps) => {
+}: Props) => {
   const [isCalculating, setIsCalculating] = useState(false)
   const [calculatedResult, setCalculatedResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
