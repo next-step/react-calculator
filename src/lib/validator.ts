@@ -30,9 +30,15 @@ export default class Validator {
       )
   }
 
+  isWithinMaxDigits(value: number, maxDigit: number = 3) {
+    const maxValue = Math.pow(10, maxDigit) - 1
+    const minValue = -1 * maxValue
+    return minValue <= value && value <= maxValue
+  }
+
   isInvalidNumberRange() {
     const parsedNumber = parseInt(this.expression)
-    return parsedNumber < -999 || parsedNumber > 999
+    return !this.isWithinMaxDigits(parsedNumber)
   }
 
   isSingleNegativeNumber() {
@@ -57,6 +63,7 @@ export default class Validator {
       } else if (this.isSingleNegativeNumber() && this.isInvalidNumberRange()) {
         throw new Error(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
       }
+      // 피연산 / 연산자 / 피연산 형식에서 range 검사가 안되고 있음!
     }
     return true
   }
