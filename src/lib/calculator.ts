@@ -7,13 +7,11 @@ type Operator = UnionFromTuple<typeof ARITHMETIC_OPERATORS>
 export default class Calculator {
   operands: number[]
   operators: Operator[]
-  expressionCharactersArray: string[]
 
-  constructor(input: string) {
+  constructor(expression: string) {
     this.operands = []
     this.operators = []
-    this.expressionCharactersArray = input.split('')
-    this.parseExpression()
+    this.parseExpression(expression)
   }
 
   isOperand(input: string) {
@@ -28,9 +26,9 @@ export default class Calculator {
     this.operands.push(Number(operand))
   }
 
-  parseExpression() {
+  parseExpression(expression: string) {
     let operand = INIT_OPERAND
-    for (const [index, character] of this.expressionCharactersArray.entries()) {
+    for (const [index, character] of expression.split('').entries()) {
       if (this.isOperand(character) || this.isNonOperatorNegative(character, index)) {
         operand += character
       } else {
