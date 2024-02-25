@@ -1,5 +1,5 @@
 import { useCalculator } from "@/hooks/useCalculator"
-import { Operation } from "@/types/calculator"
+import { Operation } from "@/types/app"
 import { FormEventHandler } from "react"
 
 export const Calculator = () => {

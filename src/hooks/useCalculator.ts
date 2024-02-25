@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Calculator as CalculatorApp } from "@/utils/calculator";
 import { ERROR_MESSAGE } from "@/constants/message";
 import { REGEXP } from "@/constants/regexp";
-import { Operation, Operator } from "@/types/calculator";
-import { OPERATION_SYMBOLS } from "@/constants/calculator";
+import { Operation, Operator } from "@/types/app";
+import { OPERATION_SYMBOLS } from "@/constants/app";
 
 export const useCalculator = () => {
   const calculator = new CalculatorApp();

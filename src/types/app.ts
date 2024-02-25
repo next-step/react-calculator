@@ -1,4 +1,4 @@
-import { OPERATION_SYMBOLS } from "@/constants/calculator";
+import { OPERATION_SYMBOLS } from "@/constants/app";
 import { Calculator } from "@/utils/calculator";
 
 export type Operation = Exclude<keyof Calculator, 'getValue' | 'clear'>
