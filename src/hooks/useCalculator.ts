@@ -22,7 +22,7 @@ export const useCalculator = () => {
   const onClickDigit = (digit: (typeof DIGITS)[number]) => {
     if (!calculatorStatus.operation) {
       // 첫번째 피연산자 입력
-      if (Validator.checkIsValidDigits(calculatorStatus.operand1 * digit)) {
+      if (Validator.checkIsValidDigits(calculatorStatus.operand1 * 10 + digit)) {
         setCalculatorStatus((prev) => ({
           ...prev,
           operand1: prev.operand1 * 10 + digit,
@@ -43,7 +43,7 @@ export const useCalculator = () => {
       return;
     }
 
-    if (Validator.checkIsValidDigits(calculatorStatus.operand2 * digit)) {
+    if (Validator.checkIsValidDigits(calculatorStatus.operand2 * 10 + digit)) {
       setCalculatorStatus((prev) => ({
         ...prev,
         operand2: prev.operand2! * 10 + digit,
@@ -59,12 +59,14 @@ export const useCalculator = () => {
   const onClickOperation = (operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN]) => {
     if (operation === OPERATION_SIGN.equals) {
       // 결과 출력
-      const result = Calculator.calculate(
-        {
-          operand1: calculatorStatus.operand1,
-          operand2: calculatorStatus.operand2 ?? calculatorStatus.operand1,
-        },
-        calculatorStatus.operation ?? OPERATION_SIGN.equals,
+      const result = Math.floor(
+        Calculator.calculate(
+          {
+            operand1: calculatorStatus.operand1,
+            operand2: calculatorStatus.operand2 ?? calculatorStatus.operand1,
+          },
+          calculatorStatus.operation ?? OPERATION_SIGN.equals,
+        ),
       );
 
       if (Validator.checkIsError(result)) {
