@@ -1,5 +1,6 @@
 import { ARITHMETIC_OPERATORS, ASSIGN_OPERATOR, OPERANDS, CLEAR_MODIFIER } from '@/constants'
 import { useExpressionState } from '@/hooks/use-expression-state'
+import { getErrorMessage } from './utils/get-error-message'
 
 function App() {
   const [expression, updateExpression, calculateExpression, clearExpression] = useExpressionState()
@@ -8,7 +9,7 @@ function App() {
     try {
       updateExpression(operand)
     } catch (error) {
-      alert((error as Error).message)
+      alert(getErrorMessage(error))
     }
   }
 
@@ -16,7 +17,7 @@ function App() {
     try {
       updateExpression(operator)
     } catch (error) {
-      alert((error as Error).message)
+      alert(getErrorMessage(error))
     }
   }
 

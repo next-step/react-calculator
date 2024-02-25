@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react'
 import { useExpressionState } from './use-expression-state'
 import { act } from '@/tests/test-utils'
 import { INPUT_NUMBER_FIRST_ERROR_MESSAGE, THREE_DIGIT_LIMIT_ERROR_MESSAGE } from '@/constants'
+import { getErrorMessage } from '@/utils/get-error-message'
 
 describe('useExpressionState Test', () => {
   const EXPRESSION = 0
@@ -65,7 +66,7 @@ describe('useExpressionState Test', () => {
       act(() => result.current[UPDATE]('1'))
       act(() => result.current[UPDATE]('1'))
     } catch (error) {
-      expect((error as Error).message).toBe(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
+      expect(getErrorMessage(error)).toBe(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
     }
   })
 
