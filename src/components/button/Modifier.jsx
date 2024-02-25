@@ -1,15 +1,9 @@
-function Modifier({ onClick }) {
-  const handleClick = (value) => {
-    onClick(value, 'modifier');
-  };
+const modifier = 'AC';
 
+function Modifier({ onClick }) {
   return (
-    <button
-      type="button"
-      className="modifier"
-      onClick={() => handleClick('AC')}
-    >
-      AC
+    <button type="button" className="modifier" onClick={() => onClick()}>
+      {modifier}
     </button>
   );
 }

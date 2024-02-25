@@ -1,10 +1,6 @@
 const operators = ['/', 'X', '-', '+', '='];
 
 function Operator({ onClick }) {
-  const handleClick = (value) => {
-    onClick(value, 'operator');
-  };
-
   return (
     <>
       {operators.map((operator) => (
@@ -12,7 +8,7 @@ function Operator({ onClick }) {
           type="button"
           key={operator}
           className="operation"
-          onClick={() => handleClick(operator)}
+          onClick={() => onClick(operator)}
         >
           {operator}
         </button>
