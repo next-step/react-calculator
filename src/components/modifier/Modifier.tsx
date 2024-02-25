@@ -1,10 +1,16 @@
 import Button from "../button/Button";
-import { BUTTON_VARIANTS } from "../button/Button.type";
+import { FC } from "react";
+import { ButtonVariantEnum } from "../button/Button.type.ts";
 
-const Modifier = () => {
+interface Props {
+    handleCalculatorResult: () => void;
+}
+const Modifier: FC<Props> = ({ handleCalculatorResult }) => {
   return (
     <div className="modifiers subgrid">
-      <Button variant={BUTTON_VARIANTS.MODIFIER}>AC</Button>
+      <Button variant={ButtonVariantEnum.MODIFIER} onClick={handleCalculatorResult}>
+        AC
+      </Button>
     </div>
   );
 };

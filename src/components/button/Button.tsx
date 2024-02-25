@@ -1,13 +1,19 @@
 import { FC, ReactNode } from "react";
-import { ButtonVariantType } from "./Button.type";
+import { ButtonVariantEnum } from "./Button.type.ts";
 
 interface Props {
   children: ReactNode;
-  variant: ButtonVariantType;
+  variant: ButtonVariantEnum;
+  onClick?: () => void;
 }
 
-const Button: FC<Props> = ({ children, variant }) => {
-  return <button className={variant}>{children}</button>;
+const Button: FC<Props> = ({ children, variant, onClick }) => {
+
+  return (
+    <button className={variant} onClick={() => onClick && onClick()}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
