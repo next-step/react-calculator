@@ -7,9 +7,10 @@ import {
   PLUS_INFINITY,
   MINUSE_INFINITY,
   INPUT_NUMBER_FIRST_ERROR_MESSAGE,
+  MAX_DIGITS,
+  THREE_DIGIT_LIMIT_ERROR_MESSAGE,
 } from '@/constants'
 import { ARITHMETIC_OPERATORS } from '@/constants'
-import Validator from '@/lib/validator'
 
 type UnionFromTuple<T> = T extends ReadonlyArray<infer U> ? U : never
 type Operator = UnionFromTuple<typeof ARITHMETIC_OPERATORS>
@@ -35,6 +36,13 @@ export default class Calculator {
     return Math.floor(operand1 / operand2)
   }
 
+  static validateOperand(operand: number, maxDigit: number = MAX_DIGITS) {
+    const maxValue = Math.pow(10, maxDigit) - 1
+    const minValue = -1 * maxValue
+
+    if (operand > maxValue || operand < minValue) throw new Error(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
+  }
+
   static operatorMethodMap = {
     [PLUS]: this.sum,
     [SUBTRACT]: this.subtract,
@@ -48,20 +56,16 @@ export default class Calculator {
     this.rightOperand = null
   }
 
-  validateOperand(operand: number) {
-    return new Validator(String(operand)).validateExpression()
-  }
-
   updateOperand(input: number) {
     if (!this.operator) {
       const newLeftOperand = Number(
         String(this.leftOperand === 0 ? '' : this.leftOperand) + String(input),
       )
-      this.validateOperand(newLeftOperand)
+      Calculator.validateOperand(newLeftOperand)
       return (this.leftOperand = newLeftOperand)
     }
     const newRightOperand = Number(String(this.rightOperand ?? '') + String(input))
-    this.validateOperand(newRightOperand)
+    Calculator.validateOperand(newRightOperand)
     this.rightOperand = newRightOperand
   }
 
