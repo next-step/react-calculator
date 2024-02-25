@@ -5,12 +5,14 @@ import {
   ERROR_MESSAGE,
   MAX_NUMBER_COUNT,
   OPERATORS,
+  MIN_NUMBER_TO_CALCULATE,
+  INITIAL_SCREEN_VALUE,
 } from '@/constants';
 import { parseExpression, calculate } from '@/utils';
 import type { OperatorType } from '@/types';
 
 function App() {
-  const [screenValue, setScreenValue] = useState('0');
+  const [screenValue, setScreenValue] = useState(INITIAL_SCREEN_VALUE);
   const inputNum = useRef('');
   const { numbers, operator } = parseExpression(screenValue);
   const operatorLabels = OPERATORS.map(({ label }) => label as string);
@@ -35,12 +37,12 @@ function App() {
   };
 
   const handleClickOperator = (operator: OperatorType) => {
-    if (screenValue === '0') {
+    if (screenValue === INITIAL_SCREEN_VALUE) {
       alert(ERROR_MESSAGE.NO_NUMBER);
       return;
     }
     if (isError) {
-      setScreenValue('0');
+      setScreenValue(INITIAL_SCREEN_VALUE);
       return;
     }
     if (numbers.length >= MAX_NUMBER_COUNT) {
@@ -58,11 +60,11 @@ function App() {
   };
   const handleClickAllClear = () => {
     inputNum.current = '';
-    setScreenValue('0');
+    setScreenValue(INITIAL_SCREEN_VALUE);
   };
   const handleClickCalculate = () => {
     inputNum.current = '';
-    if (numbers.length < 2 || !operator) {
+    if (numbers.length < MIN_NUMBER_TO_CALCULATE || !operator) {
       setScreenValue(`${numbers[0]}`);
       return;
     }

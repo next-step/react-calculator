@@ -1,5 +1,7 @@
 const MAX_NUMBER_LENGTH = 3;
 const MAX_NUMBER_COUNT = 2;
+const MIN_NUMBER_TO_CALCULATE = 2;
+const INITIAL_SCREEN_VALUE = '0';
 
 const DIGITS = Array.from({ length: 10 }, (_, i) => 9 - i);
 
@@ -33,5 +35,7 @@ export {
   DIGITS,
   MAX_NUMBER_LENGTH,
   MAX_NUMBER_COUNT,
+  MIN_NUMBER_TO_CALCULATE,
   ERROR_MESSAGE,
+  INITIAL_SCREEN_VALUE
 };
