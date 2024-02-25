@@ -28,7 +28,7 @@ export const useCalculator = ({
       : `${rightOperand}${addedDigit}`
 
     /** 중복된 0 입력 무효 처리 */
-    if (Number(nextDigit) === 0) {
+    if (Number(nextDigit) === 0 && nextDigit.length > 1) {
       return
     }
 
