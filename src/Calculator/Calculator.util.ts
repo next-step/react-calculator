@@ -15,7 +15,7 @@ export const calculate = ({
     case '-':
       return leftOperand - rightOperand
     case '/':
-      return leftOperand / rightOperand
+      return Math.floor(leftOperand / rightOperand)
     case 'X':
       return leftOperand * rightOperand
     default:

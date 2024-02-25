@@ -58,13 +58,11 @@ export const useCalculator = ({
     }
 
     updateCalculatedValue(
-      Math.floor(
-        calculate({
-          leftOperand: Number(leftOperand),
-          operation,
-          rightOperand: Number(rightOperand),
-        }),
-      ),
+      calculate({
+        leftOperand: Number(leftOperand),
+        operation,
+        rightOperand: Number(rightOperand),
+      }),
     )
   }
 
