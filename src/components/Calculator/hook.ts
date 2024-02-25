@@ -14,20 +14,22 @@ export const useCalculator = () => {
   const calculator = new Calculator()
 
   const getResult = () => {
+    if (!number1 || !number2) return
+
     if (operator === '+') {
-      return calculator.add(number1!, number2!)
+      return calculator.add(number1, number2)
     }
 
     if (operator === '-') {
-      return calculator.minus(number1!, number2!)
+      return calculator.minus(number1, number2)
     }
 
     if (operator === '/') {
-      return Number(calculator.division(number1!, number2!).toFixed(0))
+      return Number(calculator.division(number1, number2).toFixed(0))
     }
 
     if (operator === 'X') {
-      return calculator.multiply(number1!, number2!)
+      return calculator.multiply(number1, number2)
     }
   }
 
