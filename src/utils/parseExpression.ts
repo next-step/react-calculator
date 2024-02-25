@@ -10,7 +10,7 @@ const parseExpression = (expression: string) => {
     .split(operatorRegex)
     .map((num) => parseInt(num, 10))
     .filter((num) => !Number.isNaN(num));
-  const operator = expression.match(operatorRegex) as OperatorType[] | null;
+  const operator = operatorRegex.exec(expression) as [OperatorType] | null;
 
   return { numbers, operator: operator?.[0] };
 };
