@@ -1,25 +1,33 @@
 import { MESSAGE } from '../constants/message';
 
 export const Validation = {
+  CONSTANTS: {
+    MAX_DIGIT: 999,
+    DIGITS_UNIT: 10,
+  },
+
   add(result: number) {
-    Validation.isInfinite(result);
+    this.isInfinite(result);
   },
 
   subtract(result: number) {
-    Validation.isInfinite(result);
+    this.isInfinite(result);
   },
 
   multiply(result: number) {
-    Validation.isInfinite(result);
+    this.isInfinite(result);
   },
 
   divide({ x, y }: { x: number; y: number }) {
-    Validation.isDivideByZero(y);
-    Validation.isInfinite(x);
+    this.isDivideByZero(y);
+    this.isInfinite(x);
   },
 
   digitOverThreeDigits(x: number) {
-    if (x * 10 > 999) {
+    const minX = x * 10;
+    const isOverThreeDigits = minX > this.CONSTANTS.MAX_DIGIT;
+
+    if (isOverThreeDigits) {
       throw new Error(MESSAGE.ERROR.DIGIT.OVER_THREE_DIGITS);
     }
   },
