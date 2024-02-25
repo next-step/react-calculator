@@ -1,8 +1,8 @@
 import {FC} from "react";
 import Button from "../button/Button";
 import useCalculator from "../hooks/useCalculator.tsx";
-import {OperationTypeEnum} from "./Opertaiton.type.ts";
-import {ButtonVariantEnum} from "../button/Button.type.ts";
+import {OperationTypeEnum} from "./Opertaiton.enum.ts";
+import {ButtonVariantEnum} from "../button/Button.enum.ts";
 
 const OPERATION_BUTTON_LIST: { render: string; type: OperationTypeEnum }[] = [
     {render: "/", type: OperationTypeEnum.DIVIDE},

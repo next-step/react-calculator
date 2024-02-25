@@ -1,7 +1,7 @@
 import Button from "../button/Button";
 import { FC } from "react";
-import { OperationTypeEnum } from "../operation/Opertaiton.type.ts";
-import { ButtonVariantEnum } from "../button/Button.type.ts";
+import { OperationTypeEnum } from "../operation/Opertaiton.enum.ts";
+import { ButtonVariantEnum } from "../button/Button.enum.ts";
 
 interface Props {
   setNumber: (number: { left: string; right: string }) => void;

@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { ButtonVariantEnum } from "./Button.type.ts";
+import { ButtonVariantEnum } from "./Button.enum.ts";
 
 interface Props {
   children: ReactNode;

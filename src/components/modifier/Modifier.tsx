@@ -1,6 +1,6 @@
 import Button from "../button/Button";
 import { FC } from "react";
-import { ButtonVariantEnum } from "../button/Button.type.ts";
+import { ButtonVariantEnum } from "../button/Button.enum.ts";
 
 interface Props {
     handleCalculatorResult: () => void;

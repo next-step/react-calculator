@@ -4,7 +4,7 @@ import Modifier from "./components/modifier/Modifier";
 import Total from "./components/total/Total";
 import { useState } from "react";
 import Operator from "./components/operation/Operation";
-import {OperationTypeEnum} from "./components/operation/Opertaiton.type.ts";
+import {OperationTypeEnum} from "./components/operation/Opertaiton.enum.ts";
 
 const App = () => {
   const [number, setNumber] = useState({
