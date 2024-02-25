@@ -6,16 +6,16 @@ import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 export const useCalculator = ({
   maxNumberLength = DEFAULT_MAX_NUMBER_LENGTH,
 }: UseCalculatorProps) => {
-  const [result, setResult] = useState('0')
+  const [calculatedResult, setCalculatedResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
   const [operation, setOperation] = useState<OPERATION | ''>('')
   const [rightOperand, setRightOperand] = useState('')
   const displayedContents = !leftOperand
-    ? result
+    ? calculatedResult
     : `${leftOperand}${operation}${rightOperand}`
 
   const initialize = () => {
-    setResult('0')
+    setCalculatedResult('0')
     setLeftOperand('')
     setOperation('')
     setRightOperand('')
@@ -48,16 +48,20 @@ export const useCalculator = ({
       return
     }
 
-    const currentResult = Math.floor(
-      calculate({
-        leftOperand: Number(leftOperand),
-        operation,
-        rightOperand: Number(rightOperand),
-      }),
+    updateCalculatedValue(
+      Math.floor(
+        calculate({
+          leftOperand: Number(leftOperand),
+          operation,
+          rightOperand: Number(rightOperand),
+        }),
+      ),
     )
+  }
 
-    if (currentResult === Infinity || currentResult === -Infinity) {
-      setResult('오류')
+  const updateCalculatedValue = (calculatedValue: number) => {
+    if (calculatedValue === Infinity || calculatedValue === -Infinity) {
+      setCalculatedResult('오류')
       setLeftOperand('')
       setOperation('')
       setRightOperand('')
@@ -65,8 +69,8 @@ export const useCalculator = ({
       return
     }
 
-    setResult(String(currentResult))
-    setLeftOperand(String(currentResult))
+    setCalculatedResult(String(calculatedValue))
+    setLeftOperand(String(calculatedValue))
     setOperation('')
     setRightOperand('')
   }
