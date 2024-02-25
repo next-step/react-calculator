@@ -5,9 +5,9 @@ import { INPUT_NUMBER_FIRST_ERROR_MESSAGE, THREE_DIGIT_LIMIT_ERROR_MESSAGE } fro
 import { getErrorMessage } from '@/utils/get-error-message'
 
 describe('useExpressionState Test', () => {
-  const EXPRESSION = 0
-  const UPDATE = 1
-  const CALCULATE = 2
+  const EXPRESSION = 'expression'
+  const UPDATE = 'updateExpression'
+  const CALCULATE = 'calculateExpression'
   test('초기 값은 0이다', () => {
     const {
       result: { current },
@@ -17,17 +17,17 @@ describe('useExpressionState Test', () => {
 
   test('update 하면 update한 expression을 반환한다', () => {
     const { result } = renderHook(() => useExpressionState())
-    const [, update] = result.current
-    act(() => update('123'))
+    const { updateExpression } = result.current
+    act(() => updateExpression('123'))
     expect(result.current[EXPRESSION]).toBe('123')
   })
 
   test('다른 값에서 clear하면 그 값은 0이된다', () => {
     const { result } = renderHook(() => useExpressionState())
-    const [, update, , clear] = result.current
-    act(() => update('123'))
+    const { updateExpression, clearExpression } = result.current
+    act(() => updateExpression('123'))
     expect(result.current[EXPRESSION]).toBe('123')
-    act(() => clear())
+    act(() => clearExpression())
     expect(result.current[EXPRESSION]).toBe('0')
   })
 

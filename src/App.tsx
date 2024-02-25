@@ -3,7 +3,8 @@ import { useExpressionState } from '@/hooks/use-expression-state'
 import { getErrorMessage } from './utils/get-error-message'
 
 function App() {
-  const [expression, updateExpression, calculateExpression, clearExpression] = useExpressionState()
+  const { expression, updateExpression, calculateExpression, clearExpression } =
+    useExpressionState()
 
   const handleClickOperand = (operand: string) => () => {
     try {

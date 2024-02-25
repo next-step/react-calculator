@@ -6,19 +6,19 @@ const ZERO = '0'
 const INIFINITY_TEXT = '오류'
 
 export const useExpressionState = () => {
-  const [expression, setExpression] = useState(ZERO)
+  const [_expression, setExpression] = useState(ZERO)
 
-  const resultedExpression = Calculator.isInfinity(expression) ? INIFINITY_TEXT : expression
+  const resultedExpression = Calculator.isInfinity(_expression) ? INIFINITY_TEXT : _expression
 
   const updateExpression = (input: string) => {
-    if (Calculator.isInfinity(expression)) return
-    const derivedExpression = expression === ZERO ? input : expression + input
+    if (Calculator.isInfinity(_expression)) return
+    const derivedExpression = _expression === ZERO ? input : _expression + input
     new Validator(derivedExpression).validateExpression()
     setExpression(derivedExpression)
   }
 
   const calculateExpression = () => {
-    const calculatedExpression = String(new Calculator(expression).calculate())
+    const calculatedExpression = String(new Calculator(_expression).calculate())
     setExpression(calculatedExpression)
   }
 
@@ -26,5 +26,5 @@ export const useExpressionState = () => {
     setExpression(ZERO)
   }
 
-  return [resultedExpression, updateExpression, calculateExpression, clearExpression] as const
+  return { expression: resultedExpression, updateExpression, calculateExpression, clearExpression }
 }
