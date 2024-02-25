@@ -1,6 +1,6 @@
 import { CALCULATOR } from "data/constant";
 
-import OperateButton from "components/operator/OperateButton";
+import OperatorButton from "components/operator/OperatorButton";
 
 interface OperatorButtonsProps {
   onOperatorClick: (operator: string) => void;
@@ -11,11 +11,11 @@ export default function OperatorButtons({
 }: OperatorButtonsProps) {
   return (
     <div className="operations subgrid">
-      {CALCULATOR.OPERATIONS.map((operation) => (
-        <OperateButton
-          key={operation}
-          operate={operation}
-          onClick={(operation) => onOperatorClick(operation)}
+      {CALCULATOR.OPERATOR.map((operator) => (
+        <OperatorButton
+          key={operator}
+          operator={operator}
+          onClick={(operator) => onOperatorClick(operator)}
         />
       ))}
     </div>
