@@ -44,6 +44,9 @@ export default function useCalculator() {
 
   const inputOperator = useCallback(
     (input: OperatorType) => {
+      if (input === '=' && !num2) {
+        return;
+      }
       const shouldCalculate = input === '=' && num2 !== undefined && operator;
       if (shouldCalculate) {
         const operate = makeOperate(operator);
