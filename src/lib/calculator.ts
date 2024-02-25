@@ -14,21 +14,22 @@ type UnionFromTuple<T> = T extends ReadonlyArray<infer U> ? U : never
 type Operator = UnionFromTuple<typeof ARITHMETIC_OPERATORS>
 
 export default class Calculator {
+  operator: Operator | null
+  leftOperand: number | null
+  rightOperand: number | null
+
   operands: number[]
   operators: Operator[]
 
   static isInfinity(expression: string) {
     return expression === PLUS_INFINITY || expression === MINUSE_INFINITY
   }
-
   static sum(operand1: number, operand2: number) {
     return operand1 + operand2
   }
-
   static subtract(operand1: number, operand2: number) {
     return operand1 - operand2
   }
-
   static multiply(operand1: number, operand2: number) {
     return operand1 * operand2
   }
@@ -36,58 +37,50 @@ export default class Calculator {
     return Math.floor(operand1 / operand2)
   }
 
+  static operatorMethodMap = {
+    [PLUS]: this.sum,
+    [SUBTRACT]: this.subtract,
+    [MULTIPLY]: this.multiply,
+    [DIVIDE]: this.divide,
+  }
+
   constructor(expression: string) {
+    this.operator = null
+    this.leftOperand = null
+    this.rightOperand = null
+
     this.operands = []
     this.operators = []
     this.parseExpression(expression)
   }
 
-  isOperand(input: string) {
-    return !OPERATORS_REGEX.test(input)
-  }
-
-  isNonOperatorNegative(character: string, index: number) {
-    return index === 0 && character === '-'
-  }
-
-  addOperand(operand: string) {
-    this.operands.push(Number(operand))
+  isOperand(input: string, index: number) {
+    return !OPERATORS_REGEX.test(input) || (index === 0 && input === '-')
   }
 
   parseExpression(expression: string) {
-    let operand = INIT_OPERAND
+    let operandStr = INIT_OPERAND
     for (const [index, character] of expression.split('').entries()) {
-      if (this.isOperand(character) || this.isNonOperatorNegative(character, index)) {
-        operand += character
+      if (this.isOperand(character, index)) {
+        operandStr += character
       } else {
-        this.operators.push(character as Operator)
-        if (operand.length > 0) {
-          this.addOperand(operand)
-          operand = INIT_OPERAND
+        this.operator = character as Operator
+        if (operandStr.length > 0) {
+          this.leftOperand = Number(operandStr)
+          operandStr = INIT_OPERAND
         }
       }
     }
-    if (operand) {
-      this.addOperand(operand)
+    if (operandStr) {
+      this.rightOperand = Number(operandStr)
     }
   }
 
   calculate() {
-    const operatorMethodMap = {
-      [PLUS]: Calculator.sum,
-      [SUBTRACT]: Calculator.subtract,
-      [MULTIPLY]: Calculator.multiply,
-      [DIVIDE]: Calculator.divide,
-    } as const
+    if (this.leftOperand === null || this.rightOperand === null || this.operator === null)
+      return this.leftOperand
 
-    while (this.operands.length >= 2 && this.operators.length > 0) {
-      const operand1 = this.operands.shift() as number
-      const operand2 = this.operands.shift() as number
-      const operatorMethod = operatorMethodMap[this.operators.shift() as Operator]
-      const result = operatorMethod(operand1, operand2)
-      this.operands.unshift(result)
-    }
-
-    return this.operands[0]
+    const operatorMethod = Calculator.operatorMethodMap[this.operator]
+    return operatorMethod(this.leftOperand, this.rightOperand)
   }
 }
