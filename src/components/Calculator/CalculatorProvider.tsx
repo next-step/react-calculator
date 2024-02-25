@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
+import { isNumber } from '../../utils/is';
 import calculateHelper from './calculateHelper';
 import useValidation from './useValidation';
 
@@ -86,13 +87,11 @@ function CalculateProvider({ children }: PropsWithChildren) {
 
     if (isProcessNotStarted) return 0;
 
-    const isFiniteValue = process.some((item) => isFinite(item as number));
+    const containsInfiniteValue = process.filter(isNumber).some((item) => !isFinite(item));
 
-    if (isFiniteValue) {
-      return process;
-    } else {
-      return '오류';
-    }
+    if (containsInfiniteValue) return '오류';
+
+    return process;
   })();
 
   const context: Context = {
