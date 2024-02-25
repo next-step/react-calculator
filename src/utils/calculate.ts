@@ -13,6 +13,6 @@ export const calculate = (
     case "/":
       return Number(firstOperand) / Number(secondOperand);
     default:
-      return Number(firstOperand);
+      throw Error("잘못된 연산자입니다.");
   }
 };

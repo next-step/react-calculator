@@ -32,6 +32,13 @@ export const handleInputDigit = (state: CalculatorState, digit: string) => {
 export const handleInputEqualOperator = (state: CalculatorState) => {
   const { firstOperand, operator, secondOperand } = state;
 
+  if (secondOperand === "") {
+    return {
+      ...state,
+      display: firstOperand === "" ? "0" : firstOperand,
+    };
+  }
+
   const result = calculate(firstOperand, operator, secondOperand);
 
   if (isNaN(result) || !isFinite(result)) {
