@@ -27,8 +27,18 @@ describe('Calculator', () => {
       await user.click(NumberButtons[3])
       await user.click(NumberButtons[4])
 
-      screen.logTestingPlaygroundURL()
       expect(spy).toBeCalledWith(ERROR_MESSAGE.MAX_LENGTH_NUMBER)
     })
+  })
+  test('숫자를 입력받지 않은 상태에서 연산 버튼을 누른 경우, 오류를 발생시킨다.', async () => {
+    const { user } = render(<Calculator/>)
+    const OperationButton = screen.getByRole('button', { name: '+'})
+
+    const spy = vi.fn()
+    vi.spyOn(window, 'alert').mockImplementation(spy)
+
+    await user.click(OperationButton)
+
+    expect(spy).toBeCalledWith(ERROR_MESSAGE.NOT_VALID_FORMULA)
   })
 })

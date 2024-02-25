@@ -24,6 +24,11 @@ export const Calculator = () => {
   }
 
   const handleClickOperation = (operation: Operation) => () => {
+    if(!REGEXP.END_WITH_NUMBER.test(formula)) {
+      alert(ERROR_MESSAGE.NOT_VALID_FORMULA)
+      return
+    }
+
     const operationSymbol = CALCULATOR_OPERATION_MAP[operation]
     setFormula((prev) => prev + operationSymbol)
   }
