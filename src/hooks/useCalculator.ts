@@ -1,11 +1,19 @@
 import { useState } from 'react';
 
-export default function useCalculator() {
+interface CalculatorOptions {
+	maxDigits?: number;
+}
+
+export default function useCalculator(
+	props: CalculatorOptions = {
+		maxDigits: 3,
+	},
+) {
 	const [display, setDisplay] = useState('0');
 
 	const addNumber = (value: string) => {
-		if (display.split(/[+\-x/]/).pop()?.length === 3) {
-			alert('숫자는 3자리까지만 입력 가능합니다.');
+		if (display.split(/[+\-x/]/).pop()?.length === props.maxDigits) {
+			alert(`숫자는 ${props.maxDigits}자리까지만 입력 가능합니다.`);
 			return;
 		}
 
@@ -98,5 +106,5 @@ export default function useCalculator() {
 		setDisplay('0');
 	};
 
-	return { display, enter, calculate, clear };
+	return { display, enter, calculate, clear, options: props };
 }
