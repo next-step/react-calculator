@@ -12,14 +12,14 @@ interface CalculatorState {
 const INITIAL_CALCULATOR_STATE: CalculatorState = { num1: 0 };
 
 export default function useCalculator() {
-  const [{ num1, num2, operator, isNum2Negative }, setState] =
+  const [{ num1, num2, operator, isNum2Negative }, setCalculatorState] =
     useState<CalculatorState>(INITIAL_CALCULATOR_STATE);
 
   const inputNumber = useCallback(
     (num: number) => {
       const isInfinite = num1 === Infinity;
       if (isInfinite) {
-        setState({ num1: num });
+        setCalculatorState({ num1: num });
         return;
       }
 
@@ -31,7 +31,7 @@ export default function useCalculator() {
       }
 
       const newText = (inputText ?? '') + num.toString();
-      setState(prev =>
+      setCalculatorState(prev =>
         isFirstNum ? { ...prev, num1: parseInt(newText) } : { ...prev, num2: parseInt(newText) },
       );
     },
@@ -39,7 +39,7 @@ export default function useCalculator() {
   );
 
   const clear = useCallback(() => {
-    setState(INITIAL_CALCULATOR_STATE);
+    setCalculatorState(INITIAL_CALCULATOR_STATE);
   }, []);
 
   const inputOperator = useCallback(
@@ -51,12 +51,12 @@ export default function useCalculator() {
       if (shouldCalculate) {
         const operate = makeOperate(operator);
         const result = operate(num1, isNum2Negative ? -num2 : num2);
-        setState({ num1: result });
+        setCalculatorState({ num1: result });
         return;
       }
 
       if (input === '-' && operator !== undefined) {
-        setState(prev => ({ ...prev, isNum2Negative: true }));
+        setCalculatorState(prev => ({ ...prev, isNum2Negative: true }));
         return;
       }
 
@@ -64,7 +64,7 @@ export default function useCalculator() {
         alert('두 수의 연산만 가능합니다!');
         return;
       }
-      setState(prev => ({ ...prev, operator: input }));
+      setCalculatorState(prev => ({ ...prev, operator: input }));
     },
     [num1, num2, operator, isNum2Negative],
   );
