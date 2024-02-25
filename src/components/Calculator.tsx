@@ -1,60 +1,79 @@
-import { isNumber } from "@/utils/validation"
+import { ERROR_MESSAGE } from "@/constants/message"
+import { REGEXP } from "@/constants/regexp"
 import { Calculator as CalculatorApp } from "@/utils/calculator"
-import { ChangeEventHandler, FormEventHandler, useState } from "react"
+import { FormEventHandler, useState } from "react"
+
+type Operation = Exclude<keyof CalculatorApp, 'getValue' | 'clear'>
+
+type CalculatorOperationMap = {
+  [key in Operation]: string
+}
+
+const CALCULATOR_OPERATION_MAP: CalculatorOperationMap = {
+  sum: '+',
+  subtract: '-',
+  multiply: 'x',
+  division: '/'
+}
 
 export const Calculator = () => {
-  const calculator = new CalculatorApp()
-  const [inputValues, setInputValues] = useState({
-    first: '',
-    second: '',
-    result: 0
-  })
+  const [formula, setFormula] = useState('')
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value, id } = e.target
+  const handleClickClear = () => {
+    setFormula('')
+  }
 
-    if (isNumber(Number(value))) {
-      setInputValues({ ...inputValues, [id]: value })
+  const handleClickOperation = (operation: Operation) => () => {
+    const operationSymbol = CALCULATOR_OPERATION_MAP[operation]
+    setFormula((prev) => prev + operationSymbol)
+  }
+
+  const handleClickNumber = (num: number) => () => {
+    const newFormula = formula + num
+
+    if(REGEXP.MAX_LENGTH_NUMBER.test(newFormula)) {
+      alert(ERROR_MESSAGE.MAX_LENGTH_NUMBER)
+      return
     }
+
+    setFormula(newFormula)
   }
 
-  const handleClick = (operation: keyof CalculatorApp) => () => {
-    const first = Number(inputValues.first)
-    const second = Number(inputValues.second)
-
-    calculator[operation](first, second)
-  }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    setInputValues({ first: '', second: '', result: calculator.getValue() })
+    handleClickClear()
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="first">
-          숫자1
-          <input id="first" type="text" maxLength={3} value={inputValues.first} onChange={handleChange}/>
-        </label>
-      </div>
-      <div>
-        <button type="button" onClick={handleClick('sum')}>+</button>
-        <button type="button" onClick={handleClick('subtract')}>-</button>
-        <button type="button" onClick={handleClick('multiply')}>x</button>
-        <button type="button" onClick={handleClick('division')}>%</button>
-      </div>
-      <div>
-        <label htmlFor="second">
-          숫자2
-          <input id="second" type="text" maxLength={3} value={inputValues.second} onChange={handleChange}/>
-        </label>
-      </div>
-      <button type="submit">제출</button>
-      <div>
-        <h3>결과</h3>
-        <input id="result" type="text" value={inputValues.result}/>
-      </div>
-    </form>
+    <input id="result" type="text" value={formula} readOnly/>
+    <div>
+      <button type="button" onClick={handleClickClear}>AC</button>
+      <button type="button" onClick={handleClickOperation('division')}>/</button>
+    </div>
+    <div>
+      {[7, 8, 9].map(num => (
+        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
+      ))}
+      <button type="button" onClick={handleClickOperation('multiply')}>x</button>
+    </div>
+    <div>
+      {[4, 5, 6].map(num => (
+        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
+      ))}
+      <button type="button" onClick={handleClickOperation('subtract')}>-</button>
+    </div>
+    <div>
+      {[1, 2, 3].map(num => (
+        <button key={`num-${num}`} type="button" onClick={handleClickNumber(num)}>{num}</button>
+      ))}
+      <button type="button" onClick={handleClickOperation('sum')}>+</button>
+    </div>
+    <div>
+      <button type="button" onClick={handleClickNumber(0)}>0</button>
+      <button type="submit">=</button>
+    </div>
+  </form>
   )
 }
