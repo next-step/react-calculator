@@ -1,30 +1,45 @@
 import { useState } from 'react'
-import Validator from '@/lib/validator'
 import Calculator from '@/lib/calculator'
+import { Operator } from '@/types'
 
 const ZERO = '0'
 const INIFINITY_TEXT = '오류'
 
+const calculator = new Calculator()
+
 export const useExpressionState = () => {
-  const [_expression, setExpression] = useState(ZERO)
+  const [expressionState, setExpressionState] = useState(ZERO)
 
-  const resultedExpression = Calculator.isInfinity(_expression) ? INIFINITY_TEXT : _expression
+  const isInfiniteExpression = Calculator.isInfinity(expressionState)
+  const expression = isInfiniteExpression ? INIFINITY_TEXT : expressionState
 
-  const updateExpression = (input: string) => {
-    if (Calculator.isInfinity(_expression)) return
-    const derivedExpression = _expression === ZERO ? input : _expression + input
-    new Validator(derivedExpression).validateExpression()
-    setExpression(derivedExpression)
+  const updateByOperand = (operand: number) => {
+    if (isInfiniteExpression) return
+    calculator.updateOperand(operand)
+    setExpressionState(calculator.getExpression())
+  }
+
+  const updateByOperator = (operator: Operator) => {
+    if (isInfiniteExpression) return
+    calculator.updateOperator(operator)
+    setExpressionState(calculator.getExpression())
   }
 
   const calculateExpression = () => {
-    const calculatedExpression = String(new Calculator(_expression).calculate())
-    setExpression(calculatedExpression)
+    const calculatedExpression = calculator.calculate()
+    setExpressionState(String(calculatedExpression))
   }
 
   const clearExpression = () => {
-    setExpression(ZERO)
+    calculator.clear()
+    setExpressionState(calculator.getExpression())
   }
 
-  return { expression: resultedExpression, updateExpression, calculateExpression, clearExpression }
+  return {
+    expression,
+    updateByOperand,
+    updateByOperator,
+    calculateExpression,
+    clearExpression,
+  }
 }

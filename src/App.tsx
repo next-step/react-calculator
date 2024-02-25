@@ -1,22 +1,29 @@
 import { ARITHMETIC_OPERATORS, ASSIGN_OPERATOR, OPERANDS, CLEAR_MODIFIER } from '@/constants'
 import { useExpressionState } from '@/hooks/use-expression-state'
 import { getErrorMessage } from './utils/get-error-message'
+import { Operator } from './types'
 
 function App() {
-  const { expression, updateExpression, calculateExpression, clearExpression } =
-    useExpressionState()
+  const {
+    expression,
+    updateExpression,
+    updateByOperand,
+    updateByOperator,
+    calculateExpression,
+    clearExpression,
+  } = useExpressionState()
 
-  const handleClickOperand = (operand: string) => () => {
+  const handleClickOperand = (operand: number) => () => {
     try {
-      updateExpression(operand)
+      updateByOperand(operand)
     } catch (error) {
       alert(getErrorMessage(error))
     }
   }
 
-  const handleClickArithmeticOperator = (operator: string) => () => {
+  const handleClickArithmeticOperator = (operator: Operator) => () => {
     try {
-      updateExpression(operator)
+      updateByOperator(operator)
     } catch (error) {
       alert(getErrorMessage(error))
     }
