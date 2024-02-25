@@ -14,13 +14,13 @@ describe('예외 대상이 되는 경우', () => {
       });
 
       it('초기 표시값은 0이다.', async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         expect($total.textContent).toBe('0');
       });
 
       it(`[${orderList}]를 순서대로 클릭하면 ${total}이(가) 표시된다.`, async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         for (const order of orderList) {
           const $ = await screen.findByRole('button', { name: order });
@@ -40,13 +40,13 @@ describe('예외 대상이 되는 경우', () => {
       });
 
       it('초기 표시값은 0이다.', async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         expect($total.textContent).toBe('0');
       });
 
       it(`[${orderList}]를 순서대로 클릭하면 ${total}이(가) 표시된다.`, async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         for (const order of orderList) {
           const $ = await screen.findByRole('button', { name: order });
@@ -58,7 +58,7 @@ describe('예외 대상이 되는 경우', () => {
     }
   );
 
-  describe.each([{ orderList: ['1', '/', '0'] }])(
+  describe.each([{ orderList: ['1', '/', '0', '='] }])(
     '연산의 결과값이 Infinity일 경우 오류라는 문자열을 보여준다. (아이폰 참고)',
     ({ orderList }) => {
       beforeEach(() => {
@@ -66,13 +66,13 @@ describe('예외 대상이 되는 경우', () => {
       });
 
       it('초기 표시값은 0이다.', async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         expect($total.textContent).toBe('0');
       });
 
       it(`[${orderList}]를 순서대로 클릭하면 Infinity가 표시된다.`, async () => {
-        const $total = await screen.findByRole('heading', { description: '0' });
+        const $total = await screen.findByRole('heading');
 
         for (const order of orderList) {
           const $ = await screen.findByRole('button', { name: order });

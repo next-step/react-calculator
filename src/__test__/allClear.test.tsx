@@ -13,13 +13,13 @@ describe.each([
   });
 
   it('초기 표시값은 0이다.', async () => {
-    const $total = await screen.findByRole('heading', { description: '0' });
+    const $total = await screen.findByRole('heading');
 
     expect($total.textContent).toBe('0');
   });
 
   it(`[${orderList},AC]를 순서대로 클릭하면 0이(가) 표시된다.`, async () => {
-    const $total = await screen.findByRole('heading', { description: '0' });
+    const $total = await screen.findByRole('heading');
     const $AC = await screen.findByRole('button', { name: 'AC' });
 
     for (const order of orderList) {
