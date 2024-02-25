@@ -2,14 +2,14 @@ import { MouseEventHandler } from 'react';
 import { DIGITS } from '../../constants';
 
 type Props = {
-  num: (typeof DIGITS)[number];
+  digit: (typeof DIGITS)[number];
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-export const Digit = ({ num, onClick }: Props) => {
+export const Digit = ({ digit, onClick }: Props) => {
   return (
     <button className={'digit'} onClick={onClick} type={'button'}>
-      {num}
+      {digit}
     </button>
   );
 };
