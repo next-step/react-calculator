@@ -15,7 +15,7 @@ export const CalculatorKeySet = ({ className, keys, onKeyClick }: CalculatorKeyS
         onKeyClick(value);
       };
       return (
-        <Button colorScheme={colorScheme} onClick={handleButtonClick}>
+        <Button key={`${value}-${label}`} colorScheme={colorScheme} onClick={handleButtonClick}>
           {label}
         </Button>
       );
