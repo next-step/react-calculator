@@ -1,4 +1,4 @@
-import './App.css';
+import './css/index.css';
 import { useEffect, useState } from 'react';
 import Digit from './components/button/Digit';
 import Modifier from './components/button/Modifier';
