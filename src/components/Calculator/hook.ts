@@ -33,55 +33,75 @@ export const useCalculator = () => {
     }
   }
 
+  const validator = (value: number) => {
+    if (String(value).length > MAX_NUMBER_COUNT) {
+      throw new Error('숫자는 세 자리까지만 입력 가능합니다!')
+    }
+
+    return true
+  }
+
+  const getCurrentStep = () => {
+    if (showOutput) {
+      return 'showOutput'
+    }
+
+    if (!operator) {
+      return 'firstNumberReceiving'
+    }
+
+    return 'secondNumberReceiving'
+  }
+
+  const getValueForCurrentStep = (value: number, step: ReturnType<typeof getCurrentStep>) => {
+    if (step === 'firstNumberReceiving') {
+      return isNil(number1) ? value : Number(String(number1) + value)
+    }
+
+    if (step === 'secondNumberReceiving') {
+      return isNil(number2) ? value : Number(String(number2) + value)
+    }
+
+    const result = getResult()
+    const fullValue = result === 0 ? value : Number(String(result) + value)
+
+    return fullValue
+  }
+
   const onClickNumber: MouseEventHandler<HTMLButtonElement> = (e) => {
     const value = e.currentTarget.name
 
-    if (showOutput) {
-      // 값을 입력하면 결과값에 더해야함
-      const result = getResult()!
-      const fullValue = result === 0 ? value : String(result) + value
+    try {
+      const currentStep = getCurrentStep()
+      const currentStepValue = getValueForCurrentStep(Number(value), currentStep)
 
-      if (fullValue.length > MAX_NUMBER_COUNT) {
-        window.alert('숫자는 세 자리까지만 입력 가능합니다!')
+      validator(currentStepValue)
 
-        return
-      }
-
-      setNumber1(Number(fullValue))
-      setNumber2(null)
-      setOperator(null)
-      setShowOutput(false)
-
-      return
-    }
-
-    // 첫 번째 숫자를 입력중일 경우
-    const isFirstNumberReceiving = !operator
-
-    if (isFirstNumberReceiving) {
-      const fullValue = isNil(number1) ? String(value) : String(number1) + value
-
-      if (fullValue.length > MAX_NUMBER_COUNT) {
-        window.alert('숫자는 세 자리까지만 입력 가능합니다!')
+      if (currentStep === 'showOutput') {
+        setNumber1(currentStepValue)
+        setNumber2(null)
+        setOperator(null)
+        setShowOutput(false)
 
         return
       }
 
-      setNumber1(Number(fullValue))
+      if (currentStep === 'firstNumberReceiving') {
+        setNumber1(Number(currentStepValue))
 
-      return
+        return
+      }
+
+      setNumber2(Number(currentStepValue))
+    } catch (error) {
+      if (error instanceof Error) {
+        window.alert(error.message)
+
+        return
+      }
+
+      window.alert('알 수 없는 에러가 발생했습니다.')
     }
-
-    // 두 번째 숫자를 입력중일 경우
-    const fullValue = isNil(number2) ? String(value) : String(number2) + value
-
-    if (fullValue.length > MAX_NUMBER_COUNT) {
-      window.alert('숫자는 세 자리까지만 입력 가능합니다!')
-
-      return
-    }
-
-    setNumber2(Number(fullValue))
   }
 
   const onClickOperator: MouseEventHandler<HTMLButtonElement> = (e) => {
