@@ -15,8 +15,7 @@ import {
 } from './constants/messages';
 
 function App() {
-  const [resultNumber, setResultNumber] = useState('');
-  const [allClear, setAllClear] = useState(true);
+  const [resultNumber, setResultNumber] = useState('0');
   const [operator, setOperator] = useState(null);
   const { result, count, calculate } = useCalculation();
 
@@ -26,19 +25,16 @@ function App() {
   }, [result, count]);
 
   const onClickModifier = () => {
-    setAllClear(true);
     setOperator(null);
-    setResultNumber('');
+    setResultNumber('0');
   };
 
   const onClickDigit = (value) => {
     const operand = resultNumber.split(operator);
 
     // 처음에 0이 입력된 경우
-    if (resultNumber === '') {
-      if (value === 0) {
-        return;
-      }
+    if (resultNumber === '0' && value === 0) {
+      return;
     }
 
     if (
@@ -55,15 +51,18 @@ function App() {
       return;
     }
 
-    setResultNumber(`${resultNumber}${value}`);
-    setAllClear(false);
+    if (resultNumber === '0') {
+      setResultNumber(`${value}`);
+    } else {
+      setResultNumber(`${resultNumber}${value}`);
+    }
   };
 
   const onClickOperator = (value) => {
     const operand = resultNumber.split(operator);
 
     // 처음에 연산자가 입력된 경우
-    if (resultNumber === '') {
+    if (resultNumber === '0') {
       alert(MSG_WARNING_INPUT_ORDER);
       return;
     }
@@ -91,14 +90,12 @@ function App() {
     } else {
       setResultNumber(`${resultNumber}${value}`);
     }
-
-    setAllClear(false);
   };
 
   return (
     <div id="app">
       <div className="calculator">
-        <h1 id="total">{allClear ? 0 : resultNumber}</h1>
+        <h1 id="total">{resultNumber}</h1>
         <div className="digits flex">
           <Digit onClick={onClickDigit} />
         </div>

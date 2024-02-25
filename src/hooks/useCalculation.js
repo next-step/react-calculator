@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function useCalculation() {
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState('0');
   const [count, setCount] = useState(0);
 
   function calculate(operand, operator) {
