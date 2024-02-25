@@ -9,3 +9,5 @@ export const OPERATION_SIGN = {
 } as const;
 
 export const MAX_DIGITS = 3;
+
+export const ERROR_MESSAGE = '오류'
