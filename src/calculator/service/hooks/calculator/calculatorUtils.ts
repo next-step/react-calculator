@@ -11,31 +11,6 @@ export interface LastOperationType {
 	number: number;
 }
 
-export const isValidExpressionAndUnderLimit = (
-	currentExpression: string,
-	input: string,
-	limit: number
-): boolean => {
-	const isInputIsOperator = isOperator(input);
-	// 마지막 문자가 연산자인지 확인
-	const isLastCharIsOperator = isOperator(currentExpression.slice(-1));
-
-	if (isInputIsOperator) {
-		// 연산자가 연속으로 입력되는 경우를 방지
-		return !isLastCharIsOperator;
-	} else {
-		// 숫자 입력의 경우
-		const newExpression = isLastCharIsOperator
-			? input
-			: currentExpression.concat(input);
-		const matches = newExpression.match(/(\d+)$/);
-		const newNumber = matches ? Number(matches[0]) : 0;
-
-		// 새로운 숫자가 limit을 초과하는지 확인
-		return newNumber < limit;
-	}
-};
-
 export const parseFourBasicOperationsExpression = (
 	expression: string
 ): string[] => {

@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { CalculatorReceiver } from "../../commands/CalculatorCommands";
 import {
-	isValidExpressionAndUnderLimit,
 	parseFourBasicOperationsExpression,
 	performCalculation,
 	extractLastOperation
@@ -9,29 +8,6 @@ import {
 
 describe("계산기 유틸리티 함수 테스트", () => {
 	const receiver = new CalculatorReceiver();
-
-	describe("isValidExpressionAndUnderLimit 함수 검증", () => {
-		it("숫자 뒤에 연산자를 입력할 수 있다", () => {
-			// Given: 현재 표현식이 '123'이고, 제한이 1000일 때
-			// When: '+' 연산자를 입력했을 때
-			// Then: 입력이 허용되어야 한다
-			expect(isValidExpressionAndUnderLimit("123", "+", 1000)).toBe(true);
-		});
-
-		it("연산자를 연속으로 입력할 수 없다", () => {
-			// Given: 현재 표현식이 '123+'이고, 제한이 1000일 때
-			// When: '+' 연산자를 다시 입력했을 때
-			// Then: 입력이 허용되지 않아야 한다
-			expect(isValidExpressionAndUnderLimit("123+", "+", 1000)).toBe(false);
-		});
-
-		it("입력된 숫자가 제한을 초과할 경우 입력을 막는다", () => {
-			// Given: 현재 표현식이 '999'이고, 제한이 1000일 때
-			// When: '9' 숫자를 추가로 입력했을 때
-			// Then: 입력이 허용되지 않아야 한다
-			expect(isValidExpressionAndUnderLimit("999", "9", 1000)).toBe(false);
-		});
-	});
 
 	describe("parseExpression 함수 검증", () => {
 		it("표현식을 숫자와 연산자로 올바르게 분리한다", () => {
