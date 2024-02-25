@@ -21,6 +21,21 @@ export default class Calculator {
     return expression === PLUS_INFINITY || expression === MINUSE_INFINITY
   }
 
+  static sum(operand1: number, operand2: number) {
+    return operand1 + operand2
+  }
+
+  static subtract(operand1: number, operand2: number) {
+    return operand1 - operand2
+  }
+
+  static multiply(operand1: number, operand2: number) {
+    return operand1 * operand2
+  }
+  static divide(operand1: number, operand2: number) {
+    return Math.floor(operand1 / operand2)
+  }
+
   constructor(expression: string) {
     this.operands = []
     this.operators = []
@@ -56,27 +71,13 @@ export default class Calculator {
       this.addOperand(operand)
     }
   }
-  sum(operand1: number, operand2: number) {
-    return operand1 + operand2
-  }
-
-  subtract(operand1: number, operand2: number) {
-    return operand1 - operand2
-  }
-
-  multiply(operand1: number, operand2: number) {
-    return operand1 * operand2
-  }
-  divide(operand1: number, operand2: number) {
-    return Math.floor(operand1 / operand2)
-  }
 
   calculate() {
     const operatorMethodMap = {
-      [PLUS]: this.sum,
-      [SUBTRACT]: this.subtract,
-      [MULTIPLY]: this.multiply,
-      [DIVIDE]: this.divide,
+      [PLUS]: Calculator.sum,
+      [SUBTRACT]: Calculator.subtract,
+      [MULTIPLY]: Calculator.multiply,
+      [DIVIDE]: Calculator.divide,
     } as const
 
     while (this.operands.length >= 2 && this.operators.length > 0) {
