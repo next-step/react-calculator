@@ -1,5 +1,9 @@
-import { OPERATORS_TYPE, isOperator } from "../../../constants";
+import {
 	MAX_NUMBER_EXPRESSION_LENGTH,
+	NUMBERS_AND_OPERATORS,
+	OPERATORS_TYPE,
+	isOperator
+} from "../../../constants";
 import { CalculatorReceiver } from "../../commands";
 
 export interface LastOperationType {
@@ -35,7 +39,7 @@ export const isValidExpressionAndUnderLimit = (
 export const parseFourBasicOperationsExpression = (
 	expression: string
 ): string[] => {
-	return expression.match(/(\d+)|([+\-X\\/])/g) || [];
+	return expression.match(NUMBERS_AND_OPERATORS) || [];
 };
 
 export const performCalculation = (
@@ -43,10 +47,7 @@ export const performCalculation = (
 	parsedExpression: string[]
 ): string | number => {
 	let initialNumberIndex = 0;
-	if (
-		!isFinite(parseFloat(parsedExpression[0])) &&
-		parsedExpression.length > 1
-	) {
+	if (isNegativeExpression(parsedExpression)) {
 		initialNumberIndex = 1;
 		receiver.setInput(parsedExpression[0] + parsedExpression[1]);
 	} else {
@@ -56,8 +57,8 @@ export const performCalculation = (
 	let operator: OPERATORS_TYPE = "+";
 	for (let i = initialNumberIndex + 1; i < parsedExpression.length; i++) {
 		const val = parsedExpression[i];
-		if (isNaN(parseFloat(val))) {
-			operator = val as OPERATORS_TYPE;
+		if (isOperator(val)) {
+			operator = val;
 		} else {
 			receiver.calculate(operator, parseFloat(val));
 		}
@@ -67,21 +68,26 @@ export const performCalculation = (
 	return isFinite(currentValue) ? currentValue : "오류";
 };
 
+const isNegativeExpression = (expression: string[]): boolean => {
+	return !isFinite(parseFloat(expression[0])) && expression.length > 1;
+};
+
 export const extractLastOperation = (
 	parsedExpression: string[]
 ): LastOperationType => {
-	let lastOperator: OPERATORS_TYPE | null = null;
-	let lastNumber = 0;
-	for (let i = parsedExpression.length - 1; i >= 0; i--) {
-		const value = parsedExpression[i];
-		if (!isNaN(parseFloat(value))) {
-			lastNumber = parseFloat(value);
+	const initialOperation: LastOperationType = { operator: null, number: 0 };
+
+	return parsedExpression.reduce((acc, value) => {
+		if (!isNaN(acc.number) && isOperator(value)) {
+			return { operator: value, number: acc.number };
 		}
-		if (isOperator(value)) {
-			lastOperator = value;
-			break;
-		}
-	}
+
+		const currentNumber = isNaN(parseFloat(value))
+			? acc.number
+			: parseFloat(value);
+		return { operator: acc.operator, number: currentNumber };
+	}, initialOperation);
+};
 
 export const isNumberExpression = (expression: string[]): boolean => {
 	return expression.length <= MAX_NUMBER_EXPRESSION_LENGTH;
