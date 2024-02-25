@@ -1,13 +1,15 @@
-import { Operators } from '../../../constants';
+import { OperationState } from '../types';
 
 interface Props {
-  operand: [number, number];
-  operator: Operators | null;
+  operationState: OperationState;
   error: Error | null;
 }
 
-export default function Display({ operand, operator, error }: Props) {
-  const result = [operand[0], operator, operand[1]].filter(Boolean).join('');
+export default function Display({ operationState, error }: Props) {
+  const { operand1, operand2, operator } = operationState;
+  const result = [operand1, operator, operand2]
+    .filter((el) => el !== null)
+    .join('');
 
   return <h1 id='total'>{error?.message || result || 0}</h1>;
 }
