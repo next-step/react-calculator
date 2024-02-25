@@ -27,7 +27,7 @@ export const useCalculator = () => {
     }
 
     if (operator === 'X') {
-      return calculator.multiplication(number1!, number2!)
+      return calculator.multiply(number1!, number2!)
     }
   }
 

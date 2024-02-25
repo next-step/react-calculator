@@ -6,7 +6,7 @@ export interface ICalculator {
   /** 뺄셈 */
   minus: Fn
   /** 곱셈 */
-  multiplication: Fn
+  multiply: Fn
   /** 나눗셈 */
   division: Fn
 }

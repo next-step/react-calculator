@@ -9,7 +9,7 @@ export class Calculator implements ICalculator {
     return a - b
   }
 
-  multiplication(a: number, b: number): number {
+  multiply(a: number, b: number): number {
     return a * b
   }
 
