@@ -6,6 +6,7 @@ import {
   SUBTRACT,
   MULTIPLY,
   DIVIDE,
+  MAX_DIGITS,
 } from '@/constants'
 
 export default class Validator {
@@ -37,7 +38,7 @@ export default class Validator {
       )
   }
 
-  isInvalidNumberRange(value: number, maxDigit: number = 3) {
+  isInvalidNumberRange(value: number, maxDigit: number = MAX_DIGITS) {
     const maxValue = Math.pow(10, maxDigit) - 1
     const minValue = -1 * maxValue
     return value < minValue || value > maxValue
