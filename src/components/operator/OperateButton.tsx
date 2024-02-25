@@ -1,14 +1,14 @@
 interface OperateButtonProps {
   operate: string;
-  onOperatorClick: (operator: string) => void;
+  onClick: (operator: string) => void;
 }
 
 export default function OperateButton({
   operate,
-  onOperatorClick,
+  onClick,
 }: OperateButtonProps) {
   const handleOperatorButton = () => {
-    onOperatorClick(operate);
+    onClick(operate);
   };
 
   return (

@@ -1,11 +1,11 @@
 interface DigitButtonProps {
   digit: number;
-  onDigitClick: (value: string) => void;
+  onClick: (value: string) => void;
 }
 
-export default function DigitButton({ digit, onDigitClick }: DigitButtonProps) {
+export default function DigitButton({ digit, onClick }: DigitButtonProps) {
   const handleDigitButton = () => {
-    onDigitClick(String(digit));
+    onClick(String(digit));
   };
 
   return (

@@ -13,7 +13,7 @@ export default function DigitButtons({ onDigitClick }: DigitButtonsProps) {
         <DigitButton
           key={digit}
           digit={digit}
-          onDigitClick={(digit) => onDigitClick(digit)}
+          onClick={(digit) => onDigitClick(digit)}
         />
       ))}
     </div>

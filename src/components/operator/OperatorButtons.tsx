@@ -15,7 +15,7 @@ export default function OperatorButtons({
         <OperateButton
           key={operation}
           operate={operation}
-          onOperatorClick={(operation) => onOperatorClick(operation)}
+          onClick={(operation) => onOperatorClick(operation)}
         />
       ))}
     </div>
