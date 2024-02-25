@@ -44,22 +44,24 @@ describe('useCalculator 커스텀 훅 테스트', () => {
 			expect(result.current.display).toBe('3');
 		});
 
-		it('연산자 입력 후 숫자를 입력하면 해당 숫자가 표시된다.', () => {
-			const result = enterOperators(['+', '3']);
-
-			expect(result.current.display).toBe('0+3');
-		});
-
 		it('숫자를 3개 초과 입력하면 alert가 발생한다', () => {
 			enterOperators(['1', '2', '3', '4']);
 
 			expect(global.alert).toHaveBeenCalledWith('숫자는 3자리까지만 입력 가능합니다.');
 		});
 
-		it('연산자 입력 후 숫자를 3개 초과 입력하면 alert가 발생한다', () => {
-			enterOperators(['+', '1', '2', '3', '4']);
+		describe('마지막 입력값이 연산자 일때', () => {
+			it('숫자를 입력하면 해당 숫자가 표시된다.', () => {
+				const result = enterOperators(['+', '3']);
 
-			expect(global.alert).toHaveBeenCalledWith('숫자는 3자리까지만 입력 가능합니다.');
+				expect(result.current.display).toBe('0+3');
+			});
+
+			it('숫자를 3개 초과 입력하면 alert가 발생한다', () => {
+				enterOperators(['+', '1', '2', '3', '4']);
+
+				expect(global.alert).toHaveBeenCalledWith('숫자는 3자리까지만 입력 가능합니다.');
+			});
 		});
 
 		it('에러가 발생했을때 숫자를 입력하면 입력한 숫자로 표시된다.', () => {
