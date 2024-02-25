@@ -1,6 +1,8 @@
 import { PLUS, SUBTRACT, MULTIPLY, DIVIDE, OPERATORS_REGEX, INIT_OPERAND } from '@/constants'
+import { ARITHMETIC_OPERATORS } from '@/constants'
 
-type Operator = typeof PLUS | typeof SUBTRACT | typeof MULTIPLY | typeof DIVIDE
+type UnionFromTuple<T> = T extends ReadonlyArray<infer U> ? U : never
+type Operator = UnionFromTuple<typeof ARITHMETIC_OPERATORS>
 
 export default class Calculator {
   operands: number[]
