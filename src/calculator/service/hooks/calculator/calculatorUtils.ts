@@ -1,4 +1,5 @@
 import { OPERATORS_TYPE, isOperator } from "../../../constants";
+	MAX_NUMBER_EXPRESSION_LENGTH,
 import { CalculatorReceiver } from "../../commands";
 
 export interface LastOperationType {
@@ -82,5 +83,6 @@ export const extractLastOperation = (
 		}
 	}
 
-	return { operator: lastOperator, number: lastNumber };
+export const isNumberExpression = (expression: string[]): boolean => {
+	return expression.length <= MAX_NUMBER_EXPRESSION_LENGTH;
 };

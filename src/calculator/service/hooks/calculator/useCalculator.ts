@@ -46,7 +46,7 @@ export const useCalculator = () => {
 	const calculateAndUpdateLastOperation = () => {
 		const parsedExpression = parseFourBasicOperationsExpression(expression);
 
-		if (parsedExpression.length < 3) {
+		if (isNumberExpression(parsedExpression)) {
 			setExpression(repeatLastOperation(lastOperation).toString());
 			return;
 		}
