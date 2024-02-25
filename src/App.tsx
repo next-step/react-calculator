@@ -27,7 +27,7 @@ function App() {
       setScreenValue(`${digit}`);
       return;
     }
-    const newNum = Number(`${inputNum.current}${digit}`).toString();
+    const newNum = `${parseInt(`${inputNum.current}${digit}`, 10)}`;
     const newScreenValue = operator
       ? `${numbers[0]}${operator}${newNum}`
       : newNum;
