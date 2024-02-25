@@ -2,8 +2,11 @@ import { useState } from 'react';
 
 function useCalculation() {
   const [result, setResult] = useState('');
+  const [count, setCount] = useState(0);
 
   function calculate(operand, operator) {
+    setCount(count + 1);
+
     let operationResult = 0;
     if (!operator) {
       operationResult = parseInt(operand[0], 10);
@@ -33,7 +36,7 @@ function useCalculation() {
     }
   }
 
-  return { result, calculate };
+  return { result, count, calculate };
 }
 
 export default useCalculation;

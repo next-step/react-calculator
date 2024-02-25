@@ -9,12 +9,12 @@ function App() {
   const [display, setDisplay] = useState('');
   const [allClear, setAllClear] = useState(true);
   const [operator, setOperator] = useState(null);
-  const { result, calculate } = useCalculation();
+  const { result, count, calculate } = useCalculation();
 
   useEffect(() => {
     setDisplay(result);
     setOperator(null);
-  }, [result]);
+  }, [result, count]);
 
   const onClick = (value, type) => {
     // AC버튼 클릭
