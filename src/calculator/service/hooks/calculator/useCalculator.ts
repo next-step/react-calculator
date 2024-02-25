@@ -7,19 +7,24 @@ import {
 import {
 	LastOperationType,
 	extractLastOperation,
-	isValidExpressionAndUnderLimit,
+	isNumberExpression,
 	parseFourBasicOperationsExpression,
 	performCalculation
 } from "./calculatorUtils";
 import { validateInput } from "../../../util/inputValidation";
 
+const DEFAULT_EXPRESSION = "0";
+const DEFAULT_LAST_OPERATION: LastOperationType = {
+	operator: null,
+	number: 0
+};
+
 export const useCalculator = () => {
 	const [receiver] = useState(new CalculatorReceiver());
-	const [expression, setExpression] = useState("0");
-	const [lastOperation, setLastOperation] = useState<LastOperationType>({
-		operator: null,
-		number: 0
-	});
+	const [expression, setExpression] = useState(DEFAULT_EXPRESSION);
+	const [lastOperation, setLastOperation] = useState<LastOperationType>(
+		DEFAULT_LAST_OPERATION
+	);
 
 	const executeCommand = (command: Command) => {
 		command.execute();
@@ -58,8 +63,8 @@ export const useCalculator = () => {
 
 	const reset = () => {
 		executeCommand(new ResetCommand(receiver));
-		setExpression("0");
-		setLastOperation({ operator: null, number: 0 });
+		setExpression(DEFAULT_EXPRESSION);
+		setLastOperation(DEFAULT_LAST_OPERATION);
 	};
 
 	return {
