@@ -20,7 +20,7 @@ const App = () => {
   });
 
   const handleCalculatorResult = (value = "0") => {
-    setNumber({ left: value, right: "" });
+    setNumber({ left: `${Math.floor(Number(value))}`, right: "" });
     setOperator({ render: "", type: OperationTypeEnum.INIT });
   };
 
