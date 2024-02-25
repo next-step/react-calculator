@@ -1,11 +1,10 @@
 import { useRef, useState } from "react";
 import { NumberButton } from "./components/NumberButton";
 import { OperationButton } from "./components/OperationButton";
-import { OPERATION_REGEX } from "./constants";
+import { CALCULATOR_NUMBERS, OPERATION_REGEX } from "./constants";
 import "./css/index.css";
 import { EOPERATIONS } from "./enums";
-import { CALCULATOR_NUMBERS } from "./helper";
-import { calculateByOperator } from "./utils";
+import { calculateByOperator } from "./helper";
 
 function App() {
   /**화면에 표시되는 수식들 */
