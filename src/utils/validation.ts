@@ -13,8 +13,9 @@ export const Validation = {
     Validation.isInfinite(result);
   },
 
-  divide(y: number) {
+  divide({ x, y }: { x: number; y: number }) {
     Validation.isDivideByZero(y);
+    Validation.isInfinite(x);
   },
 
   digitOverThreeDigits(x: number) {

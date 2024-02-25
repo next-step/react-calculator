@@ -418,7 +418,7 @@ describe('useCalculator 테스트', () => {
     });
 
     // FIXME: 에러 캐칭이 안되서 테스트를 skip으로 등록해두었습니다.
-    describe.skip('예외 테스트', () => {
+    describe('예외 테스트', () => {
       /**
        * 연산 결과가 Infinity이거나, 0으로 나누는 경우, 에러가 발생해야 한다.
        */
@@ -443,7 +443,7 @@ describe('useCalculator 테스트', () => {
 
       describe('덧셈 연산 예외 테스트', () => {
         test.each(testCases)(
-          'handleDigit으로 x에 $x를 입력하고, handleOperator로 덧셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedAddError 이어야 한다',
+          'handleDigit으로 x에 $x를 입력하고, handleOperator로 덧셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedAddError 에러가 발생해야 한다',
           ({ x, y, expectedAddError }) => {
             const calculate = () => {
               handleActions([
@@ -465,7 +465,7 @@ describe('useCalculator 테스트', () => {
 
       describe('뺄셈 연산 예외 테스트', () => {
         test.each(testCases)(
-          'handleDigit으로 x에 $x를 입력하고, handleOperator로 뺄셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedSubtractError 이어야 한다',
+          'handleDigit으로 x에 $x를 입력하고, handleOperator로 뺄셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedSubtractError 에러가 발생해야 한다',
           ({ x, y, expectedSubtractError }) => {
             const calculate = () => {
               handleActions([
@@ -487,7 +487,7 @@ describe('useCalculator 테스트', () => {
 
       describe('곱셈 연산 예외 테스트', () => {
         test.each(testCases)(
-          'handleDigit으로 x에 $x를 입력하고, handleOperator로 곱셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedMultiplyError 이어야 한다',
+          'handleDigit으로 x에 $x를 입력하고, handleOperator로 곱셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedMultiplyError 에러가 발생해야 한다',
           ({ x, y, expectedMultiplyError }) => {
             const calculate = () => {
               handleActions([
@@ -509,7 +509,7 @@ describe('useCalculator 테스트', () => {
 
       describe('나눗셈 연산 예외 테스트', () => {
         test.each(testCases)(
-          'handleDigit으로 x에 $x를 입력하고, handleOperator로 나눗셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedDivideError 이어야 한다',
+          'handleDigit으로 x에 $x를 입력하고, handleOperator로 나눗셈 연산을 설정한 후, handleDigit으로 y에 $y를 입력하면, result는 $expectedDivideError 에러가 발생해야 한다',
           ({ x, y, expectedDivideError }) => {
             const calculate = () => {
               handleActions([

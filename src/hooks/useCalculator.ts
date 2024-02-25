@@ -45,7 +45,50 @@ export const useCalculator = () => {
     }
   };
 
+  const calculateValidation = ({
+    operator,
+    x,
+    y,
+  }: {
+    operator: Operator;
+    x: number;
+    y: number;
+  }) => {
+    switch (operator) {
+      case BUTTON.OPERATION.CHILDREN.ADD.VALUE: {
+        Validation.add(x);
+
+        break;
+      }
+
+      case BUTTON.OPERATION.CHILDREN.SUBTRACT.VALUE: {
+        Validation.subtract(x);
+
+        break;
+      }
+
+      case BUTTON.OPERATION.CHILDREN.DIVIDE.VALUE: {
+        Validation.divide({ x, y });
+
+        break;
+      }
+
+      case BUTTON.OPERATION.CHILDREN.MULTIPLY.VALUE: {
+        Validation.multiply(x);
+
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
+  };
+
   const calculate = (value: Operator) => {
+    if (state.operator !== null)
+      calculateValidation({ operator: state.operator, x: state.x, y: state.y });
+
     if (value === BUTTON.OPERATION.CHILDREN.EQUAL.VALUE) {
       setState((prev) => {
         let result = 0;
@@ -53,31 +96,24 @@ export const useCalculator = () => {
         switch (state.operator) {
           case BUTTON.OPERATION.CHILDREN.ADD.VALUE: {
             result = prev.x + prev.y;
-            Validation.add(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.SUBTRACT.VALUE: {
             result = prev.x - prev.y;
-            Validation.subtract(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.MULTIPLY.VALUE: {
             result = prev.x * prev.y;
-            Validation.multiply(result);
 
             break;
           }
 
           case BUTTON.OPERATION.CHILDREN.DIVIDE.VALUE: {
-            Validation.divide(prev.y);
-
             result = Math.round((prev.x / prev.y) * 10) / 10;
-
-            Validation.isInfinite(result);
 
             break;
           }
