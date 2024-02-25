@@ -13,6 +13,29 @@ describe('useCalculator 테스트', () => {
     calculator = hook.result;
   });
 
+  describe('초기 상태 테스트', () => {
+    const testCases = [
+      {
+        key: 'current',
+        expected: {
+          x: 0,
+          y: 0,
+        },
+      },
+      { key: 'result', expected: 0 },
+      { key: 'operator', expected: null },
+    ] as const;
+
+    test.each(testCases)(
+      '초기 상태에서 $key는 $expected 이어야 한다',
+      ({ key, expected }) => {
+        const defaultValue = calculator.current[key];
+
+        expect(defaultValue).toEqual(expected);
+      }
+    );
+  });
+
   describe('handleDigit 테스트', () => {
     test('handleDigit을 사용하여 숫자를 입력하면, 해당 숫자가 x에 설정되어야 한다', () => {
       calculator.current.handleDigit(1);
