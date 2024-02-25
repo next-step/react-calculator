@@ -15,13 +15,13 @@ describe.each([
     });
 
     it('초기 표시값은 0이다.', async () => {
-      const $total = await screen.findByRole('heading', { description: '0' });
+      const $total = await screen.findByRole('heading');
 
       expect($total.textContent).toBe('0');
     });
 
     it(`${a}을 클릭하면 ${a}이(가) 표시된다.`, async () => {
-      const $total = await screen.findByRole('heading', { description: '0' });
+      const $total = await screen.findByRole('heading');
       const $digitA = await screen.findByRole('button', { name: a });
 
       await userEvent.click($digitA);
@@ -30,7 +30,7 @@ describe.each([
     });
 
     it(`[${a}, ${operation}]를 순서대로 클릭하면 ${operation}가 나타난다.`, async () => {
-      const $total = await screen.findByRole('heading', { description: '0' });
+      const $total = await screen.findByRole('heading');
       const $digitA = await screen.findByRole('button', { name: a });
       const $operation = await screen.findByRole('button', { name: operation });
 
@@ -41,7 +41,7 @@ describe.each([
     });
 
     it(`[${a}, ${operation}, ${b}]를 순서대로 클릭하면 ${b}가 나타난다.`, async () => {
-      const $total = await screen.findByRole('heading', { description: '0' });
+      const $total = await screen.findByRole('heading');
       const $digitA = await screen.findByRole('button', { name: a });
       const $digitB = await screen.findByRole('button', { name: b });
       const $operation = await screen.findByRole('button', { name: operation });
@@ -54,10 +54,10 @@ describe.each([
     });
 
     it(`[${a}, ${operation}, ${b}, =]를 순서대로 클릭하면 ${total}이 나타난다.`, async () => {
-      const $total = await screen.findByRole('heading', { description: '0' });
-      const $digitA = await screen.findByRole('button', { name: '1' });
-      const $digitB = await screen.findByRole('button', { name: '2' });
-      const $operation = await screen.findByRole('button', { name: '+' });
+      const $total = await screen.findByRole('heading');
+      const $digitA = await screen.findByRole('button', { name: a });
+      const $digitB = await screen.findByRole('button', { name: b });
+      const $operation = await screen.findByRole('button', { name: operation });
       const $calculation = await screen.findByRole('button', { name: '=' });
 
       await userEvent.click($digitA);
