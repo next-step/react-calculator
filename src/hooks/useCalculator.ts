@@ -4,6 +4,14 @@ interface CalculatorOptions {
 	maxDigits?: number;
 }
 
+const REGEX = Object.freeze({
+	IS_NUMBER: /^[0-9]$/,
+	IS_OPERATOR: /^[+\-x/]$/,
+	OPERATOR_SPLITTER: /([+\-x/])/g,
+	IS_ENDS_WITH_NUMBER: /\d$/,
+	IS_ENDS_WITH_OPERATOR: /[+\-x/]$/,
+});
+
 export default function useCalculator(
 	props: CalculatorOptions = {
 		maxDigits: 3,
@@ -12,7 +20,7 @@ export default function useCalculator(
 	const [display, setDisplay] = useState('0');
 
 	const addNumber = (value: string) => {
-		if (display.split(/[+\-x/]/).pop()?.length === props.maxDigits) {
+		if (display.split(REGEX.OPERATOR_SPLITTER).pop()?.length === props.maxDigits) {
 			alert(`숫자는 ${props.maxDigits}자리까지만 입력 가능합니다.`);
 			return;
 		}
@@ -26,7 +34,7 @@ export default function useCalculator(
 	};
 
 	const addOperator = (value: string) => {
-		if (/\d$/.test(display)) {
+		if (REGEX.IS_ENDS_WITH_NUMBER.test(display)) {
 			setDisplay(display + value);
 			return;
 		}
@@ -35,12 +43,12 @@ export default function useCalculator(
 	};
 
 	const enter = (value: string) => {
-		if (/^[0-9]$/.test(value)) {
+		if (REGEX.IS_NUMBER.test(value)) {
 			addNumber(value);
 			return;
 		}
 
-		if (/^[+\-x/]$/.test(value)) {
+		if (REGEX.IS_OPERATOR.test(value)) {
 			addOperator(value);
 			return;
 		}
@@ -83,29 +91,21 @@ export default function useCalculator(
 	};
 
 	const executeOperation = (prevState: string) => {
-		const operations = prevState.split(/([+\-x/])/).filter(Boolean);
+		const operations = prevState.split(REGEX.OPERATOR_SPLITTER).filter(Boolean);
 
 		const operationsTuple = getOperationsTuple(operations);
 
-		try {
-			const operationResult = operationsTuple.reduce(reduceOperations, 0);
+		const operationResult = operationsTuple.reduce(reduceOperations, 0);
 
-			if (Number.isNaN(operationResult) || !Number.isFinite(operationResult)) {
-				return '오류';
-			}
-
-			return operationResult.toString();
-		} catch (error) {
-			if (error instanceof Error) {
-				return error.message;
-			}
-
+		if (Number.isNaN(operationResult) || !Number.isFinite(operationResult)) {
 			return '오류';
 		}
+
+		return operationResult.toString();
 	};
 
 	const calculate = () => {
-		if (/[+\-x/]$/.test(display)) {
+		if (REGEX.IS_ENDS_WITH_OPERATOR.test(display)) {
 			alert('숫자를 입력해 주세요.');
 			return;
 		}
