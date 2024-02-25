@@ -6,13 +6,13 @@ import Operator from './components/button/Operator';
 import useCalculation from './hooks/useCalculation';
 
 function App() {
-  const [display, setDisplay] = useState('');
+  const [resultNumber, setResultNumber] = useState('');
   const [allClear, setAllClear] = useState(true);
   const [operator, setOperator] = useState(null);
   const { result, count, calculate } = useCalculation();
 
   useEffect(() => {
-    setDisplay(result);
+    setResultNumber(result);
     setOperator(null);
   }, [result, count]);
 
@@ -21,22 +21,22 @@ function App() {
     if (type === 'modifier') {
       setAllClear(true);
       setOperator(null);
-      setDisplay('');
+      setResultNumber('');
       return;
     }
 
-    const operand = display.split(operator);
+    const operand = resultNumber.split(operator);
     // 숫자버튼 클릭
     if (type === 'digit') {
       // 처음에 0이 입력된 경우
-      if (display === '') {
+      if (resultNumber === '') {
         if (value === 0) {
           return;
         }
       }
 
       if (
-        (!operator && display.length >= 3)
+        (!operator && resultNumber.length >= 3)
         || (operand.length >= 2 && operand[1].length >= 3)
       ) {
         alert('숫자는 세 자리까지만 입력 가능합니다!');
@@ -44,24 +44,24 @@ function App() {
       }
 
       // 결과가 오류일 경우
-      if (display === '오류') {
-        setDisplay(`${value}`);
+      if (resultNumber === '오류') {
+        setResultNumber(`${value}`);
         return;
       }
 
-      setDisplay(`${display}${value}`);
+      setResultNumber(`${resultNumber}${value}`);
     }
 
     // 연산자 버튼 클릭
     if (type === 'operator') {
       // 처음에 연산자가 입력된 경우
-      if (display === '') {
+      if (resultNumber === '') {
         alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
         return;
       }
 
       // 결과값이 3자리 이상일 때 연산자를 입력하는 경우
-      if (!operator && display.length > 3) {
+      if (!operator && resultNumber.length > 3) {
         alert('숫자는 세 자리까지만 입력 가능합니다!');
         return;
       }
@@ -72,7 +72,7 @@ function App() {
       }
 
       // 결과가 오류일 경우
-      if (display === '오류') {
+      if (resultNumber === '오류') {
         alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!');
         return;
       }
@@ -80,9 +80,9 @@ function App() {
       // 연산자가 연달아 입력되는 경우 마지막 연산자로 세팅
       setOperator(value);
       if (operator && !operand[1]) {
-        setDisplay(display.slice(0, -1) + value);
+        setResultNumber(resultNumber.slice(0, -1) + value);
       } else {
-        setDisplay(`${display}${value}`);
+        setResultNumber(`${resultNumber}${value}`);
       }
     }
 
@@ -92,7 +92,7 @@ function App() {
   return (
     <div id="app">
       <div className="calculator">
-        <h1 id="total">{allClear ? 0 : display}</h1>
+        <h1 id="total">{allClear ? 0 : resultNumber}</h1>
         <div className="digits flex">
           <Digit onClick={onClick} />
         </div>
