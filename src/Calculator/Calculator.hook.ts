@@ -6,11 +6,12 @@ import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 export const useCalculator = ({
   maxNumberLength = DEFAULT_MAX_NUMBER_LENGTH,
 }: UseCalculatorProps) => {
+  const [isCalculating, setIsCalculating] = useState(false)
   const [calculatedResult, setCalculatedResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
   const [operation, setOperation] = useState<Operation | ''>('')
   const [rightOperand, setRightOperand] = useState('')
-  const displayedContents = !leftOperand
+  const displayedContents = !isCalculating
     ? calculatedResult
     : `${leftOperand}${operation}${rightOperand}`
 
@@ -37,6 +38,8 @@ export const useCalculator = ({
       return
     }
 
+    setIsCalculating(true)
+
     if (!operation) {
       setLeftOperand(nextDigit)
 
@@ -48,6 +51,7 @@ export const useCalculator = ({
 
   const updateOperation = (nextOperation: Operation) => {
     if (nextOperation !== '=') {
+      setIsCalculating(true)
       setOperation(nextOperation)
 
       return
