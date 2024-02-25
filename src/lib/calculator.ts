@@ -1,4 +1,13 @@
-import { PLUS, SUBTRACT, MULTIPLY, DIVIDE, OPERATORS_REGEX, INIT_OPERAND } from '@/constants'
+import {
+  PLUS,
+  SUBTRACT,
+  MULTIPLY,
+  DIVIDE,
+  OPERATORS_REGEX,
+  INIT_OPERAND,
+  PLUS_INFINITY,
+  MINUSE_INFINITY,
+} from '@/constants'
 import { ARITHMETIC_OPERATORS } from '@/constants'
 
 type UnionFromTuple<T> = T extends ReadonlyArray<infer U> ? U : never
@@ -7,6 +16,10 @@ type Operator = UnionFromTuple<typeof ARITHMETIC_OPERATORS>
 export default class Calculator {
   operands: number[]
   operators: Operator[]
+
+  static isInfinity(expression: string) {
+    return expression === PLUS_INFINITY || expression === MINUSE_INFINITY
+  }
 
   constructor(expression: string) {
     this.operands = []

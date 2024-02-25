@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react'
 import { useExpressionState } from './use-expression-state'
-import { act } from 'react-dom/test-utils'
+import { act } from '@/tests/test-utils'
 import { INPUT_NUMBER_FIRST_ERROR_MESSAGE, THREE_DIGIT_LIMIT_ERROR_MESSAGE } from '@/constants'
 
 describe('useExpressionState Test', () => {
@@ -43,6 +43,19 @@ describe('useExpressionState Test', () => {
     expect(result.current[EXPRESSION]).toBe('오류')
   })
 
+  test('결과가 -Infinity로 되면 "오류"임을 반환하며, 그 이후에는 업데이트가 불가능 하다', () => {
+    const { result } = renderHook(() => useExpressionState())
+
+    act(() => result.current[UPDATE]('-5/0'))
+    expect(result.current[EXPRESSION]).toBe('-5/0')
+
+    act(() => result.current[CALCULATE]())
+    expect(result.current[EXPRESSION]).toBe('오류')
+
+    act(() => result.current[UPDATE]('123'))
+    expect(result.current[EXPRESSION]).toBe('오류')
+  })
+
   test('세자리 이상의 숫자가 입력되면 ERROR가 발생한다', () => {
     const { result } = renderHook(() => useExpressionState())
 
@@ -58,11 +71,8 @@ describe('useExpressionState Test', () => {
 
   test('앞에 숫자 없이 연산자를 입력하면 ERROR가 발생한다', () => {
     const { result } = renderHook(() => useExpressionState())
-
-    try {
-      act(() => result.current[UPDATE]('+'))
-    } catch (error) {
-      expect((error as Error).message).toBe(INPUT_NUMBER_FIRST_ERROR_MESSAGE)
-    }
+    expect(() => act(() => result.current[UPDATE]('+'))).toThrowError(
+      INPUT_NUMBER_FIRST_ERROR_MESSAGE,
+    )
   })
 })
