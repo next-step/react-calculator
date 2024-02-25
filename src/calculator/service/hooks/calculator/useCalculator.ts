@@ -11,7 +11,7 @@ import {
 	parseFourBasicOperationsExpression,
 	performCalculation
 } from "./calculatorUtils";
-import { isOperator } from "../../../constants";
+import { validateInput } from "../../../util/inputValidation";
 
 export const useCalculator = () => {
 	const [receiver] = useState(new CalculatorReceiver());
@@ -27,30 +27,12 @@ export const useCalculator = () => {
 	};
 
 	const handleInput = (input: string) => {
-		// 0으로 시작하는 숫자는 0을 제거하고 입력
-		if (expression === "0" && !isOperator(input)) {
-			setExpression(input);
+		const validInput = validateInput(input, expression);
+		if (!validInput) {
+			alert("입력은 3자리까지만 가능합니다.");
 			return;
 		}
-
-		// 음수 입력
-		if (expression === "0" && input === "-") {
-			setExpression(input);
-			return;
-		}
-
-		// 연산자 이후 0을 입력하면 0을 제거하고 입력
-		if (expression.slice(-1) === "0" && !isOperator(input)) {
-			setExpression((prev) => prev.slice(0, -1) + input);
-			return;
-		}
-
-		// 연산자가 연속으로 입력되는 경우를 방지 및 자리수 제한
-		if (isValidExpressionAndUnderLimit(expression, input, 1000)) {
-			setExpression((prev) => prev + input);
-		} else {
-			alert("입력은 3자리 숫자까지만 가능합니다.");
-		}
+		setExpression(validInput);
 	};
 
 	const repeatLastOperation = (lastOperation: LastOperationType) => {
