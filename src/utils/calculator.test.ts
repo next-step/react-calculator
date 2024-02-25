@@ -1,32 +1,26 @@
-import { OperatorType } from '../common/types';
-import { makeOperate } from './calculator';
+import { add, divide, multiply, substract } from './calculator';
 
-test('1과 2에 add 연산자를 사용하면 3이 반환된다', () => {
-  const operator: OperatorType = '+';
-  const operate = makeOperate(operator);
-  expect(operate(1, 2)).toBe(3);
+test('1과 2를 add하면 3이 반환된다', () => {
+  const result = add(1, 2);
+  expect(result).toBe(3);
 });
 
-test('5와 3에 substract 연산자를 사용하면 2가 반환된다', () => {
-  const operator: OperatorType = '-';
-  const operate = makeOperate(operator);
-  expect(operate(5, 3)).toBe(2);
+test('5와 3을 substract하면 2가 반환된다', () => {
+  const result = substract(5, 3);
+  expect(result).toBe(2);
 });
 
-test('2와 6에 multiply 연산자를 사용하면 12가 반환된다', () => {
-  const operator: OperatorType = 'X';
-  const operate = makeOperate(operator);
-  expect(operate(2, 6)).toBe(12);
+test('2와 6을 multiply하면 12가 반환된다', () => {
+  const result = multiply(2, 6);
+  expect(result).toBe(12);
 });
 
-test('4와 2에 divide 연산자를 사용하면 2가 반환된다', () => {
-  const operator: OperatorType = '/';
-  const operate = makeOperate(operator);
-  expect(operate(4, 2)).toBe(2);
+test('4와 2에 divide하면 2가 반환된다', () => {
+  const result = divide(4, 2);
+  expect(result).toBe(2);
 });
 
-test('8과 6에 divide 연산자를 사용하면 소수점 이하는 버리고 1이 반환된다', () => {
-  const operator: OperatorType = '/';
-  const operate = makeOperate(operator);
-  expect(operate(8, 6)).toBe(1);
+test('8과 6에 divide하면 소수점 이하는 버리고 1이 반환된다', () => {
+  const result = divide(8, 6);
+  expect(result).toBe(1);
 });

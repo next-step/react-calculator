@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
-import { OperatorType } from '../common/types';
-import { makeOperate } from '../utils/calculator';
+import { ArithmeticOperatorType, OperatorType } from '../common/types';
+import { add, divide, multiply, substract } from '../utils/calculator';
 
 interface CalculatorState {
   num1: number;
   num2?: number;
   isNum2Negative?: boolean;
-  operator?: OperatorType;
+  operator?: ArithmeticOperatorType;
 }
 
 const INITIAL_CALCULATOR_STATE: CalculatorState = { num1: 0 };
@@ -14,6 +14,21 @@ const INITIAL_CALCULATOR_STATE: CalculatorState = { num1: 0 };
 export default function useCalculator() {
   const [{ num1, num2, operator, isNum2Negative }, setCalculatorState] =
     useState<CalculatorState>(INITIAL_CALCULATOR_STATE);
+
+  const getCalculator = useCallback((operator: ArithmeticOperatorType) => {
+    switch (operator) {
+      case '+':
+        return add;
+      case '-':
+        return substract;
+      case 'X':
+        return multiply;
+      case '/':
+        return divide;
+      default:
+        throw Error('없는 연산자입니다!');
+    }
+  }, []);
 
   const inputNumber = useCallback(
     (num: number) => {
@@ -49,7 +64,7 @@ export default function useCalculator() {
       }
       const shouldCalculate = input === '=' && num2 !== undefined && operator;
       if (shouldCalculate) {
-        const operate = makeOperate(operator);
+        const operate = getCalculator(operator);
         const result = operate(num1, isNum2Negative ? -num2 : num2);
         setCalculatorState({ num1: result });
         return;
