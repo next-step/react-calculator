@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OPERATION, UseCalculatorProps } from './Calculator.type'
+import { Operation, UseCalculatorProps } from './Calculator.type'
 import { calculate } from './Calculator.util'
 import { DEFAULT_MAX_NUMBER_LENGTH } from './Calculator.const'
 
@@ -8,7 +8,7 @@ export const useCalculator = ({
 }: UseCalculatorProps) => {
   const [calculatedResult, setCalculatedResult] = useState('0')
   const [leftOperand, setLeftOperand] = useState('')
-  const [operation, setOperation] = useState<OPERATION | ''>('')
+  const [operation, setOperation] = useState<Operation | ''>('')
   const [rightOperand, setRightOperand] = useState('')
   const displayedContents = !leftOperand
     ? calculatedResult
@@ -41,7 +41,7 @@ export const useCalculator = ({
     setRightOperand(nextDigit)
   }
 
-  const updateOperation = (nextOperation: OPERATION) => {
+  const updateOperation = (nextOperation: Operation) => {
     if (nextOperation !== '=') {
       setOperation(nextOperation)
 

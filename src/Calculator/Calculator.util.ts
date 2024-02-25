@@ -1,4 +1,4 @@
-import { OPERATION } from './Calculator.type'
+import { Operation } from './Calculator.type'
 
 export const calculate = ({
   leftOperand,
@@ -6,7 +6,7 @@ export const calculate = ({
   rightOperand,
 }: {
   leftOperand: number
-  operation: OPERATION | ''
+  operation: Operation | ''
   rightOperand: number
 }) => {
   switch (operation) {

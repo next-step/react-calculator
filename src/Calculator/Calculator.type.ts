@@ -10,4 +10,4 @@ export type UseCalculatorProps = {
   maxNumberLength?: number
 }
 
-export type OPERATION = (typeof OPERATIONS)[number]
+export type Operation = (typeof OPERATIONS)[number]
