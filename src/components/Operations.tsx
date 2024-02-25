@@ -2,26 +2,23 @@ import { OPERATORS } from '@/constants';
 import type { OperatorType } from '@/types';
 
 type OperationsProps = {
-  handleClickOperator: (action: OperatorType) => void;
-  handleClickCalculate: () => void;
+  onClickOperator: (action: OperatorType) => void;
+  onClickCalculate: () => void;
 };
 
-const Operations = ({
-  handleClickOperator,
-  handleClickCalculate,
-}: OperationsProps) => {
+const Operations = ({ onClickOperator, onClickCalculate }: OperationsProps) => {
   return (
     <div className='operations subgrid'>
       {OPERATORS.map((operator) => (
         <button
           key={operator.action}
           className='operation'
-          onClick={() => handleClickOperator(operator.label)}
+          onClick={() => onClickOperator(operator.label)}
         >
           {operator.label}
         </button>
       ))}
-      <button className='operation' onClick={handleClickCalculate}>
+      <button className='operation' onClick={onClickCalculate}>
         =
       </button>
     </div>

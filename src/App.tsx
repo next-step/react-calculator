@@ -18,7 +18,7 @@ function App() {
   const operatorLabels = OPERATORS.map(({ label }) => label as string);
   const isError = screenValue === '오류';
 
-  const handleClickDigit = (digit: DigitType) => {
+  const onClickDigit = (digit: DigitType) => {
     if (inputNum.current.length >= MAX_NUMBER_LENGTH) {
       alert(ERROR_MESSAGE.MAX_NUMBER_LENGTH);
       return;
@@ -36,7 +36,7 @@ function App() {
     setScreenValue(newScreenValue);
   };
 
-  const handleClickOperator = (operator: OperatorType) => {
+  const onClickOperator = (operator: OperatorType) => {
     if (screenValue === INITIAL_SCREEN_VALUE) {
       alert(ERROR_MESSAGE.NO_NUMBER);
       return;
@@ -58,11 +58,11 @@ function App() {
       : `${screenValue}${operator}`;
     setScreenValue(newScreenValue);
   };
-  const handleClickAllClear = () => {
+  const onClickAllClear = () => {
     inputNum.current = '';
     setScreenValue(INITIAL_SCREEN_VALUE);
   };
-  const handleClickCalculate = () => {
+  const onClickCalculate = () => {
     inputNum.current = '';
     if (numbers.length < MIN_NUMBER_TO_CALCULATE || !operator) {
       setScreenValue(`${numbers[0]}`);
@@ -76,11 +76,11 @@ function App() {
     <div id='app'>
       <div className='calculator'>
         <ScreenPanel value={screenValue} />
-        <Digits handleClickDigit={handleClickDigit} />
-        <AllClear handleClickAllClear={handleClickAllClear} />
+        <Digits onClickDigit={onClickDigit} />
+        <AllClear onClickAllClear={onClickAllClear} />
         <Operations
-          handleClickOperator={handleClickOperator}
-          handleClickCalculate={handleClickCalculate}
+          onClickOperator={onClickOperator}
+          onClickCalculate={onClickCalculate}
         />
       </div>
     </div>

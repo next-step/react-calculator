@@ -1,10 +1,10 @@
 type AllClearProps = {
-  handleClickAllClear: () => void;
+  onClickAllClear: () => void;
 };
-const AllClear = ({ handleClickAllClear }: AllClearProps) => {
+const AllClear = ({ onClickAllClear }: AllClearProps) => {
   return (
     <div className='modifiers subgrid'>
-      <button className='modifier' onClick={handleClickAllClear}>
+      <button className='modifier' onClick={onClickAllClear}>
         AC
       </button>
     </div>
