@@ -45,7 +45,8 @@ export const useCalculator = () => {
   };
 
   const appendNumber = (num: number) => {
-    const newFormula = `${formula}${num}`;
+    const currentFormula = formula.startsWith('0') && formula.length === 1 ? '' : formula;
+    const newFormula = `${currentFormula}${num}`;
 
     if (REGEXP.MAX_LENGTH_NUMBER.test(newFormula)) {
       alert(ERROR_MESSAGE.MAX_LENGTH_NUMBER);

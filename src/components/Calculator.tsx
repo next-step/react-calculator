@@ -1,60 +1,23 @@
-import { ERROR_MESSAGE } from "@/constants/message"
-import { REGEXP } from "@/constants/regexp"
-import { Calculator as CalculatorApp } from "@/utils/calculator"
-import { FormEventHandler, useState } from "react"
-
-type Operation = Exclude<keyof CalculatorApp, 'getValue' | 'clear'>
-
-type CalculatorOperationMap = {
-  [key in Operation]: string
-}
-
-const CALCULATOR_OPERATION_MAP: CalculatorOperationMap = {
-  sum: '+',
-  subtract: '-',
-  multiply: 'x',
-  division: '/'
-}
+import { useCalculator } from "@/hooks/useCalculator"
+import { Operation } from "@/types/calculator"
+import { FormEventHandler } from "react"
 
 export const Calculator = () => {
-  const [formula, setFormula] = useState('')
+  const { formula, clearFormula, appendOperation, appendNumber, calculateAndSetFormula } = useCalculator()
 
-  const handleClickClear = () => {
-    setFormula('')
-  }
-
-  const handleClickOperation = (operation: Operation) => () => {
-    if(!REGEXP.END_WITH_NUMBER.test(formula)) {
-      alert(ERROR_MESSAGE.NOT_VALID_FORMULA)
-      return
-    }
-
-    const operationSymbol = CALCULATOR_OPERATION_MAP[operation]
-    setFormula((prev) => prev + operationSymbol)
-  }
-
-  const handleClickNumber = (num: number) => () => {
-    const newFormula = formula + num
-
-    if(REGEXP.MAX_LENGTH_NUMBER.test(newFormula)) {
-      alert(ERROR_MESSAGE.MAX_LENGTH_NUMBER)
-      return
-    }
-
-    setFormula(newFormula)
-  }
-
+  const handleClickOperation = (operation: Operation) => () => appendOperation(operation)
+  const handleClickNumber = (num: number) => () => appendNumber(num)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    handleClickClear()
+    calculateAndSetFormula()
   }
 
   return (
     <form onSubmit={handleSubmit}>
-    <input id="result" type="text" value={formula} readOnly/>
+    <input id="result" type="text" value={formula || 0} readOnly/>
     <div>
-      <button type="button" onClick={handleClickClear}>AC</button>
+      <button type="button" onClick={clearFormula}>AC</button>
       <button type="button" onClick={handleClickOperation('division')}>/</button>
     </div>
     <div>
