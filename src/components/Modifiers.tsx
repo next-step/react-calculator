@@ -1,9 +1,10 @@
 import { BUTTON } from './button/button.constant';
+import { Modifier } from './button/button.type';
 import { ButtonGroup } from './buttonGroup/ButtonGroup';
 import { BUTTON_GROUP } from './buttonGroup/buttonGroup.constant';
-import { ModifiersButtonGroupProps } from './buttonGroup/buttonGroup.type';
+import { ButtonGroupOnClickProps } from './buttonGroup/buttonGroup.type';
 
-export const Modifiers = ({ onClick }: ModifiersButtonGroupProps) => {
+export const Modifiers = ({ onClick }: ButtonGroupOnClickProps<Modifier>) => {
   return (
     <ButtonGroup
       classNames={BUTTON_GROUP.MODIFIERS.CLASSNAMES}

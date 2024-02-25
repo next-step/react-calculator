@@ -1,5 +1,4 @@
 import { ClassNames } from '../../types/components';
-import { Digit, Modifier, Operator } from '../button/button.type';
 
 export interface ButtonGroupProps<T> {
   onClick: (value: T) => void;
@@ -10,14 +9,6 @@ export interface ButtonGroupProps<T> {
   classNames: ClassNames;
 }
 
-export interface DigitsButtonGroupProps {
-  onClick: (value: Digit) => void;
-}
-
-export interface ModifiersButtonGroupProps {
-  onClick: (value: Modifier) => void;
-}
-
-export interface OperationsButtonGroupProps {
-  onClick: (value: Operator) => void;
+export interface ButtonGroupOnClickProps<T> {
+  onClick: (value: T) => void;
 }

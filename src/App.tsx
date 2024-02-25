@@ -1,4 +1,4 @@
-import { Digits, Modifiers, Operations, Result } from './components';
+import { Digits, Modifiers, Operators, Result } from './components';
 import { useCalculator } from './hooks/useCalculator';
 import { Layout } from './layout/Layout';
 
@@ -17,7 +17,7 @@ function App() {
       <Result result={result} current={current} operator={operator} />
       <Digits onClick={handleDigit} />
       <Modifiers onClick={handleModifier} />
-      <Operations onClick={handleOperator} />
+      <Operators onClick={handleOperator} />
     </Layout>
   );
 }
