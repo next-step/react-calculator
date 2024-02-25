@@ -1,11 +1,11 @@
-import { useCalculator } from "./calculator/service/hooks/calculator/useCalculator";
+import { useCalculatorInput } from "./calculator/service/hooks/calculator/useCalculatorInput";
 import Calculator from "./calculator/ui/Calculator";
 import "./css/reset.css";
 import "./css/index.css";
 
 function App() {
 	const { expression, handleInput, reset, calculateAndUpdateLastOperation } =
-		useCalculator();
+		useCalculatorInput();
 
 	return (
 		<Calculator>

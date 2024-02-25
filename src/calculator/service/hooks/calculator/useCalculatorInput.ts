@@ -19,7 +19,7 @@ const DEFAULT_LAST_OPERATION: LastOperationType = {
 	number: 0
 };
 
-export const useCalculator = () => {
+export const useCalculatorInput = () => {
 	const [receiver] = useState(new CalculatorReceiver());
 	const [expression, setExpression] = useState(DEFAULT_EXPRESSION);
 	const [lastOperation, setLastOperation] = useState<LastOperationType>(
