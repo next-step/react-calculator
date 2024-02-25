@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AC, Digits, Operations, Screen } from '@/components';
+import { AllClear, Digits, Operations, ScreenPanel } from '@/components';
 import {
   MAX_NUMBER_LENGTH,
   ERROR_MESSAGE,
@@ -75,9 +75,9 @@ function App() {
   return (
     <div id='app'>
       <div className='calculator'>
-        <Screen value={screenValue} />
+        <ScreenPanel value={screenValue} />
         <Digits handleClickDigit={handleClickDigit} />
-        <AC handleClickAllClear={handleClickAllClear} />
+        <AllClear handleClickAllClear={handleClickAllClear} />
         <Operations
           handleClickOperator={handleClickOperator}
           handleClickCalculate={handleClickCalculate}

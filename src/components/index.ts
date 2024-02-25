@@ -1,6 +1,6 @@
-import AC from './AC';
+import AllClear from './AllClear';
 import Digits from './Digits';
 import Operations from './Operations';
-import Screen from './Screen';
+import ScreenPanel from './ScreenPanel';
 
-export { AC, Digits, Operations, Screen };
+export { AllClear, Digits, Operations, ScreenPanel };

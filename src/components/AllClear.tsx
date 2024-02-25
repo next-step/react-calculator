@@ -1,7 +1,7 @@
-type ACProps = {
+type AllClearProps = {
   handleClickAllClear: () => void;
 };
-const AC = ({ handleClickAllClear }: ACProps) => {
+const AllClear = ({ handleClickAllClear }: AllClearProps) => {
   return (
     <div className='modifiers subgrid'>
       <button className='modifier' onClick={handleClickAllClear}>
@@ -11,4 +11,4 @@ const AC = ({ handleClickAllClear }: ACProps) => {
   );
 };
 
-export default AC;
+export default AllClear;
