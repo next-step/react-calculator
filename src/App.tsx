@@ -4,14 +4,8 @@ import { getErrorMessage } from './utils/get-error-message'
 import { Operator } from './types'
 
 function App() {
-  const {
-    expression,
-    updateExpression,
-    updateByOperand,
-    updateByOperator,
-    calculateExpression,
-    clearExpression,
-  } = useExpressionState()
+  const { expression, updateByOperand, updateByOperator, calculateExpression, clearExpression } =
+    useExpressionState()
 
   const handleClickOperand = (operand: number) => () => {
     try {
