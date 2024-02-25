@@ -9,7 +9,7 @@ import {
   INITIAL_SCREEN_VALUE,
 } from '@/constants';
 import { parseExpression, calculate } from '@/utils';
-import type { OperatorType } from '@/types';
+import type { DigitType, OperatorType } from '@/types';
 
 function App() {
   const [screenValue, setScreenValue] = useState(INITIAL_SCREEN_VALUE);
@@ -18,7 +18,7 @@ function App() {
   const operatorLabels = OPERATORS.map(({ label }) => label as string);
   const isError = screenValue === '오류';
 
-  const handleClickDigit = (digit: number) => {
+  const handleClickDigit = (digit: DigitType) => {
     if (inputNum.current.length >= MAX_NUMBER_LENGTH) {
       alert(ERROR_MESSAGE.MAX_NUMBER_LENGTH);
       return;

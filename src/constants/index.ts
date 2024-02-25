@@ -3,7 +3,7 @@ const MAX_NUMBER_COUNT = 2;
 const MIN_NUMBER_TO_CALCULATE = 2;
 const INITIAL_SCREEN_VALUE = '0';
 
-const DIGITS = Array.from({ length: 10 }, (_, i) => 9 - i);
+const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 
 const OPERATORS = [
   {
@@ -37,5 +37,5 @@ export {
   MAX_NUMBER_COUNT,
   MIN_NUMBER_TO_CALCULATE,
   ERROR_MESSAGE,
-  INITIAL_SCREEN_VALUE
+  INITIAL_SCREEN_VALUE,
 };

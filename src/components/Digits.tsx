@@ -1,7 +1,8 @@
 import { DIGITS } from '@/constants';
+import type { DigitType } from '@/types';
 
 type DigitsProps = {
-  handleClickDigit: (value: number) => void;
+  handleClickDigit: (value: DigitType) => void;
 };
 
 const Digits = ({ handleClickDigit }: DigitsProps) => {
