@@ -29,7 +29,6 @@ export class CalculatorReceiver {
 		} else {
 			this.current /= value;
 		}
-		this.current = isFinite(this.current) ? Math.floor(this.current) : Infinity;
 	}
 
 	getCurrentValue(): number {
@@ -57,7 +56,7 @@ export class CalculatorReceiver {
 			default:
 				throw new Error("올바르지 않은 연산자입니다");
 		}
-		return this.current;
+		return this.getCurrentValue();
 	}
 }
 
@@ -108,7 +107,7 @@ export class CalculatorInvoker {
 		command.execute();
 	}
 
-	getCurrentValue(): number | string {
-		return this.receiver.getCurrentValue();
+	getCurrentValue(): number {
+		return Math.floor(this.receiver.getCurrentValue());
 	}
 }
