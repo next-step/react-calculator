@@ -36,18 +36,25 @@ export default class Validator {
     return minValue <= value && value <= maxValue
   }
 
-  isInvalidNumberRange() {
-    const parsedNumber = parseInt(this.expression)
-    return !this.isWithinMaxDigits(parsedNumber)
+  isInvalidNumberRange(num: number) {
+    return !this.isWithinMaxDigits(num)
   }
 
   isSingleNegativeNumber() {
     return this.expression[0] === SUBTRACT && this.splitsByOperators.length === 2
   }
 
+  getOperands() {
+    return this.splitsByOperators.filter(split => split !== '').map(split => Number(split))
+  }
+
+  isOperandsInvalid() {
+    return this.getOperands().some(operand => this.isInvalidNumberRange(operand))
+  }
+
   validateExpression() {
     if (this.isOnlyNumber()) {
-      if (this.isInvalidNumberRange()) {
+      if (this.isInvalidNumberRange(Number(this.expression))) {
         throw new Error(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
       }
     } else {
@@ -60,10 +67,14 @@ export default class Validator {
         throw new Error(INPUT_NUMBER_FIRST_ERROR_MESSAGE)
       } else if (this.hasSuccessiveOperators()) {
         throw new Error(INPUT_NUMBER_FIRST_ERROR_MESSAGE)
-      } else if (this.isSingleNegativeNumber() && this.isInvalidNumberRange()) {
+      } else if (
+        this.isSingleNegativeNumber() &&
+        this.isInvalidNumberRange(Number(this.expression))
+      ) {
+        throw new Error(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
+      } else if (this.isOperandsInvalid()) {
         throw new Error(THREE_DIGIT_LIMIT_ERROR_MESSAGE)
       }
-      // 피연산 / 연산자 / 피연산 형식에서 range 검사가 안되고 있음!
     }
     return true
   }
