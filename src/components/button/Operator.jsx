@@ -1,3 +1,5 @@
+const operators = ['/', 'X', '-', '+', '='];
+
 function Operator({ onClick }) {
   const handleClick = (value) => {
     onClick(value, 'operator');
@@ -5,41 +7,16 @@ function Operator({ onClick }) {
 
   return (
     <>
-      <button
-        type="button"
-        className="operation"
-        onClick={() => handleClick('/')}
-      >
-        /
-      </button>
-      <button
-        type="button"
-        className="operation"
-        onClick={() => handleClick('X')}
-      >
-        X
-      </button>
-      <button
-        type="button"
-        className="operation"
-        onClick={() => handleClick('-')}
-      >
-        -
-      </button>
-      <button
-        type="button"
-        className="operation"
-        onClick={() => handleClick('+')}
-      >
-        +
-      </button>
-      <button
-        type="button"
-        className="operation"
-        onClick={() => handleClick('=')}
-      >
-        =
-      </button>
+      {operators.map((operator) => (
+        <button
+          type="button"
+          key={operator}
+          className="operation"
+          onClick={() => handleClick(operator)}
+        >
+          {operator}
+        </button>
+      ))}
     </>
   );
 }
