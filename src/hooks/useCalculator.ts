@@ -59,27 +59,25 @@ export default function useCalculator() {
 
   const inputOperator = useCallback(
     (input: OperatorType) => {
-      if (input === '=' && !num2) {
-        return;
-      }
-      const shouldCalculate = input === '=' && num2 !== undefined && operator;
-      if (shouldCalculate) {
-        const operate = getCalculator(operator);
-        const result = operate(num1, isNum2Negative ? -num2 : num2);
-        setCalculatorState({ num1: result });
-        return;
-      }
-
-      if (input === '-' && operator !== undefined) {
-        setCalculatorState(prev => ({ ...prev, isNum2Negative: true }));
+      const isFirstOperator = num2 === undefined;
+      if (isFirstOperator) {
+        if (input === '=') return;
+        if (operator && input === '-') {
+          setCalculatorState(prev => ({ ...prev, isNum2Negative: true }));
+          return;
+        }
+        setCalculatorState(prev => ({ ...prev, operator: input }));
         return;
       }
 
-      if (num2) {
+      if (operator === undefined) return;
+      if (input !== '=') {
         alert('두 수의 연산만 가능합니다!');
         return;
       }
-      setCalculatorState(prev => ({ ...prev, operator: input }));
+      const calculate = getCalculator(operator);
+      const result = calculate(num1, isNum2Negative ? -num2 : num2);
+      setCalculatorState({ num1: result });
     },
     [num1, num2, operator, isNum2Negative],
   );
