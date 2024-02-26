@@ -60,7 +60,7 @@ button {
 	grid-area: digit;
 	display: flex;
 	flex-wrap: wrap;
-	flex-direction: row-reverse;
+	/* flex-direction: row-reverse; */
 }
 
 .digits button {
