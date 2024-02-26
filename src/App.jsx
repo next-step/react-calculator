@@ -12,11 +12,14 @@ function App() {
     const calculator = new Calculator();
 
     const onClickEqualOperationButton = () => {
-        if (operationType === '') {
+        // 아직 연산자 입력 안됨
+        const noOperationInput = operationType === '';
+        if (noOperationInput) {
             return;
         }
         const num1 = Number(firstNumber);
         const num2 = Number(secondNumber);
+
         const calculateResult = (() => {
             switch (operationType) {
                 case '+':
@@ -36,7 +39,7 @@ function App() {
         setSecondNumber('');
     };
 
-    const initalize = () => {
+    const resetState = () => {
         setFirstNumber('');
         setOperationType('');
         setSecondNumber('');
@@ -50,7 +53,7 @@ function App() {
                 <div id="total">{display}</div>
 
                 <div className="subgrid modifiers">
-                    <button onClick={initalize}>AC</button>
+                    <button onClick={resetState}>AC</button>
                 </div>
 
                 <div className="subgrid operations">
