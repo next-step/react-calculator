@@ -13,7 +13,7 @@ const calculate = (operation: string, operands: Operands) => {
     case '+':
       return Number(firstValue) + Number(secondValue);
     default:
-      break;
+      throw Error('입력 값이 유효하지 않습니다.');
   }
 };
 
