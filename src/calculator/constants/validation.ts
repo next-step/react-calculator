@@ -1,0 +1,1 @@
+export const MAX_NUMBER_EXPRESSION_LENGTH = 2;
