@@ -1,39 +1,35 @@
 import { useState } from 'react';
+import { MSG_ERROR_RESULT } from '../constants/messages';
 
 function useCalculation() {
   const [result, setResult] = useState('0');
   const [count, setCount] = useState(0);
 
+  const getResult = {
+    '+': (num1, num2) => parseInt(num1, 10) + parseInt(num2, 10),
+    '-': (num1, num2) => parseInt(num1, 10) - parseInt(num2, 10),
+    X: (num1, num2) => parseInt(num1, 10) * parseInt(num2, 10),
+    '/': (num1, num2) => parseInt(num1, 10) / parseInt(num2, 10),
+  };
+
+  function checkExpression(operator, operand) {
+    return operator && operand[1];
+  }
+
+  function checkResult(value) {
+    if (Number.isFinite(value)) {
+      return parseInt(value, 10).toString();
+    }
+    return MSG_ERROR_RESULT;
+  }
+
   function calculate(operand, operator) {
     setCount(count + 1);
 
-    let operationResult = 0;
-    if (!operator) {
-      operationResult = parseInt(operand[0], 10);
-    } else {
-      switch (operator) {
-        case '+':
-          operationResult = parseInt(operand[0], 10) + parseInt(operand[1], 10);
-          break;
-        case '-':
-          operationResult = parseInt(operand[0], 10) - parseInt(operand[1], 10);
-          break;
-        case 'X':
-          operationResult = parseInt(operand[0], 10) * parseInt(operand[1], 10);
-          break;
-        case '/':
-          operationResult = parseInt(operand[0], 10) / parseInt(operand[1], 10);
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (!Number.isFinite(operationResult)) {
-      setResult('오류');
-    } else {
-      setResult(parseInt(operationResult, 10).toString());
-    }
+    const value = checkExpression(operator, operand)
+      ? getResult[operator](operand[0], operand[1])
+      : parseInt(operand[0], 10);
+    setResult(checkResult(value));
   }
 
   return { result, count, calculate };
