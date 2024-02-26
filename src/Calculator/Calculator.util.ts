@@ -1,5 +1,22 @@
 import { Operator } from './Calculator.type'
 
+type CalculateFunction = (leftOperand: number, rightOperand: number) => number
+
+const CALCULATE_FUNCTION_MAP: {
+  '+': CalculateFunction
+  '-': CalculateFunction
+  '/': CalculateFunction
+  X: CalculateFunction
+} = {
+  '+': (leftOperand: number, rightOperand: number) =>
+    leftOperand + rightOperand,
+  '-': (leftOperand: number, rightOperand: number) =>
+    leftOperand - rightOperand,
+  '/': (leftOperand: number, rightOperand: number) =>
+    Math.floor(leftOperand / rightOperand),
+  X: (leftOperand: number, rightOperand: number) => leftOperand * rightOperand,
+}
+
 export const calculate = ({
   leftOperand,
   operator,
@@ -9,16 +26,9 @@ export const calculate = ({
   operator: Operator | ''
   rightOperand: number
 }) => {
-  switch (operator) {
-    case '+':
-      return leftOperand + rightOperand
-    case '-':
-      return leftOperand - rightOperand
-    case '/':
-      return Math.floor(leftOperand / rightOperand)
-    case 'X':
-      return leftOperand * rightOperand
-    default:
-      return 0
+  if (operator === '' || operator === '=') {
+    return 0
   }
+
+  return CALCULATE_FUNCTION_MAP[operator](leftOperand, rightOperand)
 }
