@@ -8,23 +8,20 @@ function App() {
     const [firstNumber, setFirstNumber] = useState('');
     const [operationType, setOperationType] = useState('');
     const [secondNumber, setSecondNumber] = useState('');
-
-    const calculator = new Calculator();
-
     const getCalculateResult = (num1, num2) => {
         let result = '';
         switch (operationType) {
             case '+':
-                result = calculator.sum(num1, num2);
+                result = Calculator.sum(num1, num2);
                 break;
             case '-':
-                result = calculator.substract(num1, num2);
+                result = Calculator.substract(num1, num2);
                 break;
             case 'X':
-                result = calculator.multiple(num1, num2);
+                result = Calculator.multiple(num1, num2);
                 break;
             case '/':
-                result = calculator.divide(num1, num2);
+                result = Calculator.divide(num1, num2);
                 break;
         }
 
