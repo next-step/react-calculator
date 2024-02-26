@@ -11,6 +11,30 @@ function App() {
 
     const calculator = new Calculator();
 
+    const getCalculateResult = (num1, num2) => {
+        let result = '';
+        switch (operationType) {
+            case '+':
+                result = calculator.sum(num1, num2);
+                break;
+            case '-':
+                result = calculator.substract(num1, num2);
+                break;
+            case 'X':
+                result = calculator.multiple(num1, num2);
+                break;
+            case '/':
+                result = calculator.divide(num1, num2);
+                break;
+        }
+
+        if (result === Infinity) {
+            return '오류';
+        }
+
+        return String(result);
+    };
+
     const onClickEqualOperationButton = () => {
         // 아직 연산자 입력 안됨
         const noOperationInput = operationType === '';
@@ -20,21 +44,9 @@ function App() {
         const num1 = Number(firstNumber);
         const num2 = Number(secondNumber);
 
-        const calculateResult = (() => {
-            switch (operationType) {
-                case '+':
-                    return calculator.sum(num1, num2);
-                case '-':
-                    return calculator.substract(num1, num2);
-                case 'X':
-                    return calculator.multiple(num1, num2);
-                case '/':
-                    return calculator.divide(num1, num2);
-            }
-        })();
+        const calculateResult = getCalculateResult(num1, num2);
 
-        setFirstNumber(calculateResult === Infinity ? '오류' : String(calculateResult));
-
+        setFirstNumber(calculateResult);
         setOperationType('');
         setSecondNumber('');
     };
