@@ -20,6 +20,16 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "printWidth": 100,
+    "tabWidth": 2,
+    "endOfLine": "lf"
+  },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
