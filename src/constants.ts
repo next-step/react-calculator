@@ -1,3 +1,5 @@
+export const MaxNumberLength = 3;
+
 export const Operators = {
   Plus: "+",
   Minus: "-",

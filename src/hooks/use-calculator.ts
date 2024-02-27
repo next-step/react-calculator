@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
-import { Messages, OperatorValues, Operators } from "../constants";
+import {
+  MaxNumberLength,
+  Messages,
+  OperatorValues,
+  Operators,
+} from "../constants";
 
 const OperatorMap: Record<OperatorValues, (a: number, b: number) => number> = {
   [Operators.Plus]: (a, b) => a + b,
@@ -23,31 +28,20 @@ export const useCalculator = () => {
   }, [firstNum, secondNum, operator]);
 
   const handleNumberInput = (input: number) => {
-    if (!operator) {
-      if (firstNum.toString().length >= 3) {
-        window.alert(Messages.MaxInputLength);
-        return;
-      }
+    const currentNum = operator ? secondNum : firstNum;
+    const setNum = operator ? setSecondNum : setFirstNum;
 
-      if (firstNum === 0) {
-        setFirstNum(input);
-        return;
-      }
-
-      setFirstNum(parseInt(`${firstNum}${input}`, 10));
-    } else {
-      if (secondNum.toString().length >= 3) {
-        window.alert(Messages.MaxInputLength);
-        return;
-      }
-
-      if (secondNum === 0) {
-        setSecondNum(input);
-        return;
-      }
-
-      setSecondNum(parseInt(`${secondNum}${input}`, 10));
+    if (currentNum.toString().length >= MaxNumberLength) {
+      window.alert(Messages.MaxInputLength);
+      return;
     }
+
+    if (currentNum === 0) {
+      setNum(input);
+      return;
+    }
+
+    setNum(parseInt(`${currentNum}${input}`, 10));
   };
 
   const handleSetOperator = (input: OperatorValues) => {
