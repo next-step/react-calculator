@@ -5,16 +5,22 @@ import Button from "./Components/Button";
 function App() {
   const [display, setDisplay] = useState<string>("");
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const operators = ["/", "%", "-", "+", "="];
+  const operators = ["/", "*", "-", "+", "="];
 
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value.toString();
 
-    if (!operators.includes(value)) {
+    if (!operators.includes(value) && value !== "AC") {
       console.log(value);
-      setDisplay((currentFormula) => `${currentFormula}${value}`);
+      setDisplay((currentFormula) => {
+        if (currentFormula[0] === "0") return `${value}`;
+        else {
+          return `${currentFormula}${value}`;
+        }
+      });
     } else {
       if (value === "=") {
+        // const result = Math.floor(eval(display)).toFixed(3);
         setDisplay(eval(display));
       } else if (value === "AC") {
         setDisplay("0");
