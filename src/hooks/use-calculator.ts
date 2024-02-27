@@ -19,7 +19,7 @@ export const useCalculator = () => {
   const [operator, setOperator] = useState<OperatorValues | null>(null);
 
   const displayText = useMemo(() => {
-    let result = firstNum.toString();
+    let result = isFinite(firstNum) ? `${firstNum}` : "오류";
 
     if (operator) result += `${operator}`;
     if (secondNum !== 0) result += `${secondNum}`;

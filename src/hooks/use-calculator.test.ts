@@ -133,13 +133,13 @@ describe("useCalculator", () => {
       expect(result.current.displayText).toBe("5");
     });
 
-    test("나눌 수 없는경우 문자를 표시합니다", () => {
+    test("나눌 수 없는경우 오류를 표시합니다", () => {
       act(() => result.current.handleNumberInput(1));
       act(() => result.current.handleSetOperator(Operators.Divide));
       act(() => result.current.handleNumberInput(0));
       act(() => result.current.handleCalculate());
 
-      expect(result.current.displayText).toBe("Infinity");
+      expect(result.current.displayText).toBe("오류");
     });
 
     test("계산 결과값은 소숫점 이하는 버림합니다", () => {
