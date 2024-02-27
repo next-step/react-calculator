@@ -29,12 +29,7 @@ export const CalculatorApp = () => {
         </Button>
       </Layout.Modifiers>
       <Layout.Operations>
-        {[
-          Operators.Divide,
-          Operators.Multiply,
-          Operators.Minus,
-          Operators.Plus,
-        ].map((operator) => (
+        {Object.values(Operators).map((operator) => (
           <Button
             key={operator}
             variant="operation"
