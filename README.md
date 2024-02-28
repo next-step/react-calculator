@@ -1,60 +1,14 @@
-<br/>
-<br/>
+안녕하세요 이번에 코드 구현하면서 아쉬운 점이 너무 많지만 일단 기능구현하고 커밋하였습니다.
 
-<p align="middle" >
-  <img width="100px;" src="public/images/calculator_icon.png"/>
-</p>
-<h2 align="middle">React 계산기</h2>
-<p align="middle">계산기와 함께하는 Onboarding NEXTSTEP with React</p>
-<p align="middle">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square" alt="template version"/>
-  <img src="https://img.shields.io/badge/language-html-red.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/language-css-blue.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/language-js-yellow.svg?style=flat-square"/>
-  <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"/>
-</p>
+1.연산로직을 구현하면서 switch문을 사용하였는데 구현하다보니 각자 연산자 함수를 구현하는것이 확장성이 좋지않을까라는 고민을 하였습니다.
 
-## 🔥 Projects!
 
-<p align="middle">
-  <img width="300" src="public/images/calculator_ui.png">
-</p>
+2.각 컴포넌트에서 prop을 전달할떄 변수명을 어떻게하면 좋을지 나머지 연산자는 언제 쓰면 좋을지 궁금합니다.
 
-<p align="middle">
-  <a href="https://next-step.github.io/js-calculator/">🖥️ 데모 링크</a>
-</p>
 
-## 🎯 기능 요구사항
+3.key로 배열 index주는 것은 좋지 않다고 하였지만 이번경우 리렌더링(배열이 동적으로 안바뀌기에)이 발생하지 않아 키값으로 주었습니다.
 
-- [ ] 2개의 숫자에 대해 덧셈이 가능하다.
-- [ ] 2개의 숫자에 대해 뺄셈이 가능하다.
-- [ ] 2개의 숫자에 대해 곱셈이 가능하다.
-- [ ] 2개의 숫자에 대해 나눗셈이 가능하다.
-- [ ] AC(All Clear)버튼을 누르면 0으로 초기화 한다.
-- [ ] 숫자는 한번에 최대 3자리 수까지 입력 가능하다.
-- [ ] 계산 결과를 표현할 때 소수점 이하는 버림한다.
-- [ ] 연산의 결과값이 `Infinity`일 경우 `오류`라는 문자열을 보여준다. (아이폰 참고)
 
-<br/>
+4.아직 공통 컴포넌트로 묶는게 와닿지 않는데 어떻게 하면 좀더 좋은 공통 컴포넌트로 묶을수 있을지 고민입니다.(사실 공통 컴포넌트 구현하는게 어색하고 막상하니 스파게티 코드가 되네요) 버튼 컴포넌트도 어떻게 하면 잘 나눌 수 있을지 고민입니다.
 
-## 📄 참고 사항
-
-숫자 입력은 **클릭**으로만 가능하다.
-
-<br/>
-
-## 👏 Contributing
-
-만약 미션 수행 중에 개선사항이 보인다면, 언제든 자유롭게 PR을 보내주세요.
-
-<br/>
-
-## 🐞 Bug Report
-
-버그를 발견한다면, [Issues](https://github.com/next-step/react-calculator/issues)에 등록해주세요.
-
-<br/>
-
-## 📝 License
-
-This project is [MIT](https://github.com/next-step/react-calculator/blob/master/LICENSE) licensed.
+5.구현하다보니 값이 최상단 컴포넌트에 집중되어있는데 어떻게 하면 이 문제를 해결할 수있을지 고민입니다.
