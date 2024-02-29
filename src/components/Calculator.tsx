@@ -11,10 +11,6 @@ export const Calculator = () => {
     calculateAndSetFormula
   } = useCalculator()
 
-  const handleClickOperation = (operation: Operation) => () =>
-    appendOperation(operation)
-  const handleClickNumber = (num: number) => () => appendNumber(num)
-
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     calculateAndSetFormula()
@@ -32,7 +28,7 @@ export const Calculator = () => {
               key={`num-${num}`}
               className="digit"
               type="button"
-              onClick={handleClickNumber(num)}>
+              onClick={() => appendNumber(num)}>
               {num}
             </button>
           ))}
@@ -46,25 +42,25 @@ export const Calculator = () => {
         <button
           type="button"
           className="operation"
-          onClick={handleClickOperation('division')}>
+          onClick={() => appendOperation('division')}>
           /
         </button>
         <button
           type="button"
           className="operation"
-          onClick={handleClickOperation('multiply')}>
+          onClick={() => appendOperation('multiply')}>
           X
         </button>
         <button
           type="button"
           className="operation"
-          onClick={handleClickOperation('subtract')}>
+          onClick={() => appendOperation('subtract')}>
           -
         </button>
         <button
           type="button"
           className="operation"
-          onClick={handleClickOperation('sum')}>
+          onClick={() => appendOperation('sum')}>
           +
         </button>
         <button type="submit" className="operation" id="equal-sign">
