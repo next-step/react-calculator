@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
-import { DIGITS, ERROR_MESSAGE, OPERATION_SIGN } from '../constants';
+import { DIGITS, OPERATION_SIGN } from '../constants';
 import { Calculator } from '../lib/Calculator';
 import { Validator } from '../lib/Validator';
 import { OperationTypes } from '../types/operation';
@@ -14,7 +14,7 @@ const INITIAL_CALCULATOR_STATUS = {
 
 export const useCalculator = () => {
   const [calculatorStatus, setCalculatorStatus] = useState<{
-    display: string | number;
+    display: number;
     operation: OperationTypes | null;
     operand1: number;
     operand2: number | null;
@@ -72,18 +72,11 @@ export const useCalculator = () => {
         ),
       );
 
-      if (Validator.checkIsError(result)) {
-        setCalculatorStatus({
-          ...INITIAL_CALCULATOR_STATUS,
-          display: ERROR_MESSAGE,
-        });
-      } else {
-        setCalculatorStatus({
-          ...INITIAL_CALCULATOR_STATUS,
-          operand1: result,
-          display: result,
-        });
-      }
+      setCalculatorStatus({
+        ...INITIAL_CALCULATOR_STATUS,
+        operand1: result,
+        display: result,
+      });
 
       return;
     }
