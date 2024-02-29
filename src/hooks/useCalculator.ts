@@ -60,13 +60,15 @@ export const useCalculator = () => {
   const onClickOperation = (operation: OperationTypes) => {
     if (operation === OPERATION_SIGN.equals) {
       // 결과 출력
+      const { operand1, operand2, operation } = calculatorStatus;
+
       const result = Math.floor(
         Calculator.calculate(
           {
-            operand1: calculatorStatus.operand1,
-            operand2: calculatorStatus.operand2 ?? calculatorStatus.operand1,
+            operand1: operand1,
+            operand2: operand2 ?? operand1,
           },
-          calculatorStatus.operation ?? OPERATION_SIGN.equals,
+          operation ?? OPERATION_SIGN.equals,
         ),
       );
 
