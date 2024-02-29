@@ -1,4 +1,6 @@
+import { OPERATION_SYMBOLS } from '@/constants/app'
 import { useCalculator } from '@/hooks/useCalculator'
+import { Operation } from '@/types/app'
 import { FormEventHandler } from 'react'
 
 export const Calculator = () => {
@@ -38,30 +40,15 @@ export const Calculator = () => {
         </button>
       </div>
       <div className="operations subgrid">
-        <button
-          type="button"
-          className="operation"
-          onClick={() => appendOperation('division')}>
-          /
-        </button>
-        <button
-          type="button"
-          className="operation"
-          onClick={() => appendOperation('multiply')}>
-          X
-        </button>
-        <button
-          type="button"
-          className="operation"
-          onClick={() => appendOperation('subtract')}>
-          -
-        </button>
-        <button
-          type="button"
-          className="operation"
-          onClick={() => appendOperation('sum')}>
-          +
-        </button>
+        {Object.entries(OPERATION_SYMBOLS).map(([operation, symbol]) => (
+          <button
+            key={operation}
+            type="button"
+            className="operation"
+            onClick={() => appendOperation(operation as Operation)}>
+            {symbol}
+          </button>
+        ))}
         <button type="submit" className="operation" id="equal-sign">
           =
         </button>
