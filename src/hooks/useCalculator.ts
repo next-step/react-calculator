@@ -2,6 +2,7 @@ import { MouseEventHandler, useState } from 'react';
 import { DIGITS, ERROR_MESSAGE, OPERATION_SIGN } from '../constants';
 import { Calculator } from '../lib/Calculator';
 import { Validator } from '../lib/Validator';
+import { OperationTypes } from '../types/operation';
 
 const INITIAL_DISPLAY_VALUE = 0;
 const INITIAL_CALCULATOR_STATUS = {
@@ -14,7 +15,7 @@ const INITIAL_CALCULATOR_STATUS = {
 export const useCalculator = () => {
   const [calculatorStatus, setCalculatorStatus] = useState<{
     display: string | number;
-    operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN] | null;
+    operation: OperationTypes | null;
     operand1: number;
     operand2: number | null;
   }>(INITIAL_CALCULATOR_STATUS);
@@ -56,7 +57,7 @@ export const useCalculator = () => {
     setCalculatorStatus(INITIAL_CALCULATOR_STATUS);
   };
 
-  const onClickOperation = (operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN]) => {
+  const onClickOperation = (operation: OperationTypes) => {
     if (operation === OPERATION_SIGN.equals) {
       // 결과 출력
       const result = Math.floor(

@@ -1,9 +1,10 @@
 import { OPERATION_SIGN } from '../constants';
+import { OperationTypes } from '../types/operation';
 
 export class Calculator {
   static calculate(
     { operand1, operand2 }: { operand1: number; operand2: number },
-    operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN],
+    operation: OperationTypes,
   ) {
     switch (operation) {
       case OPERATION_SIGN.addition:

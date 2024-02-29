@@ -1,9 +1,9 @@
 import { MouseEventHandler } from 'react';
-import { OPERATION_SIGN } from '../../constants';
+import { OperationTypes } from '../../types/operation';
 
 type Props = {
-  operation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN];
-  currOperation: (typeof OPERATION_SIGN)[keyof typeof OPERATION_SIGN] | null;
+  operation: OperationTypes;
+  currOperation: OperationTypes | null;
   onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
