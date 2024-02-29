@@ -55,7 +55,7 @@ describe('Calculator Spec', () => {
     // Given
     const { user } = render(<Calculator />)
     const NumberButtons = getSortedNumberButtons()
-    const MultiplyButton = screen.getByRole('button', { name: 'X' })
+    const MultiplyButton = screen.getByRole('button', { name: 'x' })
     const SubmitButton = screen.getByRole('button', { name: '=' })
     const ResultInput = screen.getByRole('textbox')
 
@@ -139,5 +139,25 @@ describe('Calculator Spec', () => {
 
     // Then
     expect(ResultInput).toHaveValue('2')
+  })
+
+  it('연산의 결과값이 Infinity일 경우 오류라는 문자열을 보여준다.', async () => {
+    // Given
+    const { user } = render(<Calculator />)
+    const NumberButtons = getSortedNumberButtons()
+    const DivisionButton = screen.getByRole('button', { name: '/' })
+    const SubmitButton = screen.getByRole('button', { name: '=' })
+
+    const spy = vi.fn()
+    vi.spyOn(window, 'alert').mockImplementation(spy)
+
+    // When
+    await user.click(NumberButtons[5])
+    await user.click(DivisionButton)
+    await user.click(NumberButtons[0])
+    await user.click(SubmitButton)
+
+    // Then
+    expect(spy).toBeCalledWith(ERROR_MESSAGE.NOT_VALID_FORMULA)
   })
 })

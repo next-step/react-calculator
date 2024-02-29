@@ -43,6 +43,10 @@ export class Calculator {
   }
 
   #setValue(value: number) {
+    if (!isNumber(value)) {
+      throw new Error(ERROR_MESSAGE.NOT_VALID_FORMULA)
+    }
+
     const newValue = Math.trunc(value)
     this.#value = newValue == -0 ? 0 : newValue
   }

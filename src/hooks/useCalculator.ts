@@ -65,8 +65,14 @@ export const useCalculator = () => {
   }
 
   const calculateAndSetFormula = () => {
-    const result = performCalculation()
-    setFormula(result.toString())
+    try {
+      const result = performCalculation()
+      setFormula(result.toString())
+    } catch (e) {
+      const { message } = e as { message: string }
+      alert(message)
+      clearFormula()
+    }
   }
 
   return {
