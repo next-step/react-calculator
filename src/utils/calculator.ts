@@ -44,6 +44,6 @@ export class Calculator {
 
   #setValue(value: number) {
     const newValue = Math.trunc(value)
-    this.#value = newValue === -0 ? 0 : newValue
+    this.#value = newValue == -0 ? 0 : newValue
   }
 }
