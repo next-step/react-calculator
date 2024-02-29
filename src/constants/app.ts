@@ -4,3 +4,5 @@ export const OPERATION_SYMBOLS = {
   multiply: 'x',
   division: '/'
 } as const
+
+export const MAX_DIGIT_LENGTH = 3
