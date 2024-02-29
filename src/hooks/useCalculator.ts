@@ -4,23 +4,26 @@ export default function useCalculator() {
   const [input, setInput] = useState('0')
   const [operator, setOperator] = useState('')
 
-  function resetInput(): void {
+  const resetInput = (): void => {
     setInput('0')
   }
 
-  function handleInput(number: number | string) {
+  const handleInput = (number: number | string) => {
     setInput((prevInput: number | string) => {
-      if (prevInput !== '0') return prevInput + number.toString()
-      else return number.toString()
+      if (prevInput !== '0') {
+        return prevInput + number.toString()
+      }
+      
+      return number.toString()
     })
   }
 
-  function handleOperator(oper: string) {
+  const handleOperator = (oper: string) => {
     setInput((prevInput) => prevInput + oper)
     setOperator(oper)
   }
   // 입력된 숫자를 더하는 함수
-  function calculateNumbers() {
+  const calculateNumbers = () => {
     const numbers = input.split(operator).map(Number)
 
     let result = 0

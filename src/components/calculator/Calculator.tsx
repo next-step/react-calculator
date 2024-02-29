@@ -1,4 +1,4 @@
-import { DIGITS, OPERATORS } from '../../consts/calculator'
+import { DIGITS, OPERATORS } from '../../constants/calculator'
 import useCalculator from '../../hooks/useCalculator'
 import './calculator.css'
 
@@ -17,6 +17,7 @@ function Calculator() {
       <div className="digits flex">
         {DIGITS.map((digit: number) => (
           <button
+            type="button"
             className="digit"
             key={digit}
             onClick={() => handleInput(digit)}
@@ -26,13 +27,14 @@ function Calculator() {
         ))}
       </div>
       <div className="modifiers subgrid">
-        <button className="modifier" onClick={resetInput}>
+        <button type="button" className="modifier" onClick={resetInput}>
           AC
         </button>
       </div>
       <div className="operations subgrid">
         {OPERATORS.map((operator: string) => (
           <button
+            type="button"
             className="operation"
             onClick={() => handleOperator(operator)}
           >
