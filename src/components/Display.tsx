@@ -1,5 +1,6 @@
 import React from 'react'
 
+const DISPLAY_INFINITY_VALUE = "오류"
 
 interface DisplayProps {
     value: string
@@ -8,7 +9,7 @@ interface DisplayProps {
 
 const Display: React.FC<DisplayProps> = ({value}) => {
     const infinityToError = (value: string): string => {
-        return value === "Infinity" ? "오류" : value;
+        return value === "Infinity" ? DISPLAY_INFINITY_VALUE : value;
     }
 
     return (

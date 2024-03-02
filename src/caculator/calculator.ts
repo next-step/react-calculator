@@ -1,19 +1,14 @@
 export default function calculate(input: string): string {
-    let tokens = inputSplit(input)
-
-    let secondOperand = 0
-    if (tokens.filter(token => typeof token === 'number').length >= 2) {
-        secondOperand = tokens[2] as number
-    }
-
-    return calculateNumbers(tokens[0] as number, tokens[1] as string, secondOperand)
+    const [num1, operator, num2] = inputSplit(input);
+    return calculateNumbers(num1, operator, num2);
 }
 
-function inputSplit(input: string): (string | number)[] {
-    return input.split(/([+\-X/])/).map(token => {
-        const num = parseInt(token)
-        return !isNaN(num) ? num : token.trim()
-    })
+function inputSplit(input: string): [number, string, number] {
+    const tokens = input.split(/([+\-X/])/);
+    const num1 = parseInt(tokens[0])
+    const num2 = parseInt(tokens[2])
+
+    return [num1, tokens[1], isNaN(num2) ? 0 : num2]
 }
 
 function calculateNumbers(firstOperand: number, operator: string, secondOperand: number): string {

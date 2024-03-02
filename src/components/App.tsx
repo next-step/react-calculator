@@ -3,8 +3,8 @@ import Button from "./Button.tsx"
 
 import Display from "./Display.tsx"
 
-import calculate from "../apis/calculator.ts"
-import {checkContinuousOperand, hasConsecutiveFourDigits} from "../apis/validator.ts"
+import calculate from "../caculator/calculator.ts"
+import {checkContinuousOperand, checkInputStartOperand, hasConsecutiveLimitDigits} from "../caculator/validator.ts"
 import '../css/index.css'
 
 
@@ -20,16 +20,16 @@ function App() {
     }
 
     const handleClick = (buttonValue: string) => {
-        if (checkContinuousOperand(displayValue[displayValue.length - 1], buttonValue)) {
+        if (checkContinuousOperand(displayValue[displayValue.length - 1], buttonValue) || checkInputStartOperand(displayValue[displayValue.length - 1], buttonValue)) {
             alert('숫자를 먼저 입력한 후 연산자를 입력해주세요!')
             return
-        } else if (hasConsecutiveFourDigits(displayValue + buttonValue)) {
+        } else if (hasConsecutiveLimitDigits(displayValue + buttonValue)) {
             alert("숫자는 세 자리까지만 입력 가능합니다!")
             return
         }
 
         switch (buttonValue) {
-            case "":
+            case "AC":
                 setDisplayValue("0");
                 break;
             case "=":
@@ -59,7 +59,7 @@ function App() {
                     <Button onClick={() => handleClick("0")} text="0"/>
                 </div>
                 <div className="modifiers subgrid">
-                    <Button onClick={() => handleClick("")} text="AC"/>
+                    <Button onClick={() => handleClick("AC")} text="AC"/>
                 </div>
                 <div className="operations subgrid">
                     <Button onClick={() => handleClick("/")} text="/"/>
