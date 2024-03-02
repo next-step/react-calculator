@@ -6,18 +6,13 @@ interface DisplayProps {
 
 }
 
-const Display: React.FC<DisplayProps> = ({ value}) => {
+const Display: React.FC<DisplayProps> = ({value}) => {
     const infinityToError = (value: string): string => {
-        if (value === "Infinity") {
-            return "오류"
-        }
-        return value
+        return value === "Infinity" ? "오류" : value;
     }
 
     return (
-        <div className="display">
-            {infinityToError(value)}
-        </div>
+        <h1 id="total">{infinityToError(value)}</h1>
     )
 
 }

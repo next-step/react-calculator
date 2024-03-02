@@ -17,10 +17,10 @@ describe('계산기 테스트', () => {
     })
 
     test('두 개 숫자 곱하기 테스트', () => {
-        expect(calculate("333 * 444")).toBe("147852")
+        expect(calculate("333 X 444")).toBe("147852")
     })
     test('곱하기를 할 때 기호로 계산이 끝날 경우 마지막 값은 0을 곱한다.', () => {
-        expect(calculate("333 * ")).toBe("0")
+        expect(calculate("333 X ")).toBe("0")
     })
 
     test('두 개 숫자 나누기 테스트', () => {

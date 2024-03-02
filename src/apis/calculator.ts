@@ -10,7 +10,7 @@ export default function calculate(input: string): string {
 }
 
 function inputSplit(input: string): (string | number)[] {
-    return input.split(/([+\-*/])/).map(token => {
+    return input.split(/([+\-X/])/).map(token => {
         const num = parseInt(token)
         return !isNaN(num) ? num : token.trim()
     })
@@ -22,7 +22,7 @@ function calculateNumbers(firstOperand: number, operator: string, secondOperand:
             return (firstOperand + secondOperand).toString()
         case "-":
             return (firstOperand - secondOperand).toString()
-        case "*":
+        case "X":
             return (firstOperand * secondOperand).toString()
         case "/":
             return (Math.trunc(firstOperand / secondOperand)).toString()
@@ -31,7 +31,3 @@ function calculateNumbers(firstOperand: number, operator: string, secondOperand:
     }
 }
 
-export const hasConsecutiveFourDigits = (str: string): boolean => {
-    const consecutiveFourDigitsRegex = /\d{4}/
-    return consecutiveFourDigitsRegex.test(str)
-}
