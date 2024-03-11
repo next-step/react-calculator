@@ -50,9 +50,9 @@ function App() {
     const splitArray = splitInputString(input);
     if (splitArray.length < MIN_OPERANDS) return input; // 연산을 수행할 충분한 입력값이 없는 경우
 
-    const num1 = parseInt(splitArray[splitArray.length - 3], 10) || 0;
-    const operation = splitArray[splitArray.length - 2];
-    const num2 = parseInt(splitArray[splitArray.length - 1], 10) || 0;
+    const [firstNumber, operator, secondNumber] = splitArray.slice(MIN_OPERANDS * -1); // 입력된 값들 중 뒤 3자리로 연산 수행
+    const num1 = parseInt(firstNumber, 10) || 0;
+    const num2 = parseInt(secondNumber, 10) || 0;
 
     const operations: { [key: string]: (num1: number, num2: number) => string} = {
       '/': (num1: number, num2: number) => calResult(num1 / num2),
