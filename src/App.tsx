@@ -17,18 +17,20 @@ function App() {
       const splitArray = splitInputString(prev);
       const lastElement = splitArray[splitArray.length - 1];
 
+      // 마지막 문자가 연산자로 끝날 경우
       if (operators.includes(lastElement)) {
         return prev + digitNumber;
-      } else {
-        const lastNumber = parseInt(lastElement + digitNumber, 10);
-        if (lastNumber >= 1000) {
-          alert('숫자는 세 자리까지만 입력 가능합니다!');
-          return prev;
-        } else {
-          splitArray[splitArray.length - 1] = lastNumber.toString();
-          return splitArray.join('');
-        }
       }
+
+      const lastNumber = parseInt(lastElement + digitNumber, 10);
+      // 마지막 숫자가 3자리가 넘어갈 경우
+      if (lastNumber >= 1000) {
+        alert('숫자는 세 자리까지만 입력 가능합니다!');
+        return prev;
+      }
+
+      splitArray[splitArray.length - 1] = lastNumber.toString();
+      return splitArray.join('');
     });
   };
 
