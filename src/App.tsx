@@ -45,8 +45,10 @@ function App() {
   };
 
   const calculateResult = (input: string) => {
+    const MIN_OPERANDS = 3 // 최소 입력값
+
     const splitArray = splitInputString(input);
-    if (splitArray.length < 3) return input; // 연산을 수행할 충분한 입력값이 없는 경우
+    if (splitArray.length < MIN_OPERANDS) return input; // 연산을 수행할 충분한 입력값이 없는 경우
 
     const num1 = parseInt(splitArray[splitArray.length - 3], 10) || 0;
     const operation = splitArray[splitArray.length - 2];
