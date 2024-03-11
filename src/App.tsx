@@ -53,27 +53,25 @@ function App() {
     const num1 = parseInt(splitArray[splitArray.length - 3], 10) || 0;
     const operation = splitArray[splitArray.length - 2];
     const num2 = parseInt(splitArray[splitArray.length - 1], 10) || 0;
-    let result = 0;
 
-    switch (operation) {
-      case '/':
-        result = num1 / num2;
-        break;
-      case 'X':
-        result = num1 * num2;
-        break;
-      case '-':
-        result = num1 - num2;
-        break;
-      case '+':
-        result = num1 + num2;
-        break;
-      default:
-        return '오류';
+    const operations: { [key: string]: (num1: number, num2: number) => string} = {
+      '/': (num1: number, num2: number) => calResult(num1 / num2),
+      'X': (num1: number, num2: number) => calResult(num1 * num2),
+      '-': (num1: number, num2: number) => calResult(num1 - num2),
+      '+': (num1: number, num2: number) => calResult(num1 + num2),
+    };
+
+    const calResult = (result: number) => {
+      if (result === Infinity) return '오류';
+      return Math.floor(result).toString();
     }
 
-    if (result === Infinity) return '오류';
-    return Math.floor(result).toString();
+    const operationFunc = operations[operator];
+    if(typeof operationFunc === 'function') {
+      return operationFunc(num1, num2);
+    }
+
+    return '오류';
   };
 
   const appendOperator = (input: string, operator: string) => {
