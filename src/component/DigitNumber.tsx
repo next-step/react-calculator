@@ -7,7 +7,6 @@ type Props = {
 
 const DigitNumber: FC<Props> = ({ digitNumber, onClick }) => {
   const handleDigitClick = () => {
-    console.log("click");
     onClick(digitNumber);
   };
 

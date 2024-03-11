@@ -7,7 +7,6 @@ type Props = {
 
 const OperatorButton: FC<Props> = ({ operator, onClick }) => {
   const handleOperatorClick = () => {
-    console.log("click");
     onClick(operator);
   };
 
