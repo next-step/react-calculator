@@ -16,13 +16,13 @@ const CalculatorProvider: React.FC<React.PropsWithChildren<Props>> = ({children}
     const validateDigitLength = (digit: string) => {
         if (digit.length > 3) {
             alert('숫자는 한번에 최대 3자리 수까지 입력 가능합니다.');
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     const onClickDigit = (digit: string) => {
         if (display.operation === OperationType.RESULT) {
-            if (validateDigitLength(display.prev + digit)) {
+            if (!validateDigitLength(display.prev + digit)) {
                 return;
             }
             setDisplay({
@@ -33,7 +33,7 @@ const CalculatorProvider: React.FC<React.PropsWithChildren<Props>> = ({children}
             return;
         }
 
-        if (validateDigitLength(display.after + digit)) {
+        if (!validateDigitLength(display.after + digit)) {
             return;
         }
 
@@ -84,22 +84,16 @@ const CalculatorProvider: React.FC<React.PropsWithChildren<Props>> = ({children}
     }
 
     const onClickOperation = (operation: OperationType) => {
-        switch (operation) {
-            case OperationType.RESULT:
-                handleResult();
-                return;
-            case OperationType.DIVISION:
-            case OperationType.MULTIPLICATION:
-            case OperationType.SUBTRACTION:
-            case OperationType.ADDITION:
-            default:
-                setDisplay({
-                    prev: display.prev,
-                    operation: operation,
-                    after: display.after
-                })
-                return;
+        if(operation === OperationType.RESULT) {
+            handleResult();
+            return;
         }
+        setDisplay({
+            prev: display.prev,
+            operation: operation,
+            after: display.after
+        })
+        return;
     }
 
     return (
