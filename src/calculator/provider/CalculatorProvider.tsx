@@ -10,8 +10,10 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
         operation: OperationType.RESULT,
         after: ''
     })
+    const DIGIT_MAX_LENGTH: number = 3;
+
     const validateDigitLength = (digit: string) => {
-        if (digit.length > 3) {
+        if (digit.length > DIGIT_MAX_LENGTH) {
             alert('숫자는 한번에 최대 3자리 수까지 입력 가능합니다.');
             return false;
         }
