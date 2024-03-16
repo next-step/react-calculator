@@ -49,6 +49,7 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
     }
 
     const calculatePreprocessing = (num: number) => {
+        if (num === Infinity) return '오류';
         if (num === 0) return '';
         return String(Math.floor(num));
     }
