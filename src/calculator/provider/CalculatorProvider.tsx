@@ -19,28 +19,37 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
         }
         return true;
     }
-    const onClickDigit = (digit: CalculatorNumberType) => {
-        if (display.operation === OperationType.RESULT) {
-            if (!validateDigitLength(display.prev + digit)) {
-                return;
-            }
-            setDisplay({
-                prev: display.prev + digit,
-                operation: display.operation,
-                after: display.after
-            })
+
+    const onChangePrevNumber = (input: CalculatorNumberType) => {
+        if (!validateDigitLength(display.prev + input)) {
             return;
         }
 
-        if (!validateDigitLength(display.after + digit)) {
+        setDisplay({
+            prev: display.prev === CalculatorNumberType.ZERO ? input : display.prev + input,
+            operation: display.operation,
+            after: display.after
+        });
+    }
+
+    const onChangeAfterNumber = (input: CalculatorNumberType) => {
+        if (!validateDigitLength(display.after + input)) {
             return;
         }
 
         setDisplay({
             prev: display.prev,
             operation: display.operation,
-            after: display.after + digit
-        })
+            after: display.after + input
+        });
+    }
+
+    const onClickDigit = (input: CalculatorNumberType) => {
+        if (display.operation === OperationType.RESULT) {
+            onChangePrevNumber(input);
+            return;
+        }
+        onChangeAfterNumber(input);
     }
 
     const onClickAllClear = () => {
