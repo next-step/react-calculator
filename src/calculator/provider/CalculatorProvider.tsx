@@ -3,11 +3,7 @@ import {CalculatorContext} from "../context/calculatorContext.ts";
 import {OperationType} from "../type/enum/operationType.ts";
 import {DisplayInterface} from "../type/interface/displayInterface.ts";
 
-interface Props {
-
-}
-
-const CalculatorProvider: React.FC<React.PropsWithChildren<Props>> = ({children}) => {
+const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
     const [display, setDisplay] = useState<DisplayInterface>({
         prev: '',
         operation: OperationType.RESULT,
