@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import {CalculatorContext} from "../context/calculatorContext.ts";
 import {OperationType} from "../type/enum/operationType.ts";
 import {DisplayInterface} from "../type/interface/displayInterface.ts";
+import {CalculatorNumberType} from "../type/enum/calculatorNumberType.ts";
 
 const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
     const [display, setDisplay] = useState<DisplayInterface>({
-        prev: '',
+        prev: CalculatorNumberType.ZERO,
         operation: OperationType.RESULT,
         after: ''
     })
@@ -16,7 +17,7 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
         }
         return true;
     }
-    const onClickDigit = (digit: string) => {
+    const onClickDigit = (digit: CalculatorNumberType) => {
         if (display.operation === OperationType.RESULT) {
             if (!validateDigitLength(display.prev + digit)) {
                 return;
@@ -42,7 +43,7 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 
     const onClickAllClear = () => {
         setDisplay({
-            prev: '',
+            prev: CalculatorNumberType.ZERO,
             operation: OperationType.RESULT,
             after: ''
         })
@@ -50,7 +51,6 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 
     const calculatePreprocessing = (num: number) => {
         if (num === Infinity) return '오류';
-        if (num === 0) return '';
         return String(Math.floor(num));
     }
 
@@ -81,7 +81,7 @@ const CalculatorProvider: React.FC<React.PropsWithChildren> = ({children}) => {
     }
 
     const onClickOperation = (operation: OperationType) => {
-        if(operation === OperationType.RESULT) {
+        if (operation === OperationType.RESULT) {
             handleResult();
             return;
         }
